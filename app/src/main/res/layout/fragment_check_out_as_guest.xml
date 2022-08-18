@@ -1,0 +1,476 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		xmlns:app="http://schemas.android.com/apk/res-auto"
+		xmlns:tools="http://schemas.android.com/tools"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:background="@color/white">
+
+	<androidx.core.widget.NestedScrollView
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:background="@color/white"
+			android:fillViewport="true"
+			tools:context=".fragment.AddAddressFragment">
+
+		<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:layout_margin="20dp"
+				android:paddingBottom="50dp"
+				android:orientation="vertical">
+
+			<TextView
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginTop="15dp"
+					android:gravity="start"
+					android:text="INDIRIZZO DI CONSEGNA"
+					android:textColor="@color/colorAccent"
+					android:textSize="18sp"
+					android:textStyle="bold" />
+
+			<TextView
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginTop="5dp"
+					android:gravity="start"
+					android:text="Inserisci l'indirizzo di consegna."
+					android:textColor="@color/colorSecondaryText"
+					android:textSize="14sp" />
+
+			<!--app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout.normal"-->
+
+			<!--E-mail-->
+			<com.google.android.material.textfield.TextInputLayout
+					android:id="@+id/telEmail"
+					style="@style/AppTextInputLayout"
+					android:hint="@string/indirizzo_e_mail">
+
+				<com.google.android.material.textfield.TextInputEditText
+						android:id="@+id/etEmail"
+						style="@style/AppEditText"
+						android:inputType="textEmailAddress" />
+			</com.google.android.material.textfield.TextInputLayout>
+
+			<!--First name-->
+			<com.google.android.material.textfield.TextInputLayout
+					android:id="@+id/telFirstName"
+					style="@style/AppTextInputLayout"
+					android:hint="@string/first_name">
+
+				<com.google.android.material.textfield.TextInputEditText
+						android:id="@+id/etFirstName"
+						style="@style/AppEditText" />
+			</com.google.android.material.textfield.TextInputLayout>
+
+			<!--Last name-->
+			<com.google.android.material.textfield.TextInputLayout
+					android:id="@+id/telLastName"
+					style="@style/AppTextInputLayout"
+					android:hint="@string/last_name">
+
+				<com.google.android.material.textfield.TextInputEditText
+						android:id="@+id/etLastName"
+						style="@style/AppEditText" />
+			</com.google.android.material.textfield.TextInputLayout>
+
+			<!--Identification Number:*-->
+			<com.google.android.material.textfield.TextInputLayout
+					android:id="@+id/telIdentificationNumber"
+					style="@style/AppTextInputLayout"
+					android:hint="@string/codice_fiscale">
+
+				<com.google.android.material.textfield.TextInputEditText
+						android:id="@+id/etIdentificationNumber"
+						style="@style/AppEditText" />
+			</com.google.android.material.textfield.TextInputLayout>
+
+			<!--AddressOne-->
+			<com.google.android.material.textfield.TextInputLayout
+					android:id="@+id/telAddressOne"
+					style="@style/AppTextInputLayout"
+					android:hint="@string/address_one">
+
+				<com.google.android.material.textfield.TextInputEditText
+						android:id="@+id/etAddressOne"
+						style="@style/AppEditText" />
+			</com.google.android.material.textfield.TextInputLayout>
+
+			<!--AddressTwo-->
+			<com.google.android.material.textfield.TextInputLayout
+					android:id="@+id/telAddressTwo"
+					style="@style/AppTextInputLayout"
+					android:hint="@string/addresstwo">
+
+				<com.google.android.material.textfield.TextInputEditText
+						android:id="@+id/etAddressTwo"
+						style="@style/AppEditText" />
+			</com.google.android.material.textfield.TextInputLayout>
+
+			<!--Pin-->
+			<com.google.android.material.textfield.TextInputLayout
+					android:id="@+id/telPin"
+					style="@style/AppTextInputLayout"
+					android:hint="@string/postcode">
+
+				<com.google.android.material.textfield.TextInputEditText
+						android:id="@+id/etPostCode"
+						style="@style/AppEditText"
+						android:inputType="number" />
+			</com.google.android.material.textfield.TextInputLayout>
+
+			<!--City-->
+			<com.google.android.material.textfield.TextInputLayout
+					android:id="@+id/telCity"
+					style="@style/AppTextInputLayout"
+					android:hint="@string/city">
+
+				<com.google.android.material.textfield.TextInputEditText
+						android:id="@+id/etCity"
+						style="@style/AppEditText"
+						android:imeOptions="actionDone" />
+			</com.google.android.material.textfield.TextInputLayout>
+
+			<!--Country-->
+			<com.google.android.material.textfield.TextInputLayout
+					android:id="@+id/telCountry"
+					style="@style/AppTextInputLayout"
+					android:hint="@string/country"
+					android:inputType="none">
+
+				<com.google.android.material.textfield.TextInputEditText
+						android:id="@+id/etCountry"
+						style="@style/AppEditText"
+						android:inputType="none" />
+			</com.google.android.material.textfield.TextInputLayout>
+
+			<!--State-->
+			<com.google.android.material.textfield.TextInputLayout
+					android:id="@+id/telState"
+					style="@style/AppTextInputLayout"
+					android:hint="@string/state"
+					android:inputType="none">
+
+				<com.google.android.material.textfield.TextInputEditText
+						android:id="@+id/etState"
+						style="@style/AppEditText"
+						android:inputType="none" />
+			</com.google.android.material.textfield.TextInputLayout>
+
+			<!--Company-->
+			<com.google.android.material.textfield.TextInputLayout
+					android:id="@+id/telCompany"
+					android:visibility="gone"
+					style="@style/AppTextInputLayout"
+					android:hint="@string/company">
+
+				<com.google.android.material.textfield.TextInputEditText
+						android:id="@+id/etCompany"
+						style="@style/AppEditText" />
+			</com.google.android.material.textfield.TextInputLayout>
+
+			<!--Mobile-->
+			<com.google.android.material.textfield.TextInputLayout
+					android:id="@+id/telMobile"
+					style="@style/AppTextInputLayout"
+					android:hint="@string/mobile">
+
+				<com.google.android.material.textfield.TextInputEditText
+						android:id="@+id/etMobile"
+						style="@style/AppEditText"
+						android:imeOptions="actionDone"
+						android:inputType="number" />
+			</com.google.android.material.textfield.TextInputLayout>
+
+			<!--Billing Address-->
+			<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="0.5dp"
+					android:layout_marginTop="15dp"
+					android:background="@color/colorDivider" />
+
+			<TextView
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginTop="15dp"
+					android:gravity="start"
+					android:text="@string/indirizzo_di_fatturazione"
+					android:textColor="@color/colorAccent"
+					android:textSize="20sp"
+					android:textStyle="bold" />
+
+			<TextView
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginTop="5dp"
+					android:gravity="start"
+					android:text="@string/se_l_indirizzo_di_fatturazione_e_diverso_da_quello_di_consegna_clicca_su_aggiungi_indirizzo"
+					android:textColor="@color/colorSecondaryText"
+					android:textSize="14sp" />
+
+			<!--Diffrent billing button-->
+			<TextView
+					android:id="@+id/btnIsDifferentBilling"
+					android:layout_width="match_parent"
+					android:layout_height="50dp"
+					android:layout_margin="25dp"
+					android:layout_marginBottom="20dp"
+					android:background="@drawable/back_rounded"
+					android:backgroundTint="@color/colorDivider"
+					android:gravity="center"
+					android:text="@string/aggiungi_indirizzo"
+					android:textAllCaps="true"
+					android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+					android:textColor="@color/white"
+					android:textSize="14sp"
+					android:textStyle="bold" />
+
+			<LinearLayout
+					android:id="@+id/llBillingAddress"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:orientation="vertical"
+					android:visibility="gone"
+					tools:visibility="visible">
+
+				<!--First name-->
+				<com.google.android.material.textfield.TextInputLayout
+						android:id="@+id/telIBillFirstName"
+						style="@style/AppTextInputLayout"
+						android:hint="@string/first_name">
+
+					<com.google.android.material.textfield.TextInputEditText
+							android:id="@+id/etBillFirstName"
+							style="@style/AppEditText" />
+				</com.google.android.material.textfield.TextInputLayout>
+
+				<!--Last name-->
+				<com.google.android.material.textfield.TextInputLayout
+						android:id="@+id/telIBillLastName"
+						style="@style/AppTextInputLayout"
+						android:hint="@string/last_name">
+
+					<com.google.android.material.textfield.TextInputEditText
+							android:id="@+id/etBillLastName"
+							style="@style/AppEditText" />
+				</com.google.android.material.textfield.TextInputLayout>
+
+				<!--Identification Number:*-->
+				<com.google.android.material.textfield.TextInputLayout
+						android:id="@+id/telIBillIdentification"
+						style="@style/AppTextInputLayout"
+						android:hint="@string/codice_fiscale">
+
+					<com.google.android.material.textfield.TextInputEditText
+							android:id="@+id/etBillIdentificationNumber"
+							style="@style/AppEditText" />
+				</com.google.android.material.textfield.TextInputLayout>
+
+				<!--Company-->
+				<com.google.android.material.textfield.TextInputLayout
+						android:id="@+id/telIBillCompany"
+						style="@style/AppTextInputLayout"
+						android:hint="@string/company">
+
+					<com.google.android.material.textfield.TextInputEditText
+							android:id="@+id/etBillCompany"
+							style="@style/AppEditText" />
+				</com.google.android.material.textfield.TextInputLayout>
+
+				<!--Vat Number-->
+				<com.google.android.material.textfield.TextInputLayout
+						android:id="@+id/telIBillVatNumber"
+						style="@style/AppTextInputLayout"
+						android:hint="@string/vat_number">
+
+					<com.google.android.material.textfield.TextInputEditText
+							android:id="@+id/etBillVatNumber"
+							style="@style/AppEditText" />
+				</com.google.android.material.textfield.TextInputLayout>
+
+				<!--AddressOne-->
+				<com.google.android.material.textfield.TextInputLayout
+						android:id="@+id/telIBillAddressOne"
+						style="@style/AppTextInputLayout"
+						android:hint="@string/address_one">
+
+					<com.google.android.material.textfield.TextInputEditText
+							android:id="@+id/etBillAddressOne"
+							style="@style/AppEditText" />
+				</com.google.android.material.textfield.TextInputLayout>
+
+				<!--AddressTwo / hide-->
+				<com.google.android.material.textfield.TextInputLayout
+						android:id="@+id/telIBillAddressTwo"
+						style="@style/AppTextInputLayout"
+						android:visibility="gone"
+						android:hint="@string/addresstwo">
+
+					<com.google.android.material.textfield.TextInputEditText
+							android:id="@+id/etBillAddressTwo"
+							style="@style/AppEditText" />
+				</com.google.android.material.textfield.TextInputLayout>
+
+				<!--Pin-->
+				<com.google.android.material.textfield.TextInputLayout
+						android:id="@+id/telIBillPin"
+						style="@style/AppTextInputLayout"
+						android:hint="@string/postcode">
+
+					<com.google.android.material.textfield.TextInputEditText
+							android:id="@+id/etBillPostCode"
+							style="@style/AppEditText"
+							android:inputType="number" />
+				</com.google.android.material.textfield.TextInputLayout>
+
+				<!--City-->
+				<com.google.android.material.textfield.TextInputLayout
+						android:id="@+id/telIBillCity"
+						style="@style/AppTextInputLayout"
+						android:hint="@string/city">
+
+					<com.google.android.material.textfield.TextInputEditText
+							android:id="@+id/etBillCity"
+							style="@style/AppEditText"
+							android:imeOptions="actionDone" />
+				</com.google.android.material.textfield.TextInputLayout>
+
+				<!--Country-->
+				<com.google.android.material.textfield.TextInputLayout
+						android:id="@+id/telIBillCountry"
+						style="@style/AppTextInputLayout"
+						android:hint="@string/country"
+						android:inputType="none">
+
+					<com.google.android.material.textfield.TextInputEditText
+							android:id="@+id/etBillCountry"
+							style="@style/AppEditText"
+							android:inputType="none" />
+				</com.google.android.material.textfield.TextInputLayout>
+
+				<!--State-->
+				<com.google.android.material.textfield.TextInputLayout
+						android:id="@+id/telIBillState"
+						style="@style/AppTextInputLayout"
+						android:hint="@string/state"
+						android:inputType="none">
+
+					<com.google.android.material.textfield.TextInputEditText
+							android:id="@+id/etBillState"
+							style="@style/AppEditText"
+							android:inputType="none" />
+				</com.google.android.material.textfield.TextInputLayout>
+
+				<!--Home Phone-->
+				<com.google.android.material.textfield.TextInputLayout
+						android:id="@+id/telIBillHomePhone"
+						style="@style/AppTextInputLayout"
+						android:hint="@string/mobile_home">
+
+					<com.google.android.material.textfield.TextInputEditText
+							android:id="@+id/etBillHomePhone"
+							style="@style/AppEditText"
+							android:inputType="number" />
+				</com.google.android.material.textfield.TextInputLayout>
+
+				<!--Mobile-->
+				<com.google.android.material.textfield.TextInputLayout
+						android:id="@+id/telIBillMobile"
+						style="@style/AppTextInputLayout"
+						android:hint="@string/mobile">
+
+					<com.google.android.material.textfield.TextInputEditText
+							android:id="@+id/etBillMobile"
+							style="@style/AppEditText"
+							android:inputType="number" />
+				</com.google.android.material.textfield.TextInputLayout>
+
+				<!--Address Title-->
+				<com.google.android.material.textfield.TextInputLayout
+						android:id="@+id/telIBillAddressTitle"
+						style="@style/AppTextInputLayout"
+						android:hint="@string/addresstwo">
+
+					<com.google.android.material.textfield.TextInputEditText
+							android:id="@+id/etBillAddressTitle"
+							style="@style/AppEditText" />
+				</com.google.android.material.textfield.TextInputLayout>
+
+				<!--Other Information-->
+				<com.google.android.material.textfield.TextInputLayout
+						android:id="@+id/telIBillAddressOtherInformation"
+						style="@style/AppTextInputLayout"
+						android:hint="@string/altre_informazioni">
+
+					<com.google.android.material.textfield.TextInputEditText
+							android:id="@+id/etBillAddressOtherInformation"
+							android:imeOptions="actionDone"
+							style="@style/AppEditText" />
+				</com.google.android.material.textfield.TextInputLayout>
+
+			</LinearLayout>
+
+			<!--<TextView
+					android:id="@+id/btnAddAddress"
+					android:layout_width="match_parent"
+					android:layout_height="55dp"
+					android:layout_marginTop="15dp"
+					android:layout_marginBottom="50dp"
+					android:background="@drawable/back_rounded"
+					android:gravity="center"
+					android:text="@string/add_address"
+					android:textAllCaps="true"
+					android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+					android:textColor="@color/white"
+					android:textSize="14sp"
+					android:textStyle="bold" />-->
+
+		</LinearLayout>
+
+	</androidx.core.widget.NestedScrollView>
+
+	<LinearLayout
+			android:id="@+id/llGrandTotal"
+			android:layout_width="match_parent"
+			android:layout_height="50dp"
+			android:layout_alignParentBottom="true"
+			android:background="@color/colorPrimary"
+			android:orientation="horizontal"
+			android:padding="0.5dp"
+			android:visibility="visible"
+			android:weightSum="100"
+			tools:visibility="visible">
+
+		<TextView
+				android:id="@+id/tvCancel"
+				android:layout_width="0dp"
+				android:layout_height="match_parent"
+				android:layout_weight="50"
+				android:background="@color/white"
+				android:gravity="center"
+				android:text="@string/continue_shopping"
+				android:textAllCaps="true"
+				android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+				android:textColor="@color/colorPrimary"
+				android:textSize="12sp"
+				android:textStyle="bold"
+				tools:ignore="AllCaps" />
+
+		<TextView
+				android:id="@+id/btnAddAddress"
+				android:layout_width="0dp"
+				android:layout_height="match_parent"
+				android:layout_weight="50"
+				android:background="@color/colorPrimary"
+				android:gravity="center"
+				android:text="@string/continue_complete_payment"
+				android:textAllCaps="true"
+				android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+				android:textColor="@color/white"
+				android:textSize="12sp"
+				android:textStyle="bold"
+				tools:ignore="AllCaps" />
+
+	</LinearLayout>
+</RelativeLayout>

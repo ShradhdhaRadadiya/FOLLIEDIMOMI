@@ -1,0 +1,51 @@
+Bitbucket url : git clone https://dkwebworld@bitbucket.org/dkwebworlds/nandini-harbal-care.git
+Androidx dependency version : https://developer.android.com/jetpack/androidx/releases/cardview
+Androidx dependency : https://developer.android.com/jetpack/androidx/migrate
+paypal test : sb-suubl910135@personal.example.com / 12345678
+
+test user : carlolvr@gmail.com / t3OiZYSJ
+                 : dev@admin.com / 123456
+                 : dev@test.com / 123456
+                 : firstdev007@gmail.com  / 123456
+
+admin : https://cipriani-couture.com/admin893h80a9z/index.php?controller=AdminLogin&token=c0634dac97cf74f2681cee5467987e88
+             : admin@admin.com / admin@@345 / aa
+
+
+web services changes :
+---------------------------------------------------------------------------------------------------
+Cart : Cart list :: need to re-format (remove unnecessary data)
+cart : cart list :: {"status":1,"message":"Opps! your cart is empty","result":{}} = here status need to be 0
+Order list :: Order status
+State list :: {"status":0,"message":"No record found","result":{}} = here result must be array
+
+Pending web services :
+1. Product detail (3 type)
+2. Credit Slip
+3. Track Order
+4. Wish list
+5. pending tab
+    - Selfy
+    - Faq
+6. Apply voucher on shopping cart
+7. Quantity update on shopping cart
+
+
+===========================================================================
+translation
+===========================================================================
+name = name*
+cognome = surname*
+ditta = Firm
+indirizzo = address*
+indirizzo e-mail = email address*
+informazioni aggiuntive = additional information
+cap = postal code*
+citta = city*
+Country(choose country)
+telephono = telephone*
+
+indirizzo di fatturazione = Billing address
+indirizzo di consegna = Delivery address
+se I'indirizzo di fatturazione e diverso da quello di consegna clicca  su "Aggiungi indirizzo" =
+if the billing address is different from the delivery address click on "Add address"

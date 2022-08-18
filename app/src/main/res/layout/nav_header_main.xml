@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		xmlns:app="http://schemas.android.com/apk/res-auto"
+		xmlns:tools="http://schemas.android.com/tools"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:visibility="visible"
+		android:background="@color/background"
+		android:theme="@style/ThemeOverlay.AppCompat.Dark">
+
+	<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="16dp"/>
+
+	<RelativeLayout
+			android:id="@+id/llUserHeader"
+			android:visibility="visible"
+			android:layout_width="match_parent"
+			android:layout_height="80dp"
+			android:layout_marginTop="16dp"
+			android:background="@color/background"
+			android:orientation="vertical"
+			android:paddingLeft="@dimen/activity_horizontal_margin"
+			android:paddingTop="@dimen/activity_horizontal_margin"
+			android:paddingRight="@dimen/activity_horizontal_margin">
+
+		<de.hdodenhof.circleimageview.CircleImageView
+				android:id="@+id/imgDrawerUser"
+				android:layout_width="55dp"
+				android:layout_height="55dp"
+				android:layout_alignParentLeft="true"
+				android:layout_centerVertical="true"
+				android:layout_marginStart="16dp"
+				android:contentDescription="@string/nav_header_desc"
+				android:src="@drawable/ic_account_verify"
+				android:tint="@color/colorAccent"
+				android:visibility="gone"
+				app:civ_border_color="@color/colorPrimary"
+				app:civ_border_overlay="true"
+				app:civ_border_width="1dp"
+				tools:ignore="RtlHardcoded" />
+
+		<LinearLayout
+				android:id="@+id/llMainDrawerHeader"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_centerVertical="true"
+				android:layout_marginStart="10dp"
+				android:layout_marginBottom="25dp"
+				android:layout_toEndOf="@+id/imgDrawerUser"
+				android:gravity="center_vertical"
+				android:orientation="vertical">
+
+			<TextView
+					android:id="@+id/tvDrawerUsername"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="@string/nav_header_title"
+					android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+					android:textColor="@color/colorPrimary"
+					android:textSize="15sp"
+					android:textStyle="normal"
+					tools:ignore="UnknownId" />
+
+			<TextView
+					android:id="@+id/tvDrawerEmail"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="@string/nav_header_subtitle"
+					android:textColor="@color/colorPrimary"
+					android:textSize="13sp"
+					android:maxLines="1"
+					android:textStyle="normal" />
+
+		</LinearLayout>
+
+		<View
+				android:layout_width="match_parent"
+				android:layout_height="5dp"
+				android:layout_alignParentBottom="true"
+				android:layout_marginTop="10dp"
+				android:background="@drawable/back_dotted_line"
+				android:layerType="software"
+				android:visibility="gone" />
+
+	</RelativeLayout>
+
+</RelativeLayout>

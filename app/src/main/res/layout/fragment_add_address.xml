@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+	xmlns:android="http://schemas.android.com/apk/res/android"
+		xmlns:tools="http://schemas.android.com/tools"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:fillViewport="true"
+		android:background="@color/white"
+		tools:context=".fragment.AddAddressFragment">
+
+	<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:layout_margin="20dp"
+			android:orientation="vertical">
+
+		<!--app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout.normal"-->
+
+		<!--Alias-->
+		<com.google.android.material.textfield.TextInputLayout
+				android:id="@+id/telAlias"
+				android:visibility="gone"
+				style="@style/AppTextInputLayout"
+				android:hint="@string/alias">
+
+			<com.google.android.material.textfield.TextInputEditText
+					android:id="@+id/etAlias"
+					android:visibility="gone"
+					style="@style/AppEditText" />
+		</com.google.android.material.textfield.TextInputLayout>
+
+		<!--First name-->
+		<com.google.android.material.textfield.TextInputLayout
+				android:id="@+id/telFirstName"
+				style="@style/AppTextInputLayout"
+				android:hint="@string/first_name">
+
+			<com.google.android.material.textfield.TextInputEditText
+					android:id="@+id/etFirstName"
+					style="@style/AppEditText" />
+		</com.google.android.material.textfield.TextInputLayout>
+
+		<!--Last name-->
+		<com.google.android.material.textfield.TextInputLayout
+				android:id="@+id/telLastName"
+				style="@style/AppTextInputLayout"
+				android:hint="@string/last_name">
+
+			<com.google.android.material.textfield.TextInputEditText
+					android:id="@+id/etLastName"
+					style="@style/AppEditText" />
+		</com.google.android.material.textfield.TextInputLayout>
+
+		<!--Identification Number:*-->
+		<com.google.android.material.textfield.TextInputLayout
+				android:id="@+id/telIdentification"
+				style="@style/AppTextInputLayout"
+				android:hint="@string/codice_fiscale">
+
+			<com.google.android.material.textfield.TextInputEditText
+					android:id="@+id/etIdentificationNumber"
+					style="@style/AppEditText" />
+		</com.google.android.material.textfield.TextInputLayout>
+
+		<!--Company-->
+		<com.google.android.material.textfield.TextInputLayout
+				android:id="@+id/telCompany"
+				style="@style/AppTextInputLayout"
+				android:hint="@string/company">
+
+			<com.google.android.material.textfield.TextInputEditText
+					android:id="@+id/etCompany"
+					style="@style/AppEditText" />
+		</com.google.android.material.textfield.TextInputLayout>
+
+		<!--Vat Number-->
+		<com.google.android.material.textfield.TextInputLayout
+				android:id="@+id/telVatNumber"
+				style="@style/AppTextInputLayout"
+				android:hint="@string/vat_number">
+
+			<com.google.android.material.textfield.TextInputEditText
+					android:id="@+id/etVatNumber"
+					style="@style/AppEditText" />
+		</com.google.android.material.textfield.TextInputLayout>
+
+		<!--AddressOne-->
+		<com.google.android.material.textfield.TextInputLayout
+				android:id="@+id/telAddressOne"
+				style="@style/AppTextInputLayout"
+				android:hint="@string/address_one">
+
+			<com.google.android.material.textfield.TextInputEditText
+					android:id="@+id/etAddressOne"
+					style="@style/AppEditText" />
+		</com.google.android.material.textfield.TextInputLayout>
+
+		<!--AddressTwo - hide-->
+		<com.google.android.material.textfield.TextInputLayout
+				android:id="@+id/telAddressTwo"
+				style="@style/AppTextInputLayout"
+				android:visibility="gone"
+				android:hint="@string/addresstwo">
+
+			<com.google.android.material.textfield.TextInputEditText
+					android:id="@+id/etAddressTwo"
+					android:visibility="gone"
+					style="@style/AppEditText" />
+		</com.google.android.material.textfield.TextInputLayout>
+
+		<!--Pin-->
+		<com.google.android.material.textfield.TextInputLayout
+				android:id="@+id/telPostCode"
+				style="@style/AppTextInputLayout"
+				android:hint="@string/postcode">
+
+			<com.google.android.material.textfield.TextInputEditText
+					android:id="@+id/etPostCode"
+					android:inputType="number"
+					style="@style/AppEditText" />
+		</com.google.android.material.textfield.TextInputLayout>
+
+		<!--City-->
+		<com.google.android.material.textfield.TextInputLayout
+				android:id="@+id/telCity"
+				style="@style/AppTextInputLayout"
+				android:hint="@string/city">
+
+			<com.google.android.material.textfield.TextInputEditText
+					android:id="@+id/etCity"
+					android:imeOptions="actionDone"
+					style="@style/AppEditText" />
+		</com.google.android.material.textfield.TextInputLayout>
+
+		<!--Country-->
+		<com.google.android.material.textfield.TextInputLayout
+				android:id="@+id/telCountry"
+				style="@style/AppTextInputLayout"
+				android:inputType="none"
+				android:hint="@string/country">
+
+			<com.google.android.material.textfield.TextInputEditText
+					android:id="@+id/etCountry"
+					android:inputType="none"
+					style="@style/AppEditText" />
+		</com.google.android.material.textfield.TextInputLayout>
+
+		<!--State-->
+		<com.google.android.material.textfield.TextInputLayout
+				android:id="@+id/telState"
+				style="@style/AppTextInputLayout"
+				android:inputType="none"
+				android:hint="@string/state">
+
+			<com.google.android.material.textfield.TextInputEditText
+					android:id="@+id/etState"
+					android:inputType="none"
+					style="@style/AppEditText" />
+		</com.google.android.material.textfield.TextInputLayout>
+
+		<!--Phone-->
+		<com.google.android.material.textfield.TextInputLayout
+				android:id="@+id/telPhone"
+				style="@style/AppTextInputLayout"
+				android:hint="@string/mobile_home">
+
+			<com.google.android.material.textfield.TextInputEditText
+					android:id="@+id/etPhone"
+					android:inputType="number"
+					style="@style/AppEditText" />
+		</com.google.android.material.textfield.TextInputLayout>
+
+		<!--Mobile-->
+		<com.google.android.material.textfield.TextInputLayout
+				android:id="@+id/telMobile"
+				style="@style/AppTextInputLayout"
+				android:hint="@string/mobile">
+
+			<com.google.android.material.textfield.TextInputEditText
+					android:id="@+id/etMobile"
+					android:inputType="number"
+					android:imeOptions="actionDone"
+					style="@style/AppEditText" />
+		</com.google.android.material.textfield.TextInputLayout>
+
+		<!--Address Title-->
+		<com.google.android.material.textfield.TextInputLayout
+				android:id="@+id/telAddressTitle"
+				style="@style/AppTextInputLayout"
+				android:hint="@string/addresstwo">
+
+			<com.google.android.material.textfield.TextInputEditText
+					android:id="@+id/etAddressTitle"
+					style="@style/AppEditText" />
+		</com.google.android.material.textfield.TextInputLayout>
+
+		<!--Other Information-->
+		<com.google.android.material.textfield.TextInputLayout
+				android:id="@+id/telAddressOtherInformation"
+				style="@style/AppTextInputLayout"
+				android:hint="@string/altre_informazioni">
+
+			<com.google.android.material.textfield.TextInputEditText
+					android:id="@+id/etAddressOtherInformation"
+					android:imeOptions="actionDone"
+					style="@style/AppEditText" />
+		</com.google.android.material.textfield.TextInputLayout>
+
+		<TextView
+				android:id="@+id/btnAddAddress"
+				android:layout_marginTop="15dp"
+				android:layout_width="match_parent"
+				android:layout_height="55dp"
+				android:textStyle="bold"
+				android:gravity="center"
+				android:layout_marginBottom="50dp"
+				android:textColor="@color/white"
+				android:text="@string/add_address"
+				android:textSize="14sp"
+				android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+				android:textAllCaps="true"
+				android:background="@drawable/ic_launcher_background"/>
+
+	</LinearLayout>
+
+</androidx.core.widget.NestedScrollView>

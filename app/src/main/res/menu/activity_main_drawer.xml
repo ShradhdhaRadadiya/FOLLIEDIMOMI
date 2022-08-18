@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+		xmlns:tools="http://schemas.android.com/tools"
+		tools:showIn="navigation_view">
+
+	<group android:checkableBehavior="single">
+		<item
+				android:id="@+id/nav_for_her"
+				android:title="@string/for_her" />
+		<item
+				android:id="@+id/nav_for_her_one"
+				android:title="@string/da_sole" />
+		<item
+				android:id="@+id/nav_for_her_two"
+				android:title="@string/lenti_nature" />
+		<item
+				android:id="@+id/nav_for_her_three"
+				android:title="@string/lenti_graduate" />
+		<item
+				android:id="@+id/nav_for_him"
+				android:title="@string/for_him" />
+
+		<item
+				android:id="@+id/nav_for_him_one"
+				android:title="@string/da_sole" />
+		<item
+				android:id="@+id/nav_for_him_two"
+				android:title="@string/lenti_nature" />
+		<item
+				android:id="@+id/nav_for_him_three"
+				android:title="@string/lenti_graduate" />
+
+		<item
+				android:id="@+id/nav_kids"
+				android:title="@string/kids" />
+		<item
+				android:id="@+id/nav_for_kids_one"
+				android:title="@string/bambino" />
+		<item
+				android:id="@+id/nav_for_kids_two"
+				android:title="@string/bambina" />
+		<item
+				android:id="@+id/nav_for_kids_three"
+				android:title="@string/lenti_graduate" />
+
+		<item
+				android:id="@+id/nav_accessory"
+				android:title="@string/accessory" />
+		<item
+				android:id="@+id/nav_for_accessory_one"
+				android:title="@string/catenine" />
+		<item
+				android:id="@+id/nav_for_accessory_two"
+				android:title="@string/custodie" />
+		<item
+				android:id="@+id/nav_for_accessory_three"
+				android:title="@string/spray" />
+
+		<item
+				android:id="@+id/nav_outlet"
+				android:title="@string/outlet" />
+
+		<!--<item
+				android:id="@+id/nav_prescription_glasses"
+				android:title="@string/prescription_glasses" />
+		<item
+				android:id="@+id/nav_sartorial_glasses"
+				android:title="@string/sartorial_glasses" />-->
+
+	</group>
+
+	<item
+			android:menuCategory="alternative"
+			android:title="Aiuto">
+		<menu>
+			<item
+					android:id="@+id/nav_condition_subscription"
+					android:title="@string/a_proposito_di_cipri_couture" />
+			<item
+					android:id="@+id/nav_term_condition"
+					android:title="@string/termini_e_codizioni" />
+			<item
+					android:id="@+id/nav_news_latter"
+					android:title="@string/condizioni_newsletter" />
+			<item
+					android:id="@+id/nav_about_us"
+					android:title="@string/metodo_di_pagamento" />
+			<item
+					android:id="@+id/nav_faq"
+					android:title="@string/fag_guide" />
+			<item
+					android:enabled="false"
+					android:checkable="false"
+					android:visible="true"
+					android:id="@+id/test1"
+					android:title="" />
+			<item
+					android:enabled="false"
+					android:checkable="false"
+					android:visible="true"
+					android:id="@+id/test12"
+					android:title="" />
+		</menu>
+	</item>
+	<!--<item
+				android:visible="false"
+				android:icon="@drawable/ic_home_ios"
+				android:id="@+id/nav_home"
+				android:title="@string/home" />-->
+	<!--<item
+				android:visible="false"
+				android:id="@+id/nav_contact_lenses"
+				android:title="@string/contact_lenses" />
+		<item
+				android:visible="false"
+				android:id="@+id/nav_selfies"
+				android:title="@string/selfies" />
+		<item
+				android:visible="false"
+				android:id="@+id/nav_faq"
+				android:title="@string/faq" />
+		<item
+				android:visible="false"
+				android:id="@+id/nav_profile"
+				android:enabled="false"
+				android:title="@string/menu_profile" />
+		<item
+				android:visible="false"
+				android:id="@+id/nav_logout"
+				android:enabled="false"
+				android:title="@string/menu_logout" />
+		<item
+				android:checkable="false"
+				android:enabled="false"
+				android:title="" />
+		<item
+				android:checkable="false"
+				android:enabled="false"
+				android:title="" />-->
+
+</menu>

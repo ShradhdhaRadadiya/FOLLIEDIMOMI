@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		xmlns:app="http://schemas.android.com/apk/res-auto"
+		xmlns:tools="http://schemas.android.com/tools"
+		android:id="@+id/coordinator"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent">
+
+	<RelativeLayout
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:background="@color/white"
+			tools:context="com.pcs.ciprianicouture.fragment.LoginFragment">
+
+		<androidx.core.widget.NestedScrollView style="@style/NestedScrollView">
+			<!-- Login -->
+			<LinearLayout
+					android:id="@+id/ll_login"
+					android:layout_width="match_parent"
+					android:layout_height="match_parent"
+					android:gravity="center"
+					android:layout_marginBottom="60dp"
+					android:orientation="vertical"
+					android:padding="25dp">
+
+				<ImageView
+						android:visibility="gone"
+						android:layout_width="match_parent"
+						android:layout_height="120dp"
+						android:src="@drawable/ic_launcher_background"
+						android:text="@string/app_name"
+					app:tint="@color/black" />
+
+				<TextView
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_marginTop="30dp"
+						android:gravity="center"
+						android:text="@string/register"
+						android:textColor="@color/colorAccent"
+						android:textSize="20sp"
+						android:textStyle="bold" />
+
+				<!--Name-->
+				<com.google.android.material.textfield.TextInputLayout
+						android:id="@+id/telName"
+						style="@style/AppTextInputLayout"
+						android:layout_marginTop="25dp"
+						android:hint="@string/first_name">
+
+					<com.google.android.material.textfield.TextInputEditText
+							android:id="@+id/etName"
+							style="@style/AppEditText" />
+				</com.google.android.material.textfield.TextInputLayout>
+
+				<!--Surname-->
+				<com.google.android.material.textfield.TextInputLayout
+						android:id="@+id/telSurname"
+						style="@style/AppTextInputLayout"
+						android:hint="@string/surname">
+
+					<com.google.android.material.textfield.TextInputEditText
+							android:id="@+id/etSurname"
+							style="@style/AppEditText" />
+				</com.google.android.material.textfield.TextInputLayout>
+
+				<!--Ditta-->
+				<com.google.android.material.textfield.TextInputLayout
+						android:id="@+id/telCompany"
+						style="@style/AppTextInputLayout"
+						android:hint="@string/ditta">
+
+					<com.google.android.material.textfield.TextInputEditText
+							android:id="@+id/etCompany"
+							style="@style/AppEditText" />
+				</com.google.android.material.textfield.TextInputLayout>
+
+				<!--Ditta-->
+				<com.google.android.material.textfield.TextInputLayout
+						android:id="@+id/telHouseNo"
+						style="@style/AppTextInputLayout"
+						android:hint="@string/codice_fiscale">
+
+					<com.google.android.material.textfield.TextInputEditText
+							android:id="@+id/etHouseNo"
+							style="@style/AppEditText" />
+				</com.google.android.material.textfield.TextInputLayout>
+
+				<!--Address-->
+				<com.google.android.material.textfield.TextInputLayout
+						android:id="@+id/telAddress"
+						style="@style/AppTextInputLayout"
+						android:hint="@string/indirizzo">
+
+					<com.google.android.material.textfield.TextInputEditText
+							android:id="@+id/etAddress"
+							style="@style/AppEditText" />
+				</com.google.android.material.textfield.TextInputLayout>
+
+				<!--E-mail-->
+				<com.google.android.material.textfield.TextInputLayout
+						android:id="@+id/telEmail"
+						style="@style/AppTextInputLayout"
+						android:hint="@string/indirizzo_e_mail">
+
+					<com.google.android.material.textfield.TextInputEditText
+							android:id="@+id/etEmail"
+							style="@style/AppEditText"
+							android:inputType="textEmailAddress" />
+				</com.google.android.material.textfield.TextInputLayout>
+
+				<!--Additional Information-->
+				<com.google.android.material.textfield.TextInputLayout
+						android:id="@+id/telAdditionalInformation"
+						style="@style/AppTextInputLayout"
+						android:hint="@string/informazioni_aggiuntive">
+
+					<com.google.android.material.textfield.TextInputEditText
+							android:id="@+id/etAdditionalInformation"
+							style="@style/AppEditText" />
+				</com.google.android.material.textfield.TextInputLayout>
+
+				<!--Pin-->
+				<com.google.android.material.textfield.TextInputLayout
+						android:id="@+id/telPin"
+						style="@style/AppTextInputLayout"
+						android:hint="@string/cap">
+
+					<com.google.android.material.textfield.TextInputEditText
+							android:id="@+id/etPin"
+							style="@style/AppEditText" />
+				</com.google.android.material.textfield.TextInputLayout>
+
+				<!--City-->
+				<com.google.android.material.textfield.TextInputLayout
+						android:id="@+id/telCity"
+						style="@style/AppTextInputLayout"
+						android:hint="@string/citta">
+
+					<com.google.android.material.textfield.TextInputEditText
+							android:id="@+id/etCity"
+							android:imeOptions="actionDone"
+							style="@style/AppEditText" />
+				</com.google.android.material.textfield.TextInputLayout>
+
+				<!--Country-->
+				<com.google.android.material.textfield.TextInputLayout
+						android:id="@+id/telCountry"
+						android:inputType="none"
+						style="@style/AppTextInputLayout"
+						android:hint="@string/country">
+
+					<com.google.android.material.textfield.TextInputEditText
+							android:id="@+id/etCountry"
+							android:inputType="none"
+							style="@style/AppEditText" />
+				</com.google.android.material.textfield.TextInputLayout>
+
+				<!--State-->
+				<com.google.android.material.textfield.TextInputLayout
+						android:id="@+id/telState"
+						style="@style/AppTextInputLayout"
+						android:hint="@string/state"
+						android:inputType="none">
+
+					<com.google.android.material.textfield.TextInputEditText
+							android:id="@+id/etState"
+							style="@style/AppEditText"
+							android:inputType="none" />
+				</com.google.android.material.textfield.TextInputLayout>
+
+				<!--Telephone-->
+				<com.google.android.material.textfield.TextInputLayout
+						android:id="@+id/telTelephone"
+						style="@style/AppTextInputLayout"
+						android:hint="@string/italian_telephono">
+
+					<com.google.android.material.textfield.TextInputEditText
+							android:id="@+id/etTelephone"
+							style="@style/AppEditText"
+							android:inputType="phone" />
+				</com.google.android.material.textfield.TextInputLayout>
+
+				<!--Password-->
+				<com.google.android.material.textfield.TextInputLayout
+						android:id="@+id/telPass"
+						style="@style/AppTextInputLayout"
+						android:hint="@string/hint_password"
+						app:passwordToggleEnabled="true">
+
+					<com.google.android.material.textfield.TextInputEditText
+							android:id="@+id/etPass"
+							style="@style/AppEditText"
+							android:inputType="textPassword" />
+				</com.google.android.material.textfield.TextInputLayout>
+
+				<TextView
+						android:layout_margin="25dp"
+						android:id="@+id/btnRegister"
+						android:layout_width="match_parent"
+						android:layout_height="50dp"
+						android:background="@color/colorPrimary"
+						android:gravity="center"
+						android:text="@string/register"
+						android:textColor="@color/white"
+						android:textSize="14sp"
+						android:textStyle="bold" />
+
+				<TextView
+						android:id="@+id/tvAlreadyHaveAccount"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_marginTop="15dp"
+						android:layout_marginBottom="5dp"
+						android:gravity="center"
+						android:text="@string/already_have_an_account_login"
+						android:textColor="@color/colorPrimary"
+						android:textSize="14sp" />
+
+			</LinearLayout>
+
+		</androidx.core.widget.NestedScrollView>
+
+		<RelativeLayout
+				android:id="@+id/rlBottomButton"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_alignParentBottom="true">
+
+
+
+		</RelativeLayout>
+	</RelativeLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

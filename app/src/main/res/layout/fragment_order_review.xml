@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		xmlns:tools="http://schemas.android.com/tools"
+		xmlns:stripe="http://schemas.android.com/apk/res-auto"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		xmlns:app="http://schemas.android.com/apk/res-auto"
+		tools:context=".fragment.OrderReviewFragment">
+
+	<androidx.core.widget.NestedScrollView
+			android:id="@+id/nestedScrollView"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:fillViewport="true">
+
+		<LinearLayout
+				android:layout_marginBottom="55dp"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:background="@color/white"
+				android:orientation="vertical"
+				android:padding="16dp">
+
+			<TextView
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:background="@color/white"
+					android:gravity="center"
+					android:padding="15dp"
+					android:text="@string/modalita_di_pagmento"
+					android:textColor="@color/colorPrimary"
+					android:textSize="20sp" />
+
+			<View
+					android:layout_width="match_parent"
+					android:layout_height="1dp"
+					android:layout_marginBottom="10dp"
+					android:background="@color/colorCommonText" />
+
+			<TextView
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:background="@color/white"
+					android:paddingBottom="20dp"
+					android:text="@string/ti_preghiamo_di_scegliere_qui_la_modalita_di_pagamento_per_il_tuo_ordine"
+					android:textColor="@color/colorPrimary"
+					android:textSize="14sp" />
+
+			<View
+					android:layout_width="match_parent"
+					android:layout_height="1dp"
+					android:layout_marginBottom="10dp"
+					android:background="@color/colorCommonText" />
+
+			<!--Stripe-->
+			<LinearLayout
+					style="@style/LinearLayoutHori"
+					android:gravity="center_vertical">
+
+				<CheckBox
+						android:id="@+id/cbxStripe"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content" />
+
+				<TextView
+						android:layout_width="wrap_content"
+						android:layout_height="60dp"
+						android:gravity="center_vertical"
+						android:scaleType="centerCrop"
+						android:layout_marginEnd="30dp"
+						android:src="@drawable/ic_paypal"
+						android:maxLines="2"
+						android:text="@string/pagamento_con_carta_di_credito_postepay_bancomat"
+						android:textColor="@color/colorSecondaryTextDark"
+						android:textSize="15sp"
+						android:textStyle="bold" />
+
+				<ImageView
+						android:layout_width="wrap_content"
+						android:layout_height="60dp"
+						android:layout_marginStart="-20dp"
+						android:src="@drawable/ic_info"
+					stripe:tint="@color/colorCommonText" />
+
+			</LinearLayout>
+
+			<TextView
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginStart="7dp"
+					android:background="@color/white"
+					android:paddingBottom="10dp"
+					android:text="@string/spedizione_immediata"
+					android:textColor="@color/colorPrimary"
+					android:textSize="14sp" />
+
+			<!--Payment method icons -->
+			<LinearLayout
+					style="@style/LinearLayoutHori"
+					android:layout_marginStart="7dp">
+
+				<ImageView
+						android:layout_width="50dp"
+						android:layout_height="35dp"
+						android:scaleType="fitCenter"
+						android:src="@drawable/ic_visa_cart" />
+
+				<ImageView
+						android:layout_width="50dp"
+						android:layout_height="35dp"
+						android:layout_marginStart="10dp"
+						android:scaleType="fitCenter"
+						android:src="@drawable/ic_master_card" />
+
+				<ImageView
+						android:layout_width="50dp"
+						android:layout_height="35dp"
+						android:layout_marginStart="10dp"
+						android:scaleType="fitCenter"
+						android:src="@drawable/ic_american_express" />
+
+			</LinearLayout>
+
+			<include layout="@layout/stripe_card_layout"/>
+
+			<!--<com.stripe.android.view.CardMultilineWidget
+					android:theme="@style/CardWidgetStyle"
+					android:layout_marginTop="15sp"
+					android:visibility="gone"
+					android:id="@+id/cardInputWidgetMultiple"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"/>-->
+
+			<!--Stripe card input widget-->
+<!--			<com.stripe.android.view.CardInputWidget
+					android:id="@+id/cardInputWidget"
+					android:layout_width="match_parent"
+					android:theme="@style/CardWidgetStyleSecond"
+					android:layout_height="wrap_content"
+					android:layout_marginTop="15sp" />-->
+
+			<!--stripe:cardTint="@android:color/holo_purple"
+					stripe:cardTextErrorColor="@android:color/holo_orange_dark"-->
+
+			<View
+					android:layout_width="match_parent"
+					android:layout_height="1dp"
+					android:layout_marginTop="25dp"
+					android:layout_marginBottom="10dp"
+					android:background="@color/colorCommonText" />
+
+			<!--Paypal-->
+			<LinearLayout
+					style="@style/LinearLayoutHori"
+					android:gravity="center_vertical">
+
+				<CheckBox
+						android:id="@+id/cbxPayPal"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:visibility="visible"/>
+
+				<ImageView
+						android:layout_width="wrap_content"
+						android:layout_height="60dp"
+						android:scaleType="centerCrop"
+						android:src="@drawable/ic_paypal"
+					android:visibility="visible"/>
+
+				<ImageView
+						android:layout_width="wrap_content"
+						android:layout_height="60dp"
+						android:layout_marginStart="10dp"
+						android:src="@drawable/ic_info"
+					android:visibility="gone"
+						android:tint="@color/colorCommonText" />
+
+			</LinearLayout>
+
+			<TextView
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginStart="7dp"
+					android:background="@color/white"
+					android:paddingBottom="10dp"
+					android:text="@string/spedizione_immediata"
+					android:textColor="@color/colorPrimary"
+					android:textSize="14sp" />
+
+		</LinearLayout>
+
+	</androidx.core.widget.NestedScrollView>
+
+	<!-- CheckOut Bottom View -->
+	<LinearLayout
+			android:id="@+id/llGrandTotal"
+			android:layout_width="match_parent"
+			android:layout_height="50dp"
+			android:layout_alignParentBottom="true"
+			android:background="@color/colorPrimary"
+			android:orientation="horizontal"
+			android:padding="0.5dp"
+			android:visibility="visible"
+			android:weightSum="100"
+			tools:visibility="visible">
+
+		<TextView
+				android:id="@+id/tvCancel"
+				android:layout_width="0dp"
+				android:layout_height="match_parent"
+				android:layout_weight="50"
+				android:background="@color/white"
+				android:gravity="center"
+				android:text="@string/continue_shopping"
+				android:textAllCaps="true"
+				android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+				android:textColor="@color/colorPrimary"
+				android:textSize="12sp"
+				android:textStyle="bold"
+				tools:ignore="AllCaps" />
+
+		<TextView
+				android:id="@+id/btnPayNow"
+				android:layout_width="0dp"
+				android:layout_height="match_parent"
+				android:layout_weight="50"
+				android:background="@color/colorPrimary"
+				android:gravity="center"
+				android:text="@string/continue_complete_payment"
+				android:textAllCaps="true"
+				android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+				android:textColor="@color/white"
+				android:textSize="12sp"
+				android:textStyle="bold"
+				tools:ignore="AllCaps" />
+
+	</LinearLayout>
+
+	<!-- Empty View -->
+	<RelativeLayout
+			android:id="@+id/rlEmptyCard"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:background="@color/white"
+			android:gravity="center"
+			android:visibility="gone"
+			tools:visibility="gone">
+
+		<ImageView
+				android:id="@+id/img_empty"
+				android:layout_width="150dp"
+				android:layout_height="150dp"
+				android:layout_centerHorizontal="true"
+				android:src="@drawable/ic_empty_cart"
+				android:tint="@color/colorDivider" />
+
+		<TextView
+				android:id="@+id/tv_empty"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_below="@+id/img_empty"
+				android:layout_marginTop="15dp"
+				android:gravity="center"
+				android:text="@string/your_cart_is_empty"
+				android:textColor="@color/colorSecondaryText"
+				android:textSize="20sp"
+				android:textStyle="bold" />
+
+		<TextView
+				android:id="@+id/tv_empty_data"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_below="@+id/tv_empty"
+				android:layout_marginTop="5dp"
+				android:gravity="center"
+				android:paddingStart="30dp"
+				android:paddingEnd="30dp"
+				android:text="@string/you_have_no_item_in_your_shopping_cart_please_add_items_to_continue"
+				android:textColor="@color/colorSecondaryText"
+				android:textSize="13sp"
+				android:textStyle="bold" />
+
+		<TextView
+				android:id="@+id/btnContinueShopping"
+				android:layout_width="180dp"
+				android:layout_height="35dp"
+				android:layout_below="@+id/tv_empty_data"
+				android:layout_centerHorizontal="true"
+				android:layout_marginTop="20dp"
+				android:background="@drawable/back_rounded_et"
+				android:elevation="0dp"
+				android:gravity="center"
+				android:text="@string/continue_shopping"
+				android:textAllCaps="false"
+				android:textColor="@color/colorSecondaryText"
+				android:textSize="14sp"
+				android:textStyle="bold" />
+	</RelativeLayout>
+
+</RelativeLayout>

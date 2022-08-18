@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+		xmlns:app="http://schemas.android.com/apk/res-auto"
+		xmlns:card_view="http://schemas.android.com/apk/res-auto"
+		xmlns:tools="http://schemas.android.com/tools"
+		android:id="@+id/cvProduct"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_margin="5dp"
+		android:elevation="0dp"
+		android:orientation="vertical"
+		app:cardBackgroundColor="@color/white"
+		app:cardCornerRadius="5dp"
+		app:cardElevation="0dp">
+
+	<RelativeLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content">
+
+		<!--android:background="@drawable/back_et"-->
+	<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="vertical">
+
+		<RelativeLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="horizontal"
+				android:padding="10dp">
+
+			<ImageView
+					android:id="@+id/imgProductImage"
+					android:layout_width="60dp"
+					android:layout_height="55dp"
+					android:src="@drawable/ic_image_icon" />
+
+			<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginStart="10dp"
+					android:layout_toEndOf="@+id/imgProductImage"
+					android:orientation="vertical">
+
+				<!-- Title -->
+				<TextView
+						android:id="@+id/tvName"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_marginEnd="30dp"
+						android:maxLines="2"
+						android:text="BRIDGE"
+						android:textSize="12sp"
+						android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+						android:textColor="@color/colorSecondaryTextDark"
+						android:textStyle="bold" />
+
+				<!-- Price -->
+				<TextView
+						android:id="@+id/tvPrice"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_marginTop="3dp"
+						android:maxLines="1"
+						android:text="€ 20.00"
+						android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+						android:textColor="@color/colorSecondaryText"
+						android:textSize="12sp"
+						android:textStyle="bold" />
+
+				<!-- Size -->
+				<TextView
+						android:id="@+id/tvSize"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_marginTop="3dp"
+						android:maxLines="1"
+						android:paddingBottom="3dp"
+						android:text="BRIDGE: BLACK SUN"
+						android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+						android:textColor="@color/colorCommonText"
+						android:textSize="10sp"
+						android:textStyle="bold" />
+
+				<!-- Size -->
+				<TextView
+						android:visibility="gone"
+						tools:visibility="visible"
+						android:id="@+id/tvCustomization"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_marginTop="3dp"
+						android:maxLines="25"
+						android:paddingBottom="3dp"
+						tools:text="Customization \n ther note \n thest \n tertea"
+						android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+						android:textColor="@color/colorCommonText"
+						android:textSize="8sp"
+						android:textStyle="bold" />
+
+			</LinearLayout>
+
+		</RelativeLayout>
+
+		<View
+				android:layout_width="match_parent"
+				android:layout_height="0.5dp"
+				android:layout_marginTop="5dp"
+				android:background="@color/colorDivider" />
+
+		<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="40dp"
+				android:orientation="horizontal">
+
+			<LinearLayout
+					android:layout_width="0dp"
+					android:layout_height="match_parent"
+					android:layout_weight="50"
+					android:gravity="center"
+					android:orientation="horizontal"
+					android:padding="5dp">
+
+				<ImageButton
+						android:id="@+id/imgMinus"
+						android:layout_width="20dp"
+						android:layout_height="20dp"
+						android:background="@drawable/back_rounded_et"
+						android:src="@drawable/ic_minus"
+					app:tint="@color/colorDivider" />
+
+				<EditText
+						android:enabled="false"
+						android:id="@+id/etQty"
+						style="@style/EditText"
+						android:layout_width="wrap_content"
+						android:layout_height="match_parent"
+						android:layout_margin="0dp"
+						android:inputType="none"
+						android:paddingStart="25dp"
+						android:paddingEnd="25dp"
+						android:text="1"
+						android:textColor="@color/colorDivider"
+						android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+						android:textSize="12sp"
+						android:textStyle="bold" />
+
+				<ImageButton
+						android:id="@+id/imgPlus"
+						android:layout_width="20dp"
+						android:layout_height="20dp"
+						android:background="@drawable/back_rounded_et"
+						android:src="@drawable/ic_plus"
+					app:tint="@color/colorDivider" />
+
+			</LinearLayout>
+
+			<View
+					android:layout_width="0.5dp"
+					android:layout_height="match_parent"
+					android:background="@color/colorDivider" />
+
+
+			<LinearLayout
+					android:layout_width="0dp"
+					android:layout_height="match_parent"
+					android:layout_weight="50"
+					android:gravity="center"
+					android:orientation="vertical">
+
+				<TextView
+						android:id="@+id/tvGrandTotalTitle"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:gravity="center"
+						android:text="@string/total_price"
+						android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+						android:textColor="@color/colorDivider"
+						android:textSize="10sp"
+						android:textStyle="bold" />
+
+				<TextView
+						android:id="@+id/tvGrandTotal"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:gravity="center"
+						android:text="00.00 €"
+						android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+						android:textColor="@color/colorSecondaryText"
+						android:textSize="12sp"
+						android:textStyle="bold" />
+
+			</LinearLayout>
+
+		</LinearLayout>
+
+	</LinearLayout>
+
+		<ImageView
+			android:id="@+id/imgDelete"
+			android:layout_width="40dp"
+			android:layout_height="40dp"
+			android:layout_alignParentEnd="true"
+			android:src="@drawable/ic_delete"
+			android:visibility="visible"
+			app:tint="@color/colorDivider" />
+	</RelativeLayout>
+</androidx.cardview.widget.CardView>

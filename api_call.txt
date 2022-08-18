@@ -1,0 +1,21 @@
+login - done
+couuntry_list - done
+state_lit - done
+update profile - done
+add addres - done
+address list - done
+delete address  - done
+add to cart - done
+sort by - done
+
+registration - phone_mobile new filed
+   vat_number, id_state,
+id_social,
+id_number - remove
+
+
+forgot_password - password new filed
+ only email is send
+
+update address ?
+
