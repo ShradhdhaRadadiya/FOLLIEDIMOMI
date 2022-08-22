@@ -18,6 +18,8 @@ object Constant{
 //   const val ROOT_URL : String = "https://cipriani-couture.com/"
 //   const val URL : String = "https://cipriani-couture.com/"
    const val LANG : String = "1"
+   const val CATid : String = "12"
+   const val TWO : String = "2"
    const val italy : String = "Italy"
    var productName : String = ""
 

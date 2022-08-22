@@ -1,6 +1,7 @@
 package com.folliedimomi.network
 
 //import com.dp.directportal.data.db.AppDatabase
+import com.folliedimomi.model.ProductDetailsModel
 import com.folliedimomi.model.*
 import com.pcs.ciprianicouture.model.*
 import com.folliedimomi.utils.convertBody
@@ -172,6 +173,18 @@ class NetworkRepository(private val api: MyApi/*, private val session: AppSessio
     suspend fun createOrder(map: HashMap<String, RequestBody>): CreateOrderResponse {
         return apiRequest {
             api.createOrder(map = map)
+        }
+    }
+
+   suspend fun productList(map: HashMap<String, RequestBody>): ProductListModel {
+        return apiRequest {
+            api.productList(map = map)
+        }
+    }
+
+    suspend fun productDetail(map: HashMap<String, RequestBody>): ProductDetailsModel {
+        return apiRequest {
+            api.productDetail(map = map)
         }
     }
 

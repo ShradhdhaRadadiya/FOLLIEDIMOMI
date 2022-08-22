@@ -1,6 +1,7 @@
 package com.folliedimomi.network
 
 import com.folliedimomi._app.Constant
+import com.folliedimomi.model.ProductDetailsModel
 import com.folliedimomi.model.*
 import com.pcs.ciprianicouture.model.*
 import okhttp3.MultipartBody
@@ -249,6 +250,19 @@ interface MyApi {
     @Multipart
     @POST("index.php")//
     suspend fun removeFromCart(@PartMap map: Map<String, @JvmSuppressWildcards RequestBody>): Response<AddToCartResponse>
+
+
+  /** Product List */
+    @Multipart
+    @POST("index.php")//
+    suspend fun productList(@PartMap map: Map<String, @JvmSuppressWildcards RequestBody>):
+          Response<ProductListModel>
+
+    /** Product List */
+    @Multipart
+    @POST("index.php")//
+    suspend fun productDetail(@PartMap map: Map<String, @JvmSuppressWildcards RequestBody>):
+          Response<ProductDetailsModel>
 
     /** Remove from cart */
     @FormUrlEncoded

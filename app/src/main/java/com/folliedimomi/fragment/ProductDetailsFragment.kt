@@ -8,12 +8,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.folliedimomi.R
 import com.folliedimomi._app.Constant
-import com.folliedimomi._app.loadFragment
-import com.folliedimomi.model.CreateOrderResponse
-import com.folliedimomi.model.ProductListModel
+import com.folliedimomi.model.ProductDetailsModel
 import com.folliedimomi.network.NetworkRepository
 import com.folliedimomi.utils.*
-import com.google.gson.JsonSyntaxException
 
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_dashboard.*
@@ -22,11 +19,10 @@ import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
-import java.io.IOException
 import java.util.ArrayList
 
 
-class DashboardFragment : Fragment(), KodeinAware {
+class ProductDetailsFragment : Fragment(), KodeinAware {
     override val kodein: Kodein by kodein()
     private val repository: NetworkRepository by instance()
     private lateinit var mContext : Context
@@ -41,29 +37,22 @@ class DashboardFragment : Fragment(), KodeinAware {
         super.onViewCreated(view, savedInstanceState)
 
         iv1.setOnClickListener {
-            if (objects.isEmpty()) getProductList()
-        }
-
-
-        iv2.setOnClickListener {
-            requireActivity().loadFragment(ProductDetailsFragment())
+            if (objects.isEmpty()) getProductDetails()
         }
     }
 
-    private fun getProductList() {
+    private fun getProductDetails() {
         Coroutines.main {
             requireActivity().progress_bars_layout.show()
             val mMap = HashMap<String, RequestBody>()
             mMap["controller"] = "mobileapi".convertBody()
-            mMap["op"] = "category_products".convertBody()
-            mMap["id_shop"] = Constant.LANG.convertBody()
-            mMap["category_id"] = Constant.CATid.convertBody()
-            mMap["page"] = Constant.LANG.convertBody()
-            mMap["id_lang"] = Constant.TWO.convertBody()
+            mMap["op"] = "product_detail".convertBody()
+            mMap["id_product"] = "275".convertBody()
+            mMap["lang_id"] = Constant.LANG.convertBody()
 
 
             try {
-                val createOrderResponse: ProductListModel = repository.productList(mMap)
+                val createOrderResponse: ProductDetailsModel = repository.productDetail(mMap)
                 if (isAdded && isVisible) {
                     requireActivity().progress_bars_layout.hide()
                     createOrderResponse.let {
