@@ -6,9 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
 import com.folliedimomi.R
 import com.folliedimomi._app.Constant
 import com.folliedimomi._app.loadFragment
+import com.folliedimomi.adapter.ProductListAdapter
 import com.folliedimomi.model.CreateOrderResponse
 import com.folliedimomi.model.ProductListModel
 import com.folliedimomi.network.NetworkRepository
@@ -39,15 +41,7 @@ class DashboardFragment : Fragment(), KodeinAware {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        iv1.setOnClickListener {
-            if (objects.isEmpty()) getProductList()
-        }
-
-
-        iv2.setOnClickListener {
-            requireActivity().loadFragment(ProductDetailsFragment())
-        }
+        getProductList()
     }
 
     private fun getProductList() {
@@ -69,6 +63,8 @@ class DashboardFragment : Fragment(), KodeinAware {
                     createOrderResponse.let {
                         if (createOrderResponse.status == 1) {
 
+                            rvProduct.layoutManager = GridLayoutManager(requireContext(), 2)
+                            rvProduct.adapter = ProductListAdapter(requireActivity(), createOrderResponse.result)
 
                         } else requireActivity().coordinatorLayout.snackBar(createOrderResponse.message)
                         return@main

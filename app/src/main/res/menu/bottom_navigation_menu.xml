@@ -4,13 +4,13 @@
 	<item
 			app:iconTint="@color/colorPrimary"
 			android:id="@+id/bNavHome"
-			android:icon="@drawable/ic_launcher_background"
+			android:icon="@drawable/ic_home"
 			android:title="@string/home" />
 
 	<item
 			app:iconTint="@color/colorPrimary"
 			android:id="@+id/bNavSearch"
-			android:icon="@drawable/ic_launcher_background"
+			android:icon="@drawable/ic_search"
 			android:title="@string/search" />
 
 	<item

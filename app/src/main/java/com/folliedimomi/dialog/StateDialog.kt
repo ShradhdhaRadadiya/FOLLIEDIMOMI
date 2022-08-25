@@ -1,4 +1,4 @@
-package com.pcs.ciprianicouture.dialog
+package com.folliedimomi.dialog
 
 import android.os.Bundle
 import android.text.Editable

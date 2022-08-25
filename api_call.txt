@@ -8,12 +8,18 @@ delete address  - done
 add to cart - done
 sort by - done
 forgot_password - done
+Order list - done
+Order detail - done
+cart list - done
+update Cart Product Qty - done
+remove cart  - done
+
 
 registration - phone_mobile new filed
-   vat_number, id_state,
-id_social,
-id_number - remove
+   -- vat_number, id_state,id_social,id_number - remove
 
 
 update address ?
+
+
 

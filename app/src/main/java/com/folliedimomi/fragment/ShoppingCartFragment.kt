@@ -18,8 +18,6 @@ import com.folliedimomi.sharedPrefrense.Session
 import com.folliedimomi.utils.*
 import com.google.gson.JsonSyntaxException
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.fragment_dashboard.*
-import kotlinx.android.synthetic.main.fragment_dashboard.tvBanner
 import kotlinx.android.synthetic.main.fragment_shoping_cart.*
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
@@ -292,13 +290,13 @@ class ShoppingCartFragment : Fragment(), KodeinAware, ShoppingCartAdapter.OnCart
                     promotionResponse.let {
                         if (promotionResponse.status == 1) {
                             val promotions = promotionResponse.result
-                            promotions?.let {
+                            promotions.let {
                                 for (item in promotions) {
                                     objects.add(item.banner)
                                 }
                                 val array = arrayOfNulls<String>(objects.size)
                                 objects.toArray(array)
-                                array?.let { tvBanner!!.setTexts(array!!) }
+                                array.let { tvBanner.setTexts(array!!) }
                             }
                         }
                         return@main

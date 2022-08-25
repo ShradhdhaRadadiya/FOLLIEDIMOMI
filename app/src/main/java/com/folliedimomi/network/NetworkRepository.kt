@@ -128,7 +128,8 @@ class NetworkRepository(private val api: MyApi/*, private val session: AppSessio
 
     suspend fun onUpdateCartQty(id_customer: String, id_product: String, id_product_attribute: String, quantity: String, customersessionid: String, upDown: String, idCart: String): UpdateQty {
         return apiRequest {
-            api.onUpdateQty(id_product = id_product, id_product_attribute = id_product_attribute, quantity = quantity, customersessionid = customersessionid, updownlabel = upDown, id_cart = idCart)
+            api.onUpdateQty(id_product = id_product, id_product_attribute = id_product_attribute,
+                quantity = quantity, updownlabel = upDown, id_cart = idCart)
         }
     }
 
@@ -155,7 +156,7 @@ class NetworkRepository(private val api: MyApi/*, private val session: AppSessio
 
     suspend fun removeFromCartGet(cartId: String, customerId: String, productId: String, productAttribute: String, sessionId: String, idCustomization: Int): AddToCartResponse {
         return apiRequest {
-            api.removeFromCartGet(id_cart = cartId, id_product = productId, id_product_attribute = productAttribute, id_customer = customerId, customersessionid = sessionId,idCustomization = idCustomization)
+            api.removeFromCartGet(id_cart = cartId, id_product = productId, id_product_attribute = productAttribute, id_customer = customerId, customersessionid = sessionId)
         }
     }
 

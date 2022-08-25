@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cvProduct"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    android:elevation="0dp"
+    android:orientation="vertical"
+    app:cardBackgroundColor="@color/whiteBack"
+    app:cardCornerRadius="0dp"
+    app:cardElevation="0dp">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="10dp"
+        android:background="@drawable/back_rounded_white_corner">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="10dp">
+            <!--  android:paddingBottom="10dp"-->
+            <!--https://www.bilder-factory.ch/143079/sonnenstrahl-im-wald.jpg-->
+            <ImageView
+                android:id="@+id/imgProductImage"
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:background="@drawable/back_rounded_white"
+                android:layout_margin="5dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_image_icon" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginTop="5dp"
+                android:background="@color/colorCommonText"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/tvName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingStart="2dp"
+                android:paddingTop="20dp"
+                android:paddingEnd="2dp"
+                android:paddingBottom="1dp"
+                android:text="OFF-WHITE"
+                android:singleLine="true"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textColor="@color/colorPrimary"
+                android:textSize="10sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingStart="10dp"
+                android:paddingTop="5dp"
+                android:paddingEnd="10dp">
+
+
+                <TextView
+                    android:id="@+id/tvActualPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="€ 89.00"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                    android:textColor="@color/colorSecondaryTextDark"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    tools:ignore="RtlSymmetry,UnusedAttribute" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvDiscount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/gray_rounded"
+                android:gravity="center"
+                android:paddingTop="5dp"
+                android:paddingBottom="10dp"
+                android:text="40% Discount"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                tools:ignore="RtlSymmetry" />
+
+            <TextView
+                android:id="@+id/tvText1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="€ 89.00"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textColor="@color/red"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:layout_marginTop="5dp"
+                tools:ignore="RtlSymmetry,UnusedAttribute" />
+
+         <TextView
+                android:id="@+id/tvText2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="€ 89.00\n fdf\ fdfd"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textColor="@color/grey"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:layout_marginTop="5dp"
+                tools:ignore="RtlSymmetry,UnusedAttribute" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="100dp"
+                android:layout_height="20dp"
+                android:src="@color/grey"
+                android:layout_gravity="center"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <!--</androidx.cardview.widget.CardView>
+
+</RelativeLayout>-->
+
+</androidx.cardview.widget.CardView>

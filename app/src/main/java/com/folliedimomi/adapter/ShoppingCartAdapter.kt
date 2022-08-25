@@ -266,11 +266,11 @@ class ShoppingCartAdapter(
         mMap["id_customer"] = userId.convertBody()
         mMap["id_product"] = productId.convertBody()
         mMap["quantity"] = qty.convertBody()
-        mMap["id_product_attribute"] = productIdAttribute.convertBody()
         mMap["lang_id"] = Constant.LANG.convertBody()
         mMap["shop_id"] = shopId.convertBody()
-        mMap["customersessionid"] = session.getAppSession()!!.convertBody()
-
+       /* mMap["customersessionid"] = session.getAppSession()!!.convertBody()
+        mMap["id_product_attribute"] = productIdAttribute.convertBody()
+*/
         return mMap
     }
 

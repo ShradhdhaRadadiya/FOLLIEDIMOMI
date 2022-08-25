@@ -231,14 +231,12 @@ interface MyApi {
         @Field("controller") controller: String = "mobileapi",
         @Field("op") op: String = "updateCartProductQty",
         @Field("lang_id") id_lang: String = Constant.LANG,
-           /* @Field("shop_id") shop_id: String = "1",*/
-         /*   @Field("id_customer") id_customer: String ,*/
-            @Field("productid") id_product: String,
+        @Field("productid") id_product: String,
         @Field("id_product_attribute") id_product_attribute: String,
         @Field("quantity") quantity: String,
-        @Field("customersessionid") customersessionid: String = "",
-        @Field("updownlabel") updownlabel: String = "up",
+        @Field("updown") updownlabel: String = "up",
         @Field("id_cart") id_cart: String = "up"
+//        @Field("customersessionid") customersessionid: String = "",
     ): Response<UpdateQty>
 
     /** Add to cart */
@@ -273,10 +271,12 @@ interface MyApi {
             @Field("id_cart") id_cart: String = "",
             @Field("id_product") id_product: String = "",
             @Field("id_product_attribute") id_product_attribute: String = "",
+            @Field("id_lang") secure_key: String = Constant.LANG,
             @Field("id_customer") id_customer: String = "",
             @Field("customersessionid") customersessionid: String,
-            @Field("id_customization") idCustomization: Int
-    ): Response<AddToCartResponse>
+//            @Field("id_customization") idCustomization: Int,
+
+            ): Response<AddToCartResponse>
 
     /** ShoppingCart */
     @FormUrlEncoded
@@ -334,8 +334,8 @@ interface MyApi {
     suspend fun getOrderDetail(
             @Field("controller") controller: String = "customerapi",
             @Field("op") op: String = "order_detail",
-            @Field("id_order") id_order: String,
-            @Field("lang_id") secure_key: String = Constant.LANG
+            @Field("id_order") id_order: String
+           // @Field("lang_id") secure_key: String = Constant.LANG
     ): Response<OrderDetailResponse>
 
     /** Addresses */

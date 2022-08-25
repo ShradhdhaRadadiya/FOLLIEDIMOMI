@@ -22,7 +22,7 @@ import org.kodein.di.generic.instance
 import java.util.ArrayList
 
 
-class ProductDetailsFragment : Fragment(), KodeinAware {
+class ProductDetailsFragment(private  var p_id: Int) : Fragment(), KodeinAware {
     override val kodein: Kodein by kodein()
     private val repository: NetworkRepository by instance()
     private lateinit var mContext : Context
@@ -35,10 +35,8 @@ class ProductDetailsFragment : Fragment(), KodeinAware {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        getProductDetails()
 
-        iv1.setOnClickListener {
-            if (objects.isEmpty()) getProductDetails()
-        }
     }
 
     private fun getProductDetails() {
@@ -47,7 +45,7 @@ class ProductDetailsFragment : Fragment(), KodeinAware {
             val mMap = HashMap<String, RequestBody>()
             mMap["controller"] = "mobileapi".convertBody()
             mMap["op"] = "product_detail".convertBody()
-            mMap["id_product"] = "275".convertBody()
+            mMap["id_product"] = p_id.toString().convertBody()
             mMap["lang_id"] = Constant.LANG.convertBody()
 
 
@@ -75,17 +73,13 @@ class ProductDetailsFragment : Fragment(), KodeinAware {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_dashboard, container, false)
+        return inflater.inflate(R.layout.fragment_product_detail, container, false)
     }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
         mContext = context
-        if (context is OnFragmentInteractionListener) {
-            listener = context
-        } else {
-            throw RuntimeException("$context must implement OnFragmentInteractionListener")
-        }
+
     }
 
     override fun onDetach() {

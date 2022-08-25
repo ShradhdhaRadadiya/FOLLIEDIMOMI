@@ -17,7 +17,7 @@ import com.folliedimomi.network.NetworkRepository
 import com.folliedimomi.utils.*
 import com.google.android.material.textfield.TextInputLayout
 import com.google.gson.JsonSyntaxException
-import com.pcs.ciprianicouture.dialog.StateDialog
+import com.folliedimomi.dialog.StateDialog
 import kotlinx.android.synthetic.main.activity_main.*
 
 import kotlinx.android.synthetic.main.fragment_register.*
