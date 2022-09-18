@@ -48,7 +48,9 @@
             tools:ignore="LockedOrientationActivity" >
 
         </activity>
-
+        <activity
+            android:name=".activity.AdvancedFilterActivity"
+            android:exported="true" />
     </application>
 
 </manifest>

@@ -261,4 +261,20 @@ class NetworkRepository(private val api: MyApi/*, private val session: AppSessio
         }*/
         return response
     }
+
+
+    suspend fun getAdvanceFilter(
+        id_parent: String,
+        id_category: String,
+        id_manufacturer: String
+    ): AdvanceFilterModel {
+        val response = apiRequest {
+            api.getAdvanceFilter(
+                id_parent = id_parent,
+                id_category = id_category,
+                id_manufacturer = id_manufacturer
+            )
+        }
+        return response
+    }
 }

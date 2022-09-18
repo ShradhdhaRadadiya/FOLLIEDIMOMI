@@ -243,5 +243,6 @@
         <string name="altre_informazioni">Altre informazioni</string>
         <string name="search_italy">Ricerca</string>
 
+    <string name="apply_il_filtyro"><!--APPLY-->Applica il filtro</string>
 
 </resources>

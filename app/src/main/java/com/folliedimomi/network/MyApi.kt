@@ -452,5 +452,20 @@ interface MyApi {
         }
     }
 
+    /**AdvanceFilter */
+    @FormUrlEncoded
+    @POST("index.php")
+    suspend fun getAdvanceFilter(
+        @Field("controller") controller: String = "mobileapi",
+        @Field("op") op: String = "advance_filter",
+        @Field("id_parent") id_parent: String = "2",
+        @Field("id_category") id_category: String,
+        @Field("id_manufacturer") id_manufacturer: String = "",
+      //  @Field("featured") featured: String = "0",
+        /*    @Field("lang_id") id_lang: String = Constant.LANG,
+            @Field("page") page: String = "1"*/
+    ): Response<AdvanceFilterModel>
+
+
 }
 
