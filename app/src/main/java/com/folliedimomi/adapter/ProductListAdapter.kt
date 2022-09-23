@@ -17,7 +17,8 @@ import com.folliedimomi.model.ProductListModel
 
 
 class ProductListAdapter(private val activity: Activity,
-                         private val product: List<ProductListModel.Result> = listOf(),
+                         private val product: ArrayList<String> = arrayListOf(),
+//                         private val product: List<ProductListModel.Result> = listOf(),
                          private val fromSearch: Boolean = false,
                          private var searchCustom: Boolean = false) :
     RecyclerView.Adapter<ProductListAdapter.MyViewHolder>() {
@@ -25,22 +26,24 @@ class ProductListAdapter(private val activity: Activity,
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_product, parent, false)
         return MyViewHolder(view).listen { position, type ->
-      activity.loadFragment(ProductDetailsFragment(product[position].id))
+      activity.loadFragment(ProductDetailsFragment(1))
+//      activity.loadFragment(ProductDetailsFragment(product[position].id))
 
         }
     }
 
     override fun getItemCount(): Int {
-        return product.size
+        return 10
+//        return product.size
     }
 
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        val item: ProductListModel.Result = product[position]
+       /* val item: ProductListModel.Result = product[position]
         holder.tvName.text = item.name
         holder.tvPrice.text =item.price
 
-        activity.loadImageInGlide(holder.imgProduct, item.productImage)
+        activity.loadImageInGlide(holder.imgProduct, item.productImage)*/
     }
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

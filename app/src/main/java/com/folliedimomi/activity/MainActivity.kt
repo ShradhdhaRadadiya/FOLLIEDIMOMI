@@ -1,5 +1,6 @@
 package com.folliedimomi.activity
 
+
 import android.annotation.SuppressLint
 import android.annotation.TargetApi
 import android.content.ActivityNotFoundException
@@ -18,8 +19,12 @@ import android.telephony.PhoneNumberUtils
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.SubMenu
 import android.view.View
-import android.widget.*
+import android.widget.ImageView
+import android.widget.RelativeLayout
+import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -32,9 +37,6 @@ import com.braintreepayments.api.dropin.DropInResult
 import com.bumptech.glide.Glide
 import com.folliedimomi.R
 import com.folliedimomi._app.BadgeDrawable
-import com.google.android.material.navigation.NavigationView
-import com.google.gson.JsonSyntaxException
-import com.folliedimomi._app.Constant
 import com.folliedimomi._app.getRandomString
 import com.folliedimomi._observer.MyObserver
 import com.folliedimomi.fragment.DashboardFragment
@@ -42,16 +44,15 @@ import com.folliedimomi.fragment.HomeFragment
 import com.folliedimomi.fragment.ShoppingCartFragment
 import com.folliedimomi.interfaces.IOnBackPressed
 import com.folliedimomi.interfaces.ShoppingCartUpdateListener
-
 import com.folliedimomi.model.Product
 import com.folliedimomi.model.ShoppingCartResponse
 import com.folliedimomi.model.ShoppingCartResult
 import com.folliedimomi.network.NetworkRepository
 import com.folliedimomi.sharedPrefrense.Session
 import com.folliedimomi.utils.*
+import com.google.android.material.navigation.NavigationView
+import com.google.gson.JsonSyntaxException
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.activity_main.toolbar
-import kotlinx.android.synthetic.main.nav_footer.*
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.kodein
@@ -84,6 +85,8 @@ class MainActivity : AppCompatActivity(),
         setContentView(R.layout.activity_main)
         lifecycle.addObserver(MyObserver()) //LifeCycle Observer from JetPack
 
+        addMenuItemInNavMenuDrawer()
+
         supportFragmentManager.addOnBackStackChangedListener(this)
         setSupportActionBar(toolbar)
         setTitle(R.string.app_name)
@@ -109,6 +112,8 @@ class MainActivity : AppCompatActivity(),
             this.supportFragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
         }
 
+
+
         //imgUserProfile = navView.getHeaderView(0).findViewById(R.id.img_drawer_user)
         llUserHeader = navView.getHeaderView(0).findViewById(R.id.llUserHeader)
         tvDrawerUser = navView.getHeaderView(0).findViewById(R.id.tvDrawerUsername)
@@ -116,18 +121,15 @@ class MainActivity : AppCompatActivity(),
         tvDrawerUser.typeface = bold
         tvDrawerEmail.typeface = regular
 
-        llContact.setOnClickListener { openBrowser("${Constant.URL}contattaci") }
-        llWhatsApp.setOnClickListener { openWhatsApp() }
 
 
-
-        navView.menu.findItem(R.id.nav_faq).setActionView(R.layout.menu_right_arrow)
+     /*   navView.menu.findItem(R.id.nav_faq).setActionView(R.layout.menu_right_arrow)
         navView.menu.findItem(R.id.nav_condition_subscription)
             .setActionView(R.layout.menu_right_arrow)
         navView.menu.findItem(R.id.nav_news_latter).setActionView(R.layout.menu_right_arrow)
         navView.menu.findItem(R.id.nav_about_us).setActionView(R.layout.menu_right_arrow)
         navView.menu.findItem(R.id.nav_term_condition).setActionView(R.layout.menu_right_arrow)
-
+*/
 
         supportActionBar!!.setHomeButtonEnabled(true)
         supportActionBar!!.setDisplayShowHomeEnabled(true)
@@ -150,6 +152,32 @@ class MainActivity : AppCompatActivity(),
             .asGif()
             .load(R.drawable.ic_launcher_background)
             .into(imgClockGif)
+
+//        app:menu="@menu/activity_main_drawer"
+    }
+
+    private fun addMenuItemInNavMenuDrawer() {
+       /* val menu = navView.menu
+        val submenu: Menu = menu.addSubMenu("New Super SubMenu")
+        submenu.add("Super Item1").subMenu.add("sub 1").subMenu.add("sub 2")
+        submenu.add("Super Item2")
+        submenu.add("Super Item3")
+        navView.invalidate()*/
+
+        val menu = navView.menu
+        val submenu: Menu = menu.addSubMenu("New Super SubMenu")
+        submenu.add("Super Item1")
+        submenu.add("Super Item2")
+        submenu.add("Super Item3")
+
+        val submenu1: Menu = menu.addSubMenu("New SubMenu")
+        submenu1.add("Super1 Item1")
+        submenu1.add("Super1 Item2")
+        submenu1.add("Super1 Item3")
+        navView.invalidate()
+
+
+
     }
 
 
@@ -267,6 +295,7 @@ class MainActivity : AppCompatActivity(),
         icon = item.icon as LayerDrawable
         setBadgeCount(applicationContext, icon!!, cartCount)
         return true
+
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -314,6 +343,8 @@ class MainActivity : AppCompatActivity(),
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
+
+        Log.e("TAG","navigation selected item --> $item")
         when (item.itemId) {
 /*
 
@@ -464,5 +495,7 @@ class MainActivity : AppCompatActivity(),
         }
         return appInstalled
     }
+
+
 
 }

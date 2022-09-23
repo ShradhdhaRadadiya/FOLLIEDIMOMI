@@ -11,8 +11,6 @@
         android:visibility="gone"
         layout="@layout/toolbar_layout"/>
 
-
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/rvView"
         android:layout_width="match_parent"

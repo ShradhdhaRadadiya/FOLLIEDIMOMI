@@ -1,5 +1,6 @@
 package com.folliedimomi.activity
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -57,7 +58,7 @@ class AdvancedFilterActivity : AppCompatActivity(), KodeinAware {
 
         mBinding.btnApply.setOnClickListener {
 
-            val dataDis = arrayListOf<String>()
+         /*   val dataDis = arrayListOf<String>()
             val dataFeatire = arrayListOf<Int>()
 
             for (i in products!!.result) {
@@ -86,18 +87,20 @@ class AdvancedFilterActivity : AppCompatActivity(), KodeinAware {
             }
 
             disData = tempDis
-            featureData = feaDis
-            /*
-                      val intent = Intent()
-                      intent.putExtra("disData", disData.joinToString())
-                      intent.putExtra("featureData", featureData.joinToString())
-                      intent.putExtra("catId", catId)
-                    setResult(Activity.RESULT_OK, intent)
-                      finish()*/
+            featureData = feaDis*/
 
+
+
+                      val intent = Intent()
+                      intent.putExtra("disData","data")
+//                      intent.putExtra("featureData", featureData.joinToString())
+//                      intent.putExtra("catId", catId)
+                      setResult(Activity.RESULT_OK, intent)
+                      finish()
+/*
             val intent = Intent("com.example.andy.CUSTOM_INTENT")
             sendBroadcast(intent)
-            finish()
+            finish()*/
         }
     }
 

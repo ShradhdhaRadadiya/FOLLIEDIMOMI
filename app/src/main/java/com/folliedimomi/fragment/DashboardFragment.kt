@@ -1,6 +1,5 @@
 package com.folliedimomi.fragment
 
-import android.app.Activity
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
@@ -11,7 +10,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.folliedimomi.R
@@ -52,11 +50,13 @@ class DashboardFragment : Fragment(), KodeinAware {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
+        var data = arrayListOf<String>()
+        rvProduct.layoutManager = GridLayoutManager(requireContext(), 2)
+        rvProduct.adapter = ProductListAdapter(requireActivity(), data )
         tvFilter.setOnClickListener {
-            var intent = Intent(mContext, AdvancedFilterActivity::class.java)
-            startActivity(intent)
-//            startActivityForResult(intent,100)
+            val intent = Intent(mContext, AdvancedFilterActivity::class.java)
+//            startActivity(intent)
+            startActivityForResult(intent,100)
 //            resultLauncher.launch(Intent(mContext, AdvancedFilterActivity::class.java));
         }
 
@@ -93,7 +93,6 @@ class DashboardFragment : Fragment(), KodeinAware {
             mMap["page"] = Constant.LANG.convertBody()
             mMap["id_lang"] = Constant.TWO.convertBody()
 
-
             try {
                 val createOrderResponse: ProductListModel = repository.productList(mMap)
                 if (isAdded && isVisible) {
@@ -102,9 +101,9 @@ class DashboardFragment : Fragment(), KodeinAware {
                     createOrderResponse.let {
                         if (createOrderResponse.status == 1) {
 
-                            rvProduct.layoutManager = GridLayoutManager(requireContext(), 2)
+                         /*   rvProduct.layoutManager = GridLayoutManager(requireContext(), 2)
                             rvProduct.adapter = ProductListAdapter(requireActivity(), createOrderResponse.result)
-
+*/
                         } else requireActivity().coordinatorLayout.snackBar(createOrderResponse.message)
                         return@main
                     }
@@ -114,12 +113,20 @@ class DashboardFragment : Fragment(), KodeinAware {
         }
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if(resultCode == -1){
+            var data1 =  data?.extras!!.getString("disData")
+            Toast.makeText(mContext,data1, Toast.LENGTH_LONG).show()
+        }
+
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-       mContext. registerReceiver(mMessageReceiver, IntentFilter("com.example.andy.CUSTOM_INTENT"));
+//       mContext. registerReceiver(mMessageReceiver, IntentFilter("com.example.andy.CUSTOM_INTENT"));
+//getProductList()
 
-        getProductList()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
