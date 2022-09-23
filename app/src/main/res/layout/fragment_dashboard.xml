@@ -35,7 +35,7 @@
                     android:drawablePadding="@dimen/_3sdp"
                     android:gravity="center"
                     app:drawableTint="@color/black"
-                    android:text=" +39 08 7776989"
+                    android:text="+39 08 7776989"
                     android:textAlignment="center"
                     android:textColor="@color/colorPrimary"
                     android:textSize="12sp"
@@ -90,23 +90,43 @@
                 android:background="@color/red"
                 android:src="@drawable/app_icon" />
 
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvFilterText"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:gravity="center"
+                android:text="Page in piccole rate con KLANA"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                app:texts="@array/text_temp" />
+
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:layout_marginTop="10dp">
+                android:layout_gravity="center">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:background="@drawable/gray_rounded">
+
                 <TextView
                     android:id="@+id/tvFilter"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
-                    android:background="@drawable/gray_rounded"
                     android:gravity="center"
                     android:drawableStart="@drawable/ic_baseline_play_arrow_24"
                     android:paddingStart="@dimen/_10sdp"
-                    android:paddingTop="@dimen/_3sdp"
+                    android:paddingTop="@dimen/_7sdp"
                     android:paddingEnd="@dimen/_10sdp"
-                    android:paddingBottom="@dimen/_3sdp"
+                    android:paddingBottom="@dimen/_7sdp"
                     android:text="FILTRA PRODOTTI"
                     android:textAllCaps="true"
                     android:drawablePadding="@dimen/_5sdp"
@@ -115,27 +135,30 @@
                     android:textSize="12sp"
                     android:textStyle="bold"
                     tools:ignore="RtlSymmetry" />
-
+                </LinearLayout>
 
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="10dp">
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:background="@drawable/gray_rounded">
 
                 <TextView
                     android:id="@+id/tvSort"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
-                    android:background="@drawable/gray_rounded"
                     android:gravity="center"
-                    android:paddingStart="@dimen/_20sdp"
-                    android:paddingTop="@dimen/_3sdp"
-                    android:paddingEnd="@dimen/_20sdp"
-                    android:paddingBottom="@dimen/_3sdp"
+                    android:paddingStart="@dimen/_10sdp"
+                    android:paddingTop="@dimen/_7sdp"
+                    android:paddingEnd="@dimen/_10sdp"
+                    android:paddingBottom="@dimen/_7sdp"
                     android:text="Sort"
                     android:textAllCaps="true"
                     android:drawablePadding="@dimen/_5sdp"

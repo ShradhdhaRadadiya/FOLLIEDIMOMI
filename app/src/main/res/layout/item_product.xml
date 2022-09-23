@@ -26,20 +26,41 @@
             android:paddingTop="10dp">
             <!--  android:paddingBottom="10dp"-->
             <!--https://www.bilder-factory.ch/143079/sonnenstrahl-im-wald.jpg-->
-            <ImageView
-                android:id="@+id/imgProductImage"
-                android:layout_width="@dimen/_100sdp"
-                android:layout_height="@dimen/_100sdp"
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginStart="5dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="5dp"
-                android:layout_marginBottom="5dp"
-                android:background="@drawable/shadow"
-                android:padding="@dimen/_1sdp"
-                android:scaleType="fitXY"
-                android:src="@drawable/ic_account_verify"
-                app:tint="@color/black" />
+                android:orientation="vertical"
+                android:padding="@dimen/_5sdp"
+                android:background="@drawable/shadow">
+
+                <TextView
+                    android:id="@+id/tvNuovo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="NUOVO"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                    android:textColor="@color/text_nuovo"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    tools:ignore="RtlSymmetry,UnusedAttribute" />
+
+                <ImageView
+                    android:id="@+id/imgProductImage"
+                    android:layout_width="@dimen/_100sdp"
+                    android:layout_height="@dimen/_100sdp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:padding="@dimen/_1sdp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/ic_account_verify"
+                    app:tint="@color/black" />
+            </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
@@ -52,11 +73,11 @@
                 android:id="@+id/tvName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
                 android:ellipsize="end"
                 android:gravity="center"
                 android:maxLines="1"
                 android:paddingStart="2dp"
-                android:layout_marginTop="@dimen/_3sdp"
                 android:paddingEnd="2dp"
                 android:paddingBottom="1dp"
                 android:singleLine="true"
@@ -94,17 +115,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_7sdp"
                 android:background="@drawable/gray_rounded"
                 android:gravity="center"
                 android:paddingStart="@dimen/_10sdp"
                 android:paddingTop="@dimen/_3sdp"
                 android:paddingEnd="@dimen/_10sdp"
                 android:paddingBottom="@dimen/_3sdp"
-                android:text="40% Discount"
+                android:text="AGGIUINI AL CARReLLO"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:textColor="@color/white"
-                android:textSize="12sp"
+                android:textSize="@dimen/_9ssp"
                 android:textStyle="bold"
                 tools:ignore="RtlSymmetry" />
 
@@ -122,7 +143,7 @@
                     android:layout_marginTop="5dp"
                     android:layout_weight="1"
                     android:gravity="center|end"
-                    android:text="€ 89.00"
+                    android:text="62 CLIENTI"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                     android:textColor="@color/red"
                     android:textSize="12sp"
@@ -153,7 +174,7 @@
                 android:text="Acquisyato\n quesyo\n prodotto"
                 android:textAllCaps="true"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textColor="@color/grey"
+                android:textColor="@color/black"
                 android:textSize="12sp"
                 android:textStyle="bold"
                 tools:ignore="RtlSymmetry,UnusedAttribute" />
@@ -162,11 +183,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_10sdp"
                 android:layout_gravity="center"
+                android:layout_marginTop="@dimen/_5sdp"
                 android:paddingStart="@dimen/_20sdp"
                 android:paddingEnd="@dimen/_20sdp"
                 android:src="@drawable/gray_rounded"
-                android:tint="@color/blue"
-                android:layout_marginTop="@dimen/_5sdp"/>
+                android:tint="@color/blue" />
 
 
             <TextView
@@ -176,21 +197,20 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:background="@drawable/gray_rounded"
-                android:gravity="center"
                 android:drawableStart="@drawable/ic_baseline_play_arrow_24"
+                android:drawablePadding="@dimen/_5sdp"
+                android:gravity="center"
                 android:paddingStart="@dimen/_5sdp"
                 android:paddingTop="@dimen/_3sdp"
                 android:paddingEnd="@dimen/_5sdp"
                 android:paddingBottom="@dimen/_3sdp"
                 android:text="Visualizza video"
                 android:textAllCaps="true"
-                android:drawablePadding="@dimen/_5sdp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_8ssp"
                 android:textStyle="bold"
                 tools:ignore="RtlSymmetry" />
-
         </LinearLayout>
 
     </RelativeLayout>

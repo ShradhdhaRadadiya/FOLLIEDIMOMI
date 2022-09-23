@@ -11,7 +11,7 @@
     <color name="colorPrimary">#000000</color>
     <color name="colorPrimaryDark">#000000</color>
     <color name="colorPrimaryLight">#000000</color>
-    <color name="colorPrimaryLight100">#E8545454</color>
+    <color name="colorPrimaryLight100">#333333</color>
     <color name="colorSecondary">#dbbe81</color>
     <color name="colorAccent">#000000</color>
 
@@ -26,7 +26,7 @@
     <color name="colorFAB">#c873f4</color>
     <color name="colorPrimaryText">#212121</color>
     <color name="colorSecondaryText">#757575</color>
-    <color name="colorSecondaryTextDark">#555555</color>
+    <color name="colorSecondaryTextDark">#333333</color>
     <color name="colorCommonText">#afafaf</color>
     <color name="colorDisable">#c6c6c6</color>
     <color name="colorIcons">#FFFFFF</color>
@@ -42,7 +42,11 @@
 
     <color name="appBack">#e9e9e9</color>
 
-    <color name="error">#F44336</color>
-    <color name="black">#000000</color>
+    <color name="error">#50F44336</color>
+    <color name="black">#010103</color>
     <color name="success">#4CAF50</color>
+    <color name="text_bg">#f3f2f7</color>
+    <color name="text_nuovo">#ea1d19</color>
+    <color name="long_text_dec">#a84134</color>
+    <color name="long_text_dec_bg">#ffd7d5</color>
 </resources>

@@ -38,7 +38,6 @@ class DashboardFragment : Fragment(), KodeinAware {
     val objects = ArrayList<String>()
     private var sortBy = ""
 
-
     private val mMessageReceiver: BroadcastReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
             // Extract data included in the Intent
@@ -55,9 +54,7 @@ class DashboardFragment : Fragment(), KodeinAware {
         rvProduct.adapter = ProductListAdapter(requireActivity(), data )
         tvFilter.setOnClickListener {
             val intent = Intent(mContext, AdvancedFilterActivity::class.java)
-//            startActivity(intent)
             startActivityForResult(intent,100)
-//            resultLauncher.launch(Intent(mContext, AdvancedFilterActivity::class.java));
         }
 
         tvSort.setOnClickListener {
