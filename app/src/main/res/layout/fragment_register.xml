@@ -27,9 +27,8 @@
 				<ImageView
 						android:layout_width="match_parent"
 						android:layout_height="120dp"
-						android:src="@drawable/ic_launcher_background"
-						android:text="@string/app_name"
-					app:tint="@color/black" />
+						android:src="@drawable/app_icon"
+					/>
 
 				<TextView
 						android:layout_width="match_parent"
@@ -64,7 +63,51 @@
 							style="@style/AppEditText" />
 				</com.google.android.material.textfield.TextInputLayout>
 
-				<!--Ditta-->
+
+				<!--Email-->
+				<com.google.android.material.textfield.TextInputLayout
+					android:id="@+id/telEmail"
+					style="@style/AppTextInputLayout"
+					android:inputType="textEmailAddress"
+					android:hint="@string/e_mail">
+
+					<com.google.android.material.textfield.TextInputEditText
+						android:id="@+id/etEmail"
+						style="@style/AppEditText"
+						android:inputType="textEmailAddress|textNoSuggestions"
+						/>
+				</com.google.android.material.textfield.TextInputLayout>
+
+				<!--Password-->
+				<com.google.android.material.textfield.TextInputLayout
+					android:id="@+id/telPass"
+					style="@style/AppTextInputLayout"
+					android:hint="@string/hint_password"
+					app:passwordToggleEnabled="true">
+
+					<com.google.android.material.textfield.TextInputEditText
+						android:id="@+id/etPass"
+						style="@style/AppEditText"
+						android:inputType="textPassword" />
+				</com.google.android.material.textfield.TextInputLayout>
+
+
+				<!-- repeat Password-->
+				<com.google.android.material.textfield.TextInputLayout
+					android:id="@+id/telRepPass"
+					style="@style/AppTextInputLayout"
+					android:hint="@string/repeat_password"
+					app:passwordToggleEnabled="true">
+
+					<com.google.android.material.textfield.TextInputEditText
+						android:id="@+id/etRepPass"
+						style="@style/AppEditText"
+						android:inputType="textPassword" />
+				</com.google.android.material.textfield.TextInputLayout>
+
+<!--
+
+				&lt;!&ndash;Ditta&ndash;&gt;
 				<com.google.android.material.textfield.TextInputLayout
 						android:id="@+id/telCompany"
 						style="@style/AppTextInputLayout"
@@ -74,8 +117,9 @@
 							android:id="@+id/etCompany"
 							style="@style/AppEditText" />
 				</com.google.android.material.textfield.TextInputLayout>
+-->
 
-				<!--Ditta-->
+				<!--codice fiscale-->
 				<com.google.android.material.textfield.TextInputLayout
 						android:id="@+id/telHouseNo"
 						style="@style/AppTextInputLayout"
@@ -96,8 +140,10 @@
 							android:id="@+id/etAddress"
 							style="@style/AppEditText" />
 				</com.google.android.material.textfield.TextInputLayout>
+<!--
 
-				<!--E-mail-->
+
+				&lt;!&ndash;E-mail&ndash;&gt;
 				<com.google.android.material.textfield.TextInputLayout
 						android:id="@+id/telEmail"
 						style="@style/AppTextInputLayout"
@@ -108,8 +154,10 @@
 							style="@style/AppEditText"
 							android:inputType="textEmailAddress" />
 				</com.google.android.material.textfield.TextInputLayout>
+-->
+<!--
 
-				<!--Additional Information-->
+				&lt;!&ndash;Additional Information&ndash;&gt;
 				<com.google.android.material.textfield.TextInputLayout
 						android:id="@+id/telAdditionalInformation"
 						style="@style/AppTextInputLayout"
@@ -119,6 +167,7 @@
 							android:id="@+id/etAdditionalInformation"
 							style="@style/AppEditText" />
 				</com.google.android.material.textfield.TextInputLayout>
+-->
 
 				<!--Pin-->
 				<com.google.android.material.textfield.TextInputLayout
@@ -181,25 +230,27 @@
 							android:inputType="phone" />
 				</com.google.android.material.textfield.TextInputLayout>
 
-				<!--Password-->
+
+				<!--N. cellulare-->
 				<com.google.android.material.textfield.TextInputLayout
-						android:id="@+id/telPass"
-						style="@style/AppTextInputLayout"
-						android:hint="@string/hint_password"
-						app:passwordToggleEnabled="true">
+					android:id="@+id/telCellulare"
+					style="@style/AppTextInputLayout"
+					android:hint="@string/n_cellular">
 
 					<com.google.android.material.textfield.TextInputEditText
-							android:id="@+id/etPass"
-							style="@style/AppEditText"
-							android:inputType="textPassword" />
+						android:id="@+id/etCellulare"
+						style="@style/AppEditText"
+						android:inputType="phone" />
 				</com.google.android.material.textfield.TextInputLayout>
+
+
 
 				<TextView
 						android:id="@+id/tvAlreadyHaveAccount"
 						android:layout_width="match_parent"
 						android:layout_height="wrap_content"
 						android:layout_marginTop="15dp"
-						android:layout_marginBottom="5dp"
+						android:layout_marginBottom="@dimen/_35sdp"
 						android:gravity="center"
 						android:text="@string/already_have_an_account_login"
 						android:textColor="@color/colorPrimary"

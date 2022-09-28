@@ -27,7 +27,9 @@
         <string name="menu_logout">Logout</string>
         <string name="cancel"><!--Cancel-->Annulla</string>
         <string name="login"><!--Login-->Accedi</string>
-        AppTextInputLayout    <string name="email"><!--Email-->Indirizzo E-mail *</string>
+    <string name="e_mail"><!--Email-->E-mail</string>
+
+    AppTextInputLayout    <string name="email"><!--Email-->Indirizzo E-mail *</string>
         <string name="don_t_have_an_account_register_here">Non hai ancora un\'account? Registrati ora <!--Don\'t have an account? Register--></string>
         <string name="already_have_an_account_login"><!--Already have an account? Login-->Se già registrato? Accedi</string>
         <string name="back_to_login"><!--Back to login-->Torna al login</string>
@@ -41,6 +43,7 @@
             Inserisci password</string>
         <string name="error_password_length">Password length must be at least 6 character</string>
         <string name="hint_password">Password *<!--Password--></string>
+        <string name="repeat_password">Ripeti la Password *<!--Password--></string>
         <string name="forgot_password">Hai dimenticato la password? <!--Forgot password--></string>
         <string name="forgot_password_title">Password dimenticata</string>
         <string name="please_wait"><!--Please wait.-->Attendere Prego</string>
@@ -244,5 +247,6 @@
         <string name="search_italy">Ricerca</string>
 
     <string name="apply_il_filtyro"><!--APPLY-->Applica il filtro</string>
+    <string name="n_cellular">N. Cellulare</string>
 
 </resources>

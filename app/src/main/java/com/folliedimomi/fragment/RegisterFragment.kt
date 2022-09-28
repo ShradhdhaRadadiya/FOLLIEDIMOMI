@@ -116,7 +116,7 @@ class RegisterFragment : Fragment(), KodeinAware, CountryDialog.ProductInterface
                 mMap["lastname"] = etSurname.text.toString().convertBody()
                 mMap["email"] = etEmail.text.toString().convertBody()
                 mMap["passwd"] = etPass.text.toString().convertBody()
-                mMap["company"] = etCompany.text.toString().convertBody()
+
                 mMap["address1"] = etAddress.text.toString().convertBody()
                 mMap["postcode"] = etPin.text.toString().convertBody()
                 mMap["city"] = etCity.text.toString().convertBody()
