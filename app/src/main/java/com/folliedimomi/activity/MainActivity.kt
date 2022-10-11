@@ -3,11 +3,8 @@ package com.folliedimomi.activity
 
 import android.annotation.SuppressLint
 import android.annotation.TargetApi
-import android.content.ActivityNotFoundException
-import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.content.res.Configuration
 import android.graphics.Typeface
 import android.graphics.drawable.LayerDrawable
@@ -15,16 +12,13 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
-import android.telephony.PhoneNumberUtils
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import android.view.SubMenu
 import android.view.View
 import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -38,15 +32,14 @@ import com.bumptech.glide.Glide
 import com.folliedimomi.R
 import com.folliedimomi._app.BadgeDrawable
 import com.folliedimomi._app.getRandomString
+import com.folliedimomi._app.loadFragment
 import com.folliedimomi._observer.MyObserver
 import com.folliedimomi.fragment.DashboardFragment
 import com.folliedimomi.fragment.HomeFragment
 import com.folliedimomi.fragment.ShoppingCartFragment
 import com.folliedimomi.interfaces.IOnBackPressed
 import com.folliedimomi.interfaces.ShoppingCartUpdateListener
-import com.folliedimomi.model.Product
-import com.folliedimomi.model.ShoppingCartResponse
-import com.folliedimomi.model.ShoppingCartResult
+import com.folliedimomi.model.*
 import com.folliedimomi.network.NetworkRepository
 import com.folliedimomi.sharedPrefrense.Session
 import com.folliedimomi.utils.*
@@ -77,7 +70,15 @@ class MainActivity : AppCompatActivity(),
     private lateinit var llUserHeader: RelativeLayout
     private lateinit var tvDrawerUser: TextView
     private lateinit var tvDrawerEmail: TextView
+
     private lateinit var imgUserProfile: ImageView
+    private  var drawerListData = arrayListOf<DrawerMenuModel.Result>()
+
+
+     var drawerCatId = 0
+     var drawerCatText = ""
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         //forceRtlIfSupported() //Right to Left transaction
@@ -85,7 +86,8 @@ class MainActivity : AppCompatActivity(),
         setContentView(R.layout.activity_main)
         lifecycle.addObserver(MyObserver()) //LifeCycle Observer from JetPack
 
-        addMenuItemInNavMenuDrawer()
+
+        callAdvanceFilterApiCall()
 
         supportFragmentManager.addOnBackStackChangedListener(this)
         setSupportActionBar(toolbar)
@@ -156,29 +158,65 @@ class MainActivity : AppCompatActivity(),
 //        app:menu="@menu/activity_main_drawer"
     }
 
-    private fun addMenuItemInNavMenuDrawer() {
-       /* val menu = navView.menu
-        val submenu: Menu = menu.addSubMenu("New Super SubMenu")
-        submenu.add("Super Item1").subMenu.add("sub 1").subMenu.add("sub 2")
-        submenu.add("Super Item2")
-        submenu.add("Super Item3")
-        navView.invalidate()*/
-
-        val menu = navView.menu
-        val submenu: Menu = menu.addSubMenu("New Super SubMenu")
-        submenu.add("Super Item1")
-        submenu.add("Super Item2")
-        submenu.add("Super Item3")
-
-        val submenu1: Menu = menu.addSubMenu("New SubMenu")
-        submenu1.add("Super1 Item1")
-        submenu1.add("Super1 Item2")
-        submenu1.add("Super1 Item3")
-        navView.invalidate()
 
 
+    private fun callAdvanceFilterApiCall() {
+        //show
+        this.progress_bars_layout.show()
+        Coroutines.main {
+            try {
+                var drawerData = repository.getDrawerMenu()
 
+                drawerData.result.let {
+                    if (drawerData.status == 1) {
+                        drawerListData = drawerData.result as ArrayList<DrawerMenuModel.Result>
+                        val menu = navView.menu
+                        for (item in drawerData.result){
+                            if(item.submenu?.isNotEmpty() == true){
+                                menu.add(item.title)
+                                val submenu: Menu = menu
+                                for (itemD in item.submenu!!){
+                                    submenu.add("     "+itemD.title)
+                                }
+                            }else{
+                                menu.add(item.title)
+                            }
+
+                        }
+                        navView.invalidate()
+                    }
+                    //hide
+                    this.progress_bars_layout.hide()
+                    return@main
+                }
+
+            } catch (e: ApiException) {
+                Log.i("OkHttp", "Response : ${e.message}")
+                //hide
+                this.progress_bars_layout.hide()
+
+                toast(e.message!!)
+            } catch (e: NoInternetException) {
+                Log.i("OkHttp", "Response : ${e.message}")
+                //hide
+                this.progress_bars_layout.hide()
+                toast(e.message!!)
+            } catch (e: JsonSyntaxException) {
+                Log.i("OkHttp", "Response : ${e.message}")
+                //hide
+                this.progress_bars_layout.hide()
+
+                toast(e.message!!)
+            } catch (e: IOException) {
+                Log.i("OkHttp", "Response : ${e.message}")
+                //hide
+                this.progress_bars_layout.hide()
+
+                toast(e.message!!)
+            }
+        }
     }
+
 
 
     private fun openBrowser(webUrl: String) {
@@ -237,7 +275,7 @@ class MainActivity : AppCompatActivity(),
         }, 2000)
     }
 
-    fun loadFragment(fragment: Fragment, title: String = "") {
+    fun loadFragmentMain(fragment: Fragment, title: String = "") {
         val fragmentTransaction = supportFragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.container, fragment)
             .addToBackStack(fragment::class.java.simpleName).commit()
@@ -301,7 +339,7 @@ class MainActivity : AppCompatActivity(),
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.action_cart -> {
-                loadFragment(ShoppingCartFragment(), getString(R.string.shopping_cart))
+                loadFragmentMain(ShoppingCartFragment(), getString(R.string.shopping_cart))
                 true
             }
             R.id.action_search -> {
@@ -345,50 +383,30 @@ class MainActivity : AppCompatActivity(),
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
 
         Log.e("TAG","navigation selected item --> $item")
-        when (item.itemId) {
-/*
+        Log.e("TAG","navigation selected item --> $drawerListData")
 
-            R.id.nav_for_her -> loadFragment(ProductListFragment("12"), getString(R.string.for_her))
-            R.id.nav_for_her_one -> loadFragment(
-                ProductListFragment("24"),
-                getString(R.string.for_her)
-            )
-            R.id.nav_for_her_two -> loadFragment(
-                ProductListFragment("25"),
-                getString(R.string.for_her)
-            )
-            R.id.nav_for_her_three -> loadFragment(
-                ProductListFragment("26"),
-                getString(R.string.for_her)
-            )
+        drawerCatText = ""
+        for (i in drawerListData){
+            if(i.submenu != null && i.submenu!!.isNotEmpty()){
+               for (j in i.submenu!!){
+                   if(j.title == item.toString().trim()){
+                       drawerCatText = i.title+" > "
+                       drawerCatText += j.title
+                       drawerCatId = j.id
+                   }
+               }
 
-            R.id.nav_for_him -> loadFragment(ProductListFragment("15"), getString(R.string.for_him))
-            R.id.nav_for_him_one -> loadFragment(
-                ProductListFragment("27"),
-                getString(R.string.for_him)
-            )
-            R.id.nav_for_him_two -> loadFragment(ProductListFragment("28"), getString(R.string.for_him))
-            R.id.nav_for_him_three -> loadFragment(ProductListFragment("29"), getString(R.string.for_him))
-
-
-            R.id.nav_accessory -> loadFragment(ProductListFragment("19"), getString(R.string.accessory))
-            R.id.nav_for_accessory_one -> loadFragment(ProductListFragment("31"), getString(R.string.accessory))
-            R.id.nav_for_accessory_two -> loadFragment(ProductListFragment("32"), getString(R.string.accessory))
-            R.id.nav_for_accessory_three -> loadFragment(ProductListFragment("33"), getString(R.string.accessory))
-            R.id.nav_kids -> loadFragment(ProductListFragment("18"), getString(R.string.kids))
-            R.id.nav_for_kids_one -> loadFragment(ProductListFragment("21"), getString(R.string.kids))
-            R.id.nav_for_kids_two -> loadFragment(ProductListFragment("22"), getString(R.string.kids))
-            R.id.nav_for_kids_three -> loadFragment(ProductListFragment("23"), getString(R.string.kids))
-            R.id.nav_outlet -> loadFragment(ProductListFragment("30"), getString(R.string.outlet))
-            R.id.nav_condition_subscription -> loadFragment(WebPageFragment("${Constant.URL}it/content/4-chi-siamo"))
-            R.id.nav_term_condition -> loadFragment(WebPageFragment("${Constant.URL}it/content/3-termini-e-condizioni"))
-            R.id.nav_news_latter -> loadFragment(WebPageFragment("${Constant.URL}it/content/6-informativa-privacy"))
-            R.id.nav_about_us -> loadFragment(WebPageFragment("${Constant.URL}it/content/5-i-nostri-metodi-di-pagamenti"))
-            R.id.nav_faq -> loadFragment(WebPageFragment("${Constant.URL}it/content/8-faq-domande-frequenti")) //openBrowser("${Constant.URL}phppages/faq.php?id_lang=2&id_shop=1")
-*/
-
+            }else{
+                if(i.title == item.toString().trim()){
+                    drawerCatText = i.title
+                    drawerCatId = i.id
+                }
+            }
         }
+
         drawerLayout.closeDrawer(GravityCompat.START)
+
+        loadFragment(DashboardFragment(drawerCatText,drawerCatId))
         return true
     }
 
@@ -458,44 +476,5 @@ class MainActivity : AppCompatActivity(),
     override fun onShoppingCartUpdate() {
         getShoppingCart(session.getUserId().toString(), session.getAppSession().toString())
     }
-
-    /** Open WhatsApp direct with specific number (No matter number save or not.)  */
-    private fun openWhatsApp() {
-        val smsNumber = "393881054253"
-        val isWhatsAppInstalled = whatsAppInstalledOrNot("com.whatsapp")
-        if (isWhatsAppInstalled) {
-            val sendIntent = Intent("android.intent.action.MAIN")
-            sendIntent.component = ComponentName("com.whatsapp", "com.whatsapp.Conversation")
-            sendIntent.putExtra(
-                "jid",
-                PhoneNumberUtils.stripSeparators(smsNumber) + "@s.whatsapp.net"
-            )
-            startActivity(sendIntent)
-        } else {
-            Toast.makeText(this, "WhatsApp not Installed", Toast.LENGTH_SHORT).show()
-            val uri = Uri.parse("market://details?id=com.whatsapp")
-            val goToMarket = Intent(Intent.ACTION_VIEW, uri)
-            try {
-                startActivity(goToMarket)
-            } catch (e: ActivityNotFoundException) {
-                Toast.makeText(this, " unable to find market app", Toast.LENGTH_LONG).show()
-            }
-        }
-    }
-
-    /** Check WhatsApp installed or not  */
-    private fun whatsAppInstalledOrNot(uri: String): Boolean {
-        val pm = packageManager
-        var appInstalled = false
-        appInstalled = try {
-            pm.getPackageInfo(uri, PackageManager.GET_ACTIVITIES)
-            true
-        } catch (e: PackageManager.NameNotFoundException) {
-            false
-        }
-        return appInstalled
-    }
-
-
 
 }

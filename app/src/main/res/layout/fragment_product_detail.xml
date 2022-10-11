@@ -15,7 +15,7 @@
         <RelativeLayout
             android:id="@+id/rl_banner"
             android:layout_width="match_parent"
-            android:layout_height="370dp">
+            android:layout_height="@dimen/_250sdp">
 
             <androidx.viewpager.widget.ViewPager
                 android:id="@+id/viewPager"
@@ -128,16 +128,16 @@
             android:textStyle="bold" />
 
 
-        <androidx.appcompat.widget.AppCompatImageView
+        <ProgressBar
+            android:id="@+id/customProgress"
+            style="@style/CustomProgressBar"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_10sdp"
             android:layout_gravity="center"
             android:layout_marginTop="@dimen/_5sdp"
-            android:paddingStart="@dimen/_20sdp"
-            android:paddingEnd="@dimen/_20sdp"
-            android:src="@drawable/gray_rounded"
-            android:tint="@color/yellow" />
-
+            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_marginEnd="@dimen/_20sdp"
+            android:progressTint="@color/yellow"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -332,15 +332,12 @@
                 android:id="@+id/tvLongDec"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ellipsize="end"
                 android:gravity="start"
-                android:maxLines="1"
                 android:paddingTop="@dimen/_2sdp"
                 android:paddingStart="@dimen/_2sdp"
                 android:paddingEnd="@dimen/_2sdp"
                 android:paddingBottom="@dimen/_2sdp"
                 android:includeFontPadding="false"
-                android:singleLine="true"
                 android:text="CAT F2"
                 android:layout_marginStart="@dimen/_20sdp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"

@@ -12,6 +12,7 @@
         <entry key="..\:/Project/Nikunj/FOLLIEDIMOMI/app/src/main/res/drawable/back_rounded_white.xml" value="0.1" />
         <entry key="..\:/Project/Nikunj/FOLLIEDIMOMI/app/src/main/res/drawable/back_rounded_white_corner.xml" value="0.105" />
         <entry key="..\:/Project/Nikunj/FOLLIEDIMOMI/app/src/main/res/drawable/bottom_navigation_item_colors.xml" value="0.1175" />
+        <entry key="..\:/Project/Nikunj/FOLLIEDIMOMI/app/src/main/res/drawable/custom_progress_bar_horizontal.xml" value="0.208" />
         <entry key="..\:/Project/Nikunj/FOLLIEDIMOMI/app/src/main/res/drawable/gray_rounded.xml" value="0.105" />
         <entry key="..\:/Project/Nikunj/FOLLIEDIMOMI/app/src/main/res/drawable/ic_american_express.xml" value="0.1" />
         <entry key="..\:/Project/Nikunj/FOLLIEDIMOMI/app/src/main/res/drawable/ic_baseline_arrow_back_24.xml" value="0.136" />
@@ -44,6 +45,7 @@
         <entry key="..\:/Project/Nikunj/FOLLIEDIMOMI/app/src/main/res/layout/dialog_choose_product.xml" value="0.1" />
         <entry key="..\:/Project/Nikunj/FOLLIEDIMOMI/app/src/main/res/layout/dialoge_advance_filter_product.xml" value="0.20416666666666666" />
         <entry key="..\:/Project/Nikunj/FOLLIEDIMOMI/app/src/main/res/layout/dialoge_filter_product.xml" value="0.10235507246376811" />
+        <entry key="..\:/Project/Nikunj/FOLLIEDIMOMI/app/src/main/res/layout/dialoge_video_play.xml" value="0.20416666666666666" />
         <entry key="..\:/Project/Nikunj/FOLLIEDIMOMI/app/src/main/res/layout/fragment_add_address.xml" value="0.1" />
         <entry key="..\:/Project/Nikunj/FOLLIEDIMOMI/app/src/main/res/layout/fragment_address.xml" value="0.1" />
         <entry key="..\:/Project/Nikunj/FOLLIEDIMOMI/app/src/main/res/layout/fragment_change_password.xml" value="0.1" />
@@ -63,6 +65,7 @@
         <entry key="..\:/Project/Nikunj/FOLLIEDIMOMI/app/src/main/res/layout/fragment_order_list.xml" value="0.1" />
         <entry key="..\:/Project/Nikunj/FOLLIEDIMOMI/app/src/main/res/layout/fragment_order_review.xml" value="0.1" />
         <entry key="..\:/Project/Nikunj/FOLLIEDIMOMI/app/src/main/res/layout/fragment_product_detail.xml" value="0.22" />
+        <entry key="..\:/Project/Nikunj/FOLLIEDIMOMI/app/src/main/res/layout/fragment_product_search.xml" value="0.16757246376811594" />
         <entry key="..\:/Project/Nikunj/FOLLIEDIMOMI/app/src/main/res/layout/fragment_profile.xml" value="0.1" />
         <entry key="..\:/Project/Nikunj/FOLLIEDIMOMI/app/src/main/res/layout/fragment_register.xml" value="0.25" />
         <entry key="..\:/Project/Nikunj/FOLLIEDIMOMI/app/src/main/res/layout/fragment_second.xml" value="0.20416666666666666" />

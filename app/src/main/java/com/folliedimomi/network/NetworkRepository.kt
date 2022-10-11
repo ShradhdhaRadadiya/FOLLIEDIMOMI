@@ -266,13 +266,34 @@ class NetworkRepository(private val api: MyApi/*, private val session: AppSessio
     suspend fun getAdvanceFilter(
         id_parent: String,
         id_category: String,
-        id_manufacturer: String
+        id_manufacturer: String,
+        start_price: String,
+        end_price: String
     ): AdvanceFilterModel {
         val response = apiRequest {
             api.getAdvanceFilter(
                 id_parent = id_parent,
                 id_category = id_category,
-                id_manufacturer = id_manufacturer
+                id_manufacturer = id_manufacturer,
+                start_price = start_price,
+                end_price = end_price
+            )
+        }
+        return response
+    }
+
+    suspend fun getDrawerMenu(): DrawerMenuModel {
+        val response = apiRequest {
+            api.getDrawerMenu(
+              )
+        }
+        return response
+    }
+
+
+    suspend fun getTitleVideo(): DashVideoTitleModel {
+        val response = apiRequest {
+            api.getDisplayTitleVideo(
             )
         }
         return response

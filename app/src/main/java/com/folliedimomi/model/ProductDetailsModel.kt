@@ -18,6 +18,10 @@ data class ProductDetailsModel(
         var attachments: List<Any>,
         @SerializedName("attribute_price")
         var attributePrice: Int,
+        @SerializedName("bar_width")
+        var bar_width: Int,
+        @SerializedName("bar_class")
+        var bar_class: String,
         @SerializedName("category")
         var category: String,
         @SerializedName("category_name")

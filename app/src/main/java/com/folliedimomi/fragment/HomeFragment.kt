@@ -47,9 +47,7 @@ class HomeFragment : Fragment(), KodeinAware {
                 }
                 R.id.bNavSearch -> {
                     //searchEnable()
-
-//                    requireActivity().loadFragment(SearchProductFragment(""))
-
+                    requireActivity().loadFragment(SearchProductFragment(""))
                     true
                 }
                 R.id.bNavAccount -> {

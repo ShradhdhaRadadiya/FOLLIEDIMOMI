@@ -436,9 +436,9 @@ interface MyApi {
             logger.level = HttpLoggingInterceptor.Level.BODY
 
             val okkHttpclient = OkHttpClient.Builder()
-                    .connectTimeout(10, TimeUnit.MINUTES)
-                    .writeTimeout(10, TimeUnit.MINUTES)
-                    .readTimeout(10, TimeUnit.MINUTES)
+                    .connectTimeout(30, TimeUnit.MINUTES)
+                    .writeTimeout(30, TimeUnit.MINUTES)
+                    .readTimeout(30, TimeUnit.MINUTES)
                     .addInterceptor(networkConnectionInterceptor)
                     .addInterceptor(logger)
                     .build()
@@ -458,13 +458,35 @@ interface MyApi {
     suspend fun getAdvanceFilter(
         @Field("controller") controller: String = "mobileapi",
         @Field("op") op: String = "advance_filter",
-        @Field("id_parent") id_parent: String = "2",
-        @Field("id_category") id_category: String,
+        @Field("id_parent") id_parent: String = "",
+        @Field("id_category") id_category: String="",
         @Field("id_manufacturer") id_manufacturer: String = "",
+        @Field("start_price") start_price: String = "",
+        @Field("end_price") end_price: String = "",
       //  @Field("featured") featured: String = "0",
         /*    @Field("lang_id") id_lang: String = Constant.LANG,
             @Field("page") page: String = "1"*/
     ): Response<AdvanceFilterModel>
+
+ /**AdvanceFilter */
+    @FormUrlEncoded
+    @POST("index.php")
+    suspend fun getDrawerMenu(
+        @Field("controller") controller: String = "mobileapi",
+        @Field("op") op: String = "header_menu",
+        @Field("lang_id") id_parent: String =  Constant.LANG,
+
+    ): Response<DrawerMenuModel>
+
+ /**AdvanceFilter */
+    @FormUrlEncoded
+    @POST("index.php")
+    suspend fun getDisplayTitleVideo(
+        @Field("controller") controller: String = "mobileapi",
+        @Field("op") op: String = "homepage_blocks"
+
+
+    ): Response<DashVideoTitleModel>
 
 
 }

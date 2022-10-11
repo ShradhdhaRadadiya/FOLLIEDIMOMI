@@ -58,8 +58,7 @@
                     android:layout_marginBottom="5dp"
                     android:padding="@dimen/_1sdp"
                     android:scaleType="fitXY"
-                    android:src="@drawable/ic_account_verify"
-                    app:tint="@color/black" />
+                    android:src="@drawable/ic_account_verify" />
             </LinearLayout>
 
             <View
@@ -180,6 +179,7 @@
                 tools:ignore="RtlSymmetry,UnusedAttribute" />
 
             <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivBar"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_10sdp"
                 android:layout_gravity="center"

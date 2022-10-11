@@ -54,7 +54,6 @@ class CategoryAdapter(
             2 -> {
                 val msgRight: AdViewHolder = holder as AdViewHolder
                 msgRight.bind(element)
-
                 // bind AdViewHolder
             }
 
@@ -69,12 +68,9 @@ class CategoryAdapter(
         fun bind(cell: AdvanceFilterModel.Result) {
             binding.apply {
                 rbCat1.text = cell.title
-
                 rvCat.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-
                 val adapter = AdvanceFilterCatListAdapter(cell.data, context, object :
                     AdvanceFilterCatListAdapter.OnProductClick {
-
                     override fun onClickOnProduct(isCat: Int, adapterPosition: Int) {
                         listener.onClickCatOnProduct(isCat,adapterPosition)
                     }

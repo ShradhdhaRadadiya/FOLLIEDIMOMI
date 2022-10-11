@@ -31,7 +31,8 @@ class AdvancedFilterActivity : AppCompatActivity(), KodeinAware {
     private lateinit var adapter: CategoryAdapter
     private var disponibilita = ""
     private var featured = "0"
-    private var catId = "2"
+    private var catId = "0"
+    private var parent_id = "0"
 
     companion object {
         var disData = arrayListOf<String>()
@@ -49,16 +50,16 @@ class AdvancedFilterActivity : AppCompatActivity(), KodeinAware {
 
     private fun initView() {
         mBinding.imgFilter.setOnClickListener { onBackPressed() }
-
-        if( products != null){
+        parent_id = intent.getStringExtra("Parent_id").toString()
+        if (products != null) {
             setAdapter(products?.result!!)
-        }else{
+        } else {
             callAdvanceFilterApiCall()
         }
 
         mBinding.btnApply.setOnClickListener {
 
-         /*   val dataDis = arrayListOf<String>()
+            val dataDis = arrayListOf<String>()
             val dataFeatire = arrayListOf<Int>()
 
             for (i in products!!.result) {
@@ -70,7 +71,6 @@ class AdvancedFilterActivity : AppCompatActivity(), KodeinAware {
                     }
                 }
             }
-
 
             val tempDis = arrayListOf<String>()
             for (i in disData.indices) {
@@ -87,20 +87,17 @@ class AdvancedFilterActivity : AppCompatActivity(), KodeinAware {
             }
 
             disData = tempDis
-            featureData = feaDis*/
+            featureData = feaDis
 
+            Log.e("TAG","disData IS ---> $disData")
+            Log.e("TAG","featureData IS ---> $featureData")
 
-
-                      val intent = Intent()
-                      intent.putExtra("disData","data")
-//                      intent.putExtra("featureData", featureData.joinToString())
-//                      intent.putExtra("catId", catId)
-                      setResult(Activity.RESULT_OK, intent)
-                      finish()
-/*
-            val intent = Intent("com.example.andy.CUSTOM_INTENT")
-            sendBroadcast(intent)
-            finish()*/
+            val intent = Intent()
+            intent.putExtra("disData", disData.joinToString())
+            intent.putExtra("featureData", featureData.joinToString())
+            intent.putExtra("catId", catId)
+            setResult(Activity.RESULT_OK, intent)
+            finish()
         }
     }
 
@@ -108,10 +105,10 @@ class AdvancedFilterActivity : AppCompatActivity(), KodeinAware {
     private fun callAdvanceFilterApiCall() {
         //show
 
-       this.progress_bars_layout.show()
+        this.progress_bars_layout.show()
         Coroutines.main {
             try {
-                products = repository.getAdvanceFilter("12", catId, featured)
+                products = repository.getAdvanceFilter(parent_id, catId, featured, "", "")
 
                 products.let {
                     if (products!!.status == 1) {
@@ -162,9 +159,9 @@ class AdvancedFilterActivity : AppCompatActivity(), KodeinAware {
         adapter = CategoryAdapter(liProducts, currentContext, object :
             CategoryAdapter.OnProductClick {
             override fun onClickCatOnProduct(isCat: Int, catId: Int) {
-                if(isCat == 1){
+                if (isCat == 1) {
                     this@AdvancedFilterActivity.catId = catId.toString()
-                }else{
+                } else {
                     this@AdvancedFilterActivity.featured = catId.toString()
                 }
                 categoryData.add(catId)

@@ -1,20 +1,11 @@
 package com.folliedimomi.utils
 
-import android.app.Activity
 import android.app.Dialog
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.Window
 import android.view.WindowManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.folliedimomi.activity.AdvancedFilterActivity
-import com.folliedimomi.adapter.CategoryAdapter
-import com.folliedimomi.databinding.DialogeAdvanceFilterProductBinding
 import com.folliedimomi.databinding.DialogeFilterProductBinding
-import com.google.gson.JsonSyntaxException
-import kotlinx.android.synthetic.main.activity_main.*
-import java.io.IOException
 
 object DialogUtils {
 
