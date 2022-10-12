@@ -5,7 +5,11 @@ import android.graphics.Typeface
 
 open class FontOverride {
 
-    open fun setDefaultFont(context: Context, staticTypefaceFieldName: String, fontAssetName: String) {
+    open fun setDefaultFont(
+        context: Context,
+        staticTypefaceFieldName: String,
+        fontAssetName: String
+    ) {
         val regular = Typeface.createFromAsset(context.assets, fontAssetName)
         replaceFont(staticTypefaceFieldName, regular)
     }

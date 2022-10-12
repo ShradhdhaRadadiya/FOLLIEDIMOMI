@@ -3,10 +3,10 @@ package com.folliedimomi.fragment
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.folliedimomi.R
 import com.folliedimomi.activity.MainActivity
@@ -18,7 +18,6 @@ import com.google.gson.JsonSyntaxException
 import com.pcs.ciprianicouture.model.*
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_order_detail.*
-
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
@@ -42,7 +41,8 @@ class OrderDetailFragment(private val orderId: String) : Fragment(), KodeinAware
         requireActivity().progress_bars_layout.show()
         Coroutines.main {
             try {
-                val orderDetailResponse: OrderDetailResponse = repository.getOrderDetail(orderId = orderId)
+                val orderDetailResponse: OrderDetailResponse =
+                    repository.getOrderDetail(orderId = orderId)
                 if (isAdded && isVisible) {
                     orderDetailResponse.let {
                         if (orderDetailResponse.status == 1) {
@@ -56,8 +56,10 @@ class OrderDetailFragment(private val orderId: String) : Fragment(), KodeinAware
                             val date = orderDetail.invoiceDate
                             val mDate = date.split(" ")
                             tvInvoiceDate.text = getString(R.string.date_label) + " " + mDate[0]
-                            tvOrderId.text = getString(R.string.order_number_label) + " " + orderDetail.idOrder.toShort()
-                            tvReference.text = getString(R.string.reference_label) + " " + orderDetail.reference
+                            tvOrderId.text =
+                                getString(R.string.order_number_label) + " " + orderDetail.idOrder.toShort()
+                            tvReference.text =
+                                getString(R.string.reference_label) + " " + orderDetail.reference
 
                             cvCartTotal.show()
                             //tvTotalDiscount.text = orderDetail.totalDiscounts.toString()
@@ -65,9 +67,9 @@ class OrderDetailFragment(private val orderId: String) : Fragment(), KodeinAware
                             tvTotalTax.text = orderDetail.totalShipping.toString()
                             tvGrandTotalGroup.text = orderDetail.totalPaid.toString()
 
-                            var totalPay : Double = 0.0
-                            for(i in products){
-                                if (i.orderCartCustomization.data.isNotEmpty()){
+                            var totalPay: Double = 0.0
+                            for (i in products) {
+                                if (i.orderCartCustomization.data.isNotEmpty()) {
                                     //holder.tvPrice.text  = "${item.cartCustomization[0].custom_price/*.toInt()*/} €"
                                     //var price = item.cartCustomization[0].custom_price.replace(",", ".").toDouble()
                                     //var total = price * item.cartQuantity
@@ -76,7 +78,7 @@ class OrderDetailFragment(private val orderId: String) : Fragment(), KodeinAware
                                     var newPrice = price + i.price.toDouble()
                                     var total = newPrice * i.orderCartCustomization.quantity
                                     totalPay += total
-                                }else{
+                                } else {
                                     totalPay += i.price.toDouble()
                                 }
                             }
@@ -98,12 +100,14 @@ class OrderDetailFragment(private val orderId: String) : Fragment(), KodeinAware
 
                             cvAddress.show()
                             var myAddress: String = ""
-                            myAddress = shippingAddress.firstname + " " + shippingAddress.lastname + "\n" + shippingAddress.phoneMobile +
-                                    "\n" + shippingAddress.addressOne + /*"\n" + shippingAddress.addressTwo +*/ "\n" + shippingAddress.city + " " + shippingAddress.postcode
+                            myAddress =
+                                shippingAddress.firstname + " " + shippingAddress.lastname + "\n" + shippingAddress.phoneMobile +
+                                        "\n" + shippingAddress.addressOne + /*"\n" + shippingAddress.addressTwo +*/ "\n" + shippingAddress.city + " " + shippingAddress.postcode
 
                             var myBillingAddress: String = ""
-                            myBillingAddress = invoiceAddress.firstname + " " + invoiceAddress.lastname + "\n" + invoiceAddress.phoneMobile +
-                                    "\n" + invoiceAddress.addressOne + /*"\n" + invoiceAddress.addressTwo +*/ "\n" + invoiceAddress.city + " " + invoiceAddress.postcode
+                            myBillingAddress =
+                                invoiceAddress.firstname + " " + invoiceAddress.lastname + "\n" + invoiceAddress.phoneMobile +
+                                        "\n" + invoiceAddress.addressOne + /*"\n" + invoiceAddress.addressTwo +*/ "\n" + invoiceAddress.city + " " + invoiceAddress.postcode
 
                             tvBillingAddress.text = myAddress
                             tvShippingAddress.text = myBillingAddress
@@ -136,7 +140,11 @@ class OrderDetailFragment(private val orderId: String) : Fragment(), KodeinAware
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.fragment_order_detail, container, false)
     }
 

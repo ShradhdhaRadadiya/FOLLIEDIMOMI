@@ -22,11 +22,9 @@ import com.folliedimomi.network.NetworkRepository
 import com.folliedimomi.sharedPrefrense.Session
 import com.folliedimomi.utils.*
 import com.google.gson.JsonSyntaxException
-
 import kotlinx.android.synthetic.main.activity_main.*
 import okhttp3.RequestBody
 import java.io.IOException
-import java.lang.Exception
 import java.text.DecimalFormat
 
 class ShoppingCartAdapter(
@@ -50,7 +48,8 @@ class ShoppingCartAdapter(
 
     //var qty: Int = 1
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_shopping_cart, parent, false)
+        val view =
+            LayoutInflater.from(parent.context).inflate(R.layout.item_shopping_cart, parent, false)
         return MyViewHolder(view)
     }
 
@@ -65,8 +64,10 @@ class ShoppingCartAdapter(
         //setImageInGlide(holder.imgProduct, "https://cipriani-couturecom615916.r.worldssl.net/5570-thickbox_default/deja-vu-.jpg")
         holder.tvName.text = item.name
         val df = DecimalFormat("#.00")
-        holder.tvPrice.text = /*"€ "+*/df.format(item.priceWt).replace(".", ",") /*String.format("%.2f", item.priceWt).toDouble().toString()*/  + " €"
-        holder.tvGrandTotal.text = /*"€ "+*/ df.format(item.totalWt).replace(".", ",") /*String.format("%.2f", item.totalWt).toDouble().toString()*/+ " €"
+        holder.tvPrice.text = /*"€ "+*/df.format(item.priceWt)
+            .replace(".", ",") /*String.format("%.2f", item.priceWt).toDouble().toString()*/ + " €"
+        holder.tvGrandTotal.text = /*"€ "+*/df.format(item.totalWt)
+            .replace(".", ",") /*String.format("%.2f", item.totalWt).toDouble().toString()*/ + " €"
         holder.tvSize.text = /*"€ "+*/item.attributes
         holder.etQty.setText(item.cartQuantity.toString())
         item.qty = item.cartQuantity
@@ -82,19 +83,19 @@ class ShoppingCartAdapter(
             /*for (i in item.cartCustomization){
                 customization.append("${i.label} : ${i.value} \n") //<br />
             }*/
-            for (i in 0 until  item.cartCustomization.size) {
+            for (i in 0 until item.cartCustomization.size) {
                 if (item.cartCustomization[i].label == "CARICA PRESCRIZIONE") {
                     customization.append("")
-                }else if(item.cartCustomization[i].label == "CARICA LA TUA FOTO"){
+                } else if (item.cartCustomization[i].label == "CARICA LA TUA FOTO") {
                     customization.append("")
                 }/*else if(item.cartCustomization[i].label == "STEP : "){
                     customization.append("")
                 }else if(item.cartCustomization[i].label == "STEP"){
                     customization.append("")
-                }*/ else if(item.cartCustomization[i].label == ""){
+                }*/ else if (item.cartCustomization[i].label == "") {
                     customization.append("Filtro Colorato : ${item.cartCustomization[i].value} \n")
-                } else{
-                    if(!(item.cartCustomization[i].value).contains("http")) {
+                } else {
+                    if (!(item.cartCustomization[i].value).contains("http")) {
                         customization.append("${item.cartCustomization[i].label} : ${item.cartCustomization[i].value} \n")
                     }
                 }//<br />
@@ -104,11 +105,14 @@ class ShoppingCartAdapter(
             val newPrice = price + item.priceWt
             var total = newPrice * item.cartQuantity
             //holder.tvPrice.text = "${item.cartCustomization[0].custom_price/*.toInt()*/} €"
-           // holder.tvPrice.text = "$newPrice €"
+            // holder.tvPrice.text = "$newPrice €"
             //holder.tvGrandTotal.text = /*"€ "+*/"${total.toString().replace(".", ",")} €"
 
-            holder.tvPrice.text = df.format(newPrice).replace(".", ",")/*String.format("%.2f", newPrice.toDouble()).toString()*/  + " €"
-            holder.tvGrandTotal.text = " ${df.format(total).replace(".", ",")} €" /*${String.format("%.2f", total.toDouble()).toString(0).replace(".", ",")}€" */
+            holder.tvPrice.text = df.format(newPrice)
+                .replace(".", ",")/*String.format("%.2f", newPrice.toDouble()).toString()*/ + " €"
+            holder.tvGrandTotal.text = " ${
+                df.format(total).replace(".", ",")
+            } €" /*${String.format("%.2f", total.toDouble()).toString(0).replace(".", ",")}€" */
 
 
             //customization.append(" ]]>")
@@ -128,14 +132,27 @@ class ShoppingCartAdapter(
         }
 
         holder.imgDelete.setOnClickListener {
-            removeFromCart(session.getUserId().toString(), item.idProduct.toString(), item.idProductAttribute.toString(),item.idCustomization)
+            removeFromCart(
+                session.getUserId().toString(),
+                item.idProduct.toString(),
+                item.idProductAttribute.toString(),
+                item.idCustomization
+            )
         }
 
         holder.imgPlus.setOnClickListener {
             item.qty += 1
             holder.etQty.setText(item.qty.toString())
             //onAddToCart(item.idProduct.toString(),item.idProductAttribute.toString(),  item.qty.toString(), session.getAppSession().toString() , session.getShopId().toString())
-            onAddToCart(id_customer = session.getUserId().toString(), id_product = item.idProduct.toString(), id_product_attribute = item.idProductAttribute.toString(), quantity = "1"/*item.qty.toString()*/, customersessionid = session.getAppSession().toString(), upDown = "up", cartId = cartId)
+            onAddToCart(
+                id_customer = session.getUserId().toString(),
+                id_product = item.idProduct.toString(),
+                id_product_attribute = item.idProductAttribute.toString(),
+                quantity = "1"/*item.qty.toString()*/,
+                customersessionid = session.getAppSession().toString(),
+                upDown = "up",
+                cartId = cartId
+            )
         }
 
         holder.imgMinus.setOnClickListener {
@@ -143,7 +160,15 @@ class ShoppingCartAdapter(
                 item.qty -= 1
                 holder.etQty.setText(item.qty.toString())
                 //onAddToCart(item.idProduct.toString(),item.idProductAttribute.toString(),  item.qty.toString(), session.getAppSession().toString() , session.getShopId().toString())
-                onAddToCart(id_customer = session.getUserId().toString(), id_product = item.idProduct.toString(), id_product_attribute = item.idProductAttribute.toString(), quantity = "1"/*item.qty.toString()*/, customersessionid = session.getAppSession().toString(), upDown = "down", cartId = cartId)
+                onAddToCart(
+                    id_customer = session.getUserId().toString(),
+                    id_product = item.idProduct.toString(),
+                    id_product_attribute = item.idProductAttribute.toString(),
+                    quantity = "1"/*item.qty.toString()*/,
+                    customersessionid = session.getAppSession().toString(),
+                    upDown = "down",
+                    cartId = cartId
+                )
             }
         }
 
@@ -169,10 +194,10 @@ class ShoppingCartAdapter(
 
     private fun setImageInGlide(img: ImageView, url: String) {
         Glide.with(activity)
-                .asBitmap()
-                .load(url)
-                .apply(RequestOptions().placeholder(R.drawable.ic_launcher_background))
-                .into(img)
+            .asBitmap()
+            .load(url)
+            .apply(RequestOptions().placeholder(R.drawable.ic_launcher_background))
+            .into(img)
     }
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -189,11 +214,23 @@ class ShoppingCartAdapter(
         val etQty: EditText = itemView.findViewById(R.id.etQty)
     }
 
-    private fun removeFromCart(userId: String, productId: String, productAttributes: String, idCustomization: Int) {
+    private fun removeFromCart(
+        userId: String,
+        productId: String,
+        productAttributes: String,
+        idCustomization: Int
+    ) {
         activity.progress_bars_layout.show()
         Coroutines.main {
             try {
-                val addToCartResponse: AddToCartResponse = repository.removeFromCartGet(cartId, userId, productId, productAttributes, session.getAppSession().toString(),idCustomization)
+                val addToCartResponse: AddToCartResponse = repository.removeFromCartGet(
+                    cartId,
+                    userId,
+                    productId,
+                    productAttributes,
+                    session.getAppSession().toString(),
+                    idCustomization
+                )
                 addToCartResponse?.let {
                     activity.progress_bars_layout.hide()
                     if (addToCartResponse.status == 1) {
@@ -225,12 +262,28 @@ class ShoppingCartAdapter(
     }
 
     //id_customer  = "",id_product = "",id_product_attribute = "",quantity = "",customersessionid = ""
-    private fun onAddToCart(id_customer: String, id_product: String, id_product_attribute: String, quantity: String, customersessionid: String, upDown: String, cartId: String) {
+    private fun onAddToCart(
+        id_customer: String,
+        id_product: String,
+        id_product_attribute: String,
+        quantity: String,
+        customersessionid: String,
+        upDown: String,
+        cartId: String
+    ) {
         //private fun onAddToCart(productId: String, productIdAttribute: String, qty: String, userId: String, shopId: String) {
         activity.progress_bars_layout.show()
         Coroutines.main {
             try {
-                val addToCartResponse: UpdateQty = repository.onUpdateCartQty(id_customer = id_customer, id_product = id_product, id_product_attribute = id_product_attribute, quantity = quantity, customersessionid = customersessionid, upDown = upDown, idCart = cartId)
+                val addToCartResponse: UpdateQty = repository.onUpdateCartQty(
+                    id_customer = id_customer,
+                    id_product = id_product,
+                    id_product_attribute = id_product_attribute,
+                    quantity = quantity,
+                    customersessionid = customersessionid,
+                    upDown = upDown,
+                    idCart = cartId
+                )
                 //val addToCartResponse: AddToCartResponse = repository.addToCart(createBodyMap(userId = userId, productId = productId, productIdAttribute = productIdAttribute, qty = qty, shopId = shopId)/**/)
 
                 addToCartResponse.let {
@@ -258,7 +311,13 @@ class ShoppingCartAdapter(
     }
 
 
-    private fun createBodyMap(productId: String, productIdAttribute: String, qty: String, userId: String, shopId: String): HashMap<String, RequestBody> {
+    private fun createBodyMap(
+        productId: String,
+        productIdAttribute: String,
+        qty: String,
+        userId: String,
+        shopId: String
+    ): HashMap<String, RequestBody> {
 
         val mMap = HashMap<String, RequestBody>()
         mMap["controller"] = "mobileapi".convertBody()
@@ -268,9 +327,9 @@ class ShoppingCartAdapter(
         mMap["quantity"] = qty.convertBody()
         mMap["lang_id"] = Constant.LANG.convertBody()
         mMap["shop_id"] = shopId.convertBody()
-       /* mMap["customersessionid"] = session.getAppSession()!!.convertBody()
-        mMap["id_product_attribute"] = productIdAttribute.convertBody()
-*/
+        /* mMap["customersessionid"] = session.getAppSession()!!.convertBody()
+         mMap["id_product_attribute"] = productIdAttribute.convertBody()
+ */
         return mMap
     }
 

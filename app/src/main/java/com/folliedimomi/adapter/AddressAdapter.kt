@@ -21,9 +21,10 @@ import kotlinx.android.synthetic.main.activity_main.*
 import java.io.IOException
 
 
-class AddressAdapter(private val mActivity: Activity, private val myOrderList: List<Addresses>,
-                     onMyInterface: GetSelectedAddress, private val isAction: Boolean,
-                     private val repository: NetworkRepository
+class AddressAdapter(
+    private val mActivity: Activity, private val myOrderList: List<Addresses>,
+    onMyInterface: GetSelectedAddress, private val isAction: Boolean,
+    private val repository: NetworkRepository
 ) : RecyclerView.Adapter<AddressAdapter.ViewHolder>() {
     private var searchOrderList: List<Addresses> = listOf()
     private var myInterface: GetSelectedAddress? = null
@@ -84,7 +85,12 @@ class AddressAdapter(private val mActivity: Activity, private val myOrderList: L
         }
 
         if (rowIndex == position) {
-            holder.cvAddress.setCardBackgroundColor(ContextCompat.getColor(mActivity, R.color.colorPrimary))
+            holder.cvAddress.setCardBackgroundColor(
+                ContextCompat.getColor(
+                    mActivity,
+                    R.color.colorPrimary
+                )
+            )
             holder.tvNameTo.setTextColor(ContextCompat.getColor(mActivity, R.color.white))
             holder.tvMobile.setTextColor(ContextCompat.getColor(mActivity, R.color.white))
             holder.tvAddressOne.setTextColor(ContextCompat.getColor(mActivity, R.color.white))
@@ -94,13 +100,43 @@ class AddressAdapter(private val mActivity: Activity, private val myOrderList: L
             holder.tvDelete.setTextColor(ContextCompat.getColor(mActivity, R.color.white))
             //holder.tvDelete.setBackgroundColor(ContextCompat.getColor(mActivity, R.color.colorPrimary))
         } else {
-            holder.cvAddress.setCardBackgroundColor(ContextCompat.getColor(mActivity, R.color.white))
-            holder.tvNameTo.setTextColor(ContextCompat.getColor(mActivity, R.color.colorPrimaryText))
-            holder.tvMobile.setTextColor(ContextCompat.getColor(mActivity, R.color.colorSecondaryText))
-            holder.tvAddressOne.setTextColor(ContextCompat.getColor(mActivity, R.color.colorSecondaryText))
-            holder.tvAddressTwo.setTextColor(ContextCompat.getColor(mActivity, R.color.colorSecondaryText))
+            holder.cvAddress.setCardBackgroundColor(
+                ContextCompat.getColor(
+                    mActivity,
+                    R.color.white
+                )
+            )
+            holder.tvNameTo.setTextColor(
+                ContextCompat.getColor(
+                    mActivity,
+                    R.color.colorPrimaryText
+                )
+            )
+            holder.tvMobile.setTextColor(
+                ContextCompat.getColor(
+                    mActivity,
+                    R.color.colorSecondaryText
+                )
+            )
+            holder.tvAddressOne.setTextColor(
+                ContextCompat.getColor(
+                    mActivity,
+                    R.color.colorSecondaryText
+                )
+            )
+            holder.tvAddressTwo.setTextColor(
+                ContextCompat.getColor(
+                    mActivity,
+                    R.color.colorSecondaryText
+                )
+            )
             holder.tvEdit.setTextColor(ContextCompat.getColor(mActivity, R.color.colorPrimaryText))
-            holder.tvDelete.setTextColor(ContextCompat.getColor(mActivity, R.color.colorPrimaryText))
+            holder.tvDelete.setTextColor(
+                ContextCompat.getColor(
+                    mActivity,
+                    R.color.colorPrimaryText
+                )
+            )
             //holder.tvDelete.backgroundTintList(ContextCompat.getColorStateList(mActivity, R.color.white))
             //holder.tvDelete.setSupportButtonTintList(ContextCompat.getColorStateList(mActivity, R.color.colorPrimary))
             //ViewCompat.setBackgroundTintList(holder.tvDelete, ColorStateList.valueOf(ContextCompat.getColor(mActivity, R.color.white)))

@@ -22,7 +22,8 @@ import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
 
 
-class OrderConfirmFragment(val orderId: String, val cartId: String, val userId: String) : Fragment() ,
+class OrderConfirmFragment(val orderId: String, val cartId: String, val userId: String) :
+    Fragment(),
     KodeinAware, IOnBackPressed {
     override val kodein: Kodein by kodein()
     private val repository: NetworkRepository by instance()
@@ -33,22 +34,34 @@ class OrderConfirmFragment(val orderId: String, val cartId: String, val userId: 
         btnBackToHome.setOnClickListener {
             //val fragmentManager: FragmentManager = requireActivity().supportFragmentManager
             //fragmentManager.popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
-            this@OrderConfirmFragment.activity!!.supportFragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+            this@OrderConfirmFragment.activity!!.supportFragmentManager.popBackStack(
+                null,
+                FragmentManager.POP_BACK_STACK_INCLUSIVE
+            )
         }
         onConfirmOrder()
-       /* if (session.getAppSession()!!.isEmpty()) */session.setAppSession(String().getRandomString(14))
+        /* if (session.getAppSession()!!.isEmpty()) */session.setAppSession(
+            String().getRandomString(
+                14
+            )
+        )
 
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.fragment_order_confirm, container, false)
     }
 
-    private fun onConfirmOrder(){
+    private fun onConfirmOrder() {
         Coroutines.main {
             requireActivity().progress_bars_layout.show()
             try {
-                val createOrderResponse: OrderCompleteResponse = repository.orderConfirm(cartId = cartId, orderId = orderId, userId = userId)
+                val createOrderResponse: OrderCompleteResponse =
+                    repository.orderConfirm(cartId = cartId, orderId = orderId, userId = userId)
                 if (isAdded && isVisible) {
                     requireActivity().progress_bars_layout.hide()
                     createOrderResponse.let {
@@ -77,6 +90,9 @@ class OrderConfirmFragment(val orderId: String, val cartId: String, val userId: 
     }
 
     override fun onBackPressed() {
-        this@OrderConfirmFragment.activity!!.supportFragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+        this@OrderConfirmFragment.activity!!.supportFragmentManager.popBackStack(
+            null,
+            FragmentManager.POP_BACK_STACK_INCLUSIVE
+        )
     }
 }

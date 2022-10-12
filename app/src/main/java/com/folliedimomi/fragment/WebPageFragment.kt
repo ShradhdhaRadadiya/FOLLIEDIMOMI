@@ -33,7 +33,11 @@ class WebPageFragment(private val url: String) : Fragment(), IOnBackPressed {
         }*/
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.fragment_web_page, container, false)
     }
 
@@ -119,9 +123,13 @@ class WebPageFragment(private val url: String) : Fragment(), IOnBackPressed {
     }
 
 
-    class MyWebViewClient internal constructor(private val progressBar: ProgressBar) : WebViewClient() {
+    class MyWebViewClient internal constructor(private val progressBar: ProgressBar) :
+        WebViewClient() {
         @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-        override fun shouldOverrideUrlLoading(view: WebView?, request: WebResourceRequest?): Boolean {
+        override fun shouldOverrideUrlLoading(
+            view: WebView?,
+            request: WebResourceRequest?
+        ): Boolean {
             val url: String = request?.url.toString();
             view?.loadUrl(url)
             return true
@@ -142,7 +150,11 @@ class WebPageFragment(private val url: String) : Fragment(), IOnBackPressed {
             progressBar.visibility = View.GONE
         }
 
-        override fun onReceivedError(view: WebView, request: WebResourceRequest, error: WebResourceError) {
+        override fun onReceivedError(
+            view: WebView,
+            request: WebResourceRequest,
+            error: WebResourceError
+        ) {
             super.onReceivedError(view, request, error)
             progressBar.visibility = View.GONE
         }

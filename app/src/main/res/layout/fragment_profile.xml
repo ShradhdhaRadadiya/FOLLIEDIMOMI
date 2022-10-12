@@ -1,125 +1,124 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-		xmlns:tools="http://schemas.android.com/tools"
-		android:layout_width="match_parent"
-		android:layout_height="match_parent"
-		xmlns:app="http://schemas.android.com/apk/res-auto"
-		tools:context=".fragment.ProfileFragment">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragment.ProfileFragment">
 
-	<androidx.core.widget.NestedScrollView
-			android:layout_width="match_parent"
-			android:layout_height="match_parent"
-			android:fillViewport="true">
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
-		<LinearLayout
-				android:focusableInTouchMode="true"
-				android:focusable="true"
-				android:padding="25dp"
-				android:background="@color/white"
-				android:gravity="center"
-				android:orientation="vertical"
-				android:layout_width="match_parent"
-				android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="25dp">
 
-			<!--E-mail-->
-			<com.google.android.material.textfield.TextInputLayout
-					android:id="@+id/telEmail"
-					android:enabled="false"
-					android:focusable="false"
-					android:focusableInTouchMode="false"
-					style="@style/AppTextInputLayout"
-					android:hint="@string/indirizzo_e_mail">
+            <!--E-mail-->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/telEmail"
+                style="@style/AppTextInputLayout"
+                android:enabled="false"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:hint="@string/indirizzo_e_mail">
 
-				<com.google.android.material.textfield.TextInputEditText
-						android:id="@+id/etEmail"
-						style="@style/AppEditText"
-						android:enabled="false"
-						android:focusable="false"
-						android:focusableInTouchMode="false"
-						android:inputType="none" />
-			</com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etEmail"
+                    style="@style/AppEditText"
+                    android:enabled="false"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:inputType="none" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-			<!--First name-->
-			<com.google.android.material.textfield.TextInputLayout
-					style="@style/AppTextInputLayout"
-					android:id="@+id/telFirstName"
-					android:hint="@string/first_name">
+            <!--First name-->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/telFirstName"
+                style="@style/AppTextInputLayout"
+                android:hint="@string/first_name">
 
-				<com.google.android.material.textfield.TextInputEditText
-						android:id="@+id/etFirstName"
-						style="@style/AppEditText" />
-			</com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etFirstName"
+                    style="@style/AppEditText" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-			<!--Last name-->
-			<com.google.android.material.textfield.TextInputLayout
-					style="@style/AppTextInputLayout"
-					android:id="@+id/telLastName"
-					android:hint="@string/last_name">
+            <!--Last name-->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/telLastName"
+                style="@style/AppTextInputLayout"
+                android:hint="@string/last_name">
 
-				<com.google.android.material.textfield.TextInputEditText
-						android:id="@+id/etLastName"
-						style="@style/AppEditText" />
-			</com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etLastName"
+                    style="@style/AppEditText" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-			<!--Company-->
-			<com.google.android.material.textfield.TextInputLayout
-					style="@style/AppTextInputLayout"
-					android:id="@+id/telCompany"
-					android:hint="@string/company">
+            <!--Company-->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/telCompany"
+                style="@style/AppTextInputLayout"
+                android:hint="@string/company">
 
-				<com.google.android.material.textfield.TextInputEditText
-						android:id="@+id/etCompany"
-						style="@style/AppEditText" />
-			</com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etCompany"
+                    style="@style/AppEditText" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-			<!--Mobile-->
-			<com.google.android.material.textfield.TextInputLayout
-					style="@style/AppTextInputLayout"
-					android:id="@+id/telMobile"
-					android:hint="@string/mobile">
+            <!--Mobile-->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/telMobile"
+                style="@style/AppTextInputLayout"
+                android:hint="@string/mobile">
 
-				<com.google.android.material.textfield.TextInputEditText
-						android:id="@+id/etMobile"
-						style="@style/AppEditText"
-						android:imeOptions="actionDone"
-						android:inputType="number" />
-			</com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etMobile"
+                    style="@style/AppEditText"
+                    android:imeOptions="actionDone"
+                    android:inputType="number" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-		</LinearLayout>
+        </LinearLayout>
 
-	</androidx.core.widget.NestedScrollView>
+    </androidx.core.widget.NestedScrollView>
 
-	<TextView
-			android:layout_alignParentBottom="true"
-			android:id="@+id/btnUpdateProfile"
-			android:layout_width="match_parent"
-			android:layout_height="50dp"
-			android:background="@color/colorPrimary"
-			android:backgroundTint="@color/colorPrimary"
-			android:gravity="center"
-			android:text="@string/update_profile"
-			android:textAllCaps="true"
-			android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-			android:textColor="@color/white"
-			android:textSize="14sp"
-			android:textStyle="bold" />
+    <TextView
+        android:id="@+id/btnUpdateProfile"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorPrimary"
+        android:backgroundTint="@color/colorPrimary"
+        android:gravity="center"
+        android:text="@string/update_profile"
+        android:textAllCaps="true"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        android:textStyle="bold" />
 
 </RelativeLayout>
 
-<!--
+    <!--
 
-			<de.hdodenhof.circleimageview.CircleImageView
-					android:id="@+id/imgUser"
-					android:layout_width="150dp"
-					android:layout_height="150dp"
-					android:contentDescription="@string/nav_header_desc"
-					android:src="@drawable/ic_user_profile_rounded"
-					android:scaleType="centerCrop"
-					android:tint="@color/background"
-					app:civ_border_color="@color/background"
-					app:civ_border_overlay="true"
-					app:civ_border_width="1dp"
-					app:srcCompat="@color/background"
-					tools:ignore="RtlHardcoded" />
+                <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/imgUser"
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:contentDescription="@string/nav_header_desc"
+                        android:src="@drawable/ic_user_profile_rounded"
+                        android:scaleType="centerCrop"
+                        android:tint="@color/background"
+                        app:civ_border_color="@color/background"
+                        app:civ_border_overlay="true"
+                        app:civ_border_width="1dp"
+                        app:srcCompat="@color/background"
+                        tools:ignore="RtlHardcoded" />
 
--->
+    -->

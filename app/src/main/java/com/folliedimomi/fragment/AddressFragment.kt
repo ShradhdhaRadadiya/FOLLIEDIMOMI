@@ -6,7 +6,6 @@ import android.view.*
 import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-
 import com.folliedimomi.R
 import com.folliedimomi._app.loadFragment
 import com.folliedimomi.activity.MainActivity
@@ -17,9 +16,7 @@ import com.folliedimomi.network.NetworkRepository
 import com.folliedimomi.sharedPrefrense.Session
 import com.folliedimomi.utils.*
 import com.google.gson.JsonSyntaxException
-
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.activity_main.toolbar
 import kotlinx.android.synthetic.main.fragment_address.*
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
@@ -27,7 +24,8 @@ import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
 import java.io.IOException
 
-class AddressFragment : Fragment(), AddressAdapter.GetSelectedAddress, KodeinAware, AddAddressFragment.OnAddressAddedListner {
+class AddressFragment : Fragment(), AddressAdapter.GetSelectedAddress, KodeinAware,
+    AddAddressFragment.OnAddressAddedListner {
     override val kodein: Kodein by kodein()
     private val repository: NetworkRepository by instance()
     private val session: Session by instance()
@@ -57,11 +55,17 @@ class AddressFragment : Fragment(), AddressAdapter.GetSelectedAddress, KodeinAwa
                 if (isAdded && isVisible) {
                     addressResponse.let {
                         if (addressResponse.status == 1) {
-                            val addressDetail : List<Addresses> = addressResponse.result
+                            val addressDetail: List<Addresses> = addressResponse.result
                             tvEmptyAddress.hide()
                             rvAddress.show()
                             rvAddress.layoutManager = LinearLayoutManager(requireActivity())
-                            rvAddress.adapter = AddressAdapter(requireActivity(),addressDetail,this@AddressFragment, true, repository)
+                            rvAddress.adapter = AddressAdapter(
+                                requireActivity(),
+                                addressDetail,
+                                this@AddressFragment,
+                                true,
+                                repository
+                            )
                         } else {
                             tvEmptyAddress.show()
                             rvAddress.hide()
@@ -89,7 +93,11 @@ class AddressFragment : Fragment(), AddressAdapter.GetSelectedAddress, KodeinAwa
     }
 
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.fragment_address, container, false)
     }
 

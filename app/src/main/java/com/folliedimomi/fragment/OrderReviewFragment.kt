@@ -24,16 +24,19 @@ import com.folliedimomi.sharedPrefrense.Session
 import com.folliedimomi.utils.*
 import com.google.android.material.textfield.TextInputLayout
 import com.google.gson.GsonBuilder
-import com.paypal.android.sdk.payments.*
-
+import com.paypal.android.sdk.payments.PayPalConfiguration
+import com.paypal.android.sdk.payments.PaymentActivity
+import com.paypal.android.sdk.payments.PaymentConfirmation
 import com.stripe.android.ApiResultCallback
 import com.stripe.android.PaymentIntentResult
 import com.stripe.android.Stripe
-import com.stripe.android.model.*
+import com.stripe.android.model.Card
+import com.stripe.android.model.ConfirmPaymentIntentParams
+import com.stripe.android.model.StripeIntent
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_order_review.*
 import kotlinx.android.synthetic.main.stripe_card_layout.*
-import okhttp3.*
+import okhttp3.RequestBody
 import org.json.JSONException
 import org.json.JSONObject
 import org.kodein.di.Kodein
@@ -51,15 +54,17 @@ import kotlin.math.roundToInt
 private val backendUrl = "http://baleshawebsolutions.com/stripeweb/"
 //http://baleshawebsolutions.com/stripeweb/newcreate_payment.php?currency=usd&amount=1100&card_holder=Vipul&user_id=132
 
-class OrderReviewFragment(mCartId: String, mSecretKey: String, mGrandTotal: String,
-                          mAddressId: String, mIdCarrier: String, myIdAddressInvoice: String, mIsGuest: Boolean = false) : Fragment(), KodeinAware {
+class OrderReviewFragment(
+    mCartId: String, mSecretKey: String, mGrandTotal: String,
+    mAddressId: String, mIdCarrier: String, myIdAddressInvoice: String, mIsGuest: Boolean = false
+) : Fragment(), KodeinAware {
     override val kodein: Kodein by kodein()
     private val repository: NetworkRepository by instance()
     private val session: Session by instance()
     private var bundle: Bundle = Bundle()
 
 
-    val _currency : String = "eur"
+    val _currency: String = "eur"
 
     /**Stripe*/
     private lateinit var publishableKey: String
@@ -69,10 +74,10 @@ class OrderReviewFragment(mCartId: String, mSecretKey: String, mGrandTotal: Stri
     /**Paypal*/
     private var paymentAmount: String = "0"
     val PAYPAL_REQUEST_CODE = 123
-    var config: PayPalConfiguration = PayPalConfiguration().environment(PayPalConfiguration.ENVIRONMENT_PRODUCTION).
-    clientId(
-        PayPalConfig.PAYPAL_CLIENT_ID
-    )
+    var config: PayPalConfiguration =
+        PayPalConfiguration().environment(PayPalConfiguration.ENVIRONMENT_PRODUCTION).clientId(
+            PayPalConfig.PAYPAL_CLIENT_ID
+        )
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -95,10 +100,10 @@ class OrderReviewFragment(mCartId: String, mSecretKey: String, mGrandTotal: Stri
                     //sandbox_d5b6zwpj_3g283r5trmgxb8qc - SANDBOX
                     //production_w3jssw64_89xhm7rnq77hczy2 - live
 
-                    val dropInRequest = DropInRequest().tokenizationKey("production_w3jssw64_89xhm7rnq77hczy2")
+                    val dropInRequest =
+                        DropInRequest().tokenizationKey("production_w3jssw64_89xhm7rnq77hczy2")
                     dropInRequest.collectDeviceData(true)
                     startActivityForResult(dropInRequest.getIntent(requireActivity()), 100)
-
 
 
                     //onInitPayPal()
@@ -111,7 +116,12 @@ class OrderReviewFragment(mCartId: String, mSecretKey: String, mGrandTotal: Stri
                         requireActivity().logI("Grand Total : $grandTotal")
                         var amounts = grandTotal.toDouble().roundToInt() * 100
                         requireActivity().logI("Amounts : $amounts")
-                        onInitStripe(amounts.toString(), session.getUserId().toString(), _currency, cardHolder = cardHolder)
+                        onInitStripe(
+                            amounts.toString(),
+                            session.getUserId().toString(),
+                            _currency,
+                            cardHolder = cardHolder
+                        )
                     }
 
                     //requireActivity().coordinatorLayout.snackBar("Under development")
@@ -139,7 +149,10 @@ class OrderReviewFragment(mCartId: String, mSecretKey: String, mGrandTotal: Stri
         }
 
         tvCancel.setOnClickListener {
-            requireActivity().supportFragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+            requireActivity().supportFragmentManager.popBackStack(
+                null,
+                FragmentManager.POP_BACK_STACK_INCLUSIVE
+            )
         }
 
     }
@@ -152,17 +165,32 @@ class OrderReviewFragment(mCartId: String, mSecretKey: String, mGrandTotal: Stri
         telExpYear.error = null
         telCVV.error = null
         isValid = when {
-            etCardHolder.text!!.toString().isEmpty() -> setError(telCardHolder, getString(R.string.required))
-            etCardNumber.text!!.toString().isEmpty() -> setError(telCardNumber, getString(R.string.required))
-            etExpMonth.text!!.toString().isEmpty() -> setError(telExpMonth, getString(R.string.required))
-            etExpYear.text!!.toString().isEmpty() -> setError(telExpYear, getString(R.string.required))
+            etCardHolder.text!!.toString().isEmpty() -> setError(
+                telCardHolder,
+                getString(R.string.required)
+            )
+            etCardNumber.text!!.toString().isEmpty() -> setError(
+                telCardNumber,
+                getString(R.string.required)
+            )
+            etExpMonth.text!!.toString().isEmpty() -> setError(
+                telExpMonth,
+                getString(R.string.required)
+            )
+            etExpYear.text!!.toString().isEmpty() -> setError(
+                telExpYear,
+                getString(R.string.required)
+            )
             etCVV.text!!.toString().isEmpty() -> setError(telCVV, getString(R.string.required))
             else -> true
         }
         return isValid
     }
 
-    private fun setError(tel: TextInputLayout, msg: String = getString(R.string.required)): Boolean {
+    private fun setError(
+        tel: TextInputLayout,
+        msg: String = getString(R.string.required)
+    ): Boolean {
         tel.isErrorEnabled = true
         tel.error = msg
         return false
@@ -189,15 +217,30 @@ class OrderReviewFragment(mCartId: String, mSecretKey: String, mGrandTotal: Stri
 
     }
 
-    private fun onInitStripe(amount: String, userId: String = "0", currency: String = _currency, cardHolder: String = "") {
+    private fun onInitStripe(
+        amount: String,
+        userId: String = "0",
+        currency: String = _currency,
+        cardHolder: String = ""
+    ) {
         onAuthorizeStripe(amount, userId, currency, cardHolder)
     }
 
-    private fun onAuthorizeStripe(amount: String, userId: String = "0", currency: String = _currency, cardHolder: String = "") {
+    private fun onAuthorizeStripe(
+        amount: String,
+        userId: String = "0",
+        currency: String = _currency,
+        cardHolder: String = ""
+    ) {
         requireActivity().progress_bars_layout.show()
         Coroutines.main {
             try {
-                val auth: StripeAuthentication = repository.onStripeAuth(amount = amount, userId = userId, cardHolder = cardHolder, currency = currency)
+                val auth: StripeAuthentication = repository.onStripeAuth(
+                    amount = amount,
+                    userId = userId,
+                    cardHolder = cardHolder,
+                    currency = currency
+                )
                 auth?.let {
                     //requireActivity().progress_bars_layout.hide()
                     publishableKey = auth.publishableKey
@@ -226,7 +269,13 @@ class OrderReviewFragment(mCartId: String, mSecretKey: String, mGrandTotal: Stri
 //                    val testCard = Card.create("4242424242424242", 12, 20, "123")
                     val params = testCard.toPaymentMethodsParams()
                     if (params != null) {
-                        val confirmParams = ConfirmPaymentIntentParams.createWithPaymentMethodCreateParams(params, paymentIntentClientSecret, "", false)
+                        val confirmParams =
+                            ConfirmPaymentIntentParams.createWithPaymentMethodCreateParams(
+                                params,
+                                paymentIntentClientSecret,
+                                "",
+                                false
+                            )
                         stripe.confirmPayment(this, confirmParams)
                     }
                     return@main
@@ -237,7 +286,7 @@ class OrderReviewFragment(mCartId: String, mSecretKey: String, mGrandTotal: Stri
         }
     }
 
-    private fun onPlaceOrder(cardHolderName:String, paymentMethod:String) {
+    private fun onPlaceOrder(cardHolderName: String, paymentMethod: String) {
         Coroutines.main {
             requireActivity().progress_bars_layout.show()
             val mMap = HashMap<String, RequestBody>()
@@ -256,36 +305,57 @@ class OrderReviewFragment(mCartId: String, mSecretKey: String, mGrandTotal: Stri
             if (isGuest) {
                 mMap["is_guest"] = "yes".convertBody()
                 mMap["guest_email"] = bundle.getString("email", "")!!.toString().convertBody()
-                mMap["shipping_firstname"] = bundle.getString("first_name", "")!!.toString().convertBody()
-                mMap["shipping_lastname"] = bundle.getString("last_name", "")!!.toString().convertBody()
-                mMap["shipping_address1"] = bundle.getString("address_one", "")!!.toString().convertBody()
-                mMap["shipping_address2"] = bundle.getString("address_two", "")!!.toString().convertBody()
+                mMap["shipping_firstname"] =
+                    bundle.getString("first_name", "")!!.toString().convertBody()
+                mMap["shipping_lastname"] =
+                    bundle.getString("last_name", "")!!.toString().convertBody()
+                mMap["shipping_address1"] =
+                    bundle.getString("address_one", "")!!.toString().convertBody()
+                mMap["shipping_address2"] =
+                    bundle.getString("address_two", "")!!.toString().convertBody()
                 mMap["shipping_city"] = bundle.getString("city", "")!!.toString().convertBody()
                 mMap["shipping_id_country"] = bundle.getString("country", "")!!.convertBody()
                 mMap["shipping_id_state"] = bundle.getString("state", "")!!.convertBody()
                 mMap["shipping_postcode"] = bundle.getString("pin", "")!!.toString().convertBody()
-                mMap["shipping_phone_mobile"] = bundle.getString("mobile", "")!!.toString().convertBody()
-                mMap["shipping_company"] = bundle.getString("company", "")!!.toString().convertBody()
-                mMap["shipping_vat_number"] = bundle.getString("id_number", "")!!.toString().convertBody()
+                mMap["shipping_phone_mobile"] =
+                    bundle.getString("mobile", "")!!.toString().convertBody()
+                mMap["shipping_company"] =
+                    bundle.getString("company", "")!!.toString().convertBody()
+                mMap["shipping_vat_number"] =
+                    bundle.getString("id_number", "")!!.toString().convertBody()
                 val isDifferentBilling: Boolean = bundle.getBoolean("is_different_billing", false)
                 if (isDifferentBilling) {
                     mMap["is_same_invoice_address"] = "no".convertBody()
-                    mMap["payment_firstname"] = bundle.getString("bill_first_name", "")!!.toString().convertBody()
-                    mMap["payment_lastname"] = bundle.getString("bill_last_name", "")!!.toString().convertBody()
-                    mMap["payment_address1"] = bundle.getString("bill_address_one", "")!!.toString().convertBody()
-                    mMap["payment_address2"] = bundle.getString("bill_address_two", "")!!.toString().convertBody()
-                    mMap["payment_city"] = bundle.getString("bill_city", "")!!.toString().convertBody()
-                    mMap["payment_id_country"] = bundle.getString("bill_country", "")!!.convertBody()
+                    mMap["payment_firstname"] =
+                        bundle.getString("bill_first_name", "")!!.toString().convertBody()
+                    mMap["payment_lastname"] =
+                        bundle.getString("bill_last_name", "")!!.toString().convertBody()
+                    mMap["payment_address1"] =
+                        bundle.getString("bill_address_one", "")!!.toString().convertBody()
+                    mMap["payment_address2"] =
+                        bundle.getString("bill_address_two", "")!!.toString().convertBody()
+                    mMap["payment_city"] =
+                        bundle.getString("bill_city", "")!!.toString().convertBody()
+                    mMap["payment_id_country"] =
+                        bundle.getString("bill_country", "")!!.convertBody()
                     mMap["payment_id_state"] = bundle.getString("bill_state", "")!!.convertBody()
-                    mMap["payment_postcode"] = bundle.getString("bill_pin", "")!!.toString().convertBody()
-                    mMap["payment_phone_mobile"] = bundle.getString("bill_mobile", "")!!.toString().convertBody()
-                    mMap["payment_company"] = bundle.getString("bill_company", "")!!.toString().convertBody()
-                    mMap["payment_vat_number"] = bundle.getString("bill_id_number", "")!!.toString().convertBody()
+                    mMap["payment_postcode"] =
+                        bundle.getString("bill_pin", "")!!.toString().convertBody()
+                    mMap["payment_phone_mobile"] =
+                        bundle.getString("bill_mobile", "")!!.toString().convertBody()
+                    mMap["payment_company"] =
+                        bundle.getString("bill_company", "")!!.toString().convertBody()
+                    mMap["payment_vat_number"] =
+                        bundle.getString("bill_id_number", "")!!.toString().convertBody()
 
-                    mMap["payment_vat_number_two"] = bundle.getString("bill_vat_number", "")!!.toString().convertBody()
-                    mMap["payment_home_phone"] = bundle.getString("bill_home_phone", "")!!.toString().convertBody()
-                    mMap["payment_address_title"] = bundle.getString("bill_address_title", "")!!.toString().convertBody()
-                    mMap["payment_other_information"] = bundle.getString("bill_other_information", "")!!.toString().convertBody()
+                    mMap["payment_vat_number_two"] =
+                        bundle.getString("bill_vat_number", "")!!.toString().convertBody()
+                    mMap["payment_home_phone"] =
+                        bundle.getString("bill_home_phone", "")!!.toString().convertBody()
+                    mMap["payment_address_title"] =
+                        bundle.getString("bill_address_title", "")!!.toString().convertBody()
+                    mMap["payment_other_information"] =
+                        bundle.getString("bill_other_information", "")!!.toString().convertBody()
                 } else {
                     mMap["is_same_invoice_address"] = "yes".convertBody()
                 }
@@ -303,10 +373,13 @@ class OrderReviewFragment(mCartId: String, mSecretKey: String, mGrandTotal: Stri
                     requireActivity().progress_bars_layout.hide()
                     createOrderResponse.let {
                         if (createOrderResponse.status == 1) {
-                            requireActivity().loadFragment(OrderConfirmFragment(
-                                createOrderResponse.result.idOrder.toString(),
-                                createOrderResponse.result.idCart.toString(),
-                                createOrderResponse.result.idCustomer.toString()))
+                            requireActivity().loadFragment(
+                                OrderConfirmFragment(
+                                    createOrderResponse.result.idOrder.toString(),
+                                    createOrderResponse.result.idCart.toString(),
+                                    createOrderResponse.result.idCustomer.toString()
+                                )
+                            )
 
                         } else requireActivity().coordinatorLayout.snackBar(createOrderResponse.message)
                         return@main
@@ -318,7 +391,11 @@ class OrderReviewFragment(mCartId: String, mSecretKey: String, mGrandTotal: Stri
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.fragment_order_review, container, false)
     }
 
@@ -341,7 +418,10 @@ class OrderReviewFragment(mCartId: String, mSecretKey: String, mGrandTotal: Stri
             bundle.putString("company", args.getString("company", ""))
             bundle.putString("mobile", args.getString("mobile", ""))
 
-            bundle.putBoolean("is_different_billing", args.getBoolean("is_different_billing", false))
+            bundle.putBoolean(
+                "is_different_billing",
+                args.getBoolean("is_different_billing", false)
+            )
             bundle.putString("bill_first_name", args.getString("bill_first_name", ""))
             bundle.putString("bill_last_name", args.getString("bill_last_name", ""))
             bundle.putString("bill_id_number", args.getString("bill_id_number", ""))
@@ -361,8 +441,8 @@ class OrderReviewFragment(mCartId: String, mSecretKey: String, mGrandTotal: Stri
 
             //bundle.putString("bill_vat_number", etBillVatNumber.text.toString())
             //bundle.putString("bill_home_phone", etBillMobile.text.toString())
-           // bundle.putString("bill_address_title", etBillMobile.text.toString())
-           // bundle.putString("bill_other_information", etBillMobile.text.toString())
+            // bundle.putString("bill_address_title", etBillMobile.text.toString())
+            // bundle.putString("bill_other_information", etBillMobile.text.toString())
         }
     }
 
@@ -378,7 +458,8 @@ class OrderReviewFragment(mCartId: String, mSecretKey: String, mGrandTotal: Stri
         if (requestCode == PAYPAL_REQUEST_CODE) {
             when (resultCode) {
                 Activity.RESULT_OK -> {
-                    val confirm: PaymentConfirmation = data!!.getParcelableExtra(PaymentActivity.EXTRA_RESULT_CONFIRMATION)!!
+                    val confirm: PaymentConfirmation =
+                        data!!.getParcelableExtra(PaymentActivity.EXTRA_RESULT_CONFIRMATION)!!
                     confirm?.let {
                         try {
                             Log.i("paypal", confirm.toJSONObject().toString(10))
@@ -409,7 +490,7 @@ class OrderReviewFragment(mCartId: String, mSecretKey: String, mGrandTotal: Stri
                     requireActivity().coordinatorLayout.snackBar("An invalid Payment or PayPalConfiguration was submitted. Please see the docs.")
                 }
             }
-        } else  if (requestCode == 100) {
+        } else if (requestCode == 100) {
             when (resultCode) {
                 AppCompatActivity.RESULT_OK -> {
                     val result: DropInResult =
@@ -431,39 +512,54 @@ class OrderReviewFragment(mCartId: String, mSecretKey: String, mGrandTotal: Stri
 
                 }
             }
-        }else {
+        } else {
             val weakActivity = WeakReference<Activity>(requireActivity())
-            stripe.onPaymentResult(requestCode, data, object : ApiResultCallback<PaymentIntentResult> {
-                override fun onSuccess(result: PaymentIntentResult) {
-                    val paymentIntent = result.intent
-                    val status = paymentIntent.status
-                    if (status == StripeIntent.Status.Succeeded) {
-                        val gson = GsonBuilder().setPrettyPrinting().create()
-                        val id = paymentIntent.id
-                        //displayAlert(weakActivity.get(), "Completa Pagamento"/*"Payment succeeded"*/, gson.toJson(paymentIntent))
-                        onPlaceOrder(id!!.toString(), "Stripe")
-                    } else {
-                        requireActivity().progress_bars_layout.hide()
-                        displayAlert(weakActivity.get(), "Pagamento fallito"/*"Payment failed"*/, paymentIntent.lastPaymentError?.message
-                                ?: "")
+            stripe.onPaymentResult(
+                requestCode,
+                data,
+                object : ApiResultCallback<PaymentIntentResult> {
+                    override fun onSuccess(result: PaymentIntentResult) {
+                        val paymentIntent = result.intent
+                        val status = paymentIntent.status
+                        if (status == StripeIntent.Status.Succeeded) {
+                            val gson = GsonBuilder().setPrettyPrinting().create()
+                            val id = paymentIntent.id
+                            //displayAlert(weakActivity.get(), "Completa Pagamento"/*"Payment succeeded"*/, gson.toJson(paymentIntent))
+                            onPlaceOrder(id!!.toString(), "Stripe")
+                        } else {
+                            requireActivity().progress_bars_layout.hide()
+                            displayAlert(
+                                weakActivity.get(),
+                                "Pagamento fallito"/*"Payment failed"*/,
+                                paymentIntent.lastPaymentError?.message
+                                    ?: ""
+                            )
+                        }
                     }
-                }
 
-                override fun onError(e: Exception) {
-                    requireActivity().progress_bars_layout.hide()
-                    displayAlert(weakActivity.get(), "Pagamento fallito"/*"Payment failed"*/, e.toString())
-                }
-            })
+                    override fun onError(e: Exception) {
+                        requireActivity().progress_bars_layout.hide()
+                        displayAlert(
+                            weakActivity.get(),
+                            "Pagamento fallito"/*"Payment failed"*/,
+                            e.toString()
+                        )
+                    }
+                })
         }
     }
 
     private fun onPlaceOrderPaypal(paymentMethodNonce: String, devicedATA: String?) {
         Coroutines.main {
             val auth: PaypalPaymentModel =
-                repository.onPayPalAuth(paymentMethodNonce.toString(), paymentAmount!!.toString(), devicedATA.toString())
+                repository.onPayPalAuth(
+                    paymentMethodNonce.toString(),
+                    paymentAmount!!.toString(),
+                    devicedATA.toString()
+                )
             auth.let {
-                Log.e("TAG","rESPONSE IS -----> $it")
-                if(auth.success){
+                Log.e("TAG", "rESPONSE IS -----> $it")
+                if (auth.success) {
                     onPlaceOrder(auth.transaction.id.toString(), "Paypal")
 //                    requireActivity().loadFragment(HomeFragment())
 //                    requireActivity().supportFragmentManager.popBackStackImmediate()
@@ -476,7 +572,12 @@ class OrderReviewFragment(mCartId: String, mSecretKey: String, mGrandTotal: Stri
     }
 
 
-    private fun displayAlert(activity: Activity?, title: String, message: String, restartDemo: Boolean = false) {
+    private fun displayAlert(
+        activity: Activity?,
+        title: String,
+        message: String,
+        restartDemo: Boolean = false
+    ) {
         if (activity == null) {
             return
         }
@@ -492,7 +593,12 @@ class OrderReviewFragment(mCartId: String, mSecretKey: String, mGrandTotal: Stri
                     if (validate()) {
                         val cardHolder = etCardHolder.text.toString()
                         var amounts = grandTotal.toDouble().roundToInt() * 100
-                        onInitStripe(amounts.toString(), session.getUserId().toString(), _currency, cardHolder = cardHolder)
+                        onInitStripe(
+                            amounts.toString(),
+                            session.getUserId().toString(),
+                            _currency,
+                            cardHolder = cardHolder
+                        )
                     }
                     //onAuthorizeStripe("1200"/*grandTotal.toDouble().toInt().toString()*/, session.getUserId().toString())
                 }

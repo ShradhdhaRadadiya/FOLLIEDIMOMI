@@ -23,12 +23,6 @@ public class BannerAdapter extends PagerAdapter {
     ImageView imgImage;
 
 
-    public interface BannerListener {
-        void leftClick(int pos);
-
-        void rightClick(int pos);
-    }
-
     public BannerAdapter(Context context, Gallery gallery /*Uri images[]*/, BannerListener myBannerListener) {
         this.context = context;
         this.gallery = gallery;
@@ -38,7 +32,7 @@ public class BannerAdapter extends PagerAdapter {
 
     @Override
     public int getCount() {
-        return /*images.length*/ gallery.getImages() == null ? 0 : gallery.getImages().size() ;
+        return /*images.length*/ gallery.getImages() == null ? 0 : gallery.getImages().size();
     }
 
     @Override
@@ -60,5 +54,11 @@ public class BannerAdapter extends PagerAdapter {
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
         container.removeView((RelativeLayout) object);
+    }
+
+    public interface BannerListener {
+        void leftClick(int pos);
+
+        void rightClick(int pos);
     }
 }

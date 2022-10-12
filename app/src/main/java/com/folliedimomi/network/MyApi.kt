@@ -1,9 +1,8 @@
 package com.folliedimomi.network
 
 import com.folliedimomi._app.Constant
-import com.folliedimomi.model.ProductDetailsModel
 import com.folliedimomi.model.*
-import com.pcs.ciprianicouture.model.*
+import com.pcs.ciprianicouture.model.OrderDetailResponse
 import okhttp3.MultipartBody
 import okhttp3.OkHttpClient
 import okhttp3.RequestBody
@@ -27,10 +26,10 @@ interface MyApi {
     @FormUrlEncoded
     @POST("stripeweb/newcreate_payment.php")
     suspend fun onStripeAuth(
-            @Field("amount") amount: String ,
-            @Field("user_id") user_id: String = "",
-            @Field("card_holder") card_holder: String = "",
-            @Field("currency") currency: String = "usd"
+        @Field("amount") amount: String,
+        @Field("user_id") user_id: String = "",
+        @Field("card_holder") card_holder: String = "",
+        @Field("currency") currency: String = "usd"
     ): Response<StripeAuthentication>
 
 
@@ -39,20 +38,20 @@ interface MyApi {
     @FormUrlEncoded
     @POST("braintree/src/create-payment.php")
     suspend fun onPaypalAuth(
-            @Field("payment_method_nonce") nonce: String ,
-            @Field("amount") amount: String = "",
-            @Field("deviceDataFromTheClient") deviceData: String = "",
+        @Field("payment_method_nonce") nonce: String,
+        @Field("amount") amount: String = "",
+        @Field("deviceDataFromTheClient") deviceData: String = "",
     ): Response<PaypalPaymentModel>
 
     /** Login */
     @POST("index.php")
     @FormUrlEncoded
     suspend fun onSupplierLogin(
-            @Field(encoded = true,  value = "email") email: String,
-            @Field("passwd") password: String,
-            @Field("op") op: String = "customer_login",
-            @Field("controller") controller: String = "mobileapi",
-            @Field("id_lang") id_lang: String = Constant.LANG
+        @Field(encoded = true, value = "email") email: String,
+        @Field("passwd") password: String,
+        @Field("op") op: String = "customer_login",
+        @Field("controller") controller: String = "mobileapi",
+        @Field("id_lang") id_lang: String = Constant.LANG
     ): Response<LoginResponse>
 
     /** Register */
@@ -64,10 +63,10 @@ interface MyApi {
     @FormUrlEncoded
     @POST("index.php")
     suspend fun onForgotPassword(
-            @Field("controller") controller: String = "customerapi",
-            @Field("op") op: String = "forgot_password",
-            @Field("email") email: String,
-            @Field("id_lang") id_lang: String = Constant.LANG
+        @Field("controller") controller: String = "customerapi",
+        @Field("op") op: String = "forgot_password",
+        @Field("email") email: String,
+        @Field("id_lang") id_lang: String = Constant.LANG
     ): Response<ForgotPasswordResponse>
 
     /** Register */
@@ -160,18 +159,18 @@ interface MyApi {
     @FormUrlEncoded
     @POST("index.php")
     suspend fun getSortBy(
-            @Field("controller") controller: String = "customerapi",
-            @Field("op") op: String = "filter_sortby",
-            @Field("lang_id") id_lang: String = Constant.LANG
+        @Field("controller") controller: String = "customerapi",
+        @Field("op") op: String = "filter_sortby",
+        @Field("lang_id") id_lang: String = Constant.LANG
     ): Response<SortByResponse>
 
     /** Home : Promotion */
     @FormUrlEncoded
     @POST("index.php")
     suspend fun getPromotion(
-            @Field("controller") controller: String = "mobileapi",
-            @Field("op") op: String = "header_topbanner_slider",
-            @Field("lang_id") id_lang: String = Constant.LANG
+        @Field("controller") controller: String = "mobileapi",
+        @Field("op") op: String = "header_topbanner_slider",
+        @Field("lang_id") id_lang: String = Constant.LANG
     ): Response<PromotionResponse>
 
     /** Coupon : Promotion */
@@ -250,33 +249,33 @@ interface MyApi {
     suspend fun removeFromCart(@PartMap map: Map<String, @JvmSuppressWildcards RequestBody>): Response<AddToCartResponse>
 
 
-  /** Product List */
+    /** Product List */
     @Multipart
     @POST("index.php")//
     suspend fun productList(@PartMap map: Map<String, @JvmSuppressWildcards RequestBody>):
-          Response<ProductListModel>
+            Response<ProductListModel>
 
     /** Product List */
     @Multipart
     @POST("index.php")//
     suspend fun productDetail(@PartMap map: Map<String, @JvmSuppressWildcards RequestBody>):
-          Response<ProductDetailsModel>
+            Response<ProductDetailsModel>
 
     /** Remove from cart */
     @FormUrlEncoded
     @POST("index.php")
     suspend fun removeFromCartGet(
-            @Field("controller") controller: String = "mobileapi",
-            @Field("op") op: String = "removecartitem",
-            @Field("id_cart") id_cart: String = "",
-            @Field("id_product") id_product: String = "",
-            @Field("id_product_attribute") id_product_attribute: String = "",
-            @Field("id_lang") secure_key: String = Constant.LANG,
-            @Field("id_customer") id_customer: String = "",
-            @Field("customersessionid") customersessionid: String,
+        @Field("controller") controller: String = "mobileapi",
+        @Field("op") op: String = "removecartitem",
+        @Field("id_cart") id_cart: String = "",
+        @Field("id_product") id_product: String = "",
+        @Field("id_product_attribute") id_product_attribute: String = "",
+        @Field("id_lang") secure_key: String = Constant.LANG,
+        @Field("id_customer") id_customer: String = "",
+        @Field("customersessionid") customersessionid: String,
 //            @Field("id_customization") idCustomization: Int,
 
-            ): Response<AddToCartResponse>
+    ): Response<AddToCartResponse>
 
     /** ShoppingCart */
     @FormUrlEncoded
@@ -294,10 +293,10 @@ interface MyApi {
     @FormUrlEncoded
     @POST("index.php")
     suspend fun getGuestShoppingCart(
-            @Field("controller") controller: String = "mobileapi",
-            @Field("op") op: String = "cart_list",
-            @Field("id_customer") id_customer: String,
-            @Field("secure_key") secure_key: String
+        @Field("controller") controller: String = "mobileapi",
+        @Field("op") op: String = "cart_list",
+        @Field("id_customer") id_customer: String,
+        @Field("secure_key") secure_key: String
     ): Response<ShoppingCartResponse>
 
 
@@ -332,10 +331,10 @@ interface MyApi {
     @FormUrlEncoded
     @POST("index.php")
     suspend fun getOrderDetail(
-            @Field("controller") controller: String = "customerapi",
-            @Field("op") op: String = "order_detail",
-            @Field("id_order") id_order: String
-           // @Field("lang_id") secure_key: String = Constant.LANG
+        @Field("controller") controller: String = "customerapi",
+        @Field("op") op: String = "order_detail",
+        @Field("id_order") id_order: String
+        // @Field("lang_id") secure_key: String = Constant.LANG
     ): Response<OrderDetailResponse>
 
     /** Addresses */
@@ -381,9 +380,9 @@ interface MyApi {
     @FormUrlEncoded
     @POST("index.php")
     suspend fun getCountryList(
-            @Field("controller") controller: String = "mobileapi",
-            @Field("op") op: String = "country_list",
-            @Field("lang_id") id_lang: String = Constant.LANG
+        @Field("controller") controller: String = "mobileapi",
+        @Field("op") op: String = "country_list",
+        @Field("lang_id") id_lang: String = Constant.LANG
     ): Response<CountryRespnse>
 
     /** State List */
@@ -401,9 +400,9 @@ interface MyApi {
     @FormUrlEncoded
     @POST("index.php")
     suspend fun getColors(
-            @Field("controller") controller: String = "mobileapi",
-            @Field("op") op: String = "product_color_images",
-            @Field("lang_id") id_lang: String = Constant.LANG
+        @Field("controller") controller: String = "mobileapi",
+        @Field("op") op: String = "product_color_images",
+        @Field("lang_id") id_lang: String = Constant.LANG
     ): Response<List<ImageColors>>
 
     /** Delete Order*/
@@ -415,8 +414,8 @@ interface MyApi {
     @Multipart
     @POST("upload")
     fun uploadMultipleFilesDynamic(
-            @Part("description") description: RequestBody,
-            @Part files: List<MultipartBody.Part>
+        @Part("description") description: RequestBody,
+        @Part files: List<MultipartBody.Part>
     ): Call<ResponseBody>
 
     @GET("docs/country/")
@@ -436,19 +435,19 @@ interface MyApi {
             logger.level = HttpLoggingInterceptor.Level.BODY
 
             val okkHttpclient = OkHttpClient.Builder()
-                    .connectTimeout(30, TimeUnit.MINUTES)
-                    .writeTimeout(30, TimeUnit.MINUTES)
-                    .readTimeout(30, TimeUnit.MINUTES)
-                    .addInterceptor(networkConnectionInterceptor)
-                    .addInterceptor(logger)
-                    .build()
+                .connectTimeout(30, TimeUnit.MINUTES)
+                .writeTimeout(30, TimeUnit.MINUTES)
+                .readTimeout(30, TimeUnit.MINUTES)
+                .addInterceptor(networkConnectionInterceptor)
+                .addInterceptor(logger)
+                .build()
 
             return Retrofit.Builder()
-                    .client(okkHttpclient)
-                    .baseUrl(Constant.ROOT_URL)
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build()
-                    .create(MyApi::class.java)
+                .client(okkHttpclient)
+                .baseUrl(Constant.ROOT_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
+                .create(MyApi::class.java)
         }
     }
 
@@ -459,26 +458,26 @@ interface MyApi {
         @Field("controller") controller: String = "mobileapi",
         @Field("op") op: String = "advance_filter",
         @Field("id_parent") id_parent: String = "",
-        @Field("id_category") id_category: String="",
+        @Field("id_category") id_category: String = "",
         @Field("id_manufacturer") id_manufacturer: String = "",
         @Field("start_price") start_price: String = "",
         @Field("end_price") end_price: String = "",
-      //  @Field("featured") featured: String = "0",
+        //  @Field("featured") featured: String = "0",
         /*    @Field("lang_id") id_lang: String = Constant.LANG,
             @Field("page") page: String = "1"*/
     ): Response<AdvanceFilterModel>
 
- /**AdvanceFilter */
+    /**AdvanceFilter */
     @FormUrlEncoded
     @POST("index.php")
     suspend fun getDrawerMenu(
         @Field("controller") controller: String = "mobileapi",
         @Field("op") op: String = "header_menu",
-        @Field("lang_id") id_parent: String =  Constant.LANG,
+        @Field("lang_id") id_parent: String = Constant.LANG,
 
-    ): Response<DrawerMenuModel>
+        ): Response<DrawerMenuModel>
 
- /**AdvanceFilter */
+    /**AdvanceFilter */
     @FormUrlEncoded
     @POST("index.php")
     suspend fun getDisplayTitleVideo(

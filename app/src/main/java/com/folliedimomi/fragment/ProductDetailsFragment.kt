@@ -1,8 +1,8 @@
 package com.folliedimomi.fragment
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.ColorStateList
-import android.graphics.Color
 import android.os.Bundle
 import android.text.Html
 import android.util.Log
@@ -57,11 +57,11 @@ class ProductDetailsFragment(private var p_id: Int) : Fragment(), KodeinAware,
 
         tvplus.setOnClickListener {
             var data = (tvDigit.text.toString()).toInt()
-            if (data > 0) {
+            if (data >= 0) {
                 data += 1
                 tvDigit.text = data.toString()
             } else {
-                requireActivity().toast("Quantity must be grater than 0")
+//                requireActivity().toast("Quantity must be grater than 0")
             }
         }
         tvMinus.setOnClickListener {
@@ -76,7 +76,7 @@ class ProductDetailsFragment(private var p_id: Int) : Fragment(), KodeinAware,
     }
 
 
-     fun onAddToCartProduct(addressId: Int) {
+    fun onAddToCartProduct(addressId: Int) {
         //show
         Globals.showProgress(mContext)
         Coroutines.main {
@@ -91,12 +91,12 @@ class ProductDetailsFragment(private var p_id: Int) : Fragment(), KodeinAware,
                 mMap["shop_id"] = Constant.LANG.convertBody()
                 if (session.getUserId().toString().isNotEmpty()) {
                     mMap["id_customer"] = session.getUserId().toString().convertBody()
-                }else{
+                } else {
                     mMap["id_customer"] = "0".convertBody()
                 }
                 mMap["customersessionid"] = session.getAppSession().toString().convertBody()
 
-                Log.e("TAG","mMAP IS ----> $mMap")
+                Log.e("TAG", "mMAP IS ----> $mMap")
 
                 val drawerData = repository.addToCart(mMap)
 
@@ -132,6 +132,7 @@ class ProductDetailsFragment(private var p_id: Int) : Fragment(), KodeinAware,
             }
         }
     }
+
     private fun setupGallery(images: ArrayList<String>) {
         var gallery = Gallery(images)
         myCustomPagerAdapter = BannerAdapter(requireContext(), gallery /*images*/, this)
@@ -159,6 +160,7 @@ class ProductDetailsFragment(private var p_id: Int) : Fragment(), KodeinAware,
             View.VISIBLE
     }
 
+    @SuppressLint("ResourceAsColor")
     private fun getProductDetails() {
         Coroutines.main {
             requireActivity().progress_bars_layout.show()
@@ -181,7 +183,7 @@ class ProductDetailsFragment(private var p_id: Int) : Fragment(), KodeinAware,
                         if (createOrderResponse.status == 1) {
 
                             var dataDis = createOrderResponse.result
-                            proId =  dataDis.idProduct
+                            proId = dataDis.idProduct
                             val imageData = arrayListOf<String>()
                             for (item in dataDis.productimages) {
                                 imageData.add(item.imageUrl)
@@ -192,25 +194,22 @@ class ProductDetailsFragment(private var p_id: Int) : Fragment(), KodeinAware,
                             tvText1.text = dataDis.finalDisplayPrice
                             tvText21.text = dataDis.name
                             tvDes.text = dataDis.salesNumber
-                            tvLongDec.text = Html.fromHtml(dataDis.description).toString()
+                            tvLongDec.text = Html.fromHtml(dataDis.description).toString().trim()
                             customProgress.progress = dataDis.bar_width
 
                             when (dataDis.bar_class) {
                                 "psb-low" -> customProgress.progressTintList =
-                                    ColorStateList.valueOf(
-                                        Color.RED
-                                    )
+                                    ColorStateList.valueOf(mContext.resources.getColor(R.color.pro_less))
+
                                 "psb-medium" -> customProgress.progressTintList =
-                                    ColorStateList.valueOf(
-                                        Color.BLUE
-                                    )
+                                    ColorStateList.valueOf(mContext.resources.getColor(R.color.pro_med))
+
                                 "psb-high" -> customProgress.progressTintList =
-                                    ColorStateList.valueOf(
-                                        Color.CYAN
-                                    )
+                                    ColorStateList.valueOf(mContext.resources.getColor(R.color.pro_high))
+
                             }
 
-                            if(dataDis.video.isEmpty()){
+                            if (dataDis.video.isEmpty()) {
                                 tvVideoDes.visibility = View.GONE
                             }
                         } else requireActivity().coordinatorLayout.snackBar(createOrderResponse.message)

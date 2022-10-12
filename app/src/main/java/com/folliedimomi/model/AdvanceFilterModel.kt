@@ -23,25 +23,30 @@ data class AdvanceFilterModel(
     ) {
         data class Data(
             @SerializedName("category_id")
-            var categoryId: Int? = 0,
+            var categoryId: Int,
             @SerializedName("category_name")
-            var categoryName: String?,
+            var categoryName: String,
             @SerializedName("description")
-            var description: String?,
-            @SerializedName("id_manufacturer")
-            var idManufacturer: String = "0",
+            var description: String,
             @SerializedName("level_depth")
-            var levelDepth: Int?,
+            var levelDepth: Int,
             @SerializedName("link_rewrite")
-            var linkRewrite: String?,
-            @SerializedName("name")
-            var name: String?,
+            var linkRewrite: String,
             @SerializedName("nb_products_recursive")
             var nbProductsRecursive: Int,
             @SerializedName("position")
-            var position: Int?,
+            var position: Int,
             @SerializedName("selected")
-            var selected: String
-        )
+            var selected: String,
+            @SerializedName("id_manufacturer")
+            var idManufacturer: String,
+            @SerializedName("name")
+            var name: String,
+            @SerializedName("start_price")
+            var startPrice: String,
+            @SerializedName("end_price")
+            var endPrice: String,
+
+            )
     }
 }

@@ -25,6 +25,7 @@ fun Context.logD(msg: String, tag: String = "OkHttp") {
 //    if (BuildConfig.DEBUG) Log.d(this::class.java.simpleName, msg)
     Log.d(this::class.java.simpleName, msg)
 }
+
 fun Context.logI(msg: String, tag: String = "OkHttp") {
 //    if (BuildConfig.DEBUG) Log.i(tag, msg)
     Log.i(tag, msg)

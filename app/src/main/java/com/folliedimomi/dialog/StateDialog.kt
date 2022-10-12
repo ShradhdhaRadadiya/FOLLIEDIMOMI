@@ -14,7 +14,8 @@ import com.folliedimomi.adapter.SearchAdapter
 
 import kotlinx.android.synthetic.main.dialog_choose_product.*
 
-class StateDialog(/*private val productList: List<ProductSearchResult>*/private val productInterface: StateInterface) : DialogFragment(), SearchAdapter.ProductItemClicked {
+class StateDialog(/*private val productList: List<ProductSearchResult>*/private val productInterface: StateInterface) :
+    DialogFragment(), SearchAdapter.ProductItemClicked {
     private var myInterface: StateInterface? = null
 
     init {
@@ -31,7 +32,11 @@ class StateDialog(/*private val productList: List<ProductSearchResult>*/private 
     }
 
     private var productAdapter: SearchAdapter? = null
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.dialog_choose_product, container, false)
     }
 

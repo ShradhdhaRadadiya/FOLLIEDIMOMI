@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-		style="@style/NestedScrollView"
-		android:background="@color/background">
+    style="@style/NestedScrollView"
+    android:background="@color/background">
 
-	<RelativeLayout style="@style/LinearLayoutRoot">
+    <RelativeLayout style="@style/LinearLayoutRoot">
 
-		<androidx.recyclerview.widget.RecyclerView
-				android:id="@+id/rvOrder"
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:layout_margin="10dp" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvOrder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp" />
 
-		<TextView
-				android:id="@+id/tvEmpty"
-				android:layout_width="match_parent"
-				android:layout_height="match_parent"
-				android:background="@color/white"
-				android:gravity="center"
-				android:text="@string/it_seems_you_don_t_have_any_order_history_at"
-				android:visibility="gone" />
-	</RelativeLayout>
+        <TextView
+            android:id="@+id/tvEmpty"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:gravity="center"
+            android:text="@string/it_seems_you_don_t_have_any_order_history_at"
+            android:visibility="gone" />
+    </RelativeLayout>
 
 </androidx.core.widget.NestedScrollView>

@@ -13,10 +13,14 @@ import com.bumptech.glide.request.RequestOptions
 import com.folliedimomi.R
 import com.pcs.ciprianicouture.model.ProductsOrderDetail
 
-class OrderDetailAdapter(private val activity: Activity, private val product: List<ProductsOrderDetail>) : RecyclerView.Adapter<OrderDetailAdapter.MyViewHolder>() {
+class OrderDetailAdapter(
+    private val activity: Activity,
+    private val product: List<ProductsOrderDetail>
+) : RecyclerView.Adapter<OrderDetailAdapter.MyViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_order_detail, parent, false)
+        val view =
+            LayoutInflater.from(parent.context).inflate(R.layout.item_order_detail, parent, false)
         return MyViewHolder(view)
     }
 
@@ -81,7 +85,9 @@ class OrderDetailAdapter(private val activity: Activity, private val product: Li
             val newPrice = price + item.orderCartCustomization.customPrice.toDouble()
             var total = newPrice * qty
             holder.tvPrice.text = activity.getString(R.string.label_price) + "$newPrice €"
-            holder.tvGrandTotal.text = activity.getString(R.string.label_total_price) + "${total.toString().replace(".", ",")} €"
+            holder.tvGrandTotal.text = activity.getString(R.string.label_total_price) + "${
+                total.toString().replace(".", ",")
+            } €"
 
             holder.tvCustomization.text = customization
         }
@@ -91,10 +97,10 @@ class OrderDetailAdapter(private val activity: Activity, private val product: Li
 
     private fun setImageInGlide(img: ImageView, url: String) {
         Glide.with(activity)
-                .asBitmap()
-                .load(url)
-                .apply(RequestOptions().placeholder(R.drawable.ic_launcher_background))
-                .into(img)
+            .asBitmap()
+            .load(url)
+            .apply(RequestOptions().placeholder(R.drawable.ic_launcher_background))
+            .into(img)
     }
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

@@ -1,11 +1,12 @@
 package com.folliedimomi.fragment
 
+
 import android.annotation.SuppressLint
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.folliedimomi.R
 import com.folliedimomi.activity.MainActivity
@@ -18,15 +19,13 @@ import com.folliedimomi.utils.*
 import com.google.gson.JsonSyntaxException
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_order_list.*
-
-
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
 import java.io.IOException
 
-class OrderListFragment : Fragment() , KodeinAware {
+class OrderListFragment : Fragment(), KodeinAware {
     override val kodein: Kodein by kodein()
     private val repository: NetworkRepository by instance()
     private val session: Session by instance()
@@ -74,7 +73,11 @@ class OrderListFragment : Fragment() , KodeinAware {
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.fragment_order_list, container, false)
     }
 

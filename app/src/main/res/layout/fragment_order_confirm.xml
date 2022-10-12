@@ -1,50 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:app="http://schemas.android.com/apk/res-auto"
-	xmlns:tools="http://schemas.android.com/tools"
-		android:layout_width="match_parent"
-		android:layout_height="match_parent"
-		android:padding="30dp"
-		tools:context=".fragment.OrderConfirmFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="30dp"
+    tools:context=".fragment.OrderConfirmFragment">
 
-	<LinearLayout
-			android:id="@+id/llSuccess"
-			android:visibility="gone"
-			tools:visibility="visible"
-			android:orientation="vertical"
-			android:gravity="center"
-			android:layout_width="match_parent"
-			android:layout_height="match_parent">
-		<ImageView
-			android:src="@drawable/ic_success"
-				android:layout_width="150dp"
-				android:layout_height="150dp"
-			app:tint="@color/success" />
+    <LinearLayout
+        android:id="@+id/llSuccess"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone"
+        tools:visibility="visible">
 
-		<TextView
-				android:textSize="18sp"
-				android:layout_marginTop="25dp"
-				android:text="Ordine confermato con successo"
-				android:gravity="center"
-				android:textColor="@color/colorPrimary"
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"/>
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:src="@drawable/ic_success"
+            app:tint="@color/success" />
 
-		<TextView
-				android:id="@+id/btnBackToHome"
-				android:background="@drawable/back_rounded_et"
-				android:paddingBottom="10sp"
-				android:paddingTop="10sp"
-				android:paddingEnd="25sp"
-				android:paddingStart="25sp"
-				android:textSize="16sp"
-				android:layout_marginTop="25dp"
-				android:text="@string/continue_shopping"
-				android:gravity="center"
-				android:textColor="@color/colorPrimary"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"/>
-	</LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:gravity="center"
+            android:text="Ordine confermato con successo"
+            android:textColor="@color/colorPrimary"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/btnBackToHome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:background="@drawable/back_rounded_et"
+            android:gravity="center"
+            android:paddingStart="25sp"
+            android:paddingTop="10sp"
+            android:paddingEnd="25sp"
+            android:paddingBottom="10sp"
+            android:text="@string/continue_shopping"
+            android:textColor="@color/colorPrimary"
+            android:textSize="16sp" />
+    </LinearLayout>
 
 
 </LinearLayout>

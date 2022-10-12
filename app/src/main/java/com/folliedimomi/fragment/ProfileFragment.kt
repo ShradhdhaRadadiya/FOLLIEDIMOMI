@@ -107,13 +107,20 @@ class ProfileFragment : Fragment(), KodeinAware {
         return isValid
     }
 
-    private fun setError(tel: TextInputLayout, msg: String = getString(R.string.required)): Boolean {
+    private fun setError(
+        tel: TextInputLayout,
+        msg: String = getString(R.string.required)
+    ): Boolean {
         tel.isErrorEnabled = true
         tel.error = msg
         return false
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.fragment_profile, container, false)
     }
 

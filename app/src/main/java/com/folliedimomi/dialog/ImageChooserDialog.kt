@@ -21,7 +21,11 @@ class ImageChooserDialog(private val chooserInterface: ChooserInterface) : Dialo
     }
 
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.dialog_choose_image, container, false)
     }
 

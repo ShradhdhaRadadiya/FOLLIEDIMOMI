@@ -15,12 +15,13 @@ import com.folliedimomi.fragment.OrderDetailFragment
 import com.folliedimomi.model.Orders
 
 
-class OrderAdapter(private val activity: Activity, private val liOrder: List<Orders> = listOf()) : RecyclerView.Adapter<OrderAdapter.MyViewHolder>() {
+class OrderAdapter(private val activity: Activity, private val liOrder: List<Orders> = listOf()) :
+    RecyclerView.Adapter<OrderAdapter.MyViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_orders, parent, false)
         return MyViewHolder(view).listen { position, type ->
-                activity.loadFragment(OrderDetailFragment(liOrder[position].idOrder.toString()))
+            activity.loadFragment(OrderDetailFragment(liOrder[position].idOrder.toString()))
         }
     }
 

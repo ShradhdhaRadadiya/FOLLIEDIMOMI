@@ -34,11 +34,11 @@
                     android:drawableStart="@drawable/ic_baseline_call_24"
                     android:drawablePadding="@dimen/_3sdp"
                     android:gravity="center"
-                    app:drawableTint="@color/black"
                     android:text="+39 08 7776989"
                     android:textAlignment="center"
                     android:textColor="@color/colorPrimary"
                     android:textSize="12sp"
+                    app:drawableTint="@color/black"
                     app:layout_constraintEnd_toStartOf="@+id/tvEmail"
                     app:layout_constraintStart_toStartOf="parent" />
 
@@ -49,11 +49,11 @@
                     android:drawableStart="@drawable/ic_baseline_email_24"
                     android:drawablePadding="@dimen/_3sdp"
                     android:gravity="center"
-                    app:drawableTint="@color/black"
                     android:text="info@folliedimomi.it"
                     android:textAlignment="center"
                     android:textColor="@color/colorPrimary"
                     android:textSize="12sp"
+                    app:drawableTint="@color/black"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/tvPhone" />
 
@@ -86,8 +86,8 @@
                 android:id="@+id/iv1"
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
-                android:scaleType="fitXY"
                 android:background="@color/red"
+                android:scaleType="fitXY"
                 android:src="@drawable/app_icon" />
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -105,23 +105,24 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-               android:orientation="horizontal">
+                android:orientation="horizontal">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:gravity="center"
-                    android:layout_weight="1"
                     android:layout_marginStart="@dimen/_10sdp"
                     android:layout_marginEnd="@dimen/_10sdp"
-                    android:background="@drawable/gray_rounded">
+                    android:layout_weight="1"
+                    android:background="@drawable/gray_rounded"
+                    android:gravity="center">
 
                     <TextView
                         android:id="@+id/tvSort"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_gravity="center"
+                        android:drawablePadding="@dimen/_5sdp"
                         android:gravity="center"
                         android:paddingStart="@dimen/_10sdp"
                         android:paddingTop="@dimen/_7sdp"
@@ -129,13 +130,11 @@
                         android:paddingBottom="@dimen/_7sdp"
                         android:text="Sort"
                         android:textAllCaps="true"
-                        android:drawablePadding="@dimen/_5sdp"
                         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                         android:textColor="@color/white"
                         android:textSize="12sp"
                         android:textStyle="bold"
                         tools:ignore="RtlSymmetry" />
-
 
 
                 </LinearLayout>
@@ -152,25 +151,25 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:gravity="center"
                         android:layout_marginStart="@dimen/_10sdp"
                         android:layout_marginEnd="@dimen/_10sdp"
-                        android:background="@drawable/gray_rounded">
+                        android:background="@drawable/gray_rounded"
+                        android:gravity="center">
 
                         <TextView
                             android:id="@+id/tvFilter"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:layout_gravity="center"
-                            android:gravity="center"
                             android:drawableStart="@drawable/ic_baseline_play_arrow_24"
+                            android:drawablePadding="@dimen/_5sdp"
+                            android:gravity="center"
                             android:paddingStart="@dimen/_10sdp"
-                            android:paddingEnd="@dimen/_10sdp"
                             android:paddingTop="@dimen/_7sdp"
+                            android:paddingEnd="@dimen/_10sdp"
                             android:paddingBottom="@dimen/_7sdp"
                             android:text="FILTRA PRODOTTI"
                             android:textAllCaps="true"
-                            android:drawablePadding="@dimen/_5sdp"
                             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                             android:textColor="@color/white"
                             android:textSize="12sp"
@@ -182,8 +181,6 @@
 
 
             </LinearLayout>
-
-
 
 
         </LinearLayout>
@@ -198,9 +195,9 @@
             android:paddingStart="10dp"
             android:paddingTop="5dp"
             android:paddingEnd="10dp"
+            android:paddingBottom="15dp"
             app:spanCount="2"
             tools:listitem="@layout/item_product"
-            android:paddingBottom="15dp"
             tools:visibility="visible" />
 
 

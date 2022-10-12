@@ -1,67 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-		xmlns:app="http://schemas.android.com/apk/res-auto"
-		android:id="@+id/cvOrder"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:layout_margin="5dp"
-		android:elevation="0dp"
-		android:orientation="vertical"
-		app:cardBackgroundColor="@color/white"
-		app:cardCornerRadius="0dp"
-		app:cardElevation="0dp">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cvOrder"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    android:elevation="0dp"
+    android:orientation="vertical"
+    app:cardBackgroundColor="@color/white"
+    app:cardCornerRadius="0dp"
+    app:cardElevation="0dp">
 
-	<RelativeLayout
-			android:padding="10dp"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp">
 
-		<TextView style="@style/TextView"
-				android:id="@+id/tvOrderNumber"
-				android:text="OZLSIZFVQ"
-				android:textStyle="bold"
-				android:textSize="14sp"
-				android:textColor="@color/colorPrimary" />
+        <TextView
+            android:id="@+id/tvOrderNumber"
+            style="@style/TextView"
+            android:text="OZLSIZFVQ"
+            android:textColor="@color/colorPrimary"
+            android:textSize="14sp"
+            android:textStyle="bold" />
 
-		<TextView style="@style/TextView"
-				android:id="@+id/tvDate"
-				android:text="02/26/2019"
-				android:textSize="12sp"
-				android:layout_marginTop="5dp"
-				android:layout_below="@+id/tvOrderNumber"
-				android:textColor="@color/colorSecondaryText" />
+        <TextView
+            android:id="@+id/tvDate"
+            style="@style/TextView"
+            android:layout_below="@+id/tvOrderNumber"
+            android:layout_marginTop="5dp"
+            android:text="02/26/2019"
+            android:textColor="@color/colorSecondaryText"
+            android:textSize="12sp" />
 
-		<TextView style="@style/TextView"
-				android:id="@+id/tvPaymentMethod"
-				android:text="Cash on Delivery (COD)"
-				android:layout_marginTop="5dp"
-				android:textSize="12sp"
-				android:layout_below="@+id/tvDate"
-				android:textColor="@color/colorSecondaryText" />
+        <TextView
+            android:id="@+id/tvPaymentMethod"
+            style="@style/TextView"
+            android:layout_below="@+id/tvDate"
+            android:layout_marginTop="5dp"
+            android:text="Cash on Delivery (COD)"
+            android:textColor="@color/colorSecondaryText"
+            android:textSize="12sp" />
 
-		<TextView style="@style/TextView"
-				android:id="@+id/tvPrice"
-				android:layout_alignParentEnd="true"
-				android:text="35,80 €"
-				android:layout_marginTop="2dp"
-				android:textStyle="bold"
-				android:textSize="14sp"
-				android:layout_below="@+id/tvDate"
-				android:textColor="@color/colorPrimary" />
+        <TextView
+            android:id="@+id/tvPrice"
+            style="@style/TextView"
+            android:layout_below="@+id/tvDate"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="2dp"
+            android:text="35,80 €"
+            android:textColor="@color/colorPrimary"
+            android:textSize="14sp"
+            android:textStyle="bold" />
 
-	</RelativeLayout>
-	<TextView style="@style/TextView"
-			android:text="Shipped"
-			android:id="@+id/tvOrderStatus"
-			android:backgroundTint="#8a2be2"
-			android:paddingEnd="30dp"
-			android:paddingTop="30dp"
-			android:paddingBottom="10dp"
-			android:paddingStart="15dp"
-			android:layout_marginTop="-25dp"
-			android:layout_marginEnd="-20dp"
-			android:textColor="@color/white"
-			android:background="@drawable/back_rounded_button"
-			android:layout_gravity="end|top"/>
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tvOrderStatus"
+        style="@style/TextView"
+        android:layout_gravity="end|top"
+        android:layout_marginTop="-25dp"
+        android:layout_marginEnd="-20dp"
+        android:background="@drawable/back_rounded_button"
+        android:backgroundTint="#8a2be2"
+        android:paddingStart="15dp"
+        android:paddingTop="30dp"
+        android:paddingEnd="30dp"
+        android:paddingBottom="10dp"
+        android:text="Shipped"
+        android:textColor="@color/white" />
 
 </androidx.cardview.widget.CardView>

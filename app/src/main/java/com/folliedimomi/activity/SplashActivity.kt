@@ -4,8 +4,10 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.folliedimomi.R
-import com.folliedimomi._app.loadFragment
-import com.folliedimomi.fragment.*
+import com.folliedimomi.fragment.ChangePasswordFragment
+import com.folliedimomi.fragment.LoginFragment
+import com.folliedimomi.fragment.RegisterFragment
+import com.folliedimomi.fragment.SplashFragment
 import com.folliedimomi.sharedPrefrense.Session
 
 class SplashActivity : AppCompatActivity(), SplashFragment.OnFragmentInteractionListener,

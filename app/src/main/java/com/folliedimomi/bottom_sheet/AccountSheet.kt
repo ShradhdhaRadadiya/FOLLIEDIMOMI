@@ -26,7 +26,7 @@ import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
 
-class AccountSheet : BottomSheetDialogFragment(), KodeinAware{
+class AccountSheet : BottomSheetDialogFragment(), KodeinAware {
     override val kodein: Kodein by kodein()
     private val session: Session by instance()
     private val mActivity: MainActivity by instance()
@@ -63,9 +63,9 @@ class AccountSheet : BottomSheetDialogFragment(), KodeinAware{
             session.logOut()
             session.setAppSession(String().getRandomString(14))
             Constant.isRunning = true
-            try{
+            try {
                 requireActivity().llUserHeader.hide()
-            }catch (e:Exception){
+            } catch (e: Exception) {
 
             }
             tvLogout.hide()
@@ -123,7 +123,11 @@ class AccountSheet : BottomSheetDialogFragment(), KodeinAware{
 
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.sheet_accounts, container, false)
     }
 
@@ -146,7 +150,12 @@ class AccountSheet : BottomSheetDialogFragment(), KodeinAware{
     fun showError(msg: String) {
         if (isAdded && isVisible) {
             tvError.text = msg
-            tvError.setTextColor(ContextCompat.getColor(this@AccountSheet.activity!!, R.color.white))
+            tvError.setTextColor(
+                ContextCompat.getColor(
+                    this@AccountSheet.activity!!,
+                    R.color.white
+                )
+            )
             tvError.visibility = View.VISIBLE
             android.os.Handler().postDelayed({
                 if (tvError != null) {
@@ -160,7 +169,12 @@ class AccountSheet : BottomSheetDialogFragment(), KodeinAware{
     fun showSuccess(msg: String) {
         if (isAdded && isVisible) {
             tvError.text = msg
-            tvError.setTextColor(ContextCompat.getColor(this@AccountSheet.activity!!, R.color.black))
+            tvError.setTextColor(
+                ContextCompat.getColor(
+                    this@AccountSheet.activity!!,
+                    R.color.black
+                )
+            )
             tvError.visibility = View.VISIBLE
             android.os.Handler().postDelayed({
                 if (tvError != null) {
@@ -169,7 +183,6 @@ class AccountSheet : BottomSheetDialogFragment(), KodeinAware{
             }, 2000)
         }
     }
-
 
 
 }

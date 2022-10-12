@@ -28,7 +28,11 @@ class LoginFragment : Fragment(), View.OnClickListener, KodeinAware {
     private val repository: NetworkRepository by instance()
     private var listener: OnFragmentInteractionListener? = null
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.fragment_login, container, false)
     }
 
@@ -41,9 +45,8 @@ class LoginFragment : Fragment(), View.OnClickListener, KodeinAware {
 
     override fun onClick(v: View?) {
         when (v!!.id) {
-            R.id.btnLogin ->
-            {
-                Log.e("TAG","EMAIL IS------> ${etEmail.text.toString()}")
+            R.id.btnLogin -> {
+                Log.e("TAG", "EMAIL IS------> ${etEmail.text.toString()}")
                 if (validate()) onLogin(etEmail.text.toString(), etPassword.text.toString())
 
             }
@@ -58,21 +61,23 @@ class LoginFragment : Fragment(), View.OnClickListener, KodeinAware {
         requireActivity().progress_bars_layout.show()
         Coroutines.main {
             try {
-                Log.e("TAG","EMAIL IS- onLogin-----> ${etEmail.text}")
+                Log.e("TAG", "EMAIL IS- onLogin-----> ${etEmail.text}")
 
 //                val loginResponse: LoginResponse = repository.onLogin("carlolvr@gmail.com", "ytZYDUmI")
                 val loginResponse: LoginResponse = repository.onLogin(email, pass)
-                if (isAdded && isVisible){loginResponse.let {
-                    if (loginResponse.status == 1) {
-                        val user = loginResponse.result
-                        setSessionUser(user)
-                        listener!!.onLoginComplete()
-                    } else {
-                        coordinator.snackBar(loginResponse.message!!)
+                if (isAdded && isVisible) {
+                    loginResponse.let {
+                        if (loginResponse.status == 1) {
+                            val user = loginResponse.result
+                            setSessionUser(user)
+                            listener!!.onLoginComplete()
+                        } else {
+                            coordinator.snackBar(loginResponse.message!!)
+                        }
+                        requireActivity().progress_bars_layout.hide()
+                        return@main
                     }
-                    requireActivity().progress_bars_layout.hide()
-                    return@main
-                }}
+                }
             } catch (e: ApiException) {
                 requireActivity().progress_bars_layout.hide()
                 coordinator.snackBar(e.message!!)

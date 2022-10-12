@@ -31,9 +31,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:background="@drawable/shadow"
                 android:orientation="vertical"
-                android:padding="@dimen/_5sdp"
-                android:background="@drawable/shadow">
+                android:padding="@dimen/_5sdp">
 
                 <TextView
                     android:id="@+id/tvNuovo"
@@ -178,16 +178,16 @@
                 android:textStyle="bold"
                 tools:ignore="RtlSymmetry,UnusedAttribute" />
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/ivBar"
+            <ProgressBar
+                android:id="@+id/customProgress"
+                style="@style/CustomProgressBar"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_10sdp"
                 android:layout_gravity="center"
+                android:layout_marginStart="@dimen/_20sdp"
                 android:layout_marginTop="@dimen/_5sdp"
-                android:paddingStart="@dimen/_20sdp"
-                android:paddingEnd="@dimen/_20sdp"
-                android:src="@drawable/gray_rounded"
-                android:tint="@color/blue" />
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:progressTint="@color/yellow" />
 
 
             <TextView

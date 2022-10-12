@@ -1,21 +1,36 @@
 package com.folliedimomi.network
 
 //import com.dp.directportal.data.db.AppDatabase
-import com.folliedimomi.model.ProductDetailsModel
 import com.folliedimomi.model.*
-import com.pcs.ciprianicouture.model.*
 import com.folliedimomi.utils.convertBody
+import com.pcs.ciprianicouture.model.OrderDetailResponse
 import okhttp3.RequestBody
 
-class NetworkRepository(private val api: MyApi/*, private val session: AppSession*/) : SafeApiRequest() {
+class NetworkRepository(private val api: MyApi/*, private val session: AppSession*/) :
+    SafeApiRequest() {
 
 
-    suspend fun onStripeAuth(amount: String, userId: String, cardHolder: String, currency: String = ""): StripeAuthentication {
+    suspend fun onStripeAuth(
+        amount: String,
+        userId: String,
+        cardHolder: String,
+        currency: String = ""
+    ): StripeAuthentication {
         return apiRequest {
-            api.onStripeAuth(amount = amount, user_id = userId, card_holder = cardHolder, currency = currency)
+            api.onStripeAuth(
+                amount = amount,
+                user_id = userId,
+                card_holder = cardHolder,
+                currency = currency
+            )
         }
     }
-    suspend fun onPayPalAuth(nonce: String, amount: String, deviceData: String): PaypalPaymentModel {
+
+    suspend fun onPayPalAuth(
+        nonce: String,
+        amount: String,
+        deviceData: String
+    ): PaypalPaymentModel {
         return apiRequest {
             api.onPaypalAuth(nonce = nonce, amount = amount, deviceData = deviceData)
         }
@@ -58,9 +73,17 @@ class NetworkRepository(private val api: MyApi/*, private val session: AppSessio
         return response
     }
 
-    suspend fun getProductDetail(productId: String, userId: String, idProductAttribute: String): ProductDetailResponse {
+    suspend fun getProductDetail(
+        productId: String,
+        userId: String,
+        idProductAttribute: String
+    ): ProductDetailResponse {
         val response = apiRequest {
-            api.getProductDetail(id_product = productId, id_customer = userId, id_product_attribute = idProductAttribute)
+            api.getProductDetail(
+                id_product = productId,
+                id_customer = userId,
+                id_product_attribute = idProductAttribute
+            )
         }
         return response
     }
@@ -74,7 +97,11 @@ class NetworkRepository(private val api: MyApi/*, private val session: AppSessio
 
     suspend fun getFilterProducts(sortBy: String, catId: String, userId: String): FilterProduct {
         return apiRequest {
-            api.getFilterProducts(sort_by = sortBy, current_id_category = catId, id_customer = userId)
+            api.getFilterProducts(
+                sort_by = sortBy,
+                current_id_category = catId,
+                id_customer = userId
+            )
         }
     }
 
@@ -108,7 +135,11 @@ class NetworkRepository(private val api: MyApi/*, private val session: AppSessio
         }
     }
 
-    suspend fun onApplyCoupon(couponCode: String, id_cart: String, id_customer: String = ""): ApplyCouponRespone {
+    suspend fun onApplyCoupon(
+        couponCode: String,
+        id_cart: String,
+        id_customer: String = ""
+    ): ApplyCouponRespone {
         return apiRequest {
             api.onApplyCoupon(coupancode = couponCode, id_cart = id_cart, id_customer = id_customer)
         }
@@ -126,10 +157,20 @@ class NetworkRepository(private val api: MyApi/*, private val session: AppSessio
         }
     }*/
 
-    suspend fun onUpdateCartQty(id_customer: String, id_product: String, id_product_attribute: String, quantity: String, customersessionid: String, upDown: String, idCart: String): UpdateQty {
+    suspend fun onUpdateCartQty(
+        id_customer: String,
+        id_product: String,
+        id_product_attribute: String,
+        quantity: String,
+        customersessionid: String,
+        upDown: String,
+        idCart: String
+    ): UpdateQty {
         return apiRequest {
-            api.onUpdateQty(id_product = id_product, id_product_attribute = id_product_attribute,
-                quantity = quantity, updownlabel = upDown, id_cart = idCart)
+            api.onUpdateQty(
+                id_product = id_product, id_product_attribute = id_product_attribute,
+                quantity = quantity, updownlabel = upDown, id_cart = idCart
+            )
         }
     }
 
@@ -139,7 +180,11 @@ class NetworkRepository(private val api: MyApi/*, private val session: AppSessio
         }
     }
 
-    suspend fun removeItemFromCart(cartId: String, customerId: String, productId: String): AddToCartResponse {
+    suspend fun removeItemFromCart(
+        cartId: String,
+        customerId: String,
+        productId: String
+    ): AddToCartResponse {
         val mMap = HashMap<String, RequestBody>()
         mMap["controller"] = "mobileapi".convertBody()
         mMap["op"] = "removecartitem".convertBody()
@@ -154,9 +199,22 @@ class NetworkRepository(private val api: MyApi/*, private val session: AppSessio
         }
     }
 
-    suspend fun removeFromCartGet(cartId: String, customerId: String, productId: String, productAttribute: String, sessionId: String, idCustomization: Int): AddToCartResponse {
+    suspend fun removeFromCartGet(
+        cartId: String,
+        customerId: String,
+        productId: String,
+        productAttribute: String,
+        sessionId: String,
+        idCustomization: Int
+    ): AddToCartResponse {
         return apiRequest {
-            api.removeFromCartGet(id_cart = cartId, id_product = productId, id_product_attribute = productAttribute, id_customer = customerId, customersessionid = sessionId)
+            api.removeFromCartGet(
+                id_cart = cartId,
+                id_product = productId,
+                id_product_attribute = productAttribute,
+                id_customer = customerId,
+                customersessionid = sessionId
+            )
         }
     }
 
@@ -177,7 +235,7 @@ class NetworkRepository(private val api: MyApi/*, private val session: AppSessio
         }
     }
 
-   suspend fun productList(map: HashMap<String, RequestBody>): ProductListModel {
+    suspend fun productList(map: HashMap<String, RequestBody>): ProductListModel {
         return apiRequest {
             api.productList(map = map)
         }
@@ -219,13 +277,29 @@ class NetworkRepository(private val api: MyApi/*, private val session: AppSessio
         }
     }
 
-    suspend fun getCarrier(userId: String, cartId: String, addId: String, invoiceId: String, shopId: String): CarrierResponse {
+    suspend fun getCarrier(
+        userId: String,
+        cartId: String,
+        addId: String,
+        invoiceId: String,
+        shopId: String
+    ): CarrierResponse {
         return apiRequest {
-            api.getCarrier(id_customer = userId, id_cart = cartId, id_address_delivery = addId, id_address_invoice = invoiceId, shop_id = shopId)
+            api.getCarrier(
+                id_customer = userId,
+                id_cart = cartId,
+                id_address_delivery = addId,
+                id_address_invoice = invoiceId,
+                shop_id = shopId
+            )
         }
     }
 
-    suspend fun orderConfirm(userId: String, cartId: String, orderId: String): OrderCompleteResponse {
+    suspend fun orderConfirm(
+        userId: String,
+        cartId: String,
+        orderId: String
+    ): OrderCompleteResponse {
         return apiRequest {
             api.orderConfirm(id_customer = userId, id_cart = cartId, id_order = orderId)
         }
@@ -285,7 +359,7 @@ class NetworkRepository(private val api: MyApi/*, private val session: AppSessio
     suspend fun getDrawerMenu(): DrawerMenuModel {
         val response = apiRequest {
             api.getDrawerMenu(
-              )
+            )
         }
         return response
     }

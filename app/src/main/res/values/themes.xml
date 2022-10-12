@@ -148,6 +148,7 @@
         <item name="boxCornerRadiusTopEnd">50dp</item>
         <item name="boxCornerRadiusTopStart">50dp</item>-->
     </style>
+
     <style name="AppEditText" parent="Widget.AppCompat.EditText">
         <item name="android:imeOptions">actionNext</item>
         <item name="android:singleLine">true</item>

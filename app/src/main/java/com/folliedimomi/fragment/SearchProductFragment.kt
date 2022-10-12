@@ -31,7 +31,8 @@ import org.kodein.di.generic.instance
 import java.io.IOException
 
 
-class SearchProductFragment(private val searchText: String) : Fragment(), KodeinAware ,ProductListAdapter.GetAddToCartAndVideo{
+class SearchProductFragment(private val searchText: String) : Fragment(), KodeinAware,
+    ProductListAdapter.GetAddToCartAndVideo {
     override val kodein: Kodein by kodein()
 
     private val repository: NetworkRepository by instance()
@@ -49,14 +50,20 @@ class SearchProductFragment(private val searchText: String) : Fragment(), Kodein
         showKeyboard(requireActivity())
 
         etSearch.myOnTextChangedListener {
-            if (it.length > 3) getProductFromServer(etSearch.text.toString(), Session(requireContext()).getUserId().toString())
+            if (it.length > 3) getProductFromServer(
+                etSearch.text.toString(),
+                Session(requireContext()).getUserId().toString()
+            )
         }
 
         etSearch.setOnEditorActionListener { v, actionId, event ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                 //performSearch(etSearch.text.toString())
                 hideKeyboard()
-                getProductFromServer(etSearch.text.toString(), Session(requireContext()).getUserId().toString())
+                getProductFromServer(
+                    etSearch.text.toString(),
+                    Session(requireContext()).getUserId().toString()
+                )
                 return@setOnEditorActionListener true
             }
             return@setOnEditorActionListener false
@@ -84,7 +91,7 @@ class SearchProductFragment(private val searchText: String) : Fragment(), Kodein
             mMap["queryString"] = searchText.convertBody()
             if (session.getUserId().toString().isNotEmpty()) {
                 mMap["id_customer"] = session.getUserId().toString().convertBody()
-            }else{
+            } else {
                 mMap["id_customer"] = "0".convertBody()
             }
             mMap["id_lang"] = Constant.LANG.convertBody()
@@ -133,12 +140,14 @@ class SearchProductFragment(private val searchText: String) : Fragment(), Kodein
         }
 
 
-
     }
 
 
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.fragment_product_search, container, false)
     }
 
@@ -172,7 +181,8 @@ class SearchProductFragment(private val searchText: String) : Fragment(), Kodein
 
     private fun showKeyboard(activity: Activity) {
         val view = activity.currentFocus
-        val methodManager = activity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        val methodManager =
+            activity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         assert(view != null)
         methodManager.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT)
     }
@@ -182,13 +192,19 @@ class SearchProductFragment(private val searchText: String) : Fragment(), Kodein
     }
 
     fun Context.hideKeyboard(view: View) {
-        val inputMethodManager = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        val inputMethodManager =
+            getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
         inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
     }
 
     fun Context.openKeyboard(view: View) {
-        val inputMethodManager = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
-        inputMethodManager.toggleSoftInputFromWindow(view.applicationWindowToken, InputMethodManager.SHOW_FORCED, 0)
+        val inputMethodManager =
+            getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.toggleSoftInputFromWindow(
+            view.applicationWindowToken,
+            InputMethodManager.SHOW_FORCED,
+            0
+        )
     }
 
     override fun onPause() {
@@ -216,12 +232,12 @@ class SearchProductFragment(private val searchText: String) : Fragment(), Kodein
                 mMap["shop_id"] = Constant.LANG.convertBody()
                 if (session.getUserId().toString().isNotEmpty()) {
                     mMap["id_customer"] = session.getUserId().toString().convertBody()
-                }else{
+                } else {
                     mMap["id_customer"] = "0".convertBody()
                 }
                 mMap["customersessionid"] = session.getAppSession().toString().convertBody()
 
-                Log.e("TAG","mMAP IS ----> $mMap")
+                Log.e("TAG", "mMAP IS ----> $mMap")
 
                 val drawerData = repository.addToCart(mMap)
 

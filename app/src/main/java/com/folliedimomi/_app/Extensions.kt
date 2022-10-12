@@ -4,16 +4,8 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
-import android.net.ConnectivityManager
-import android.widget.ImageView
-import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
-import java.util.*
 import android.graphics.*
+import android.net.ConnectivityManager
 import android.os.Build
 import android.provider.Settings
 import android.telephony.TelephonyManager
@@ -23,10 +15,18 @@ import android.util.Base64
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
+import android.widget.ImageView
+import android.widget.Toast
 import androidx.annotation.RequiresPermission
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.folliedimomi.R
 import java.io.ByteArrayOutputStream
+import java.util.*
 
 fun Context.showToast(message: String, length: Int = Toast.LENGTH_SHORT) {
     Toast.makeText(this, message, length).show()
@@ -34,22 +34,30 @@ fun Context.showToast(message: String, length: Int = Toast.LENGTH_SHORT) {
 
 @SuppressLint("MissingPermission")
 fun Context.isNetworkAvailable(): Boolean {
-    val connectivityManager = this.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+    val connectivityManager =
+        this.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
     val networkInfo = connectivityManager.activeNetworkInfo
     return networkInfo != null && networkInfo.isConnected
 }
 
 fun Context.loadImageInGlide(img: ImageView, url: String) {
     Glide.with(this)
-            .asBitmap()
-            .load(url)
-            .apply(RequestOptions().placeholder(R.drawable.ic_launcher_background))
-            .into(img)
+        .asBitmap()
+        .load(url)
+        .apply(RequestOptions().placeholder(R.drawable.ic_launcher_background))
+        .into(img)
 }
 
 fun Activity.loadFragment(fragment: Fragment) {
     val fragmentTransaction = (this as AppCompatActivity).supportFragmentManager.beginTransaction()
-    fragmentTransaction.replace(R.id.container, fragment).addToBackStack(fragment::class.java.simpleName).commit()
+    fragmentTransaction.replace(R.id.container, fragment)
+        .addToBackStack(fragment::class.java.simpleName).commit()
+}
+
+fun Activity.loadFragmentStack(fragment: Fragment) {
+    val fragmentTransaction = (this as AppCompatActivity).supportFragmentManager.beginTransaction()
+    fragmentTransaction.add(R.id.container, fragment)
+        .addToBackStack(fragment::class.java.simpleName).commit()
 }
 
 fun Activity.loadFragmentWithoutBackStack(fragment: Fragment) {
@@ -72,9 +80,9 @@ fun String.random(): String {
 fun String.getRandomString(length: Int): String {
     val charPool: List<Char> = ('a'..'z') + ('A'..'Z') + ('0'..'9')
     return (1..length)
-            .map { kotlin.random.Random.nextInt(0, charPool.size) }
-            .map(charPool::get)
-            .joinToString("")
+        .map { kotlin.random.Random.nextInt(0, charPool.size) }
+        .map(charPool::get)
+        .joinToString("")
 }
 
 fun Fragment.hideKeyboard() {
@@ -109,7 +117,9 @@ fun View.hideIf(boolean: Boolean, makeInvisible: Boolean = false) {
 /**
  * will enable the view If Condition is true else enables It
  */
-fun View.enableIf(boolean: Boolean) { isEnabled = boolean }
+fun View.enableIf(boolean: Boolean) {
+    isEnabled = boolean
+}
 
 /**
  * will disable the view If Condition is true else enables It
@@ -130,7 +140,8 @@ fun View.showKeyboard() {
  */
 fun View.hideKeyboard(): Boolean {
     try {
-        val inputMethodManager = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        val inputMethodManager =
+            context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         return inputMethodManager.hideSoftInputFromWindow(windowToken, 0)
     } catch (ignored: RuntimeException) {
     }
@@ -150,27 +161,32 @@ fun View.setPaddingRight(value: Int) = setPadding(paddingLeft, paddingTop, value
 /**
  * set View Padding From Top
  */
-fun View.setPaddingTop(value: Int) = setPaddingRelative(paddingStart, value, paddingEnd, paddingBottom)
+fun View.setPaddingTop(value: Int) =
+    setPaddingRelative(paddingStart, value, paddingEnd, paddingBottom)
 
 /**
  * set View Padding From Bottom
  */
-fun View.setPaddingBottom(value: Int) = setPaddingRelative(paddingStart, paddingTop, paddingEnd, value)
+fun View.setPaddingBottom(value: Int) =
+    setPaddingRelative(paddingStart, paddingTop, paddingEnd, value)
 
 /**
  * set View Padding From Start
  */
-fun View.setPaddingStart(value: Int) = setPaddingRelative(value, paddingTop, paddingEnd, paddingBottom)
+fun View.setPaddingStart(value: Int) =
+    setPaddingRelative(value, paddingTop, paddingEnd, paddingBottom)
 
 /**
  * set View Padding From End
  */
-fun View.setPaddingEnd(value: Int) = setPaddingRelative(paddingStart, paddingTop, value, paddingBottom)
+fun View.setPaddingEnd(value: Int) =
+    setPaddingRelative(paddingStart, paddingTop, value, paddingBottom)
 
 /**
  * set View Padding On Horizontal Edges
  */
-fun View.setPaddingHorizontal(value: Int) = setPaddingRelative(value, paddingTop, value, paddingBottom)
+fun View.setPaddingHorizontal(value: Int) =
+    setPaddingRelative(value, paddingTop, value, paddingBottom)
 
 /**
  * set View Padding From Vertical Edges
@@ -275,53 +291,62 @@ fun Context.showToastHard(msg: String) = AlertDialog.Builder(this).setMessage(ms
  *            })
  */
 fun Context.showConfirmationDialog(
-        msg: String,
-        onResponse: (result: Boolean) -> Unit,
-        positiveText: String = "Yes",
-        negetiveText: String = "No",
-        cancelable: Boolean = false
+    msg: String,
+    onResponse: (result: Boolean) -> Unit,
+    positiveText: String = "Yes",
+    negetiveText: String = "No",
+    cancelable: Boolean = false
 ) =
-        AlertDialog.Builder(this).setMessage(msg).setPositiveButton(positiveText) { _, _ -> onResponse(true) }.setNegativeButton(
-                negetiveText
-        ) { _, _ -> onResponse(false) }.setCancelable(cancelable).show()
+    AlertDialog.Builder(this).setMessage(msg)
+        .setPositiveButton(positiveText) { _, _ -> onResponse(true) }.setNegativeButton(
+        negetiveText
+    ) { _, _ -> onResponse(false) }.setCancelable(cancelable).show()
 
 
 /**
  * Want your user to choose Single thing from a bunch? call showSinglePicker and provide your options to choose from
  */
-fun Context.showSinglePicker(choices: Array<String>, onResponse: (index: Int) -> Unit, checkedItemIndex: Int = -1) =
-        AlertDialog.Builder(this).setSingleChoiceItems(choices, checkedItemIndex) { dialog, which ->
-            onResponse(which)
-            dialog.dismiss()
-        }.show()
+fun Context.showSinglePicker(
+    choices: Array<String>,
+    onResponse: (index: Int) -> Unit,
+    checkedItemIndex: Int = -1
+) =
+    AlertDialog.Builder(this).setSingleChoiceItems(choices, checkedItemIndex) { dialog, which ->
+        onResponse(which)
+        dialog.dismiss()
+    }.show()
 
 /**
  * Want your user to choose Multiple things from a bunch? call showMultiPicker and provide your options to choose from
  */
 fun Context.showMultiPicker(
-        choices: Array<String>,
-        onResponse: (index: Int, isChecked: Boolean) -> Unit,
-        checkedItems: BooleanArray? = null
+    choices: Array<String>,
+    onResponse: (index: Int, isChecked: Boolean) -> Unit,
+    checkedItems: BooleanArray? = null
 ) =
-        AlertDialog.Builder(this).setMultiChoiceItems(choices, checkedItems) { _, which, isChecked ->
-            onResponse(
-                    which,
-                    isChecked
-            )
-        }.setPositiveButton("Done", null).show()
+    AlertDialog.Builder(this).setMultiChoiceItems(choices, checkedItems) { _, which, isChecked ->
+        onResponse(
+            which,
+            isChecked
+        )
+    }.setPositiveButton("Done", null).show()
 
 
 /**
  * Try Catch within a single line
  */
-fun tryAndCatch(runnable: () -> Unit, onCatch: ((e: Throwable?) -> Unit)? = null, onFinally: (() -> Unit)? = null) =
-        try {
-            runnable.invoke()
-        } catch (e: Throwable) {
-            onCatch?.invoke(e)
-        } finally {
-            onFinally?.invoke()
-        }
+fun tryAndCatch(
+    runnable: () -> Unit,
+    onCatch: ((e: Throwable?) -> Unit)? = null,
+    onFinally: (() -> Unit)? = null
+) =
+    try {
+        runnable.invoke()
+    } catch (e: Throwable) {
+        onCatch?.invoke(e)
+    } finally {
+        onFinally?.invoke()
+    }
 
 /**
  * get Screen Width Easily
@@ -519,7 +544,11 @@ fun Bitmap.compressBySampleSize(maxWidth: Int, maxHeight: Int, recycle: Boolean 
 }
 
 //***********Private Methods Are below**********************
-private fun calculateInSampleSize(options: BitmapFactory.Options, maxWidth: Int, maxHeight: Int): Int {
+private fun calculateInSampleSize(
+    options: BitmapFactory.Options,
+    maxWidth: Int,
+    maxHeight: Int
+): Int {
     var height = options.outHeight
     var width = options.outWidth
     var inSampleSize = 1

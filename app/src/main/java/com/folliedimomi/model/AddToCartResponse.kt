@@ -4,29 +4,29 @@ package com.folliedimomi.model
 import com.google.gson.annotations.SerializedName
 
 data class AddToCartResponse(
-        @SerializedName("result")
-        val result: Result,
-        @SerializedName("message")
-        val message: String = "",
-        @SerializedName("status")
-        val status: Int = 0
+    @SerializedName("result")
+    val result: Result,
+    @SerializedName("message")
+    val message: String = "",
+    @SerializedName("status")
+    val status: Int = 0
 )
 
 data class Result(
-        @SerializedName("id_address_invoice")
-        val idAddressInvoice: Int = 0,
-        @SerializedName("id_customer")
-        val idCustomer: Int = 0,
-        @SerializedName("id_cart")
-        val idCart: Int = 0,
-        @SerializedName("secure_key")
-        val secureKey: String = "",
-        @SerializedName("id_address_delivery")
-        val idAddressDelivery: Int = 0,
-        @SerializedName("id_currency")
-        val idCurrency: Int = 0,
-        @SerializedName("products")
-        val products: List<Product> = listOf()
+    @SerializedName("id_address_invoice")
+    val idAddressInvoice: Int = 0,
+    @SerializedName("id_customer")
+    val idCustomer: Int = 0,
+    @SerializedName("id_cart")
+    val idCart: Int = 0,
+    @SerializedName("secure_key")
+    val secureKey: String = "",
+    @SerializedName("id_address_delivery")
+    val idAddressDelivery: Int = 0,
+    @SerializedName("id_currency")
+    val idCurrency: Int = 0,
+    @SerializedName("products")
+    val products: List<Product> = listOf()
 )
 
 

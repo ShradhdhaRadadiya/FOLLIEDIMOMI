@@ -1,11 +1,9 @@
 package com.folliedimomi.adapter
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-
 import com.folliedimomi.activity.AdvancedFilterActivity.Companion.disData
 import com.folliedimomi.activity.AdvancedFilterActivity.Companion.featureData
 import com.folliedimomi.databinding.ItemCheckboxCatListBinding
@@ -45,12 +43,12 @@ class AdvanceFilterFeatureListAdapter(
 
             if (model.idManufacturer.toString() == "0") {
                 mBinding.check1.text = model.name
-                if(disData.contains(model.name)){
+                if (disData.contains(model.name)) {
                     mBinding.check1.isChecked = true
                 }
             } else {
                 mBinding.check1.text = model.name
-                if(featureData.contains(model.idManufacturer!!.toInt())){
+                if (featureData.contains(model.idManufacturer!!.toInt())) {
                     mBinding.check1.isChecked = true
                 }
             }

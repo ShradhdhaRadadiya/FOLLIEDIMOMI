@@ -4,15 +4,20 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.Filter
+import android.widget.Filterable
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.folliedimomi.R
 import com.folliedimomi._app.listen
 import com.folliedimomi.model.CountryState
 
 
-class SearchAdapter(private val product: List<CountryState>, private val productInterface: ProductItemClicked) :
-        RecyclerView.Adapter<SearchAdapter.ViewHolder>(), Filterable {
+class SearchAdapter(
+    private val product: List<CountryState>,
+    private val productInterface: ProductItemClicked
+) :
+    RecyclerView.Adapter<SearchAdapter.ViewHolder>(), Filterable {
     private var searchProduct: List<CountryState>? = null
     private var myInterface: ProductItemClicked? = null
 
@@ -53,7 +58,8 @@ class SearchAdapter(private val product: List<CountryState>, private val product
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_search_product, parent, false)
+        val view =
+            LayoutInflater.from(parent.context).inflate(R.layout.item_search_product, parent, false)
         return ViewHolder(view).listen { position, _ ->
             val item = searchProduct!![position]
             myInterface!!.onItemClicked(item.id.toString(), item.name)

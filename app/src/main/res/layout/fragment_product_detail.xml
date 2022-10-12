@@ -3,8 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
+    android:clickable="true"
     android:descendantFocusability="blocksDescendants"
-    android:fillViewport="true">
+    android:fillViewport="true"
+    android:focusable="true">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -45,6 +48,7 @@
                 app:tint="@color/colorPrimary" />
 
         </RelativeLayout>
+
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabLayout"
             android:layout_width="match_parent"
@@ -52,6 +56,7 @@
             app:tabBackground="@drawable/tab_selector"
             app:tabGravity="center"
             app:tabIndicatorHeight="0dp" />
+
         <TextView
             android:id="@+id/tvName"
             android:layout_width="match_parent"
@@ -134,16 +139,16 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/_10sdp"
             android:layout_gravity="center"
-            android:layout_marginTop="@dimen/_5sdp"
             android:layout_marginStart="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_5sdp"
             android:layout_marginEnd="@dimen/_20sdp"
-            android:progressTint="@color/yellow"/>
+            android:progressTint="@color/yellow" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="@dimen/_5sdp">
+            android:layout_marginTop="@dimen/_5sdp"
+            android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/tvMinus"
@@ -209,31 +214,32 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:gravity="center"
-            android:background="@drawable/gray_rounded"
             android:layout_marginTop="@dimen/_10sdp"
-            >
-        <TextView
-            android:id="@+id/tvVideo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:drawableStart="@drawable/ic_baseline_play_arrow_24"
-            android:paddingStart="@dimen/_5sdp"
-            android:paddingTop="@dimen/_10sdp"
-            android:paddingEnd="@dimen/_5sdp"
-            android:paddingBottom="@dimen/_10sdp"
-            android:text="AGGIUINI AL CARReLLO"
-            android:textAllCaps="true"
-            android:drawablePadding="@dimen/_5sdp"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textColor="@color/white"
-            android:textSize="@dimen/_10ssp"
-            android:textStyle="bold"
-            tools:ignore="RtlSymmetry" />
+            android:background="@drawable/gray_rounded"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/tvVideo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:drawableStart="@drawable/ic_baseline_play_arrow_24"
+                android:drawablePadding="@dimen/_5sdp"
+                android:gravity="center"
+                android:paddingStart="@dimen/_5sdp"
+                android:paddingTop="@dimen/_10sdp"
+                android:paddingEnd="@dimen/_5sdp"
+                android:paddingBottom="@dimen/_10sdp"
+                android:text="AGGIUINI AL CARReLLO"
+                android:textAllCaps="true"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_10ssp"
+                android:textStyle="bold"
+                tools:ignore="RtlSymmetry" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
+
         <TextView
             android:id="@+id/tvDescri"
             android:layout_width="match_parent"
@@ -253,15 +259,15 @@
             android:textStyle="bold" />
 
 
-
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/_1ssp"
-            android:layout_marginTop="5dp"
             android:layout_marginStart="@dimen/_15sdp"
+            android:layout_marginTop="5dp"
             android:layout_marginEnd="@dimen/_15sdp"
             android:background="@color/black"
             android:visibility="visible" />
+
         <TextView
             android:id="@+id/tvVideoDes"
             android:layout_width="match_parent"
@@ -280,10 +286,11 @@
             android:textSize="@dimen/_13ssp"
             android:textStyle="bold" />
 
-             <TextView
+        <TextView
             android:id="@+id/tvVideoDec"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_20sdp"
             android:layout_marginTop="@dimen/_10sdp"
             android:ellipsize="end"
             android:gravity="start"
@@ -293,16 +300,16 @@
             android:paddingBottom="1dp"
             android:singleLine="true"
             android:text="200 COLPI"
-            android:layout_marginStart="@dimen/_20sdp"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textColor="@color/black"
             android:textSize="@dimen/_13ssp"
             android:textStyle="bold" />
 
-            <TextView
+        <TextView
             android:id="@+id/tvVideoDecnew"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_20sdp"
             android:layout_marginTop="@dimen/_10sdp"
             android:ellipsize="end"
             android:gravity="start"
@@ -312,7 +319,6 @@
             android:paddingBottom="1dp"
             android:singleLine="true"
             android:text="CAT F2"
-            android:layout_marginStart="@dimen/_20sdp"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textColor="@color/black"
             android:textSize="@dimen/_13ssp"
@@ -323,8 +329,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_20sdp"
-            android:layout_marginEnd="@dimen/_20sdp"
             android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_20sdp"
             android:layout_marginBottom="@dimen/_20sdp"
             android:background="@color/long_text_dec_bg">
 
@@ -332,14 +338,14 @@
                 android:id="@+id/tvLongDec"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_20sdp"
                 android:gravity="start"
-                android:paddingTop="@dimen/_2sdp"
+                android:includeFontPadding="false"
                 android:paddingStart="@dimen/_2sdp"
+                android:paddingTop="@dimen/_2sdp"
                 android:paddingEnd="@dimen/_2sdp"
                 android:paddingBottom="@dimen/_2sdp"
-                android:includeFontPadding="false"
                 android:text="CAT F2"
-                android:layout_marginStart="@dimen/_20sdp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:textColor="@color/long_text_dec"
                 android:textSize="@dimen/_13ssp"

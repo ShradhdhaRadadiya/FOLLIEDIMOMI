@@ -3,17 +3,15 @@ package com.folliedimomi.fragment
 
 import android.os.Bundle
 import android.util.Patterns
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import com.folliedimomi.R
 import com.folliedimomi.model.ForgotPasswordResponse
 import com.folliedimomi.network.NetworkRepository
 import com.folliedimomi.utils.*
 import com.google.gson.JsonSyntaxException
-
-
 import kotlinx.android.synthetic.main.activity_splash.*
 import kotlinx.android.synthetic.main.fragment_change_password.*
 import org.kodein.di.Kodein
@@ -22,7 +20,7 @@ import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
 import java.io.IOException
 
-class ChangePasswordFragment : Fragment() , KodeinAware{
+class ChangePasswordFragment : Fragment(), KodeinAware {
     override val kodein: Kodein by kodein()
     private val repository: NetworkRepository by instance()
 
@@ -36,44 +34,45 @@ class ChangePasswordFragment : Fragment() , KodeinAware{
         }
     }
 
-    private fun onSendEmail(email:String){
+    private fun onSendEmail(email: String) {
         //requireActivity().coordinator.snackBar("Under development")
         onChangePassword(email)
     }
 
-    private fun onChangePassword(email : String) {
+    private fun onChangePassword(email: String) {
         Coroutines.main {
             requireActivity().progress_bars_layout.show()
 
-                try {
-                    val registerResponse: ForgotPasswordResponse = repository.onForgotPassword(email = email)
-                    if (isAdded && isVisible) {
-                        registerResponse.let {
-                            if (registerResponse.status == 1) {
-                                requireActivity().progress_bars_layout.hide()
-                                //val registerResponse : RegisterUser = registerResponse.result
-                                requireActivity().coordinator.snackBar("L'email di recupero password è stata inviata con successo")
-                                //requireActivity().supportFragmentManager.popBackStackImmediate()
-                            } else {
-                                requireActivity().coordinator.snackBar(registerResponse.message)
-                            }
-                            return@main
+            try {
+                val registerResponse: ForgotPasswordResponse =
+                    repository.onForgotPassword(email = email)
+                if (isAdded && isVisible) {
+                    registerResponse.let {
+                        if (registerResponse.status == 1) {
+                            requireActivity().progress_bars_layout.hide()
+                            //val registerResponse : RegisterUser = registerResponse.result
+                            requireActivity().coordinator.snackBar("L'email di recupero password è stata inviata con successo")
+                            //requireActivity().supportFragmentManager.popBackStackImmediate()
+                        } else {
+                            requireActivity().coordinator.snackBar(registerResponse.message)
                         }
+                        return@main
                     }
-                } catch (e: ApiException) {
-                    requireActivity().progress_bars_layout.hide()
-                    requireActivity().coordinator.snackBar(e.message!!)
-                } catch (e: JsonSyntaxException) {
-                    requireActivity().progress_bars_layout.hide()
-                    requireActivity().coordinator.snackBar(e.message!!)
-                } catch (e: NoInternetException) {
-                    requireActivity().progress_bars_layout.hide()
-                    requireActivity().coordinator.snackBar(e.message!!)
-                } catch (e: IOException) {
-                    requireActivity().progress_bars_layout.hide()
-                    requireActivity().coordinator.snackBar(e.message!!)
                 }
+            } catch (e: ApiException) {
+                requireActivity().progress_bars_layout.hide()
+                requireActivity().coordinator.snackBar(e.message!!)
+            } catch (e: JsonSyntaxException) {
+                requireActivity().progress_bars_layout.hide()
+                requireActivity().coordinator.snackBar(e.message!!)
+            } catch (e: NoInternetException) {
+                requireActivity().progress_bars_layout.hide()
+                requireActivity().coordinator.snackBar(e.message!!)
+            } catch (e: IOException) {
+                requireActivity().progress_bars_layout.hide()
+                requireActivity().coordinator.snackBar(e.message!!)
             }
+        }
 
     }
 
@@ -99,7 +98,11 @@ class ChangePasswordFragment : Fragment() , KodeinAware{
         return isValid
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.fragment_change_password, container, false)
     }
 

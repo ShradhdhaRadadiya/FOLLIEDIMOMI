@@ -1,17 +1,22 @@
 package com.folliedimomi.utils
 
-import androidx.databinding.Observable
-import androidx.databinding.ObservableField
-import androidx.lifecycle.*
 //import androidx.lifecycle.LiveData
 //import androidx.lifecycle.MediatorLiveData
 //import androidx.lifecycle.Observer
+import androidx.databinding.Observable
+import androidx.databinding.ObservableField
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
+import androidx.lifecycle.Observer
 import java.io.IOException
 
 class ApiException(message: String) : IOException(message)
 class NoInternetException(message: String) : IOException(message)
 
-inline fun <T> dependantObservableField(vararg dependencies: Observable, crossinline mapper: () -> T?) =
+inline fun <T> dependantObservableField(
+    vararg dependencies: Observable,
+    crossinline mapper: () -> T?
+) =
     object : ObservableField<T>(*dependencies) {
         override fun get(): T? {
             return mapper()

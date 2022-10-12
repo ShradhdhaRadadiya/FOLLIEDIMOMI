@@ -41,22 +41,22 @@ class AdvanceFilterCatListAdapter(
         RecyclerView.ViewHolder(mBinding.root) {
         fun setDataToView(model: AdvanceFilterModel.Result.Data) {
 
-            if(model.categoryId == 0 || model.categoryId == null){
+            if (model.categoryId == 0 || model.categoryId == null) {
                 mBinding.radio1.text = model.name
-            }else{
+            } else {
                 mBinding.radio1.text = model.categoryName
 
             }
-            if(AdvancedFilterActivity.categoryData.contains(model.categoryId)){
+            if (AdvancedFilterActivity.categoryData.contains(model.categoryId)) {
                 mBinding.radio1.isChecked = true
             }
             mBinding.radio1.setOnCheckedChangeListener { p0, p1 ->
                 if (p1) {
                     AdvancedFilterActivity.categoryData.clear()
-                    if(model.categoryId == 0){
-                        model.idManufacturer.let { listener.onClickOnProduct(1,it.toInt()) }
-                    }else {
-                        model.categoryId?.let { listener.onClickOnProduct(1,it) }
+                    if (model.categoryId == 0) {
+                        model.idManufacturer.let { listener.onClickOnProduct(1, it.toInt()) }
+                    } else {
+                        model.categoryId?.let { listener.onClickOnProduct(1, it) }
                     }
                 }
             }
@@ -66,7 +66,7 @@ class AdvanceFilterCatListAdapter(
 
 
     interface OnProductClick {
-        fun onClickOnProduct(isCat : Int, adapterPosition: Int)
+        fun onClickOnProduct(isCat: Int, adapterPosition: Int)
     }
 }
 

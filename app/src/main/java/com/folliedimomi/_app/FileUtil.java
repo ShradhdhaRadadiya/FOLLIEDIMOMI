@@ -33,7 +33,7 @@ public class FileUtil {
                     return id.replaceFirst("raw:", "");
                 }
                 uri = ContentUris.withAppendedId(
-                    Uri.parse("content://downloads/public_downloads"), Long.valueOf(id));
+                        Uri.parse("content://downloads/public_downloads"), Long.valueOf(id));
             } else if (isMediaDocument(uri)) {
                 final String docId = DocumentsContract.getDocumentId(uri);
                 final String[] split = docId.split(":");
@@ -51,13 +51,13 @@ public class FileUtil {
                 }
                 selection = "_id=?";
                 selectionArgs = new String[]{
-                    split[1]
+                        split[1]
                 };
             }
         }
         if ("content".equalsIgnoreCase(uri.getScheme())) {
             String[] projection = {
-                MediaStore.Images.Media.DATA
+                    MediaStore.Images.Media.DATA
             };
             try (Cursor cursor = context.getContentResolver().query(uri, projection, selection, selectionArgs, null)) {
                 if (cursor != null && cursor.moveToFirst()) {

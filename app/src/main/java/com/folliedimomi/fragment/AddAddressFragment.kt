@@ -7,6 +7,7 @@ import com.folliedimomi.R
 import com.folliedimomi._app.Constant
 import com.folliedimomi.activity.MainActivity
 import com.folliedimomi.dialog.CountryDialog
+import com.folliedimomi.dialog.StateDialog
 import com.folliedimomi.model.AddAddressResponse
 import com.folliedimomi.model.CountryRespnse
 import com.folliedimomi.model.StateRespnse
@@ -14,8 +15,6 @@ import com.folliedimomi.network.NetworkRepository
 import com.folliedimomi.sharedPrefrense.Session
 import com.folliedimomi.utils.*
 import com.google.android.material.textfield.TextInputLayout
-import com.folliedimomi.dialog.StateDialog
-
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_add_address.*
 import okhttp3.RequestBody
@@ -23,9 +22,9 @@ import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
-import java.lang.Exception
 
-class AddAddressFragment(onAddressAddedListener: OnAddressAddedListner) : Fragment(), CountryDialog.ProductInterface, StateDialog.StateInterface, KodeinAware {
+class AddAddressFragment(onAddressAddedListener: OnAddressAddedListner) : Fragment(),
+    CountryDialog.ProductInterface, StateDialog.StateInterface, KodeinAware {
     override val kodein: Kodein by kodein()
 
     private val repository: NetworkRepository by instance()
@@ -48,7 +47,7 @@ class AddAddressFragment(onAddressAddedListener: OnAddressAddedListner) : Fragme
 
     override fun onCountryClicked(countryId: String, countryName: String) {
         if (isAdded && isVisible) {
-            if (countryName != "Italy"){
+            if (countryName != "Italy") {
                 telState.hide()
                 telIdentification.hide()
             } else {
@@ -78,7 +77,10 @@ class AddAddressFragment(onAddressAddedListener: OnAddressAddedListner) : Fragme
                 if (Constant.countryList.isNotEmpty()) {
                     Constant.countryListDialog = CountryDialog(this@AddAddressFragment)
                     if (!Constant.countryListDialog!!.isVisible) {
-                        Constant.countryListDialog!!.show(this@AddAddressFragment.activity!!.supportFragmentManager, "Country search dialog")
+                        Constant.countryListDialog!!.show(
+                            this@AddAddressFragment.activity!!.supportFragmentManager,
+                            "Country search dialog"
+                        )
                     }
                 }
             }
@@ -90,7 +92,10 @@ class AddAddressFragment(onAddressAddedListener: OnAddressAddedListner) : Fragme
                 if (Constant.stateList.isNotEmpty()) {
                     Constant.stateListDialog = StateDialog(this@AddAddressFragment)
                     if (!Constant.stateListDialog!!.isVisible) {
-                        Constant.stateListDialog!!.show(this@AddAddressFragment.activity!!.supportFragmentManager, "State search dialog")
+                        Constant.stateListDialog!!.show(
+                            this@AddAddressFragment.activity!!.supportFragmentManager,
+                            "State search dialog"
+                        )
                     }
                 } else {
                     requireActivity().coordinatorLayout.snackBar(getString(R.string.does_not_have_any_state))
@@ -105,7 +110,9 @@ class AddAddressFragment(onAddressAddedListener: OnAddressAddedListner) : Fragme
 
     private fun onAddAddress() {
         Coroutines.main {
-            if (countryId.isEmpty() || countryId == "0") requireActivity().coordinatorLayout.snackBar(getString(R.string.select_valid_country))
+            if (countryId.isEmpty() || countryId == "0") requireActivity().coordinatorLayout.snackBar(
+                getString(R.string.select_valid_country)
+            )
             //else if (stateId.isEmpty() || stateId == "0") requireActivity().coordinatorLayout.snackBar(getString(R.string.select_valid_state))
             else {
                 requireActivity().progress_bars_layout.show()
@@ -151,7 +158,10 @@ class AddAddressFragment(onAddressAddedListener: OnAddressAddedListner) : Fragme
         }
     }
 
-    private fun setError(tel: TextInputLayout, msg: String = getString(R.string.required)): Boolean {
+    private fun setError(
+        tel: TextInputLayout,
+        msg: String = getString(R.string.required)
+    ): Boolean {
         tel.isErrorEnabled = true
         tel.error = msg
         return false
@@ -181,14 +191,17 @@ class AddAddressFragment(onAddressAddedListener: OnAddressAddedListner) : Fragme
             etLastName.text!!.toString().isEmpty() -> setError(telLastName)
             //etIdentificationNumber.text!!.toString().isEmpty() -> setError(telIdentification)
             //etIdentificationNumber.text!!.toString().isEmpty() -> setError(telIdentification)
-            etCompany.text!!.toString().isNotEmpty() && etVatNumber.text!!.toString().isEmpty() -> setError(telVatNumber)
+            etCompany.text!!.toString().isNotEmpty() && etVatNumber.text!!.toString()
+                .isEmpty() -> setError(telVatNumber)
             etAddressOne.text!!.toString().isEmpty() -> setError(telAddressOne)
             //etAddressTwo.text!!.toString().isEmpty() -> setError(telAddressTwo)
             //etPostCode.text!!.toString().isEmpty() -> setError(telPin)
             etCity.text!!.toString().isEmpty() -> setError(telCity)
             etCountry.text!!.toString().isEmpty() -> setError(telCountry)
-            etCountry.text!!.toString() == "Italy" && etState.text!!.toString().isEmpty() -> setError(telState)
-            etCountry.text!!.toString() == "Italy" && etIdentificationNumber.text!!.toString().isEmpty() -> setError(telIdentification)
+            etCountry.text!!.toString() == "Italy" && etState.text!!.toString()
+                .isEmpty() -> setError(telState)
+            etCountry.text!!.toString() == "Italy" && etIdentificationNumber.text!!.toString()
+                .isEmpty() -> setError(telIdentification)
 
             /*etCountry.text!!.toString() == "Italy" -> {
                  if (etState.text!!.toString().isEmpty()) setError(telState)
@@ -228,14 +241,13 @@ class AddAddressFragment(onAddressAddedListener: OnAddressAddedListner) : Fragme
                     countryResponse.let {
                         if (countryResponse.status == 1) {
                             Constant.countryList = countryResponse.result
-                            for (i in Constant.countryList){
+                            for (i in Constant.countryList) {
                                 if (i.name == "Italy") {
                                     countryId = i.id.toString()
                                     getState(countryId)
                                 }
                             }
-                        }
-                        else Constant.countryList = emptyList()
+                        } else Constant.countryList = emptyList()
                         return@main
                     }
                 }
@@ -263,7 +275,11 @@ class AddAddressFragment(onAddressAddedListener: OnAddressAddedListner) : Fragme
     }
 
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.fragment_add_address, container, false)
     }
 

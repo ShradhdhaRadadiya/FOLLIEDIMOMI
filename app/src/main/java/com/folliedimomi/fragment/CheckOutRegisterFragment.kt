@@ -8,6 +8,7 @@ import com.folliedimomi.R
 import com.folliedimomi._app.Constant
 import com.folliedimomi._app.loadFragmentWithoutBackStack
 import com.folliedimomi.dialog.CountryDialog
+import com.folliedimomi.dialog.StateDialog
 import com.folliedimomi.model.CountryRespnse
 import com.folliedimomi.model.RegisterResponse
 import com.folliedimomi.model.RegisterUser
@@ -16,7 +17,6 @@ import com.folliedimomi.network.NetworkRepository
 import com.folliedimomi.sharedPrefrense.Session
 import com.folliedimomi.utils.*
 import com.google.android.material.textfield.TextInputLayout
-import com.folliedimomi.dialog.StateDialog
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_check_out_register.*
 import okhttp3.RequestBody
@@ -24,9 +24,9 @@ import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
-import java.lang.Exception
 
-class CheckOutRegisterFragment(mCartId: String, mSecretKey: String, mGrandTotal: String) : Fragment(),
+class CheckOutRegisterFragment(mCartId: String, mSecretKey: String, mGrandTotal: String) :
+    Fragment(),
     KodeinAware, CountryDialog.ProductInterface, StateDialog.StateInterface {
     override val kodein: Kodein by kodein()
     private val repository: NetworkRepository by instance()
@@ -50,7 +50,7 @@ class CheckOutRegisterFragment(mCartId: String, mSecretKey: String, mGrandTotal:
                 telState.hide()
                 telHouseNo.hide()
                 stateId = "0"
-            } else{
+            } else {
                 telState.show()
                 telHouseNo.show()
             }
@@ -63,8 +63,8 @@ class CheckOutRegisterFragment(mCartId: String, mSecretKey: String, mGrandTotal:
 
     override fun onStateClicked(stateId: String, stateName: String) {
         if (isAdded && isVisible) {
-                this.stateId = stateId
-                etState.setText(stateName)
+            this.stateId = stateId
+            etState.setText(stateName)
         }
     }
 
@@ -79,7 +79,10 @@ class CheckOutRegisterFragment(mCartId: String, mSecretKey: String, mGrandTotal:
                 if (Constant.countryList.isNotEmpty()) {
                     Constant.countryListDialog = CountryDialog(this@CheckOutRegisterFragment)
                     if (!Constant.countryListDialog!!.isVisible) {
-                        Constant.countryListDialog!!.show(this@CheckOutRegisterFragment.activity!!.supportFragmentManager, "Country search dialog")
+                        Constant.countryListDialog!!.show(
+                            this@CheckOutRegisterFragment.activity!!.supportFragmentManager,
+                            "Country search dialog"
+                        )
                         Constant.stateList = emptyList()
                     }
                 }
@@ -92,7 +95,10 @@ class CheckOutRegisterFragment(mCartId: String, mSecretKey: String, mGrandTotal:
                 if (Constant.stateList.isNotEmpty()) {
                     Constant.stateListDialog = StateDialog(this@CheckOutRegisterFragment)
                     if (!Constant.stateListDialog!!.isVisible) {
-                        Constant.stateListDialog!!.show(this@CheckOutRegisterFragment.activity!!.supportFragmentManager, "State search dialog")
+                        Constant.stateListDialog!!.show(
+                            this@CheckOutRegisterFragment.activity!!.supportFragmentManager,
+                            "State search dialog"
+                        )
                     }
                 } else {
                     requireActivity().coordinatorLayout.snackBar(getString(R.string.does_not_have_any_state))
@@ -114,7 +120,9 @@ class CheckOutRegisterFragment(mCartId: String, mSecretKey: String, mGrandTotal:
 
     private fun onRegister() {
         Coroutines.main {
-            if (countryId.isEmpty() || countryId == "0") requireActivity().coordinator.snackBar(getString(R.string.select_valid_country))
+            if (countryId.isEmpty() || countryId == "0") requireActivity().coordinator.snackBar(
+                getString(R.string.select_valid_country)
+            )
             //else if (stateId.isEmpty() || stateId == "0") requireActivity().coordinatorLayout.snackBar(getString(R.string.select_valid_state))
             else {
                 requireActivity().progress_bars_layout.show()
@@ -146,7 +154,13 @@ class CheckOutRegisterFragment(mCartId: String, mSecretKey: String, mGrandTotal:
                                 val user = registerResponse.result
                                 setSessionUser(user)
                                 requireActivity().coordinator.snackBar(registerResponse.message)
-                                requireActivity().loadFragmentWithoutBackStack(OrderAddressFragment(cartId, secretKey, grandTotal))
+                                requireActivity().loadFragmentWithoutBackStack(
+                                    OrderAddressFragment(
+                                        cartId,
+                                        secretKey,
+                                        grandTotal
+                                    )
+                                )
                                 //requireActivity().supportFragmentManager.popBackStackImmediate()
                             } else {
                                 requireActivity().coordinator.snackBar(registerResponse.message)
@@ -163,12 +177,12 @@ class CheckOutRegisterFragment(mCartId: String, mSecretKey: String, mGrandTotal:
     }
 
     private fun setSessionUser(user: RegisterUser) {
-            session.setServerLoggedIn(true)
-            session.setUserId(user.idCustomer.toString())
-            session.setUserName("${user.firstname}  ${user.lastname}")
-            session.setUserEmail(user.email)
-            session.setSecureKey(user.secureKey)
-            session.setShopId(user.idShop.toString())
+        session.setServerLoggedIn(true)
+        session.setUserId(user.idCustomer.toString())
+        session.setUserName("${user.firstname}  ${user.lastname}")
+        session.setUserEmail(user.email)
+        session.setSecureKey(user.secureKey)
+        session.setShopId(user.idShop.toString())
     }
 
     private fun getCountry() {
@@ -181,14 +195,13 @@ class CheckOutRegisterFragment(mCartId: String, mSecretKey: String, mGrandTotal:
                     countryResponse.let {
                         if (countryResponse.status == 1) {
                             Constant.countryList = countryResponse.result
-                            for (i in Constant.countryList){
+                            for (i in Constant.countryList) {
                                 if (i.name == "Italy") {
                                     countryId = i.id.toString()
                                     getState(countryId)
                                 }
                             }
-                        }
-                        else Constant.countryList = emptyList()
+                        } else Constant.countryList = emptyList()
                         return@main
                     }
                 }
@@ -223,12 +236,17 @@ class CheckOutRegisterFragment(mCartId: String, mSecretKey: String, mGrandTotal:
             etSurname.text!!.toString().isEmpty() -> setError(telSurname)
             etAddress.text!!.toString().isEmpty() -> setError(telAddress)
             etEmail.text!!.toString().isEmpty() -> setError(telEmail)
-            !Patterns.EMAIL_ADDRESS.matcher(etEmail.text!!).matches() -> setError(telEmail, getString(R.string.error_please_enter_valid_email))
+            !Patterns.EMAIL_ADDRESS.matcher(etEmail.text!!).matches() -> setError(
+                telEmail,
+                getString(R.string.error_please_enter_valid_email)
+            )
             etPin.text!!.toString().isEmpty() -> setError(telPin)
             etCity.text!!.toString().isEmpty() -> setError(telCity)
             etCountry.text!!.toString().isEmpty() -> setError(telCountry)
-            etCountry.text!!.toString() == "Italy" && etState.text!!.toString().isEmpty() -> setError(telState)
-            etCountry.text!!.toString() == "Italy" && etHouseNo.text!!.toString().isEmpty()-> setError(telHouseNo)
+            etCountry.text!!.toString() == "Italy" && etState.text!!.toString()
+                .isEmpty() -> setError(telState)
+            etCountry.text!!.toString() == "Italy" && etHouseNo.text!!.toString()
+                .isEmpty() -> setError(telHouseNo)
 
             /*etCountry.text!!.toString() == "Italy" -> {
                 if (etState.text!!.toString().isEmpty())  setError(telState)
@@ -244,7 +262,10 @@ class CheckOutRegisterFragment(mCartId: String, mSecretKey: String, mGrandTotal:
         return isValid
     }
 
-    private fun setError(tel: TextInputLayout, msg: String = getString(R.string.required)): Boolean {
+    private fun setError(
+        tel: TextInputLayout,
+        msg: String = getString(R.string.required)
+    ): Boolean {
         tel.isErrorEnabled = true
         tel.error = msg
         return false
@@ -262,7 +283,11 @@ class CheckOutRegisterFragment(mCartId: String, mSecretKey: String, mGrandTotal:
         telCity.error = null
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.fragment_check_out_register, container, false)
     }
 

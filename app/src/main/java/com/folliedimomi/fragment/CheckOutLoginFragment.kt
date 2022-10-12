@@ -18,14 +18,13 @@ import com.folliedimomi.utils.*
 import com.google.android.material.textfield.TextInputLayout
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_check_out_login.*
-
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
-import java.lang.Exception
 
-class CheckOutLoginFragment(mCartId: String, mSecretKey: String, mGrandTotal: String) : Fragment(R.layout.fragment_check_out_login), View.OnClickListener, KodeinAware {
+class CheckOutLoginFragment(mCartId: String, mSecretKey: String, mGrandTotal: String) :
+    Fragment(R.layout.fragment_check_out_login), View.OnClickListener, KodeinAware {
     override val kodein: Kodein by kodein()
     private val repository: NetworkRepository by instance()
     private val session: Session by instance()
@@ -51,14 +50,24 @@ class CheckOutLoginFragment(mCartId: String, mSecretKey: String, mGrandTotal: St
     override fun onClick(v: View?) {
         when (v!!.id) {
             R.id.btnLogin -> {
-                Log.e("TAG","EMAIL IS------> ${etEmail.text.toString()}")
+                Log.e("TAG", "EMAIL IS------> ${etEmail.text.toString()}")
 
                 if (validate()) onLogin(etEmail.text.toString(), etPassword.text.toString())
             }
-            R.id.tvForgotPassword -> { requireActivity().loadFragment(ForgotPasswordAsGuestFragment()) }
-            R.id.tvCreateNewAccount -> requireActivity().loadFragmentWithoutBackStack(CheckOutRegisterFragment(cartId, secretKey, grandTotal))
-            R.id.btnGuest -> requireActivity().loadFragmentWithoutBackStack(CheckOutAsGuestFragment(cartId, secretKey, grandTotal))
-            else -> { }//coorcontext!!.showToast("Something wrong clicked")
+            R.id.tvForgotPassword -> {
+                requireActivity().loadFragment(ForgotPasswordAsGuestFragment())
+            }
+            R.id.tvCreateNewAccount -> requireActivity().loadFragmentWithoutBackStack(
+                CheckOutRegisterFragment(cartId, secretKey, grandTotal)
+            )
+            R.id.btnGuest -> requireActivity().loadFragmentWithoutBackStack(
+                CheckOutAsGuestFragment(
+                    cartId,
+                    secretKey,
+                    grandTotal
+                )
+            )
+            else -> {}//coorcontext!!.showToast("Something wrong clicked")
         }
     }
 
@@ -89,7 +98,13 @@ class CheckOutLoginFragment(mCartId: String, mSecretKey: String, mGrandTotal: St
     }
 
     private fun onLoginComplete() {
-        requireActivity().loadFragmentWithoutBackStack(OrderAddressFragment(cartId, secretKey, grandTotal))
+        requireActivity().loadFragmentWithoutBackStack(
+            OrderAddressFragment(
+                cartId,
+                secretKey,
+                grandTotal
+            )
+        )
     }
 
     private fun validate(): Boolean {
@@ -97,16 +112,31 @@ class CheckOutLoginFragment(mCartId: String, mSecretKey: String, mGrandTotal: St
         telEmail.error = null
         telPassword.error = null
         isValid = when {
-            etEmail.text!!.toString().isEmpty() -> setError(telEmail, getString(R.string.error_please_enter_email))
-            !Patterns.EMAIL_ADDRESS.matcher(etEmail.text!!).matches() -> setError(telEmail, getString(R.string.error_please_enter_valid_email))
-            etPassword.text!!.toString().isEmpty() -> setError(telPassword, getString(R.string.error_please_enter_password))
-            etPassword.text!!.toString().length < 5 -> setError(telPassword, getString(R.string.error_password_length))
+            etEmail.text!!.toString().isEmpty() -> setError(
+                telEmail,
+                getString(R.string.error_please_enter_email)
+            )
+            !Patterns.EMAIL_ADDRESS.matcher(etEmail.text!!).matches() -> setError(
+                telEmail,
+                getString(R.string.error_please_enter_valid_email)
+            )
+            etPassword.text!!.toString().isEmpty() -> setError(
+                telPassword,
+                getString(R.string.error_please_enter_password)
+            )
+            etPassword.text!!.toString().length < 5 -> setError(
+                telPassword,
+                getString(R.string.error_password_length)
+            )
             else -> true
         }
         return isValid
     }
 
-    private fun setError(tel: TextInputLayout, msg: String = getString(R.string.required)): Boolean {
+    private fun setError(
+        tel: TextInputLayout,
+        msg: String = getString(R.string.required)
+    ): Boolean {
         tel.isErrorEnabled = true
         tel.error = msg
         return false

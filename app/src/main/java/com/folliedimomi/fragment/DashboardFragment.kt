@@ -1,15 +1,16 @@
 package com.folliedimomi.fragment
 
 import android.app.Dialog
+import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import android.net.Uri
+import android.content.IntentFilter
 import android.os.Bundle
 import android.util.Log
 import android.view.*
 import android.widget.MediaController
-import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.recyclerview.widget.GridLayoutManager
 import com.bumptech.glide.Glide
 import com.folliedimomi.R
@@ -25,7 +26,6 @@ import com.google.gson.JsonSyntaxException
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_dashboard.*
 import okhttp3.RequestBody
-import okhttp3.ResponseBody
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
@@ -51,9 +51,6 @@ class DashboardFragment(private var drawerCatText: String = "", private var draw
     private var categoryId = ""
     private val session: Session by instance()
 
-    companion object {
-        var id_parent = ""
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -62,8 +59,14 @@ class DashboardFragment(private var drawerCatText: String = "", private var draw
 
         tvFilter.setOnClickListener {
             val intent = Intent(mContext, AdvancedFilterActivity::class.java)
-            intent.putExtra("Parent_id",drawerCatId)
-            startActivityForResult(intent, 100)
+            Log.e("TAG", "drawerCatId=======? $drawerCatId")
+            intent.putExtra("Parent_id", drawerCatId)
+            startActivity(intent)
+
+            /*  val intent = Intent(mContext, AdvancedFilterActivity::class.java)
+              Log.e("TAG", "drawerCatId=======? $drawerCatId")
+              intent.putExtra("Parent_id", drawerCatId)
+              startActivityForResult(intent, 100)*/
         }
 
         iv1.setOnClickListener {
@@ -109,6 +112,11 @@ class DashboardFragment(private var drawerCatText: String = "", private var draw
                             6 -> sortBy = "price_asc"
                             7 -> sortBy = "price_desc"
                         }
+                        Log.e(
+                            "ProductList",
+                            "ProductList -----sorting: $drawerCatId--->$categoryId--->$manufac "
+                        )
+
                         getProductList()
                     }
                 })
@@ -132,9 +140,12 @@ class DashboardFragment(private var drawerCatText: String = "", private var draw
                     }
                     //hide
                     Globals.hideProgress()
+                    Log.e(
+                        "ProductList",
+                        "ProductList -----on video screen: $drawerCatId--->$categoryId--->$manufac "
+                    )
 
                     getProductList()
-
                     return@main
                 }
 
@@ -163,6 +174,7 @@ class DashboardFragment(private var drawerCatText: String = "", private var draw
     }
 
     private fun getProductList() {
+        Log.e("ProductList", "ProductList -----: $drawerCatId--->$categoryId--->$manufac ")
         Coroutines.main {
             Globals.showProgress(mContext)
             val mMap = HashMap<String, RequestBody>()
@@ -228,19 +240,11 @@ class DashboardFragment(private var drawerCatText: String = "", private var draw
         }
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == -1) {
-            var data1 = data?.extras!!.getString("disData")
-
-
-            //todo api call
-        }
-
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        callDisplyTitleVideoApiCall()
+
     }
 
     override fun onCreateView(
@@ -248,7 +252,26 @@ class DashboardFragment(private var drawerCatText: String = "", private var draw
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_dashboard, container, false)
+        val view = inflater.inflate(R.layout.fragment_dashboard, container, false)
+        val broadCastReceiver = object : BroadcastReceiver() {
+            override fun onReceive(contxt: Context?, intent: Intent?) {
+                Log.e("Receive", "receiver cal------------------")
+                categoryId = intent?.extras!!.getString("disData").toString()
+                manufac = intent.extras!!.getString("featureData").toString()
+                var data3 = intent.extras!!.getString("catId")
+                Log.e(
+                    "ProductList",
+                    "ProductList -----on activity result: $drawerCatId--->$categoryId--->$manufac "
+                )
+
+                getProductList()
+            }
+        }
+
+        LocalBroadcastManager.getInstance(mContext)
+            .registerReceiver(broadCastReceiver, IntentFilter("DataAction"))
+
+        return view
     }
 
     override fun onAttach(context: Context) {
@@ -259,9 +282,6 @@ class DashboardFragment(private var drawerCatText: String = "", private var draw
         } else {
             throw RuntimeException("$context must implement OnFragmentInteractionListener")
         }
-
-        callDisplyTitleVideoApiCall()
-
     }
 
     override fun onDetach() {
@@ -288,12 +308,12 @@ class DashboardFragment(private var drawerCatText: String = "", private var draw
                 mMap["shop_id"] = Constant.LANG.convertBody()
                 if (session.getUserId().toString().isNotEmpty()) {
                     mMap["id_customer"] = session.getUserId().toString().convertBody()
-                }else{
+                } else {
                     mMap["id_customer"] = "0".convertBody()
                 }
                 mMap["customersessionid"] = session.getAppSession().toString().convertBody()
 
-                Log.e("TAG","mMAP IS ----> $mMap")
+                Log.e("TAG", "mMAP IS ----> $mMap")
 
                 val drawerData = repository.addToCart(mMap)
 

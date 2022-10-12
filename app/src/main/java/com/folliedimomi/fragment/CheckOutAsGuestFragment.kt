@@ -11,24 +11,23 @@ import androidx.fragment.app.FragmentManager
 import com.folliedimomi.R
 import com.folliedimomi._app.Constant
 import com.folliedimomi.dialog.CountryDialog
+import com.folliedimomi.dialog.StateDialog
 import com.folliedimomi.model.CountryRespnse
 import com.folliedimomi.model.StateRespnse
 import com.folliedimomi.network.NetworkRepository
 import com.folliedimomi.sharedPrefrense.Session
 import com.folliedimomi.utils.*
 import com.google.android.material.textfield.TextInputLayout
-import com.folliedimomi.dialog.StateDialog
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_check_out_as_guest.*
-
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
 
 class CheckOutAsGuestFragment(mCartId: String, mSecretKey: String, mGrandTotal: String) :
-        Fragment(R.layout.fragment_check_out_as_guest),
-        KodeinAware, CountryDialog.ProductInterface, StateDialog.StateInterface {
+    Fragment(R.layout.fragment_check_out_as_guest),
+    KodeinAware, CountryDialog.ProductInterface, StateDialog.StateInterface {
     override val kodein: Kodein by kodein()
     private val repository: NetworkRepository by instance()
     private val session: Session by instance()
@@ -109,7 +108,10 @@ class CheckOutAsGuestFragment(mCartId: String, mSecretKey: String, mGrandTotal: 
         }
 
         tvCancel.setOnClickListener {
-            this@CheckOutAsGuestFragment.activity!!.supportFragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+            this@CheckOutAsGuestFragment.activity!!.supportFragmentManager.popBackStack(
+                null,
+                FragmentManager.POP_BACK_STACK_INCLUSIVE
+            )
         }
 
         btnIsDifferentBilling.setOnClickListener {
@@ -127,7 +129,10 @@ class CheckOutAsGuestFragment(mCartId: String, mSecretKey: String, mGrandTotal: 
                 if (Constant.countryList.isNotEmpty()) {
                     Constant.countryListDialog = CountryDialog(this@CheckOutAsGuestFragment)
                     if (!Constant.countryListDialog!!.isVisible) {
-                        Constant.countryListDialog!!.show(this@CheckOutAsGuestFragment.activity!!.supportFragmentManager, "Country search dialog")
+                        Constant.countryListDialog!!.show(
+                            this@CheckOutAsGuestFragment.activity!!.supportFragmentManager,
+                            "Country search dialog"
+                        )
                         isBillCountry = false
                     }
                 }
@@ -141,7 +146,10 @@ class CheckOutAsGuestFragment(mCartId: String, mSecretKey: String, mGrandTotal: 
                 if (Constant.countryList.isNotEmpty()) {
                     Constant.countryListDialog = CountryDialog(this@CheckOutAsGuestFragment)
                     if (!Constant.countryListDialog!!.isVisible) {
-                        Constant.countryListDialog!!.show(this@CheckOutAsGuestFragment.activity!!.supportFragmentManager, "Country search dialog")
+                        Constant.countryListDialog!!.show(
+                            this@CheckOutAsGuestFragment.activity!!.supportFragmentManager,
+                            "Country search dialog"
+                        )
                         isBillCountry = true
                     }
                 }
@@ -154,7 +162,10 @@ class CheckOutAsGuestFragment(mCartId: String, mSecretKey: String, mGrandTotal: 
                 if (Constant.stateList.isNotEmpty()) {
                     Constant.stateListDialog = StateDialog(this@CheckOutAsGuestFragment)
                     if (!Constant.stateListDialog!!.isVisible) {
-                        Constant.stateListDialog!!.show(this@CheckOutAsGuestFragment.activity!!.supportFragmentManager, "State search dialog")
+                        Constant.stateListDialog!!.show(
+                            this@CheckOutAsGuestFragment.activity!!.supportFragmentManager,
+                            "State search dialog"
+                        )
                         isBillState = false
                     }
                 } else {
@@ -169,7 +180,10 @@ class CheckOutAsGuestFragment(mCartId: String, mSecretKey: String, mGrandTotal: 
                 if (Constant.stateList.isNotEmpty()) {
                     Constant.stateListDialog = StateDialog(this@CheckOutAsGuestFragment)
                     if (!Constant.stateListDialog!!.isVisible) {
-                        Constant.stateListDialog!!.show(this@CheckOutAsGuestFragment.activity!!.supportFragmentManager, "State search dialog")
+                        Constant.stateListDialog!!.show(
+                            this@CheckOutAsGuestFragment.activity!!.supportFragmentManager,
+                            "State search dialog"
+                        )
                         isBillState = true
                     }
                 } else {
@@ -186,9 +200,13 @@ class CheckOutAsGuestFragment(mCartId: String, mSecretKey: String, mGrandTotal: 
     private fun onAddAddress() {
         var bundle: Bundle = Bundle()
 
-        if (countryId.isEmpty() || countryId == "0") requireActivity().coordinatorLayout.snackBar(getString(R.string.select_valid_country))
+        if (countryId.isEmpty() || countryId == "0") requireActivity().coordinatorLayout.snackBar(
+            getString(R.string.select_valid_country)
+        )
         //else if (stateId.isEmpty() || stateId == "0") requireActivity().coordinatorLayout.snackBar(getString(R.string.select_valid_state))
-        else if (isBillingShow && /*billCountryId.isEmpty() || */billCountryId == "0") requireActivity().coordinatorLayout.snackBar(getString(R.string.select_valid_country))
+        else if (isBillingShow && /*billCountryId.isEmpty() || */billCountryId == "0") requireActivity().coordinatorLayout.snackBar(
+            getString(R.string.select_valid_country)
+        )
         //else if (isBillingShow && /*billStateId.isEmpty() ||*/ billStateId == "0") requireActivity().coordinatorLayout.snackBar(getString(R.string.select_valid_state))
         else {
             bundle.putString("email", etEmail.text.toString())
@@ -227,7 +245,8 @@ class CheckOutAsGuestFragment(mCartId: String, mSecretKey: String, mGrandTotal: 
             val fragment = OrderReviewFragment(cartId, secretKey, grandTotal, "", "", "", true)
             fragment.arguments = bundle
             val fragmentTransaction = requireActivity().supportFragmentManager.beginTransaction()
-            fragmentTransaction.replace(R.id.container, fragment).addToBackStack(fragment::class.java.simpleName).commit()
+            fragmentTransaction.replace(R.id.container, fragment)
+                .addToBackStack(fragment::class.java.simpleName).commit()
         }
     }
 
@@ -237,7 +256,10 @@ class CheckOutAsGuestFragment(mCartId: String, mSecretKey: String, mGrandTotal: 
         isValid = when {
             etEmail.text!!.toString().isEmpty() -> setError(telEmail)
             /*etEmail.text!!.toString().isEmpty() -> setError(telEmail)*/
-            !Patterns.EMAIL_ADDRESS.matcher(etEmail.text!!).matches() -> setError(telEmail, getString(R.string.error_please_enter_valid_email))
+            !Patterns.EMAIL_ADDRESS.matcher(etEmail.text!!).matches() -> setError(
+                telEmail,
+                getString(R.string.error_please_enter_valid_email)
+            )
             etFirstName.text!!.toString().isEmpty() -> setError(telFirstName)
             etLastName.text!!.toString().isEmpty() -> setError(telLastName)
             //etIdentificationNumber.text!!.toString().isEmpty() -> setError(telIdentificationNumber)
@@ -247,8 +269,10 @@ class CheckOutAsGuestFragment(mCartId: String, mSecretKey: String, mGrandTotal: 
             etCity.text!!.toString().isEmpty() -> setError(telCity)
             etCountry.text!!.toString().isEmpty() -> setError(telCountry)
 
-            etCountry.text!!.toString() == "Italy" && etState.text!!.toString().isEmpty() -> setError(telState)
-            etCountry.text!!.toString() == "Italy" && etIdentificationNumber.text!!.toString().isEmpty()-> setError(telIdentificationNumber)
+            etCountry.text!!.toString() == "Italy" && etState.text!!.toString()
+                .isEmpty() -> setError(telState)
+            etCountry.text!!.toString() == "Italy" && etIdentificationNumber.text!!.toString()
+                .isEmpty() -> setError(telIdentificationNumber)
             /*etCountry.text!!.toString() == "Italy" -> {
                 if (etState.text!!.toString().isEmpty()) setError(telState)
                 if (etIdentificationNumber.text!!.toString().isEmpty()) setError(telIdentificationNumber)
@@ -269,14 +293,17 @@ class CheckOutAsGuestFragment(mCartId: String, mSecretKey: String, mGrandTotal: 
             etBillFirstName.text!!.toString().isEmpty() -> setError(telIBillFirstName)
             etBillLastName.text!!.toString().isEmpty() -> setError(telIBillLastName)
             //etBillIdentificationNumber.text!!.toString().isEmpty() -> setError(telIBillIdentification)
-            etBillCompany.text!!.toString().isNotEmpty() && etBillVatNumber.text!!.toString().isEmpty() -> setError(telIBillVatNumber)
+            etBillCompany.text!!.toString().isNotEmpty() && etBillVatNumber.text!!.toString()
+                .isEmpty() -> setError(telIBillVatNumber)
             etBillAddressOne.text!!.toString().isEmpty() -> setError(telIBillAddressOne)
             //etBillAddressTwo.text!!.toString().isEmpty() -> setError(telIBillAddressTwo)
             //etBillPostCode.text!!.toString().isEmpty() -> setError(telIBillPin)
             etBillCity.text!!.toString().isEmpty() -> setError(telIBillCity)
             etBillCountry.text!!.toString().isEmpty() -> setError(telIBillCountry)
-            etBillCountry.text!!.toString() == "Italy" && etBillState.text!!.toString().isEmpty() -> setError(telIBillState)
-            etBillCountry.text!!.toString() == "Italy" && etBillIdentificationNumber.text!!.toString().isEmpty() -> setError(telIBillIdentification)
+            etBillCountry.text!!.toString() == "Italy" && etBillState.text!!.toString()
+                .isEmpty() -> setError(telIBillState)
+            etBillCountry.text!!.toString() == "Italy" && etBillIdentificationNumber.text!!.toString()
+                .isEmpty() -> setError(telIBillIdentification)
             //etBillState.text!!.toString().isEmpty() -> setError(telIBillState)
             //etBillCompany.text!!.toString().isEmpty() -> setError(telIBillCompany)
             etBillMobile.text!!.toString().isEmpty() -> setError(telIBillMobile)
@@ -286,7 +313,10 @@ class CheckOutAsGuestFragment(mCartId: String, mSecretKey: String, mGrandTotal: 
         return isValid
     }
 
-    private fun setError(tel: TextInputLayout, msg: String = getString(R.string.required)): Boolean {
+    private fun setError(
+        tel: TextInputLayout,
+        msg: String = getString(R.string.required)
+    ): Boolean {
         tel.isErrorEnabled = true
         tel.error = msg
         return false

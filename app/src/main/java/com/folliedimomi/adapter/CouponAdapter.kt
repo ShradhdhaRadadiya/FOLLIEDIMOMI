@@ -10,7 +10,8 @@ import com.folliedimomi.R
 import com.folliedimomi.model.CouponCode
 
 
-class CouponAdapter(private val liCoupon: List<CouponCode> = listOf()) : RecyclerView.Adapter<CouponAdapter.MyViewHolder>() {
+class CouponAdapter(private val liCoupon: List<CouponCode> = listOf()) :
+    RecyclerView.Adapter<CouponAdapter.MyViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_coupan, parent, false)

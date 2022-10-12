@@ -28,7 +28,9 @@ import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
 import java.io.IOException
 
-class OrderAddressFragment(mCartId: String, mSecretKey: String, mGrandTotal: String) : Fragment(), AddressAdapter.GetSelectedAddress, KodeinAware, AddAddressFragment.OnAddressAddedListner, BillingAdapter.GetSelectedAddress {
+class OrderAddressFragment(mCartId: String, mSecretKey: String, mGrandTotal: String) : Fragment(),
+    AddressAdapter.GetSelectedAddress, KodeinAware, AddAddressFragment.OnAddressAddedListner,
+    BillingAdapter.GetSelectedAddress {
     override val kodein: Kodein by kodein()
     private val repository: NetworkRepository by instance()
     private val session: Session by instance()
@@ -68,10 +70,18 @@ class OrderAddressFragment(mCartId: String, mSecretKey: String, mGrandTotal: Str
         cbxDifferentBillingAddress.setOnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked) {
                 isDifferentBillingAddress = true
-                if (Constant.myAddressList.isNotEmpty()) idBillingAddress = Constant.myAddressList[0].idAddress.toString()
+                if (Constant.myAddressList.isNotEmpty()) idBillingAddress =
+                    Constant.myAddressList[0].idAddress.toString()
                 rvBillingAddress.show()
-                rvBillingAddress.layoutManager = LinearLayoutManager(this@OrderAddressFragment.activity!!)
-                rvBillingAddress.adapter = BillingAdapter(requireActivity(), Constant.myAddressList, this@OrderAddressFragment, false, repository)
+                rvBillingAddress.layoutManager =
+                    LinearLayoutManager(this@OrderAddressFragment.activity!!)
+                rvBillingAddress.adapter = BillingAdapter(
+                    requireActivity(),
+                    Constant.myAddressList,
+                    this@OrderAddressFragment,
+                    false,
+                    repository
+                )
             } else {
                 isDifferentBillingAddress = false
                 idBillingAddress = ""
@@ -83,12 +93,24 @@ class OrderAddressFragment(mCartId: String, mSecretKey: String, mGrandTotal: Str
             if (idBillingAddress.isEmpty()) {
                 idBillingAddress = idAddress
             }
-            requireActivity().loadFragment(OrderReviewFragment(cartId,secretKey,grandTotal,idAddress,idCarrier,idBillingAddress))
+            requireActivity().loadFragment(
+                OrderReviewFragment(
+                    cartId,
+                    secretKey,
+                    grandTotal,
+                    idAddress,
+                    idCarrier,
+                    idBillingAddress
+                )
+            )
             //requireActivity().loadFragment(OrderCarrierFragment(cartId,secretKey,grandTotal,idAddress,idBillingAddress))
         }
 
         tvCancel.setOnClickListener {
-            requireActivity().supportFragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+            requireActivity().supportFragmentManager.popBackStack(
+                null,
+                FragmentManager.POP_BACK_STACK_INCLUSIVE
+            )
         }
 
         if (isDifferentBillingAddress) rvBillingAddress.show()
@@ -97,7 +119,11 @@ class OrderAddressFragment(mCartId: String, mSecretKey: String, mGrandTotal: Str
         getAddress(session.getUserId().toString())
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.fragment_order_address, container, false)
     }
 
@@ -122,14 +148,22 @@ class OrderAddressFragment(mCartId: String, mSecretKey: String, mGrandTotal: Str
                     addressResponse.let {
                         if (addressResponse.status == 1) {
                             Constant.myAddressList = addressResponse.result
-                            if (Constant.myAddressList.isNotEmpty()) idAddress = Constant.myAddressList[0].idAddress.toString()
+                            if (Constant.myAddressList.isNotEmpty()) idAddress =
+                                Constant.myAddressList[0].idAddress.toString()
                             tvEmptyAddress.hide()
                             rvAddress.show()
                             llGrandTotal.show()
                             fabAddress.show()
                             cbxDifferentBillingAddress.show()
-                            rvAddress.layoutManager = LinearLayoutManager(this@OrderAddressFragment.activity!!)
-                            rvAddress.adapter = AddressAdapter(requireActivity(), Constant.myAddressList, this@OrderAddressFragment, false, repository)
+                            rvAddress.layoutManager =
+                                LinearLayoutManager(this@OrderAddressFragment.activity!!)
+                            rvAddress.adapter = AddressAdapter(
+                                requireActivity(),
+                                Constant.myAddressList,
+                                this@OrderAddressFragment,
+                                false,
+                                repository
+                            )
                         } else {
                             tvEmptyAddress.show()
                             rvAddress.hide()

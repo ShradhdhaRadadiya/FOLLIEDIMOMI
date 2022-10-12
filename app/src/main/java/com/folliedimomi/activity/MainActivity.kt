@@ -26,20 +26,21 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import com.braintreepayments.api.dropin.DropInActivity
-import com.braintreepayments.api.dropin.DropInResult
 import com.bumptech.glide.Glide
 import com.folliedimomi.R
 import com.folliedimomi._app.BadgeDrawable
 import com.folliedimomi._app.getRandomString
-import com.folliedimomi._app.loadFragment
+import com.folliedimomi._app.loadFragmentWithoutBackStack
 import com.folliedimomi._observer.MyObserver
 import com.folliedimomi.fragment.DashboardFragment
 import com.folliedimomi.fragment.HomeFragment
 import com.folliedimomi.fragment.ShoppingCartFragment
 import com.folliedimomi.interfaces.IOnBackPressed
 import com.folliedimomi.interfaces.ShoppingCartUpdateListener
-import com.folliedimomi.model.*
+import com.folliedimomi.model.DrawerMenuModel
+import com.folliedimomi.model.Product
+import com.folliedimomi.model.ShoppingCartResponse
+import com.folliedimomi.model.ShoppingCartResult
 import com.folliedimomi.network.NetworkRepository
 import com.folliedimomi.sharedPrefrense.Session
 import com.folliedimomi.utils.*
@@ -72,12 +73,11 @@ class MainActivity : AppCompatActivity(),
     private lateinit var tvDrawerEmail: TextView
 
     private lateinit var imgUserProfile: ImageView
-    private  var drawerListData = arrayListOf<DrawerMenuModel.Result>()
+    private var drawerListData = arrayListOf<DrawerMenuModel.Result>()
 
 
-     var drawerCatId = 0
-     var drawerCatText = ""
-
+    var drawerCatId = 0
+    var drawerCatText = ""
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -115,7 +115,6 @@ class MainActivity : AppCompatActivity(),
         }
 
 
-
         //imgUserProfile = navView.getHeaderView(0).findViewById(R.id.img_drawer_user)
         llUserHeader = navView.getHeaderView(0).findViewById(R.id.llUserHeader)
         tvDrawerUser = navView.getHeaderView(0).findViewById(R.id.tvDrawerUsername)
@@ -124,14 +123,13 @@ class MainActivity : AppCompatActivity(),
         tvDrawerEmail.typeface = regular
 
 
-
-     /*   navView.menu.findItem(R.id.nav_faq).setActionView(R.layout.menu_right_arrow)
-        navView.menu.findItem(R.id.nav_condition_subscription)
-            .setActionView(R.layout.menu_right_arrow)
-        navView.menu.findItem(R.id.nav_news_latter).setActionView(R.layout.menu_right_arrow)
-        navView.menu.findItem(R.id.nav_about_us).setActionView(R.layout.menu_right_arrow)
-        navView.menu.findItem(R.id.nav_term_condition).setActionView(R.layout.menu_right_arrow)
-*/
+        /*   navView.menu.findItem(R.id.nav_faq).setActionView(R.layout.menu_right_arrow)
+           navView.menu.findItem(R.id.nav_condition_subscription)
+               .setActionView(R.layout.menu_right_arrow)
+           navView.menu.findItem(R.id.nav_news_latter).setActionView(R.layout.menu_right_arrow)
+           navView.menu.findItem(R.id.nav_about_us).setActionView(R.layout.menu_right_arrow)
+           navView.menu.findItem(R.id.nav_term_condition).setActionView(R.layout.menu_right_arrow)
+   */
 
         supportActionBar!!.setHomeButtonEnabled(true)
         supportActionBar!!.setDisplayShowHomeEnabled(true)
@@ -159,7 +157,6 @@ class MainActivity : AppCompatActivity(),
     }
 
 
-
     private fun callAdvanceFilterApiCall() {
         //show
         this.progress_bars_layout.show()
@@ -171,14 +168,14 @@ class MainActivity : AppCompatActivity(),
                     if (drawerData.status == 1) {
                         drawerListData = drawerData.result as ArrayList<DrawerMenuModel.Result>
                         val menu = navView.menu
-                        for (item in drawerData.result){
-                            if(item.submenu?.isNotEmpty() == true){
+                        for (item in drawerData.result) {
+                            if (item.submenu?.isNotEmpty() == true) {
                                 menu.add(item.title)
                                 val submenu: Menu = menu
-                                for (itemD in item.submenu!!){
-                                    submenu.add("     "+itemD.title)
+                                for (itemD in item.submenu!!) {
+                                    submenu.add("     " + itemD.title)
                                 }
-                            }else{
+                            } else {
                                 menu.add(item.title)
                             }
 
@@ -216,7 +213,6 @@ class MainActivity : AppCompatActivity(),
             }
         }
     }
-
 
 
     private fun openBrowser(webUrl: String) {
@@ -352,52 +348,25 @@ class MainActivity : AppCompatActivity(),
         }
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == 100) {
-            when (resultCode) {
-                AppCompatActivity.RESULT_OK -> {
-                    val result: DropInResult =
-                        data?.getParcelableExtra<DropInResult>(DropInResult.EXTRA_DROP_IN_RESULT) as DropInResult
-                    val paymentMethodNonce = result.paymentMethodNonce
-                    val devicedATA = result.deviceData
-
-                    Log.e("TAG", "result is -----> $result")
-                    Log.e("TAG", "nonce is -----> ${paymentMethodNonce!!.nonce}")
-                    Log.e("TAG", "device is -----> $devicedATA")
-
-
-
-                }
-                AppCompatActivity.RESULT_CANCELED -> { // the user canceled
-                }
-                else -> { // handle errors here, an exception may be available in
-                    val error = data?.getSerializableExtra(DropInActivity.EXTRA_ERROR) as Exception
-                    Log.e("TAG", "error is ----->$error ")
-
-                }
-            }
-        }
-    }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
 
-        Log.e("TAG","navigation selected item --> $item")
-        Log.e("TAG","navigation selected item --> $drawerListData")
+        Log.e("TAG", "navigation selected item --> $item")
+        Log.e("TAG", "navigation selected item --> $drawerListData")
 
         drawerCatText = ""
-        for (i in drawerListData){
-            if(i.submenu != null && i.submenu!!.isNotEmpty()){
-               for (j in i.submenu!!){
-                   if(j.title == item.toString().trim()){
-                       drawerCatText = i.title+" > "
-                       drawerCatText += j.title
-                       drawerCatId = j.id
-                   }
-               }
+        for (i in drawerListData) {
+            if (i.submenu != null && i.submenu!!.isNotEmpty()) {
+                for (j in i.submenu!!) {
+                    if (j.title == item.toString().trim()) {
+                        drawerCatText = i.title + " > "
+                        drawerCatText += j.title
+                        drawerCatId = j.id
+                    }
+                }
 
-            }else{
-                if(i.title == item.toString().trim()){
+            } else {
+                if (i.title == item.toString().trim()) {
                     drawerCatText = i.title
                     drawerCatId = i.id
                 }
@@ -406,7 +375,7 @@ class MainActivity : AppCompatActivity(),
 
         drawerLayout.closeDrawer(GravityCompat.START)
 
-        loadFragment(DashboardFragment(drawerCatText,drawerCatId))
+        loadFragmentWithoutBackStack(DashboardFragment(drawerCatText, drawerCatId))
         return true
     }
 
@@ -477,4 +446,10 @@ class MainActivity : AppCompatActivity(),
         getShoppingCart(session.getUserId().toString(), session.getAppSession().toString())
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        for (fragment in supportFragmentManager.fragments) {
+            fragment.onActivityResult(requestCode, resultCode, data)
+        }
+    }
 }

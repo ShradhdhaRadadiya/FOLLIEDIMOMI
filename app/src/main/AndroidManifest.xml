@@ -31,8 +31,8 @@
         <activity
             android:name=".activity.MainActivity"
             android:exported="true"
-            android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"
             tools:ignore="LockedOrientationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -45,13 +45,13 @@
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/FullscreenTheme"
-            tools:ignore="LockedOrientationActivity" >
+            tools:ignore="LockedOrientationActivity">
 
         </activity>
         <activity
             android:name=".activity.AdvancedFilterActivity"
             android:exported="true"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

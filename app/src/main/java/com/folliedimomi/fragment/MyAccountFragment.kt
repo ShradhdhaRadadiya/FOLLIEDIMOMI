@@ -23,7 +23,11 @@ class MyAccountFragment : Fragment(), KodeinAware {
         super.onViewCreated(view, savedInstanceState)
 
 
-        tvOrderHistoryAndDetail.setOnClickListener { requireActivity().loadFragment(OrderListFragment()) }
+        tvOrderHistoryAndDetail.setOnClickListener {
+            requireActivity().loadFragment(
+                OrderListFragment()
+            )
+        }
         tvOrderTracking.setOnClickListener { requireActivity().loadFragment(WebPageFragment("${Constant.URL}it/dove-si-trova-il-mio-pacco")) }
 //        tvOrderTracking.setOnClickListener { requireActivity().loadFragment(WebPageFragment("${Constant.URL}it/index.php?controller=mypage")) }
         tvMyAddresses.setOnClickListener { requireActivity().loadFragment(AddressFragment()) }
@@ -31,7 +35,11 @@ class MyAccountFragment : Fragment(), KodeinAware {
         tvMyVoucher.setOnClickListener { requireActivity().loadFragment(CouponFragment()) }
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.fragment_my_account, container, false)
     }
 

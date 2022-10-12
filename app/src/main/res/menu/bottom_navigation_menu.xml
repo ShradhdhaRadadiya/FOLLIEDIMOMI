@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-		xmlns:app="http://schemas.android.com/apk/res-auto">
-	<item
-			app:iconTint="@color/colorPrimary"
-			android:id="@+id/bNavHome"
-			android:icon="@drawable/ic_home"
-			android:title="@string/home" />
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/bNavHome"
+        android:icon="@drawable/ic_home"
+        android:title="@string/home"
+        app:iconTint="@color/colorPrimary" />
 
-	<item
-			app:iconTint="@color/colorPrimary"
-			android:id="@+id/bNavSearch"
-			android:icon="@drawable/ic_search"
-			android:title="@string/search" />
+    <item
+        android:id="@+id/bNavSearch"
+        android:icon="@drawable/ic_search"
+        android:title="@string/search"
+        app:iconTint="@color/colorPrimary" />
 
-	<item
-			app:iconTint="@color/colorPrimary"
-			android:id="@+id/bNavAccount"
-			android:icon="@drawable/ic_account_verify"
-			android:title="@string/my_account" />
+    <item
+        android:id="@+id/bNavAccount"
+        android:icon="@drawable/ic_account_verify"
+        android:title="@string/my_account"
+        app:iconTint="@color/colorPrimary" />
 </menu>

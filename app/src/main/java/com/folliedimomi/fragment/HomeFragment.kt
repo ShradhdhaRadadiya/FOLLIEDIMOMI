@@ -22,7 +22,7 @@ import org.kodein.di.generic.instance
 
 class HomeFragment : Fragment(), KodeinAware {
     override val kodein: Kodein by kodein()
-    private val mActivity : MainActivity by instance()
+    private val mActivity: MainActivity by instance()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -41,19 +41,21 @@ class HomeFragment : Fragment(), KodeinAware {
                 R.id.bNavHome -> {
                     searchDisable()
                     requireActivity().loadFragment(DashboardFragment())
-
 //                    loadFragment(DashboardFragment())
                     true
                 }
                 R.id.bNavSearch -> {
-                    //searchEnable()
+//                    searchDisable()
                     requireActivity().loadFragment(SearchProductFragment(""))
                     true
                 }
                 R.id.bNavAccount -> {
                     searchDisable()
                     val accountSheet = AccountSheet.getInstance()
-                    accountSheet.show(requireActivity().supportFragmentManager, getString(R.string.my_account))
+                    accountSheet.show(
+                        requireActivity().supportFragmentManager,
+                        getString(R.string.my_account)
+                    )
                     true
                 }
                 else -> false
@@ -70,28 +72,33 @@ class HomeFragment : Fragment(), KodeinAware {
         //rvBestSeller.adapter = HomeProductAdapter(requireActivity())
     }
 
-    fun performSearch(text: String){
+    fun performSearch(text: String) {
         hideKeyboard()
         //showSnackBar(rootLayout, "Your search $text executed")
 //        requireActivity().loadFragment(SearchProductFragment(text))
     }
 
-    fun searchEnable(){
+    fun searchEnable() {
         etSearch.setText("")
         etSearch.visibility = View.VISIBLE
         etSearch.requestFocus()
 
-        val inputMethodManager = requireContext().getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
-        inputMethodManager.toggleSoftInputFromWindow(rootLayout.windowToken, InputMethodManager.SHOW_FORCED, 0)
+        val inputMethodManager =
+            requireContext().getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.toggleSoftInputFromWindow(
+            rootLayout.windowToken,
+            InputMethodManager.SHOW_FORCED,
+            0
+        )
     }
 
-    fun searchDisable(){
+    fun searchDisable() {
         hideKeyboard()
         etSearch.visibility = View.GONE
         rootLayout.requestFocus()
     }
 
-    fun showSnackBar(view: View, message:String){
+    fun showSnackBar(view: View, message: String) {
         val snackbar = Snackbar.make(view, message, Snackbar.LENGTH_SHORT)
         snackbar.anchorView = bottomNavigation
         snackbar.show()
@@ -102,7 +109,11 @@ class HomeFragment : Fragment(), KodeinAware {
         fragmentTransaction.replace(R.id.rootLayout, fragment).commit()
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
@@ -115,7 +126,8 @@ class HomeFragment : Fragment(), KodeinAware {
     }
 
     fun Context.hideKeyboard(view: View) {
-        val inputMethodManager = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        val inputMethodManager =
+            getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
         inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
     }
 

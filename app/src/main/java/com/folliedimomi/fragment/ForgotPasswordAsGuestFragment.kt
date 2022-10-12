@@ -2,15 +2,13 @@ package com.folliedimomi.fragment
 
 import android.os.Bundle
 import android.util.Patterns
-import androidx.fragment.app.Fragment
 import android.view.View
-
+import androidx.fragment.app.Fragment
 import com.folliedimomi.R
 import com.folliedimomi.model.ForgotPasswordResponse
 import com.folliedimomi.network.NetworkRepository
 import com.folliedimomi.utils.*
 import com.google.gson.JsonSyntaxException
-
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_forgot_password_as_guest.*
 import org.kodein.di.Kodein
@@ -19,7 +17,8 @@ import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
 import java.io.IOException
 
-class ForgotPasswordAsGuestFragment : Fragment(R.layout.fragment_forgot_password_as_guest) , KodeinAware {
+class ForgotPasswordAsGuestFragment : Fragment(R.layout.fragment_forgot_password_as_guest),
+    KodeinAware {
     override val kodein: Kodein by kodein()
     private val repository: NetworkRepository by instance()
 
@@ -34,17 +33,18 @@ class ForgotPasswordAsGuestFragment : Fragment(R.layout.fragment_forgot_password
         }
     }
 
-    private fun onSendEmail(email:String){
+    private fun onSendEmail(email: String) {
         //requireActivity().coordinator.snackBar("Under development")
         onChangePassword(email)
     }
 
-    private fun onChangePassword(email : String) {
+    private fun onChangePassword(email: String) {
         Coroutines.main {
             requireActivity().progress_bars_layout.show()
 
             try {
-                val registerResponse: ForgotPasswordResponse = repository.onForgotPassword(email = email)
+                val registerResponse: ForgotPasswordResponse =
+                    repository.onForgotPassword(email = email)
                 if (isAdded && isVisible) {
                     registerResponse.let {
                         if (registerResponse.status == 1) {

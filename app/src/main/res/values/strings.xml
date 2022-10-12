@@ -18,233 +18,234 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
-        <string name="menu_home">Home</string>
-        <string name="menu_gallery">Gallery</string>
-        <string name="menu_slideshow">Slideshow</string>
-        <string name="menu_tools">Tools</string>
-        <string name="menu_share">Share</string>
-        <string name="menu_send">Send</string>
-        <string name="menu_logout">Logout</string>
-        <string name="cancel"><!--Cancel-->Annulla</string>
-        <string name="login"><!--Login-->Accedi</string>
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="menu_tools">Tools</string>
+    <string name="menu_share">Share</string>
+    <string name="menu_send">Send</string>
+    <string name="menu_logout">Logout</string>
+    <string name="cancel"><!--Cancel-->Annulla</string>
+    <string name="login"><!--Login-->Accedi</string>
     <string name="e_mail"><!--Email-->E-mail</string>
 
-    AppTextInputLayout    <string name="email"><!--Email-->Indirizzo E-mail *</string>
-        <string name="don_t_have_an_account_register_here">Non hai ancora un\'account? Registrati ora <!--Don\'t have an account? Register--></string>
-        <string name="already_have_an_account_login"><!--Already have an account? Login-->Se già registrato? Accedi</string>
-        <string name="back_to_login"><!--Back to login-->Torna al login</string>
-        <string name="category"><!--Category-->Categoria</string>
-        <string name="log_out"><!--Log Out-->Esci</string>
-        <string name="required"><!--Necessaria-->Campo Obbligatorio</string>
-        <string name="error_please_enter_email"><!--Please enter email-->
-            Inserisci indirizzo e-mail</string>
-        <string name="error_please_enter_valid_email"><!--Please enter valid email-->Inserisci un indirizzo e-mail valido</string>
-        <string name="error_please_enter_password"><!--Please enter password-->
-            Inserisci password</string>
-        <string name="error_password_length">Password length must be at least 6 character</string>
-        <string name="hint_password">Password *<!--Password--></string>
-        <string name="repeat_password">Ripeti la Password *<!--Password--></string>
-        <string name="forgot_password">Hai dimenticato la password? <!--Forgot password--></string>
-        <string name="forgot_password_title">Password dimenticata</string>
-        <string name="please_wait"><!--Please wait.-->Attendere Prego</string>
-        <string name="sort"><!--Sort-->Ordina</string>
-        <string name="cart">cart</string>
-        <string name="search"><!--Search-->Cerca</string>
-        <string name="shopping_cart"><!--Shopping Cart-->Carrello</string>
-        <string name="search_here"><!--Search Here-->Scrivi qui…</string>
-        <string name="filter"><!--Filter-->Filtra</string>
-        <string name="sort_by"><!--Sort By-->Ordina per</string>
-        <string name="close_app"><!--Close App-->Chiudi App</string>
-        <string name="are_you_sure_close_app"><!--Are you sure you want to close the app?-->Sei sicuro di voler chiudere l\'app?</string>
-        <string name="yes"><!--Yes-->Si</string>
-        <string name="no">No</string>
-        <string name="total_discount"><!--Total Discount-->Totale Sconto</string>
-        <string name="sub_total"><!--Sub Total-->Totale Prodotti</string>
-        <string name="total_tax"><!--Total Tax-->Totale IVA</string>
-        <string name="proceed"><!--Proceed-->Procedi</string>
-        <string name="your_cart_is_empty"><!--Your Cart is empty-->Il tuo Carrello è vuoto</string>
-        <string name="you_have_no_item_in_your_shopping_cart_please_add_items_to_continue"><!--You have no item in your shopping cart. Please add items to continue.-->
-            Il tuo carrello è vuoto. INIZIA LO SHOPPING!</string>
-        <string name="continue_shopping"><!--Continue Shopping-->Continua lo shopping</string>
-        <string name="continue_complete_payment"><!--Process to Purchases-->
-            Procedi All`acquisto</string>
-        <string name="complete_payment"><!--complete payment-->Completa Pagamento</string>
-        <string name="similar_products"><!--Similar Products-->Prodotti Simili</string>
-        <string name="grand_total"><!--Grand Total-->Totale</string>
-        <string name="total_amount"><!--Total Amount -->Totale Ordine</string>
-        <string name="next"><!--Next-->Avanti</string>
-        <string name="you_don_t_have_any_order_history_at"><!--You don\'t have any order history at-->
-            Non hai effettuato ancora nessun ordine</string>
-        <string name="you_don_t_have_any_address_add_address_to_complete_this_order"><!--You don\'t have any address! Add address to complete this order-->
-            Non hai ancora inserito nessun indirizzo! Aggiungi prima il tuo indirizzo per completare l\'ordine</string>
-        <string name="you_don_t_have_any_address_click_below_button_to_add_new_address"><!--You don\'t have any address! Click below button to add new address-->
-            Nessun indirizzo trovato! Fare clic sul pulsante in basso per aggiungere un indirizzo</string>
-        <string name="shipping_address"><!--Shipping Address-->Indirizzo di Spedizione</string>
-        <string name="billing_address"><!--Billing Address-->indirizzo di Fatturazione</string>
-        <string name="api_error"><!--Something went wrong-->Qualcosa è andato storto</string>
-        <string name="select_valid_country"><!--Please select valid country-->Seleziona una nazione valida</string>
-        <string name="select_valid_state"><!--Select valid state-->Seleziona provincia</string>
-        <string name="iva_escl">(iva escl.)</string>
-        <string name="iva_incl">( incl. VAT.)</string>
-        <string name="total_shipping"><!--Total shipping-->Costo spedizione</string>
-        <string name="free_shipping"><!--Free Shipping-->Spedizione Gratis</string>
-        <string name="total_price"><!--Total Price-->Prezzo Totale</string>
-        <string name="enter_promotion_code_here"><!--Enter promotion code here-->
-            Inserisci codice coupon</string>
-        <string name="apply"><!--APPLY-->Applica</string>
-        <string name="description"><!--Description-->Descrizione</string>
-        <string name="date_label"><!--Date :-->Data : </string>
-        <string name="reference_label"><!--Reference :-->Riferimento : </string>
-        <string name="order_number_label"><!--Order No. :-->Ordine N. : </string>
-        <string name="addresses"><!--Addresses-->Rubrica Indirizzi</string>
-        <string name="personal_information"><!--Personal Information-->Informazioni Personali</string>
-        <string name="vouchers"><!--Vouchers-->Coupon</string>
-        <string name="your_wish_lists">Your Wish Lists</string>
-        <string name="gift_cards">Gift Cards</string>
-        <string name="returns_manager"><!--Returns Manager-->Sezione Resi</string>
+    AppTextInputLayout
+    <string name="email"><!--Email-->Indirizzo E-mail *</string>
+    <string name="don_t_have_an_account_register_here">Non hai ancora un\'account? Registrati ora <!--Don\'t have an account? Register--></string>
+    <string name="already_have_an_account_login"><!--Already have an account? Login-->Se già registrato? Accedi</string>
+    <string name="back_to_login"><!--Back to login-->Torna al login</string>
+    <string name="category"><!--Category-->Categoria</string>
+    <string name="log_out"><!--Log Out-->Esci</string>
+    <string name="required"><!--Necessaria-->Campo Obbligatorio</string>
+    <string name="error_please_enter_email"><!--Please enter email-->
+        Inserisci indirizzo e-mail</string>
+    <string name="error_please_enter_valid_email"><!--Please enter valid email-->Inserisci un indirizzo e-mail valido</string>
+    <string name="error_please_enter_password"><!--Please enter password-->
+        Inserisci password</string>
+    <string name="error_password_length">Password length must be at least 6 character</string>
+    <string name="hint_password">Password *<!--Password--></string>
+    <string name="repeat_password">Ripeti la Password *<!--Password--></string>
+    <string name="forgot_password">Hai dimenticato la password? <!--Forgot password--></string>
+    <string name="forgot_password_title">Password dimenticata</string>
+    <string name="please_wait"><!--Please wait.-->Attendere Prego</string>
+    <string name="sort"><!--Sort-->Ordina</string>
+    <string name="cart">cart</string>
+    <string name="search"><!--Search-->Cerca</string>
+    <string name="shopping_cart"><!--Shopping Cart-->Carrello</string>
+    <string name="search_here"><!--Search Here-->Scrivi qui…</string>
+    <string name="filter"><!--Filter-->Filtra</string>
+    <string name="sort_by"><!--Sort By-->Ordina per</string>
+    <string name="close_app"><!--Close App-->Chiudi App</string>
+    <string name="are_you_sure_close_app"><!--Are you sure you want to close the app?-->Sei sicuro di voler chiudere l\'app?</string>
+    <string name="yes"><!--Yes-->Si</string>
+    <string name="no">No</string>
+    <string name="total_discount"><!--Total Discount-->Totale Sconto</string>
+    <string name="sub_total"><!--Sub Total-->Totale Prodotti</string>
+    <string name="total_tax"><!--Total Tax-->Totale IVA</string>
+    <string name="proceed"><!--Proceed-->Procedi</string>
+    <string name="your_cart_is_empty"><!--Your Cart is empty-->Il tuo Carrello è vuoto</string>
+    <string name="you_have_no_item_in_your_shopping_cart_please_add_items_to_continue"><!--You have no item in your shopping cart. Please add items to continue.-->
+        Il tuo carrello è vuoto. INIZIA LO SHOPPING!</string>
+    <string name="continue_shopping"><!--Continue Shopping-->Continua lo shopping</string>
+    <string name="continue_complete_payment"><!--Process to Purchases-->
+        Procedi All`acquisto</string>
+    <string name="complete_payment"><!--complete payment-->Completa Pagamento</string>
+    <string name="similar_products"><!--Similar Products-->Prodotti Simili</string>
+    <string name="grand_total"><!--Grand Total-->Totale</string>
+    <string name="total_amount"><!--Total Amount -->Totale Ordine</string>
+    <string name="next"><!--Next-->Avanti</string>
+    <string name="you_don_t_have_any_order_history_at"><!--You don\'t have any order history at-->
+        Non hai effettuato ancora nessun ordine</string>
+    <string name="you_don_t_have_any_address_add_address_to_complete_this_order"><!--You don\'t have any address! Add address to complete this order-->
+        Non hai ancora inserito nessun indirizzo! Aggiungi prima il tuo indirizzo per completare l\'ordine</string>
+    <string name="you_don_t_have_any_address_click_below_button_to_add_new_address"><!--You don\'t have any address! Click below button to add new address-->
+        Nessun indirizzo trovato! Fare clic sul pulsante in basso per aggiungere un indirizzo</string>
+    <string name="shipping_address"><!--Shipping Address-->Indirizzo di Spedizione</string>
+    <string name="billing_address"><!--Billing Address-->indirizzo di Fatturazione</string>
+    <string name="api_error"><!--Something went wrong-->Qualcosa è andato storto</string>
+    <string name="select_valid_country"><!--Please select valid country-->Seleziona una nazione valida</string>
+    <string name="select_valid_state"><!--Select valid state-->Seleziona provincia</string>
+    <string name="iva_escl">(iva escl.)</string>
+    <string name="iva_incl">( incl. VAT.)</string>
+    <string name="total_shipping"><!--Total shipping-->Costo spedizione</string>
+    <string name="free_shipping"><!--Free Shipping-->Spedizione Gratis</string>
+    <string name="total_price"><!--Total Price-->Prezzo Totale</string>
+    <string name="enter_promotion_code_here"><!--Enter promotion code here-->
+        Inserisci codice coupon</string>
+    <string name="apply"><!--APPLY-->Applica</string>
+    <string name="description"><!--Description-->Descrizione</string>
+    <string name="date_label"><!--Date :-->Data : </string>
+    <string name="reference_label"><!--Reference :-->Riferimento : </string>
+    <string name="order_number_label"><!--Order No. :-->Ordine N. : </string>
+    <string name="addresses"><!--Addresses-->Rubrica Indirizzi</string>
+    <string name="personal_information"><!--Personal Information-->Informazioni Personali</string>
+    <string name="vouchers"><!--Vouchers-->Coupon</string>
+    <string name="your_wish_lists">Your Wish Lists</string>
+    <string name="gift_cards">Gift Cards</string>
+    <string name="returns_manager"><!--Returns Manager-->Sezione Resi</string>
 
 
-        <string name="first_name"><!--First name-->Nome</string>
-        <string name="last_name"><!--Last name-->Cognome</string>
-        <string name="company"><!--Company-->Azienda</string>
-        <string name="phone"><!--Phone-->Telefono</string>
-        <string name="update_profile"><!--Update Profile-->Aggiorna Profilo</string>
-        <string name="surname">Cognome <!--Surname--></string>
-        <string name="date_of_birth"><!--Date Of Birth-->Data di Nascita</string>
-        <string name="current_password">Current Password</string>
-        <string name="new_password">Nuova password<!--New Password--></string>
-        <string name="confirm_password">Conferma password<!--Confirm Password--></string>
-        <string name="order_history_details"><!--<![CDATA[Order history & Details]]>-->
-            <![CDATA[Storico Ordini]]></string>
-        <string name="update"><!--Update-->Aggiorna</string>
-        <string name="delete"><!--Delete-->Elimina</string>
-        <string name="faq">Faq</string>
-        <string name="selfies">Selfies</string>
-        <string name="contact_lenses">Contact Lenses</string>
-        <string name="prescription_glasses"><!--Prescription Glasses-->LENTI GRADUATE</string>
-        <string name="outlet"><!--Prescription Glasses-->OUTLET</string>
-        <string name="accessory"><!--Accessory-->ACCESSORI</string>
-        <string name="kids"><!--Kids-->KIDS</string>
-        <string name="sartorial_glasses"><!--Sartorial Glasses-->OCCHIALE SARTORIALE</string>
-        <string name="for_him"><!--For Him-->PER LUI</string>
-        <string name="for_her"><!--For Her-->PER LEI</string>
-        <string name="da_sole">&#160;&#160;&#160;&#160;&#160;DA SOLE</string>
-        <string name="lenti_nature">&#160;&#160;&#160;&#160;&#160;LENTI NEUTRE</string>
-        <string name="lenti_graduate">&#160;&#160;&#160;&#160;&#160;LENTI GRADUATE</string>
-        <string name="bambino">&#160;&#160;&#160;&#160;&#160;BAMBINO</string>
-        <string name="bambina">&#160;&#160;&#160;&#160;&#160;BAMBINA</string>
-        <string name="catenine">&#160;&#160;&#160;&#160;&#160;CATENINE</string>
-        <string name="custodie">&#160;&#160;&#160;&#160;&#160;CUSTODIE</string>
-        <string name="spray">&#160;&#160;&#160;&#160;&#160;SPRAY</string>
-        <string name="home">Home</string>
-        <string name="new_arrivals">NEW ARRIVALS</string>
-        <string name="my_account"><!--My Account-->Il mio account</string>
-        <string name="choose_address"><!--Choose Address-->Scegli l\'indirizzo</string>
-        <string name="open_size_chart">Open size chart</string>
-        <string name="credit_notes"><!--Credit notes--><!--Note Credito-->I miei Ordini</string>
-        <string name="order_tracking"><!--Order Tracking-->Traccia il mio pacco</string>
-        <string name="availavle">Articoli</string>
-        <string name="customize"><!--Customize-->Personalizza</string>
-        <string name="record_not_available"><!--Record not available-->Record non disponibile</string>
-        <string name="not_found"><!--Not Found-->Non Trovato</string>
-        <string name="label_total_price"><!--Total price : -->Totale Prezzo : </string>
-        <string name="label_qty"><!--Quantity-->Quantità : </string>
-        <string name="label_price"><!--Price : -->Prezzo : </string>
-        <string name="alias">Alias</string>
-        <string name="address_one"><!--Address One-->Indirizzo</string>
-        <string name="addresstwo"><!--AddressTwo-->Nome negozio o Cognome al citofono</string>
-        <string name="city"><!--City-->Città</string>
-        <string name="state"><!--State--><!--Stato-->Provincia</string>
-        <string name="country"><!--Country-->Nazione</string>
-        <string name="postcode"><!--Postcode-->Codice postale</string>
-        <string name="mobile"><!--Mobile-->Cellulare</string>
-        <string name="mobile_home"><!--Mobile-->Telefono di casa</string>
-        <string name="vat_number">Partita IVA<!--Vat Number--></string>
-        <string name="add_address"><!--Add Address-->Aggiungi Indirizzo</string>
-        <string name="does_not_have_any_state"><!--Selected country doesn\'t have any state-->la nazione selezionata non ha alcuna provincia</string>
-        <string name="different_billing_address"><!--Different billing address-->Indirizzo di fatturazione diverso?</string>
-        <string name="review_order"><!--Review Order-->Rivedi Ordine</string>
-        <string name="carrier_info">Carrier info</string>
-        <string name="label_delay">Delay :</string>
-        <string name="label_info">Info:</string>
-        <string name="my_personal_information"><!--My Personal Information-->
-            Informazioni Personali</string>
-        <string name="order_history_and_detail"><!--Order History and detail-->Storico Ordini</string>
-        <string name="my_credit_slip"><!--My Credit Slip-->Traccia il mio pacco</string>
-        <string name="my_addresses"><!--My Addresses-->Rubrica Indirizzi</string>
-        <string name="my_voucher"><!--My Voucher-->Coupon</string>
-        <string name="it_seems_you_don_t_have_any_order_history_at"><!--It seems you don\'t have any order history at-->
-            Sembra che tu non abbia alcuna cronologia degli ordini a</string>
-        <string name="personalizza_la_tua_lente">personalizza la tua lente</string>
-        <string name="choose_colors"><!--Choose colors-->Seleziona colore</string>
-        <string name="conferma">CONFERMA</string>
-        <string name="fag_guide"><![CDATA[FAG & GUIDE]]></string>
-        <string name="metodo_di_pagamento">METODO DI PAGAMENTO</string>
-        <string name="condizioni_newsletter">CONDIZIONI NEWSLETTER</string>
-        <string name="termini_e_codizioni">TERMINI E CODIZIONI</string>
-        <string name="a_proposito_di_cipri_couture">A PROPOSITO DI CIPRI-COUTURE</string>
-        <string name="lenti_da_riposo_correttive_sotto_prescrizione_medica_sono_occhiali_correttivi_con_effetto_riposante_per_il_sistema_visivo">Uso indicato nei periodi di stress visivo (esempio lettura di un libro)<!--Lenti da riposo/correttive: sotto prescrizione medica, sono occhiali correttivi, con effetto riposante per il sistema visivo.--></string>
-        <string name="antiriflesso_incluso">(Antiriflesso incluso)</string>
-        <string name="lenti_da_riposo_distanza">LENTI PER RIPOSO/LETTURA<!--RIPOSO/--><!--IPERMETROPIA/-->
-            <!--DISTANZA--><!--LENTI DA RIPOSO/DISTANZA--></string>
-        <string name="costo_30_00">costo € 30,00</string>
-        <string name="costo_25_00">costo € 60,00</string>
-        <string name="sf_sinistra">SF SINISTRA</string>
-        <string name="sf_destra">SF DESTRA</string>
-        <string name="lenti_per_lettura_presbiopia">LENTI CORRETTIVE PER GRADAZIONI MEDIE<!--LETTURA/PRESBIOPIA--><!--LENTI PER LETTURA/PRESBIOPIA--></string>
-        <string name="lenti_per_lettura_presbiopia_utilizzate_generalmente_quando_si_ha_difficolt_di_vedere_nitidamente_gli_oggetti_vicini_incluso_anche_antiriflesso_consigliati_sotto_prescrizione_medica">Uso indicato per distanza/permanenza. Anche in presenza di astigmatismo. Spessore lente 1/61 (indice rifrazione). Indicazione medica.<!--Lenti per lettura/presbiopia: utilizzate generalmente quando si ha difficoltà di vedere nitidamente gli oggetti vicini (incluso anche antiriflesso) consigliati sotto prescrizione medica.--></string>
-        <string name="lenti_protezione_maxi_uv_emi">MAX UV - BLU BLOCK<!--LENTI PROTEZIONE MAXI UV+EMI--></string>
-        <string name="costo_40_00">costo € 45,00</string>
-        <string name="lenti_con_protezione_maxi_uv_emi_consigliati_a_tutti_coloro_che_trascorrono_circa_6_8_ore_al_giorno_davanti_al_computer_o_smartphone_la_loro_funzione_e_di_proteggere_gli_occhi_dalla_luce_uv_emessa_dai_dispositivi_elettronici_di_garantire_benessere_e_sollievo_alla_stanchezza_visiva">Lenti con protezione maxi uv+emi: consigliati a tutti coloro che trascorrono circa 6/8 ore al giorno davanti al computer o smartphone. La loro funzione e di proteggere gli occhi dalla luce uv emessa dai dispositivi elettronici è di garantire benessere e sollievo alla stanchezza visiva.</string>
-        <string name="lenti_per_miopia_distanza">LENTI CORRETTIVE PER GRADAZIONI LIEVI<!--MIOPIA/ IPERMETROPIA--><!--MIOPIA--><!--LENTI PER MIOPIA/DISTANZA--></string>
-        <string name="costo_35_00">costo € 35,00</string>
-        <string name="la_miopia_un_ametropia_o_un_anomalia_refrattiva_ossia_una_patologia_oculistica_a_causa_della_quale_i_raggi_luminosi_provenienti_da_un_oggetto_posto_all_infinito_non_si_focalizzano_correttamente_sulla_retina_ma_davanti_a_essa_la_conseguenza_che_gli_oggetti_osservati_tendono_ad_apparire_sfocati_e_la_visione_migliora_con_la_riduzione_della_distanza_a_cui_si_guarda">Uso indicato per distanza/permanenza. Anche in presenza di astigmatismo.Spessore lenti 1/56 (indice di rifrazione). Su indicazione medica.<!--La miopia è un\'ametropia o un\'anomalia refrattiva, ossia una patologia oculistica a causa della quale i raggi luminosi provenienti da un oggetto posto all\'infinito non si focalizzano correttamente sulla retina, ma davanti a essa. La conseguenza è che gli oggetti osservati tendono ad apparire sfocati e la visione migliora con la riduzione della distanza a cui si guarda.--></string>
-        <string name="lenti_neutre_con_antiriflesso">NEUTRE SENZA GRADAZIONI<!--LENTI NEUTRE CON ANTIRIFLESSO--></string>
-        <string name="costo_20_00">costo € 20,00</string>
-        <string name="consiste_nella_deposizione_di_un_sottilissimo_strato_di_particolari_sali_minerali_su_lenti_per_ridurre_i_riflessi_di_luce_fari_auto_sole_tv_che_riducono_la_nitidezza_delle_immagini_fornite_dal_dispositivo_ottico">Consiste nella deposizione di un sottilissimo strato di particolari sali minerali su lenti (ANTIRIFLESSO).Per ridurre i riflessi di luce (fari auto, sole, tv) che riducono la nitidezza delle immagini fornite dal dispositivo ottico.</string>
-        <string name="new_consiste_nella_deposizione_di_un_sottilissimo_strato_di_particolari_sali_minerali_su_lenti_per_ridurre_i_riflessi_di_luce_fari_auto_sole_tv_che_riducono_la_nitidezza_delle_immagini_fornite_dal_dispositivo_ottico">Per creare la sua lente graduata abbiamo bisogno di una foto frontale del viso con dei vecchi occhiali indossati. La foto deve essere frontale , con telefono altezza naso , tipo fototessera , non sarà mai pubblicata nel rispetto della privacy</string>
-        <string name="tipo_di_lenti">Tipo di lenti</string>
-        <string name="voglio_caricare_una_immagine_della_mia_prescrizione">Voglio caricare una immagine della mia prescrizione</string>
-        <string name="carica_file">Carica File</string>
-        <string name="hint_name">Name</string>
-        <string name="ditta">Ditta</string>
-        <string name="register">Registrati</string>
-        <string name="indirizzo">Indirizzo</string>
-        <string name="indirizzo_e_mail">Indirizzo e-mail</string>
-        <string name="informazioni_aggiuntive">Informazioni aggiuntive</string>
-        <string name="cap">Cap</string>
-        <string name="citta">Citta</string>
-        <string name="italian_telephono">Telefono</string>
-        <string name="ti_preghiamo_di_scegliere_qui_la_modalita_di_pagamento_per_il_tuo_ordine">Ti preghiamo di scegliere qui la modalita di pagamento per il tuo ordine.</string>
-        <string name="spedizione_immediata">Spedizione immediata</string>
-        <string name="modalita_di_pagmento">MODALITA DI PAGMENTO</string>
-        <string name="se_possiedi_dia_un_account_effettua_il_login_inserendo_l_e_mail_e_la_password">Se possiedi già un account effettua il login inserendo l\'email e la password.<!--Se possiedi dia un account effettua il login inserendo l\'e-mail e la password--></string>
-        <string name="Required_tag">* campi obbligatori</string>
+    <string name="first_name"><!--First name-->Nome</string>
+    <string name="last_name"><!--Last name-->Cognome</string>
+    <string name="company"><!--Company-->Azienda</string>
+    <string name="phone"><!--Phone-->Telefono</string>
+    <string name="update_profile"><!--Update Profile-->Aggiorna Profilo</string>
+    <string name="surname">Cognome <!--Surname--></string>
+    <string name="date_of_birth"><!--Date Of Birth-->Data di Nascita</string>
+    <string name="current_password">Current Password</string>
+    <string name="new_password">Nuova password<!--New Password--></string>
+    <string name="confirm_password">Conferma password<!--Confirm Password--></string>
+    <string name="order_history_details"><!--<![CDATA[Order history & Details]]>-->
+        <![CDATA[Storico Ordini]]></string>
+    <string name="update"><!--Update-->Aggiorna</string>
+    <string name="delete"><!--Delete-->Elimina</string>
+    <string name="faq">Faq</string>
+    <string name="selfies">Selfies</string>
+    <string name="contact_lenses">Contact Lenses</string>
+    <string name="prescription_glasses"><!--Prescription Glasses-->LENTI GRADUATE</string>
+    <string name="outlet"><!--Prescription Glasses-->OUTLET</string>
+    <string name="accessory"><!--Accessory-->ACCESSORI</string>
+    <string name="kids"><!--Kids-->KIDS</string>
+    <string name="sartorial_glasses"><!--Sartorial Glasses-->OCCHIALE SARTORIALE</string>
+    <string name="for_him"><!--For Him-->PER LUI</string>
+    <string name="for_her"><!--For Her-->PER LEI</string>
+    <string name="da_sole">&#160;&#160;&#160;&#160;&#160;DA SOLE</string>
+    <string name="lenti_nature">&#160;&#160;&#160;&#160;&#160;LENTI NEUTRE</string>
+    <string name="lenti_graduate">&#160;&#160;&#160;&#160;&#160;LENTI GRADUATE</string>
+    <string name="bambino">&#160;&#160;&#160;&#160;&#160;BAMBINO</string>
+    <string name="bambina">&#160;&#160;&#160;&#160;&#160;BAMBINA</string>
+    <string name="catenine">&#160;&#160;&#160;&#160;&#160;CATENINE</string>
+    <string name="custodie">&#160;&#160;&#160;&#160;&#160;CUSTODIE</string>
+    <string name="spray">&#160;&#160;&#160;&#160;&#160;SPRAY</string>
+    <string name="home">Home</string>
+    <string name="new_arrivals">NEW ARRIVALS</string>
+    <string name="my_account"><!--My Account-->Il mio account</string>
+    <string name="choose_address"><!--Choose Address-->Scegli l\'indirizzo</string>
+    <string name="open_size_chart">Open size chart</string>
+    <string name="credit_notes"><!--Credit notes--><!--Note Credito-->I miei Ordini</string>
+    <string name="order_tracking"><!--Order Tracking-->Traccia il mio pacco</string>
+    <string name="availavle">Articoli</string>
+    <string name="customize"><!--Customize-->Personalizza</string>
+    <string name="record_not_available"><!--Record not available-->Record non disponibile</string>
+    <string name="not_found"><!--Not Found-->Non Trovato</string>
+    <string name="label_total_price"><!--Total price : -->Totale Prezzo : </string>
+    <string name="label_qty"><!--Quantity-->Quantità : </string>
+    <string name="label_price"><!--Price : -->Prezzo : </string>
+    <string name="alias">Alias</string>
+    <string name="address_one"><!--Address One-->Indirizzo</string>
+    <string name="addresstwo"><!--AddressTwo-->Nome negozio o Cognome al citofono</string>
+    <string name="city"><!--City-->Città</string>
+    <string name="state"><!--State--><!--Stato-->Provincia</string>
+    <string name="country"><!--Country-->Nazione</string>
+    <string name="postcode"><!--Postcode-->Codice postale</string>
+    <string name="mobile"><!--Mobile-->Cellulare</string>
+    <string name="mobile_home"><!--Mobile-->Telefono di casa</string>
+    <string name="vat_number">Partita IVA<!--Vat Number--></string>
+    <string name="add_address"><!--Add Address-->Aggiungi Indirizzo</string>
+    <string name="does_not_have_any_state"><!--Selected country doesn\'t have any state-->la nazione selezionata non ha alcuna provincia</string>
+    <string name="different_billing_address"><!--Different billing address-->Indirizzo di fatturazione diverso?</string>
+    <string name="review_order"><!--Review Order-->Rivedi Ordine</string>
+    <string name="carrier_info">Carrier info</string>
+    <string name="label_delay">Delay :</string>
+    <string name="label_info">Info:</string>
+    <string name="my_personal_information"><!--My Personal Information-->
+        Informazioni Personali</string>
+    <string name="order_history_and_detail"><!--Order History and detail-->Storico Ordini</string>
+    <string name="my_credit_slip"><!--My Credit Slip-->Traccia il mio pacco</string>
+    <string name="my_addresses"><!--My Addresses-->Rubrica Indirizzi</string>
+    <string name="my_voucher"><!--My Voucher-->Coupon</string>
+    <string name="it_seems_you_don_t_have_any_order_history_at"><!--It seems you don\'t have any order history at-->
+        Sembra che tu non abbia alcuna cronologia degli ordini a</string>
+    <string name="personalizza_la_tua_lente">personalizza la tua lente</string>
+    <string name="choose_colors"><!--Choose colors-->Seleziona colore</string>
+    <string name="conferma">CONFERMA</string>
+    <string name="fag_guide"><![CDATA[FAG & GUIDE]]></string>
+    <string name="metodo_di_pagamento">METODO DI PAGAMENTO</string>
+    <string name="condizioni_newsletter">CONDIZIONI NEWSLETTER</string>
+    <string name="termini_e_codizioni">TERMINI E CODIZIONI</string>
+    <string name="a_proposito_di_cipri_couture">A PROPOSITO DI CIPRI-COUTURE</string>
+    <string name="lenti_da_riposo_correttive_sotto_prescrizione_medica_sono_occhiali_correttivi_con_effetto_riposante_per_il_sistema_visivo">Uso indicato nei periodi di stress visivo (esempio lettura di un libro)<!--Lenti da riposo/correttive: sotto prescrizione medica, sono occhiali correttivi, con effetto riposante per il sistema visivo.--></string>
+    <string name="antiriflesso_incluso">(Antiriflesso incluso)</string>
+    <string name="lenti_da_riposo_distanza">LENTI PER RIPOSO/LETTURA<!--RIPOSO/--><!--IPERMETROPIA/-->
+        <!--DISTANZA--><!--LENTI DA RIPOSO/DISTANZA--></string>
+    <string name="costo_30_00">costo € 30,00</string>
+    <string name="costo_25_00">costo € 60,00</string>
+    <string name="sf_sinistra">SF SINISTRA</string>
+    <string name="sf_destra">SF DESTRA</string>
+    <string name="lenti_per_lettura_presbiopia">LENTI CORRETTIVE PER GRADAZIONI MEDIE<!--LETTURA/PRESBIOPIA--><!--LENTI PER LETTURA/PRESBIOPIA--></string>
+    <string name="lenti_per_lettura_presbiopia_utilizzate_generalmente_quando_si_ha_difficolt_di_vedere_nitidamente_gli_oggetti_vicini_incluso_anche_antiriflesso_consigliati_sotto_prescrizione_medica">Uso indicato per distanza/permanenza. Anche in presenza di astigmatismo. Spessore lente 1/61 (indice rifrazione). Indicazione medica.<!--Lenti per lettura/presbiopia: utilizzate generalmente quando si ha difficoltà di vedere nitidamente gli oggetti vicini (incluso anche antiriflesso) consigliati sotto prescrizione medica.--></string>
+    <string name="lenti_protezione_maxi_uv_emi">MAX UV - BLU BLOCK<!--LENTI PROTEZIONE MAXI UV+EMI--></string>
+    <string name="costo_40_00">costo € 45,00</string>
+    <string name="lenti_con_protezione_maxi_uv_emi_consigliati_a_tutti_coloro_che_trascorrono_circa_6_8_ore_al_giorno_davanti_al_computer_o_smartphone_la_loro_funzione_e_di_proteggere_gli_occhi_dalla_luce_uv_emessa_dai_dispositivi_elettronici_di_garantire_benessere_e_sollievo_alla_stanchezza_visiva">Lenti con protezione maxi uv+emi: consigliati a tutti coloro che trascorrono circa 6/8 ore al giorno davanti al computer o smartphone. La loro funzione e di proteggere gli occhi dalla luce uv emessa dai dispositivi elettronici è di garantire benessere e sollievo alla stanchezza visiva.</string>
+    <string name="lenti_per_miopia_distanza">LENTI CORRETTIVE PER GRADAZIONI LIEVI<!--MIOPIA/ IPERMETROPIA--><!--MIOPIA--><!--LENTI PER MIOPIA/DISTANZA--></string>
+    <string name="costo_35_00">costo € 35,00</string>
+    <string name="la_miopia_un_ametropia_o_un_anomalia_refrattiva_ossia_una_patologia_oculistica_a_causa_della_quale_i_raggi_luminosi_provenienti_da_un_oggetto_posto_all_infinito_non_si_focalizzano_correttamente_sulla_retina_ma_davanti_a_essa_la_conseguenza_che_gli_oggetti_osservati_tendono_ad_apparire_sfocati_e_la_visione_migliora_con_la_riduzione_della_distanza_a_cui_si_guarda">Uso indicato per distanza/permanenza. Anche in presenza di astigmatismo.Spessore lenti 1/56 (indice di rifrazione). Su indicazione medica.<!--La miopia è un\'ametropia o un\'anomalia refrattiva, ossia una patologia oculistica a causa della quale i raggi luminosi provenienti da un oggetto posto all\'infinito non si focalizzano correttamente sulla retina, ma davanti a essa. La conseguenza è che gli oggetti osservati tendono ad apparire sfocati e la visione migliora con la riduzione della distanza a cui si guarda.--></string>
+    <string name="lenti_neutre_con_antiriflesso">NEUTRE SENZA GRADAZIONI<!--LENTI NEUTRE CON ANTIRIFLESSO--></string>
+    <string name="costo_20_00">costo € 20,00</string>
+    <string name="consiste_nella_deposizione_di_un_sottilissimo_strato_di_particolari_sali_minerali_su_lenti_per_ridurre_i_riflessi_di_luce_fari_auto_sole_tv_che_riducono_la_nitidezza_delle_immagini_fornite_dal_dispositivo_ottico">Consiste nella deposizione di un sottilissimo strato di particolari sali minerali su lenti (ANTIRIFLESSO).Per ridurre i riflessi di luce (fari auto, sole, tv) che riducono la nitidezza delle immagini fornite dal dispositivo ottico.</string>
+    <string name="new_consiste_nella_deposizione_di_un_sottilissimo_strato_di_particolari_sali_minerali_su_lenti_per_ridurre_i_riflessi_di_luce_fari_auto_sole_tv_che_riducono_la_nitidezza_delle_immagini_fornite_dal_dispositivo_ottico">Per creare la sua lente graduata abbiamo bisogno di una foto frontale del viso con dei vecchi occhiali indossati. La foto deve essere frontale , con telefono altezza naso , tipo fototessera , non sarà mai pubblicata nel rispetto della privacy</string>
+    <string name="tipo_di_lenti">Tipo di lenti</string>
+    <string name="voglio_caricare_una_immagine_della_mia_prescrizione">Voglio caricare una immagine della mia prescrizione</string>
+    <string name="carica_file">Carica File</string>
+    <string name="hint_name">Name</string>
+    <string name="ditta">Ditta</string>
+    <string name="register">Registrati</string>
+    <string name="indirizzo">Indirizzo</string>
+    <string name="indirizzo_e_mail">Indirizzo e-mail</string>
+    <string name="informazioni_aggiuntive">Informazioni aggiuntive</string>
+    <string name="cap">Cap</string>
+    <string name="citta">Citta</string>
+    <string name="italian_telephono">Telefono</string>
+    <string name="ti_preghiamo_di_scegliere_qui_la_modalita_di_pagamento_per_il_tuo_ordine">Ti preghiamo di scegliere qui la modalita di pagamento per il tuo ordine.</string>
+    <string name="spedizione_immediata">Spedizione immediata</string>
+    <string name="modalita_di_pagmento">MODALITA DI PAGMENTO</string>
+    <string name="se_possiedi_dia_un_account_effettua_il_login_inserendo_l_e_mail_e_la_password">Se possiedi già un account effettua il login inserendo l\'email e la password.<!--Se possiedi dia un account effettua il login inserendo l\'e-mail e la password--></string>
+    <string name="Required_tag">* campi obbligatori</string>
 
-        <string-array name="text_temp">
-            <item> </item>
-            <item> </item>
-            <item> </item>
-        </string-array>
+    <string-array name="text_temp">
+        <item> </item>
+        <item> </item>
+        <item> </item>
+    </string-array>
 
-        <!-- TODO: Remove or change this placeholder text -->
-        <string name="hello_blank_fragment">Hello blank fragment</string>
-        <string name="change_password_link_will_ne_send_to_your_registered_email">Inserisci l\'indirizzo email che hai usato per registrarti. Ti sarà inviata una nuova password via email</string>
-        <string name="send_email">Invia una email<!--Send email--></string>
-        <string name="pagamento_con_carta_di_credito_postepay_bancomat">Pagamento con carta di credito - postepay - bancomat</string>
-        <string name="acquista_senza_registrazione">Acquista senza registrazione</string>
-        <string name="dovrai_solo_inserire_solo_il_tuo_indirizzo_e_mail_piu_il_tuo_indirizzo_di_spedizione">Dovrai solo inserire solo il tuo indirizzo e-mail piu il tuo indirizzo di spedizione.</string>
-        <string name="codice_fiscale">Codice Fiscale</string>
-        <string name="aggiungi_indirizzo">aggiungi indirizzo</string>
-        <string name="asse">ASSE</string>
-        <string name="cil">CIL</string>
-        <string name="carica_una_tua_foto_frontale_selfie_con_montatura_indossata">Per creare la sua lente graduata abbiamo bisogno di una foto frontale del viso con dei vecchi occhiali indossati. La foto deve essere frontale , con telefono altezza naso , tipo fototessera , non sarà mai pubblicata nel rispetto della privacy<!--Carica una foto frontale del viso con degli occhiali indossati esempio-->
-            :<!--Carica una tua foto frontale (selfie) con montatura indossata.--></string>
-        <string name="indirizzo_di_fatturazione">INDIRIZZO DI FATTURAZIONE</string>
-        <string name="se_l_indirizzo_di_fatturazione_e_diverso_da_quello_di_consegna_clicca_su_aggiungi_indirizzo">Se l\'indirizzo di fatturazione e diverso da quello di consegna, clicca su \'Aggiungi indirizzo\'.</string>
-        <string name="non_hai_nessun_codice_coupon">Non hai nessun codice coupon.</string>
-        <string name="altre_informazioni">Altre informazioni</string>
-        <string name="search_italy">Ricerca</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="change_password_link_will_ne_send_to_your_registered_email">Inserisci l\'indirizzo email che hai usato per registrarti. Ti sarà inviata una nuova password via email</string>
+    <string name="send_email">Invia una email<!--Send email--></string>
+    <string name="pagamento_con_carta_di_credito_postepay_bancomat">Pagamento con carta di credito - postepay - bancomat</string>
+    <string name="acquista_senza_registrazione">Acquista senza registrazione</string>
+    <string name="dovrai_solo_inserire_solo_il_tuo_indirizzo_e_mail_piu_il_tuo_indirizzo_di_spedizione">Dovrai solo inserire solo il tuo indirizzo e-mail piu il tuo indirizzo di spedizione.</string>
+    <string name="codice_fiscale">Codice Fiscale</string>
+    <string name="aggiungi_indirizzo">aggiungi indirizzo</string>
+    <string name="asse">ASSE</string>
+    <string name="cil">CIL</string>
+    <string name="carica_una_tua_foto_frontale_selfie_con_montatura_indossata">Per creare la sua lente graduata abbiamo bisogno di una foto frontale del viso con dei vecchi occhiali indossati. La foto deve essere frontale , con telefono altezza naso , tipo fototessera , non sarà mai pubblicata nel rispetto della privacy<!--Carica una foto frontale del viso con degli occhiali indossati esempio-->
+        :<!--Carica una tua foto frontale (selfie) con montatura indossata.--></string>
+    <string name="indirizzo_di_fatturazione">INDIRIZZO DI FATTURAZIONE</string>
+    <string name="se_l_indirizzo_di_fatturazione_e_diverso_da_quello_di_consegna_clicca_su_aggiungi_indirizzo">Se l\'indirizzo di fatturazione e diverso da quello di consegna, clicca su \'Aggiungi indirizzo\'.</string>
+    <string name="non_hai_nessun_codice_coupon">Non hai nessun codice coupon.</string>
+    <string name="altre_informazioni">Altre informazioni</string>
+    <string name="search_italy">Ricerca</string>
 
     <string name="apply_il_filtyro"><!--APPLY-->Applica il filtro</string>
     <string name="n_cellular">N. Cellulare</string>

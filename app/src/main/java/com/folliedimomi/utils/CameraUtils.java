@@ -16,7 +16,6 @@ import android.util.Log;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.FileProvider;
 
-
 import com.braintreepayments.api.googlepayment.BuildConfig;
 
 import java.io.File;
@@ -110,7 +109,7 @@ public class CameraUtils {
                 .getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), GALLERY_DIRECTORY_NAME);
 
         // External sdcard location
-/*        File mediaStorageDir = new File(*//*context.getExternalFilesDir(Environment.DIRECTORY_PICTURES)*//*
+        /*        File mediaStorageDir = new File(*//*context.getExternalFilesDir(Environment.DIRECTORY_PICTURES)*//*
                 Environment.DIRECTORY_PICTURES*//*(Environment.DIRECTORY_PICTURES)*//*,
                 "Picture");*/
 

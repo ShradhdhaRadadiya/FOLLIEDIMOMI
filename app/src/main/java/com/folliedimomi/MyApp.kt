@@ -1,8 +1,8 @@
 package com.folliedimomi
 
 import android.app.Application
-import com.folliedimomi.activity.MainActivity
 import com.folliedimomi._app.FontOverride
+import com.folliedimomi.activity.MainActivity
 import com.folliedimomi.network.MyApi
 import com.folliedimomi.network.NetworkConnectionInterceptor
 import com.folliedimomi.network.NetworkRepository
@@ -17,7 +17,7 @@ import org.kodein.di.generic.instance
 import org.kodein.di.generic.provider
 import org.kodein.di.generic.singleton
 
-open class  MyApp : Application(), KodeinAware {
+open class MyApp : Application(), KodeinAware {
 
     override val kodein = Kodein.lazy {
         import(androidXModule(this@MyApp))
@@ -28,7 +28,7 @@ open class  MyApp : Application(), KodeinAware {
         bind() from provider { MainActivity() }
         bind() from provider { Session(this@MyApp) }
     }
-    
+
     override fun onCreate() {
         super.onCreate()
         //MyApp = this;

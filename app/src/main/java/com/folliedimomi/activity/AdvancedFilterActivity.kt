@@ -1,10 +1,10 @@
 package com.folliedimomi.activity
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.folliedimomi.adapter.CategoryAdapter
 import com.folliedimomi.databinding.ActivityAdvancedFilterBinding
@@ -19,6 +19,7 @@ import org.kodein.di.KodeinAware
 import org.kodein.di.android.kodein
 import org.kodein.di.generic.instance
 import java.io.IOException
+
 
 class AdvancedFilterActivity : AppCompatActivity(), KodeinAware {
 
@@ -61,7 +62,7 @@ class AdvancedFilterActivity : AppCompatActivity(), KodeinAware {
 
             val dataDis = arrayListOf<String>()
             val dataFeatire = arrayListOf<Int>()
-
+/*
             for (i in products!!.result) {
                 for (i1 in i.data) {
                     if (i1.categoryId.toString() == "0") {
@@ -87,16 +88,32 @@ class AdvancedFilterActivity : AppCompatActivity(), KodeinAware {
             }
 
             disData = tempDis
-            featureData = feaDis
-
-            Log.e("TAG","disData IS ---> $disData")
-            Log.e("TAG","featureData IS ---> $featureData")
+            featureData = feaDis*/
 
             val intent = Intent()
-            intent.putExtra("disData", disData.joinToString())
-            intent.putExtra("featureData", featureData.joinToString())
-            intent.putExtra("catId", catId)
-            setResult(Activity.RESULT_OK, intent)
+            intent.action = "DataAction"
+            intent.flags = Intent.FLAG_INCLUDE_STOPPED_PACKAGES
+            intent.putExtra("disData", "17,16")
+            intent.putExtra("featureData", "2")
+            intent.putExtra("catId", "13")
+//            sendBroadcast(intent)
+            LocalBroadcastManager.getInstance(this).sendBroadcast(intent)
+
+            //=================================
+            /*   Log.e("TAG","disData IS ---> $disData")
+               Log.e("TAG","featureData IS ---> $featureData")
+
+               val intent = Intent()
+   //            intent.putExtra("disData", disData.joinToString())
+   //            intent.putExtra("featureData", featureData.joinToString())
+   //
+               intent.putExtra("disData","17,16")
+               intent.putExtra("featureData", "2")
+               intent.putExtra("catId", "13")
+   //            intent.putExtra("catId", catId)
+               setResult(Activity.RESULT_OK, intent)*/
+            //=================================
+
             finish()
         }
     }
@@ -108,7 +125,8 @@ class AdvancedFilterActivity : AppCompatActivity(), KodeinAware {
         this.progress_bars_layout.show()
         Coroutines.main {
             try {
-                products = repository.getAdvanceFilter(parent_id, catId, featured, "", "")
+                products = repository.getAdvanceFilter("12", "17,16", "2", "10", "120")
+//                products = repository.getAdvanceFilter(parent_id, catId, featured, "", "")
 
                 products.let {
                     if (products!!.status == 1) {

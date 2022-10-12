@@ -1,173 +1,172 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-		xmlns:app="http://schemas.android.com/apk/res-auto"
-		android:layout_width="match_parent"
-		android:layout_height="match_parent"
-		android:background="@color/white">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
 
 
-	<FrameLayout
-			android:id="@+id/rootLayout"
-			android:layout_width="match_parent"
-			android:layout_height="match_parent"
-			android:layout_above="@+id/bottomNavigation"
-			android:orientation="vertical"/>
+    <FrameLayout
+        android:id="@+id/rootLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/bottomNavigation"
+        android:orientation="vertical" />
 
-	<com.google.android.material.bottomnavigation.BottomNavigationView
-			android:id="@+id/bottomNavigation"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:layout_alignParentBottom="true"
-			android:layout_gravity="bottom"
-			android:background="@color/background"
-			app:itemIconTint="@drawable/bottom_navigation_item_colors"
-			app:itemRippleColor="@color/ripple"
-			app:itemTextColor="@color/colorSecondaryTextDark"
-			app:labelVisibilityMode="unlabeled"
-			app:menu="@menu/bottom_navigation_menu" />
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom"
+        android:background="@color/background"
+        app:itemIconTint="@drawable/bottom_navigation_item_colors"
+        app:itemRippleColor="@color/ripple"
+        app:itemTextColor="@color/colorSecondaryTextDark"
+        app:labelVisibilityMode="unlabeled"
+        app:menu="@menu/bottom_navigation_menu" />
 
-	<com.google.android.material.textfield.TextInputEditText
-			android:maxLines="1"
-			android:windowSoftInputMode="stateVisible"
-			android:backgroundTint="@color/background"
-			android:id="@+id/etSearch"
-			android:visibility="gone"
-			android:textColor="@color/colorPrimary"
-			android:imeOptions="actionSearch"
-			android:inputType="text"
-			android:padding="15dp"
-			android:gravity="center_vertical"
-			android:textColorHint="@color/colorSecondaryText"
-			android:hint="@string/search_here"
-			android:background="@drawable/back_et"
-			android:layout_width="match_parent"
-			android:layout_height="60dp"/>
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/etSearch"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@drawable/back_et"
+        android:backgroundTint="@color/background"
+        android:gravity="center_vertical"
+        android:hint="@string/search_here"
+        android:imeOptions="actionSearch"
+        android:inputType="text"
+        android:maxLines="1"
+        android:padding="15dp"
+        android:textColor="@color/colorPrimary"
+        android:textColorHint="@color/colorSecondaryText"
+        android:visibility="gone"
+        android:windowSoftInputMode="stateVisible" />
 
 </RelativeLayout>
 
 
-		<!--<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-				xmlns:app="http://schemas.android.com/apk/res-auto"
-				xmlns:tools="http://schemas.android.com/tools"
-				android:layout_width="match_parent"
-				android:layout_height="match_parent"
-				android:fillViewport="true">
+    <!--<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
 
-			<LinearLayout
-					android:orientation="vertical"
-					android:layout_width="match_parent"
-					android:layout_height="match_parent">
-
-
-
-			</LinearLayout>
-
-		</androidx.core.widget.NestedScrollView>-->
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
 
 
-		<!--
-		<LinearLayout
-		android:background="@color/white"
-		android:orientation="vertical"
-		android:layout_width="match_parent"
-		android:layout_height="match_parent">
+        </LinearLayout>
 
-		&lt;!&ndash;
-				android:paddingStart="6dp"
-				android:paddingEnd="6dp"&ndash;&gt;
-		&lt;!&ndash;Popular Pictures&ndash;&gt;
-		<RelativeLayout
-				android:visibility="visible"
-				tools:visibility="visible"
-				android:id="@+id/rlNewArrivalViewAll"
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content">
-
-			<TextView
-					android:padding="15dp"
-					android:textStyle="bold"
-					android:textColor="@color/white"
-					android:textSize="16sp"
-					android:gravity="center"
-					android:text="@string/new_arrivals"
-					android:layout_toStartOf="@+id/tvPopularProductViewAll"
-					android:background="@color/colorPrimary"
-					android:layout_width="match_parent"
-					android:layout_height="wrap_content"/>
-
-			<TextView
-					android:visibility="gone"
-					android:id="@+id/tvPopularProductViewAll"
-					android:padding="10dp"
-					android:textStyle="bold"
-					android:textColor="@color/colorPrimary"
-					android:textSize="16sp"
-					android:layout_alignParentEnd="true"
-					android:gravity="center_vertical"
-					android:text="@string/view_all"
-					android:background="@color/appBack"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"/>
+    </androidx.core.widget.NestedScrollView>-->
 
 
-		</RelativeLayout>
+    <!--
+    <LinearLayout
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-		<androidx.recyclerview.widget.RecyclerView
-				android:id="@+id/rvNewArrival"
-				android:visibility="visible"
-				android:padding="6dp"
-				android:nestedScrollingEnabled="false"
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content" />
+    &lt;!&ndash;
+            android:paddingStart="6dp"
+            android:paddingEnd="6dp"&ndash;&gt;
+    &lt;!&ndash;Popular Pictures&ndash;&gt;
+    <RelativeLayout
+            android:visibility="visible"
+            tools:visibility="visible"
+            android:id="@+id/rlNewArrivalViewAll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <TextView
+                android:padding="15dp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:gravity="center"
+                android:text="@string/new_arrivals"
+                android:layout_toStartOf="@+id/tvPopularProductViewAll"
+                android:background="@color/colorPrimary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        <TextView
+                android:visibility="gone"
+                android:id="@+id/tvPopularProductViewAll"
+                android:padding="10dp"
+                android:textStyle="bold"
+                android:textColor="@color/colorPrimary"
+                android:textSize="16sp"
+                android:layout_alignParentEnd="true"
+                android:gravity="center_vertical"
+                android:text="@string/view_all"
+                android:background="@color/appBack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
 
 
-		&lt;!&ndash;Best Sellers &ndash;&gt;
-		<RelativeLayout
-				android:paddingStart="6dp"
-				android:paddingEnd="6dp"
-				android:visibility="gone"
-				tools:visibility="visible"
-				android:id="@+id/rlBestSellerViewAll"
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content">
+    </RelativeLayout>
 
-			<TextView
-					android:padding="10dp"
-					android:textStyle="bold"
-					android:textColor="@color/colorPrimary"
-					android:textSize="16sp"
-					android:gravity="center_vertical"
-					android:text="@string/best_sellers"
-					android:layout_toStartOf="@+id/tvBestSellerViewAll"
-					android:background="@color/appBack"
-					android:layout_width="match_parent"
-					android:layout_height="wrap_content"/>
+    <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvNewArrival"
+            android:visibility="visible"
+            android:padding="6dp"
+            android:nestedScrollingEnabled="false"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
-			<TextView
-					android:id="@+id/tvBestSellerViewAll"
-					android:padding="10dp"
-					android:textStyle="bold"
-					android:textColor="@color/colorPrimary"
-					android:textSize="16sp"
-					android:layout_alignParentEnd="true"
-					android:gravity="center_vertical"
-					android:text="@string/view_all"
-					android:background="@color/appBack"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"/>
 
-		</RelativeLayout>
+    &lt;!&ndash;Best Sellers &ndash;&gt;
+    <RelativeLayout
+            android:paddingStart="6dp"
+            android:paddingEnd="6dp"
+            android:visibility="gone"
+            tools:visibility="visible"
+            android:id="@+id/rlBestSellerViewAll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-		<androidx.recyclerview.widget.RecyclerView
-				android:id="@+id/rvBestSeller"
-				android:visibility="visible"
-				android:padding="6dp"
-				android:layout_marginBottom="25dp"
-				android:nestedScrollingEnabled="false"
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content" />
+        <TextView
+                android:padding="10dp"
+                android:textStyle="bold"
+                android:textColor="@color/colorPrimary"
+                android:textSize="16sp"
+                android:gravity="center_vertical"
+                android:text="@string/best_sellers"
+                android:layout_toStartOf="@+id/tvBestSellerViewAll"
+                android:background="@color/appBack"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
 
-		&lt;!&ndash;<include layout="@layout/footer"/>&ndash;&gt;
+        <TextView
+                android:id="@+id/tvBestSellerViewAll"
+                android:padding="10dp"
+                android:textStyle="bold"
+                android:textColor="@color/colorPrimary"
+                android:textSize="16sp"
+                android:layout_alignParentEnd="true"
+                android:gravity="center_vertical"
+                android:text="@string/view_all"
+                android:background="@color/appBack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
 
-		</LinearLayout>-->
+    </RelativeLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvBestSeller"
+            android:visibility="visible"
+            android:padding="6dp"
+            android:layout_marginBottom="25dp"
+            android:nestedScrollingEnabled="false"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    &lt;!&ndash;<include layout="@layout/footer"/>&ndash;&gt;
+
+    </LinearLayout>-->

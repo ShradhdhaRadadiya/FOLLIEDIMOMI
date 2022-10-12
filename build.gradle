@@ -55,7 +55,7 @@ components.all {
     allVariants {
         withDependencies { deps ->
             deps.each { dep ->
-                if (dep.group == 'net.minidev' && dep.name =='json-smart') {
+                if (dep.group == 'net.minidev' && dep.name == 'json-smart') {
                     dep.version {
                         prefer "2.3"
                     }
