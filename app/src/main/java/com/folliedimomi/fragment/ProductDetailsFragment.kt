@@ -1,19 +1,19 @@
 package com.folliedimomi.fragment
 
 import android.annotation.SuppressLint
+import android.app.Dialog
 import android.content.Context
 import android.content.res.ColorStateList
 import android.os.Bundle
-import android.text.Html
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import android.widget.MediaController
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
 import com.folliedimomi.R
 import com.folliedimomi._app.Constant
 import com.folliedimomi.adapter.BannerAdapter
+import com.folliedimomi.databinding.DialogeVideoPlayBinding
 import com.folliedimomi.model.Gallery
 import com.folliedimomi.model.ProductDetailsModel
 import com.folliedimomi.network.NetworkRepository
@@ -46,6 +46,8 @@ class ProductDetailsFragment(private var p_id: Int) : Fragment(), KodeinAware,
     val imageList = ArrayList<String>()
     var position = 0
     var proId = 0
+    private var videoUrl = ""
+
     private val session: Session by instance()
 
 
@@ -64,6 +66,7 @@ class ProductDetailsFragment(private var p_id: Int) : Fragment(), KodeinAware,
 //                requireActivity().toast("Quantity must be grater than 0")
             }
         }
+
         tvMinus.setOnClickListener {
             var data = (tvDigit.text.toString()).toInt()
             if (data > 0) {
@@ -73,8 +76,100 @@ class ProductDetailsFragment(private var p_id: Int) : Fragment(), KodeinAware,
                 requireActivity().toast("Quantity must be grater than 0")
             }
         }
+
+        tvVideoDes.setOnClickListener {
+            if (videoUrl.isNotEmpty()) {
+                openDialogeForVideo(videoUrl)
+
+            } else {
+                requireContext().toast("Video not found!")
+            }
+        }
+
+        tvVideo.setOnClickListener {
+            doRequestForAddCart()
+        }
     }
 
+    private fun doRequestForAddCart() {
+        Globals.showProgress(mContext)
+        Coroutines.main {
+            try {
+
+                val mMap = HashMap<String, RequestBody>()
+                mMap["controller"] = "mobileapi".convertBody()
+                mMap["op"] = "addtocart".convertBody()
+                mMap["id_product"] = proId.toString().convertBody()
+                mMap["quantity"] = "1".convertBody()
+                mMap["lang_id"] = Constant.LANG.convertBody()
+                mMap["shop_id"] = Constant.LANG.convertBody()
+                if (session.getUserId().toString().isNotEmpty()) {
+                    mMap["id_customer"] = session.getUserId().toString().convertBody()
+                } else {
+                    mMap["id_customer"] = "0".convertBody()
+                }
+                mMap["customersessionid"] = session.getAppSession().toString().convertBody()
+
+                Log.e("TAG", "mMAP IS ----> $mMap")
+
+                val drawerData = repository.addToCart(mMap)
+
+                drawerData.result.let {
+                    if (drawerData.status == 1) {
+                        requireActivity().toast(drawerData.message)
+                    }
+                    //hide
+                    Globals.hideProgress()
+                    return@main
+                }
+
+            } catch (e: ApiException) {
+                Log.i("OkHttp", "Response : ${e.message}")
+                //hide
+                Globals.hideProgress()
+                requireContext().toast(e.message!!)
+            } catch (e: NoInternetException) {
+                Log.i("OkHttp", "Response : ${e.message}")
+                //hide
+                Globals.hideProgress()
+                requireContext().toast(e.message!!)
+            } catch (e: JsonSyntaxException) {
+                Log.i("OkHttp", "Response : ${e.message}")
+                //hide
+                Globals.hideProgress()
+                requireContext().toast(e.message!!)
+            } catch (e: IOException) {
+                Log.i("OkHttp", "Response : ${e.message}")
+                //hide
+                Globals.hideProgress()
+                requireContext().toast(e.message!!)
+            }
+        }
+    }
+
+    private fun openDialogeForVideo(videoUrl: String) {
+        val binding: DialogeVideoPlayBinding = DialogeVideoPlayBinding.inflate(
+            LayoutInflater.from(context)
+        )
+        val dialog = Dialog(requireContext())
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setCancelable(true)
+        dialog.setContentView(binding.root)
+
+        val window: Window = dialog.window!!
+        val width = (requireContext().resources.displayMetrics.widthPixels * 0.90).toInt()
+        val height = WindowManager.LayoutParams.WRAP_CONTENT
+        window.setLayout(width, height)
+        window.setBackgroundDrawableResource(android.R.color.transparent)
+        binding.videoView.setVideoPath(videoUrl)
+        binding.videoView.setOnPreparedListener {
+            it.isLooping = true
+            binding.videoView.setMediaController(MediaController(requireContext()));
+            binding.videoView.requestFocus();
+            binding.videoView.start()
+        }
+        dialog.show()
+    }
 
     fun onAddToCartProduct(addressId: Int) {
         //show
@@ -152,7 +247,6 @@ class ProductDetailsFragment(private var p_id: Int) : Fragment(), KodeinAware,
         img_right.setOnClickListener { viewPager.arrowScroll(ViewPager.FOCUS_RIGHT) }
     }
 
-
     fun toggleArrowVisibility(isAtZeroIndex: Boolean, isAtLastIndex: Boolean) {
         if (isAtZeroIndex) img_left.visibility = View.INVISIBLE else img_left.visibility =
             View.VISIBLE
@@ -194,7 +288,7 @@ class ProductDetailsFragment(private var p_id: Int) : Fragment(), KodeinAware,
                             tvText1.text = dataDis.finalDisplayPrice
                             tvText21.text = dataDis.name
                             tvDes.text = dataDis.salesNumber
-                            tvLongDec.text = Html.fromHtml(dataDis.description).toString().trim()
+                            tvLongDec.text = mContext.getString(R.string.pro_desciption)
                             customProgress.progress = dataDis.bar_width
 
                             when (dataDis.bar_class) {
@@ -211,7 +305,14 @@ class ProductDetailsFragment(private var p_id: Int) : Fragment(), KodeinAware,
 
                             if (dataDis.video.isEmpty()) {
                                 tvVideoDes.visibility = View.GONE
+                            } else {
+                                videoUrl = dataDis.video[0].videoUrl
+                                tvVideoDes.visibility = View.VISIBLE
+
+
                             }
+
+
                         } else requireActivity().coordinatorLayout.snackBar(createOrderResponse.message)
                         return@main
                     }
@@ -222,23 +323,17 @@ class ProductDetailsFragment(private var p_id: Int) : Fragment(), KodeinAware,
         }
     }
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_product_detail, container, false)
     }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
         mContext = context
-
     }
 
     override fun onDetach() {
@@ -247,7 +342,6 @@ class ProductDetailsFragment(private var p_id: Int) : Fragment(), KodeinAware,
     }
 
     interface OnFragmentInteractionListener {
-
     }
 
     override fun leftClick(pos: Int) {

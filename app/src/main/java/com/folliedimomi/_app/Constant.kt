@@ -12,7 +12,7 @@ object Constant {
     //}
 
     const val ROOT_URL: String = "https://folliedimomi.it/"
-    const val URL: String = "https://cipri-couture.com/"
+    const val URL: String = "https://folliedimomi.it/"
 
     //   const val ROOT_URL : String = "http://cipri-couture.it/ps17/"
 //   const val URL : String = "http://cipri-couture.it/ps17/"

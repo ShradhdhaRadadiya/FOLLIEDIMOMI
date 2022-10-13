@@ -39,7 +39,7 @@ class ShoppingCartFragment : Fragment(), KodeinAware, ShoppingCartAdapter.OnCart
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        if (objects.isEmpty()) getPromotion()
+//        if (objects.isEmpty()) getPromotion()
         getShoppingCart(session.getUserId().toString(), session.getAppSession().toString())
         Log.i("OkHttp", "Key : ${session.getSecureKey().toString()}")
         /* rvCard.layoutManager = LinearLayoutManager(this@ShoppingCartFragment.activity!!)
@@ -119,7 +119,7 @@ class ShoppingCartFragment : Fragment(), KodeinAware, ShoppingCartAdapter.OnCart
         Coroutines.main {
             try {
                 val applyCouponRespone: ApplyCouponRespone =
-                    repository.onRemoveCoupon(id_cart_rule = couponCode, id_cart = cartId)
+                    repository.onRemoveCoupon(id_cart_rule = couponCode, id_cart = cartId,session.getUserId().toString())
                 if (isAdded && isVisible) {
                     applyCouponRespone.let {
                         if (applyCouponRespone.status == 1) {

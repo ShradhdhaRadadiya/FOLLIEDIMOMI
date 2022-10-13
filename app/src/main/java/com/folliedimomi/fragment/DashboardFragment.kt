@@ -62,42 +62,16 @@ class DashboardFragment(private var drawerCatText: String = "", private var draw
             Log.e("TAG", "drawerCatId=======? $drawerCatId")
             intent.putExtra("Parent_id", drawerCatId)
             startActivity(intent)
-
-            /*  val intent = Intent(mContext, AdvancedFilterActivity::class.java)
-              Log.e("TAG", "drawerCatId=======? $drawerCatId")
-              intent.putExtra("Parent_id", drawerCatId)
-              startActivityForResult(intent, 100)*/
         }
 
         iv1.setOnClickListener {
             if (videoUrl.isNotEmpty()) {
-                val binding: DialogeVideoPlayBinding = DialogeVideoPlayBinding.inflate(
-                    LayoutInflater.from(context)
-                )
-                val dialog = Dialog(requireContext())
-                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-                dialog.setCancelable(true)
-                dialog.setContentView(binding.root)
-
-                val window: Window = dialog.window!!
-                val width = (requireContext().resources.displayMetrics.widthPixels * 0.90).toInt()
-                val height = WindowManager.LayoutParams.WRAP_CONTENT
-                window.setLayout(width, height)
-                window.setBackgroundDrawableResource(android.R.color.transparent)
-
-                binding.videoView.setVideoPath(videoUrl)
-
-                binding.videoView.setOnPreparedListener {
-                    it.isLooping = true
-                    binding.videoView.setMediaController(MediaController(requireContext()));
-                    binding.videoView.requestFocus();
-                    binding.videoView.start()
-                }
-                dialog.show()
+                openDialogeForVideo(videoUrl)
             } else {
                 requireContext().toast("Video not found!")
             }
         }
+
         tvSort.setOnClickListener {
             DialogUtils.showFilterDialog(mContext,
                 object : DialogUtils.PostInterface {
@@ -121,6 +95,30 @@ class DashboardFragment(private var drawerCatText: String = "", private var draw
                     }
                 })
         }
+    }
+
+    private fun openDialogeForVideo(videoUrl: String) {
+        val binding: DialogeVideoPlayBinding = DialogeVideoPlayBinding.inflate(
+            LayoutInflater.from(context)
+        )
+        val dialog = Dialog(requireContext())
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setCancelable(true)
+        dialog.setContentView(binding.root)
+
+        val window: Window = dialog.window!!
+        val width = (requireContext().resources.displayMetrics.widthPixels * 0.90).toInt()
+        val height = WindowManager.LayoutParams.WRAP_CONTENT
+        window.setLayout(width, height)
+        window.setBackgroundDrawableResource(android.R.color.transparent)
+        binding.videoView.setVideoPath(videoUrl)
+        binding.videoView.setOnPreparedListener {
+            it.isLooping = true
+            binding.videoView.setMediaController(MediaController(requireContext()));
+            binding.videoView.requestFocus();
+            binding.videoView.start()
+        }
+        dialog.show()
     }
 
     private fun callDisplyTitleVideoApiCall() {
@@ -208,7 +206,6 @@ class DashboardFragment(private var drawerCatText: String = "", private var draw
                                 requireActivity(),
                                 createOrderResponse.result.products, this
                             )
-
                         } else requireActivity().coordinatorLayout.snackBar(createOrderResponse.message)
                     }
 
@@ -242,9 +239,7 @@ class DashboardFragment(private var drawerCatText: String = "", private var draw
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         callDisplyTitleVideoApiCall()
-
     }
 
     override fun onCreateView(
@@ -263,7 +258,6 @@ class DashboardFragment(private var drawerCatText: String = "", private var draw
                     "ProductList",
                     "ProductList -----on activity result: $drawerCatId--->$categoryId--->$manufac "
                 )
-
                 getProductList()
             }
         }
@@ -351,6 +345,17 @@ class DashboardFragment(private var drawerCatText: String = "", private var draw
     }
 
     override fun onOpenVideo(videoUrl: String) {
-        //open video dialoge
+        if (videoUrl.isNotEmpty()) {
+            openDialogeForVideo(videoUrl)
+        } else {
+            requireContext().toast("Video not found!")
+        }
     }
 }
+/*op:advance_filter
+id_parent:12
+id_category:17,16
+//id_manufacturer:2
+start_price:10
+end_price:120
+*/

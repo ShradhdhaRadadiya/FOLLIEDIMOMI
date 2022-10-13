@@ -152,4 +152,8 @@ dependencies {
     implementation 'com.braintreepayments.api:three-d-secure:3.4.1'
     /*KP ROGRESSHUD*/
     implementation 'com.kaopiz:kprogresshud:1.2.0'
+
+
+    implementation 'com.github.Innovattic:range-seek-bar:1.0.4'
+
 }

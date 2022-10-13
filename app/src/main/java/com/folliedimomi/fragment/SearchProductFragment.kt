@@ -2,12 +2,14 @@ package com.folliedimomi.fragment
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.*
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
+import android.widget.MediaController
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.folliedimomi.R
@@ -15,7 +17,9 @@ import com.folliedimomi._app.Constant
 import com.folliedimomi._app.myOnTextChangedListener
 import com.folliedimomi.activity.MainActivity
 import com.folliedimomi.adapter.ProductListAdapter
+import com.folliedimomi.databinding.DialogeVideoPlayBinding
 import com.folliedimomi.model.ProductListModel
+import com.folliedimomi.model.SearchProductModel
 import com.folliedimomi.network.NetworkRepository
 import com.folliedimomi.sharedPrefrense.Session
 import com.folliedimomi.utils.*
@@ -98,17 +102,17 @@ class SearchProductFragment(private val searchText: String) : Fragment(), Kodein
 
 
             try {
-                val createOrderResponse: ProductListModel = repository.productList(mMap)
+                val createOrderResponse: SearchProductModel = repository.searchProduct(mMap)
                 if (isAdded && isVisible) {
 
                     createOrderResponse.let {
                         if (createOrderResponse.status == 1) {
+                            var data = createOrderResponse.result
                             rvProduct.layoutManager = GridLayoutManager(requireContext(), 2)
                             rvProduct.adapter = ProductListAdapter(
                                 requireActivity(),
-                                createOrderResponse.result.products, this
+                                data, this
                             )
-
                         } else requireActivity().coordinatorLayout.snackBar(createOrderResponse.message)
                     }
 
@@ -275,7 +279,34 @@ class SearchProductFragment(private val searchText: String) : Fragment(), Kodein
     }
 
     override fun onOpenVideo(videoUrl: String) {
+        if (videoUrl.isNotEmpty()) {
+            openDialogeForVideo(videoUrl)
+        } else {
+            requireContext().toast("Video not found!")
+        }
+    }
+    private fun openDialogeForVideo(videoUrl: String) {
+        val binding: DialogeVideoPlayBinding = DialogeVideoPlayBinding.inflate(
+            LayoutInflater.from(context)
+        )
+        val dialog = Dialog(requireContext())
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setCancelable(true)
+        dialog.setContentView(binding.root)
 
+        val window: Window = dialog.window!!
+        val width = (requireContext().resources.displayMetrics.widthPixels * 0.90).toInt()
+        val height = WindowManager.LayoutParams.WRAP_CONTENT
+        window.setLayout(width, height)
+        window.setBackgroundDrawableResource(android.R.color.transparent)
+        binding.videoView.setVideoPath(videoUrl)
+        binding.videoView.setOnPreparedListener {
+            it.isLooping = true
+            binding.videoView.setMediaController(MediaController(requireContext()));
+            binding.videoView.requestFocus();
+            binding.videoView.start()
+        }
+        dialog.show()
     }
 
 }

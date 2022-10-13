@@ -2,6 +2,7 @@ package com.folliedimomi.network
 
 import com.folliedimomi._app.Constant
 import com.folliedimomi.model.*
+import com.google.gson.JsonObject
 import com.pcs.ciprianicouture.model.OrderDetailResponse
 import okhttp3.MultipartBody
 import okhttp3.OkHttpClient
@@ -204,7 +205,9 @@ interface MyApi {
         @Field("op") op: String = "removecouponcode",
         @Field("lang_id") id_lang: String = Constant.LANG,
         @Field("id_cart_rule") id_cart_rule: String,
-        @Field("id_cart") id_cart: String = ""
+        @Field("id_cart") id_cart: String = "",
+        @Field("id_customer") id_customer: String = ""
+
     ): Response<ApplyCouponRespone>
 
     /** Update Cart */
@@ -254,6 +257,11 @@ interface MyApi {
     @POST("index.php")//
     suspend fun productList(@PartMap map: Map<String, @JvmSuppressWildcards RequestBody>):
             Response<ProductListModel>
+   /** Product List */
+    @Multipart
+    @POST("index.php")//
+    suspend fun searchProduct(@PartMap map: Map<String, @JvmSuppressWildcards RequestBody>):
+            Response<SearchProductModel>
 
     /** Product List */
     @Multipart
@@ -461,11 +469,12 @@ interface MyApi {
         @Field("id_category") id_category: String = "",
         @Field("id_manufacturer") id_manufacturer: String = "",
         @Field("start_price") start_price: String = "",
-        @Field("end_price") end_price: String = "",
+        @Field("end_price") end_price: String = ""
         //  @Field("featured") featured: String = "0",
         /*    @Field("lang_id") id_lang: String = Constant.LANG,
             @Field("page") page: String = "1"*/
-    ): Response<AdvanceFilterModel>
+    ): Response<JsonObject>
+
 
     /**AdvanceFilter */
     @FormUrlEncoded

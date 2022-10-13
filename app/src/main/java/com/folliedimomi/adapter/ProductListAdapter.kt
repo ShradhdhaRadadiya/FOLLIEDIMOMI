@@ -49,13 +49,17 @@ class ProductListAdapter(
         holder.tvText1.text = salesPro[0] + " clienti"
         holder.tvText2.text = salesPro[1]
 
-        holder.tvNuovo.visibility = View.INVISIBLE
         if (item.barWidth == 0) {
             holder.customProgress.visibility = View.INVISIBLE
         }
 
         if (item.productImage.isNotEmpty())
             Glide.with(activity).load(item.productImage).into(holder.imgProduct)
+
+        if (item.new == 1)
+            holder.tvNuovo.visibility = View.VISIBLE
+        else
+            holder.tvNuovo.visibility = View.INVISIBLE
 
 
         holder.customProgress.progress = item.barWidth

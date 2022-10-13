@@ -3,8 +3,11 @@ package com.folliedimomi.network
 //import com.dp.directportal.data.db.AppDatabase
 import com.folliedimomi.model.*
 import com.folliedimomi.utils.convertBody
+import com.google.gson.JsonObject
 import com.pcs.ciprianicouture.model.OrderDetailResponse
 import okhttp3.RequestBody
+import okhttp3.Response
+import okhttp3.ResponseBody
 
 class NetworkRepository(private val api: MyApi/*, private val session: AppSession*/) :
     SafeApiRequest() {
@@ -145,9 +148,10 @@ class NetworkRepository(private val api: MyApi/*, private val session: AppSessio
         }
     }
 
-    suspend fun onRemoveCoupon(id_cart_rule: String, id_cart: String): ApplyCouponRespone {
+    suspend fun onRemoveCoupon(id_cart_rule: String, id_cart: String,        id_customer: String = ""
+    ): ApplyCouponRespone {
         return apiRequest {
-            api.onRemoveCoupon(id_cart_rule = id_cart_rule, id_cart = id_cart)
+            api.onRemoveCoupon(id_cart_rule = id_cart_rule, id_cart = id_cart, id_customer = id_customer)
         }
     }
 
@@ -238,6 +242,12 @@ class NetworkRepository(private val api: MyApi/*, private val session: AppSessio
     suspend fun productList(map: HashMap<String, RequestBody>): ProductListModel {
         return apiRequest {
             api.productList(map = map)
+        }
+    }
+
+    suspend fun searchProduct(map: HashMap<String, RequestBody>): SearchProductModel {
+        return apiRequest {
+            api.searchProduct(map = map)
         }
     }
 
@@ -343,7 +353,7 @@ class NetworkRepository(private val api: MyApi/*, private val session: AppSessio
         id_manufacturer: String,
         start_price: String,
         end_price: String
-    ): AdvanceFilterModel {
+    ): JsonObject {
         val response = apiRequest {
             api.getAdvanceFilter(
                 id_parent = id_parent,

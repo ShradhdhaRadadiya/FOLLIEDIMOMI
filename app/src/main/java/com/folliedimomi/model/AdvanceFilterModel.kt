@@ -23,9 +23,9 @@ data class AdvanceFilterModel(
     ) {
         data class Data(
             @SerializedName("category_id")
-            var categoryId: Int,
+            var categoryId: Int = 0,
             @SerializedName("category_name")
-            var categoryName: String,
+            var categoryName: String = "",
             @SerializedName("description")
             var description: String,
             @SerializedName("level_depth")

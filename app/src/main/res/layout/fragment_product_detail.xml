@@ -65,8 +65,8 @@
             android:ellipsize="end"
             android:gravity="center"
             android:maxLines="1"
-            android:paddingStart="2dp"
-            android:paddingEnd="2dp"
+            android:paddingStart="@dimen/_10sdp"
+            android:paddingEnd="@dimen/_10sdp"
             android:paddingBottom="1dp"
             android:singleLine="true"
             android:text="HOME / FUOCHI D'ARTIDICIO/MARYFLO - COLPI"
@@ -95,6 +95,7 @@
                 android:textColor="@color/red"
                 android:textSize="@dimen/_13ssp"
                 android:textStyle="bold"
+                android:paddingStart="@dimen/_10sdp"
                 tools:ignore="RtlSymmetry,UnusedAttribute" />
 
             <TextView
@@ -109,6 +110,7 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_13ssp"
+                android:paddingEnd="@dimen/_10sdp"
                 android:textStyle="bold"
                 tools:ignore="RtlSymmetry,UnusedAttribute" />
         </LinearLayout>
@@ -122,8 +124,8 @@
             android:ellipsize="end"
             android:gravity="center"
             android:maxLines="1"
-            android:paddingStart="2dp"
-            android:paddingEnd="2dp"
+            android:paddingStart="@dimen/_10sdp"
+            android:paddingEnd="@dimen/_10sdp"
             android:paddingBottom="1dp"
             android:singleLine="true"
             android:text="3 CLIENTI HANNO ACQUISYATO QUESYO PRODOTTO"

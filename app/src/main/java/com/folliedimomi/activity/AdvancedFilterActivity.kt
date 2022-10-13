@@ -12,6 +12,7 @@ import com.folliedimomi.model.AdvanceFilterModel
 import com.folliedimomi.network.NetworkRepository
 import com.folliedimomi.sharedPrefrense.Session
 import com.folliedimomi.utils.*
+import com.google.gson.Gson
 import com.google.gson.JsonSyntaxException
 import kotlinx.android.synthetic.main.activity_main.*
 import org.kodein.di.Kodein
@@ -96,23 +97,7 @@ class AdvancedFilterActivity : AppCompatActivity(), KodeinAware {
             intent.putExtra("disData", "17,16")
             intent.putExtra("featureData", "2")
             intent.putExtra("catId", "13")
-//            sendBroadcast(intent)
             LocalBroadcastManager.getInstance(this).sendBroadcast(intent)
-
-            //=================================
-            /*   Log.e("TAG","disData IS ---> $disData")
-               Log.e("TAG","featureData IS ---> $featureData")
-
-               val intent = Intent()
-   //            intent.putExtra("disData", disData.joinToString())
-   //            intent.putExtra("featureData", featureData.joinToString())
-   //
-               intent.putExtra("disData","17,16")
-               intent.putExtra("featureData", "2")
-               intent.putExtra("catId", "13")
-   //            intent.putExtra("catId", catId)
-               setResult(Activity.RESULT_OK, intent)*/
-            //=================================
 
             finish()
         }
@@ -125,10 +110,10 @@ class AdvancedFilterActivity : AppCompatActivity(), KodeinAware {
         this.progress_bars_layout.show()
         Coroutines.main {
             try {
-                products = repository.getAdvanceFilter("12", "17,16", "2", "10", "120")
-//                products = repository.getAdvanceFilter(parent_id, catId, featured, "", "")
+              var  products = repository.getAdvanceFilter("12", "17,16", "2", "10", "120")
+            // products = repository.getAdvanceFilter(parent_id, catId, featured, "", "")
 
-                products.let {
+            /*    products.let {
                     if (products!!.status == 1) {
                         mBinding.rvProduct.show()
                         mBinding.tvEmptyText.hide()
@@ -137,11 +122,11 @@ class AdvancedFilterActivity : AppCompatActivity(), KodeinAware {
                         mBinding.rvProduct.hide()
                         mBinding.tvEmptyText.show()
                         toast(products!!.message)
-                    }
+                    }*/
                     //hide
                     this.progress_bars_layout.hide()
                     return@main
-                }
+           //     }
 
             } catch (e: ApiException) {
                 Log.i("OkHttp", "Response : ${e.message}")
