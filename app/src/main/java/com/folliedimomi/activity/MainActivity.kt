@@ -44,6 +44,7 @@ import com.folliedimomi.model.ShoppingCartResult
 import com.folliedimomi.network.NetworkRepository
 import com.folliedimomi.sharedPrefrense.Session
 import com.folliedimomi.utils.*
+import com.folliedimomi.utils.Globals.drawerCatId
 import com.google.android.material.navigation.NavigationView
 import com.google.gson.JsonSyntaxException
 import kotlinx.android.synthetic.main.activity_main.*
@@ -76,8 +77,8 @@ class MainActivity : AppCompatActivity(),
     private var drawerListData = arrayListOf<DrawerMenuModel.Result>()
 
 
-    var drawerCatId = 0
-    var drawerCatText = ""
+
+    var drawerCatText = "Home"
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -373,9 +374,13 @@ class MainActivity : AppCompatActivity(),
             }
         }
 
+        if(drawerCatId == 1){
+            drawerCatId = 12
+        }
+
         drawerLayout.closeDrawer(GravityCompat.START)
 
-        loadFragmentWithoutBackStack(DashboardFragment(drawerCatText, drawerCatId))
+        loadFragmentWithoutBackStack(DashboardFragment(drawerCatText))
         return true
     }
 

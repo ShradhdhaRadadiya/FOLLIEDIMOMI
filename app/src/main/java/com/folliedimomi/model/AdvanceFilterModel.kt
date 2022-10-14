@@ -39,14 +39,9 @@ data class AdvanceFilterModel(
             @SerializedName("selected")
             var selected: String,
             @SerializedName("id_manufacturer")
-            var idManufacturer: String,
+            var idManufacturer: String="0",
             @SerializedName("name")
-            var name: String,
-            @SerializedName("start_price")
-            var startPrice: String,
-            @SerializedName("end_price")
-            var endPrice: String,
-
+            var name: String
             )
     }
 }

@@ -5,6 +5,7 @@ import android.app.Dialog
 import android.content.Context
 import android.content.res.ColorStateList
 import android.os.Bundle
+import android.text.Html
 import android.util.Log
 import android.view.*
 import android.widget.MediaController
@@ -308,9 +309,9 @@ class ProductDetailsFragment(private var p_id: Int) : Fragment(), KodeinAware,
                             } else {
                                 videoUrl = dataDis.video[0].videoUrl
                                 tvVideoDes.visibility = View.VISIBLE
-
-
                             }
+
+                            tvVideoDec.text = Html.fromHtml( dataDis.description)
 
 
                         } else requireActivity().coordinatorLayout.snackBar(createOrderResponse.message)

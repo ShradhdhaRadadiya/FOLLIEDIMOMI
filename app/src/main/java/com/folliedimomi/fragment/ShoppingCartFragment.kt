@@ -191,7 +191,9 @@ class ShoppingCartFragment : Fragment(), KodeinAware, ShoppingCartAdapter.OnCart
                                     val summary: CartSummary = shoppingCart.cartSummary
                                     cartId = shoppingCart.idCart.toString()
                                     secretKey = shoppingCart.secureKey.toString()
-                                    //tvTotalDiscount.text = String.format("%.2f", summary.totalDiscounts).toDouble().toString() + " €"
+                                tvTotalDiscount.text = if(summary.totalDiscounts == 0.0)  "0,00 €" else df.format(summary.totalDiscounts).replace(".", ",") +" €"
+
+//                                    tvTotalDiscount.text = String.format("%.2f", summary.totalDiscounts).toDouble().toString() + " €"
                                     //tvSubTotal.text = String.format("%.2f", summary.totalProducts).toDouble().toString() + " €"
                                     //tvTotalTax.text = String.format("%.2f", summary.totalShipping).toDouble().toString() + " €"
                                     tvTotalDiscount.text =

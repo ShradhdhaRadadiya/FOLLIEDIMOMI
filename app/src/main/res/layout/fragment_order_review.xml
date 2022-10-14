@@ -51,34 +51,113 @@
                 android:layout_marginBottom="10dp"
                 android:background="@color/colorCommonText" />
 
-            <!--Stripe-->
+
+            <!--Boni-->
             <LinearLayout
                 style="@style/LinearLayoutHori"
+                android:layout_width="match_parent"
                 android:gravity="center_vertical">
 
                 <CheckBox
-                    android:id="@+id/cbxStripe"
+                    android:id="@+id/cbxBonifico"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:visibility="visible" />
 
-                <TextView
+                <LinearLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="60dp"
-                    android:layout_marginEnd="30dp"
-                    android:gravity="center_vertical"
-                    android:maxLines="2"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/ic_paypal"
-                    android:text="@string/pagamento_con_carta_di_credito_postepay_bancomat"
-                    android:textColor="@color/colorSecondaryTextDark"
-                    android:textSize="15sp"
-                    android:textStyle="bold" />
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="60dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ps_wirepayment"
+                        android:visibility="visible" />
+                </LinearLayout>
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="60dp"
-                    android:layout_marginStart="-20dp"
+                    android:layout_gravity="end"
+                    android:layout_marginStart="10dp"
                     android:src="@drawable/ic_info"
+                    android:visibility="visible"
+                    stripe:tint="@color/colorCommonText" />
+
+            </LinearLayout>
+
+
+            <!--Paypal-->
+            <LinearLayout
+                style="@style/LinearLayoutHori"
+                android:layout_width="match_parent"
+                android:gravity="center_vertical">
+
+                <CheckBox
+                    android:id="@+id/cbxPayPal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="visible" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="60dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ic_paypal"
+                        android:visibility="visible" />
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="60dp"
+                    android:layout_gravity="end"
+                    android:layout_marginStart="10dp"
+                    android:src="@drawable/ic_info"
+                    android:visibility="visible"
+                    stripe:tint="@color/colorCommonText" />
+
+            </LinearLayout>
+
+
+            <!--Paypal-->
+            <LinearLayout
+                style="@style/LinearLayoutHori"
+                android:layout_width="match_parent"
+                android:gravity="center_vertical">
+
+                <CheckBox
+                    android:id="@+id/cbxPay"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="visible" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="60dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ps_tanzopostepay"
+                        android:visibility="visible" />
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="60dp"
+                    android:layout_gravity="end"
+                    android:layout_marginStart="10dp"
+                    android:src="@drawable/ic_info"
+                    android:visibility="visible"
                     stripe:tint="@color/colorCommonText" />
 
             </LinearLayout>
@@ -89,99 +168,7 @@
                 android:layout_marginStart="7dp"
                 android:background="@color/white"
                 android:paddingBottom="10dp"
-                android:text="@string/spedizione_immediata"
-                android:textColor="@color/colorPrimary"
-                android:textSize="14sp" />
-
-            <!--Payment method icons -->
-            <LinearLayout
-                style="@style/LinearLayoutHori"
-                android:layout_marginStart="7dp">
-
-                <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="35dp"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/ic_visa_cart" />
-
-                <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="35dp"
-                    android:layout_marginStart="10dp"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/ic_master_card" />
-
-                <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="35dp"
-                    android:layout_marginStart="10dp"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/ic_american_express" />
-
-            </LinearLayout>
-
-            <include layout="@layout/stripe_card_layout" />
-
-            <!--<com.stripe.android.view.CardMultilineWidget
-                    android:theme="@style/CardWidgetStyle"
-                    android:layout_marginTop="15sp"
-                    android:visibility="gone"
-                    android:id="@+id/cardInputWidgetMultiple"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>-->
-
-            <!--Stripe card input widget-->
-            <!--			<com.stripe.android.view.CardInputWidget
-                                android:id="@+id/cardInputWidget"
-                                android:layout_width="match_parent"
-                                android:theme="@style/CardWidgetStyleSecond"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="15sp" />-->
-
-            <!--stripe:cardTint="@android:color/holo_purple"
-                    stripe:cardTextErrorColor="@android:color/holo_orange_dark"-->
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="25dp"
-                android:layout_marginBottom="10dp"
-                android:background="@color/colorCommonText" />
-
-            <!--Paypal-->
-            <LinearLayout
-                style="@style/LinearLayoutHori"
-                android:gravity="center_vertical">
-
-                <CheckBox
-                    android:id="@+id/cbxPayPal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:visibility="visible" />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="60dp"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/ic_paypal"
-                    android:visibility="visible" />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="60dp"
-                    android:layout_marginStart="10dp"
-                    android:src="@drawable/ic_info"
-                    android:tint="@color/colorCommonText"
-                    android:visibility="gone" />
-
-            </LinearLayout>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="7dp"
-                android:background="@color/white"
-                android:paddingBottom="10dp"
+                android:layout_marginTop="@dimen/_10sdp"
                 android:text="@string/spedizione_immediata"
                 android:textColor="@color/colorPrimary"
                 android:textSize="14sp" />

@@ -22,6 +22,7 @@ import com.folliedimomi.model.ProductListModel
 import com.folliedimomi.network.NetworkRepository
 import com.folliedimomi.sharedPrefrense.Session
 import com.folliedimomi.utils.*
+import com.folliedimomi.utils.Globals.drawerCatId
 import com.google.gson.JsonSyntaxException
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_dashboard.*
@@ -33,7 +34,7 @@ import org.kodein.di.generic.instance
 import java.io.IOException
 
 
-class DashboardFragment(private var drawerCatText: String = "", private var drawerCatId: Int = 0) :
+class DashboardFragment(private var drawerCatText: String = "") :
     Fragment(), KodeinAware, ProductListAdapter.GetAddToCartAndVideo {
     override val kodein: Kodein by kodein()
     private val repository: NetworkRepository by instance()
@@ -47,9 +48,12 @@ class DashboardFragment(private var drawerCatText: String = "", private var draw
     private var sortBy = "sales_desc"
     private var videoUrl = ""
     private var manufac = ""
+    private var start_price = ""
+    private var end_price = ""
     private var cate = ""
     private var categoryId = ""
     private val session: Session by instance()
+
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -59,8 +63,6 @@ class DashboardFragment(private var drawerCatText: String = "", private var draw
 
         tvFilter.setOnClickListener {
             val intent = Intent(mContext, AdvancedFilterActivity::class.java)
-            Log.e("TAG", "drawerCatId=======? $drawerCatId")
-            intent.putExtra("Parent_id", drawerCatId)
             startActivity(intent)
         }
 
@@ -172,6 +174,12 @@ class DashboardFragment(private var drawerCatText: String = "", private var draw
     }
 
     private fun getProductList() {
+        if (drawerCatId == 12) {
+            categoryId = ""
+            manufac = ""
+            start_price = ""
+            end_price = ""
+        }
         Log.e("ProductList", "ProductList -----: $drawerCatId--->$categoryId--->$manufac ")
         Coroutines.main {
             Globals.showProgress(mContext)
@@ -192,6 +200,12 @@ class DashboardFragment(private var drawerCatText: String = "", private var draw
             }
             if (manufac.trim().isNotEmpty()) {
                 mMap["id_manufacturer"] = manufac.convertBody()
+            }
+            if (start_price.trim().isNotEmpty()) {
+                mMap["start_price"] = start_price.convertBody()
+            }
+            if (end_price.trim().isNotEmpty()) {
+                mMap["end_price"] = end_price.convertBody()
             }
 
             Log.e("TAG", "data pass is ----> $mMap")
@@ -253,15 +267,11 @@ class DashboardFragment(private var drawerCatText: String = "", private var draw
                 Log.e("Receive", "receiver cal------------------")
                 categoryId = intent?.extras!!.getString("disData").toString()
                 manufac = intent.extras!!.getString("featureData").toString()
-                var data3 = intent.extras!!.getString("catId")
-                Log.e(
-                    "ProductList",
-                    "ProductList -----on activity result: $drawerCatId--->$categoryId--->$manufac "
-                )
+                end_price = intent.extras!!.getString("end_price").toString()
+                start_price = intent.extras!!.getString("start_price").toString()
                 getProductList()
             }
         }
-
         LocalBroadcastManager.getInstance(mContext)
             .registerReceiver(broadCastReceiver, IntentFilter("DataAction"))
 

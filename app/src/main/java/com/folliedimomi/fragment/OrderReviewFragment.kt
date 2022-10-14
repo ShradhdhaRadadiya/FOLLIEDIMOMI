@@ -109,44 +109,25 @@ class OrderReviewFragment(
                     //onInitPayPal()
                     //requireActivity().loadFragment(PayPalFragment(cartId, secretKey, grandTotal, idAddress, idCarrier, idAddressInvoice))
                 }
-                cbxStripe.isChecked -> {
 
-                    if (validate()) {
-                        val cardHolder = etCardHolder.text.toString()
-                        requireActivity().logI("Grand Total : $grandTotal")
-                        var amounts = grandTotal.toDouble().roundToInt() * 100
-                        requireActivity().logI("Amounts : $amounts")
-                        onInitStripe(
-                            amounts.toString(),
-                            session.getUserId().toString(),
-                            _currency,
-                            cardHolder = cardHolder
-                        )
-                    }
-
-                    //requireActivity().coordinatorLayout.snackBar("Under development")
-                    //val params = cardInputWidgetMultiple.paymentMethodCreateParams
-                    // val testCard = Card.create("4000000000003220", 12, 20, "123")
-
-                    // val params = testCard.toPaymentMethodsParams()
-                    /*val params = cardInputWidgetMultiple.paymentMethodCreateParams
-                    if (params != null) {
-                        val confirmParams = ConfirmPaymentIntentParams.createWithPaymentMethodCreateParams(params, paymentIntentClientSecret)
-                        stripe = Stripe(requireActivity().applicationContext, PaymentConfiguration.getInstance(requireContext().applicationContext).publishableKey)
-                        stripe.confirmPayment(this, confirmParams)
-                    }*/
-                }
                 else -> requireActivity().coordinatorLayout.snackBar("Seleziona il tipo di pagamento"/*""Please choose any payment option first"*/)
             }
         }
 
         cbxPayPal.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked) cbxStripe.isChecked = false
+            if (isChecked) cbxBonifico.isChecked = false
+            if (isChecked) cbxPay.isChecked = false
+        }
+        cbxBonifico.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) cbxPayPal.isChecked = false
+            if (isChecked) cbxPay.isChecked = false
+        }
+        cbxPay.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) cbxPayPal.isChecked = false
+            if (isChecked) cbxBonifico.isChecked = false
         }
 
-        cbxStripe.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked) cbxPayPal.isChecked = false
-        }
+
 
         tvCancel.setOnClickListener {
             requireActivity().supportFragmentManager.popBackStack(

@@ -26,7 +26,7 @@ class HomeFragment : Fragment(), KodeinAware {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        loadFragment(DashboardFragment())
+        loadFragment(DashboardFragment("Home"))
 
         etSearch.setOnEditorActionListener { v, actionId, event ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
@@ -40,7 +40,7 @@ class HomeFragment : Fragment(), KodeinAware {
             when (it.itemId) {
                 R.id.bNavHome -> {
                     searchDisable()
-                    requireActivity().loadFragment(DashboardFragment())
+                    requireActivity().loadFragment(DashboardFragment("Home"))
 //                    loadFragment(DashboardFragment())
                     true
                 }

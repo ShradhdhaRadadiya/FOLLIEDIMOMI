@@ -153,6 +153,8 @@ dependencies {
     /*KP ROGRESSHUD*/
     implementation 'com.kaopiz:kprogresshud:1.2.0'
 
+    implementation 'com.github.MohammedAlaaMorsi:RangeSeekBar:1.0.6'
+
 
     implementation 'com.github.Innovattic:range-seek-bar:1.0.4'
 

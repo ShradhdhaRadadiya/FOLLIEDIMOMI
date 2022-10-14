@@ -5,6 +5,7 @@ import com.kaopiz.kprogresshud.KProgressHUD
 
 object Globals {
     var progressFlower: KProgressHUD? = null
+    var drawerCatId = 12
 
     //show progress dialog
     fun showProgress(context: Context) {

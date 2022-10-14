@@ -1,10 +1,11 @@
 package com.folliedimomi.adapter
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.folliedimomi.activity.AdvancedFilterActivity.Companion.disData
+import com.folliedimomi.activity.AdvancedFilterActivity.Companion.categoryData
 import com.folliedimomi.activity.AdvancedFilterActivity.Companion.featureData
 import com.folliedimomi.databinding.ItemCheckboxCatListBinding
 import com.folliedimomi.model.AdvanceFilterModel
@@ -12,7 +13,9 @@ import com.folliedimomi.model.AdvanceFilterModel
 
 class AdvanceFilterFeatureListAdapter(
     private var dataList: List<AdvanceFilterModel.Result.Data>,
-    private var context: Context
+    private var context: Context,
+    private var listener: OnProductClick
+
 ) : RecyclerView.Adapter<AdvanceFilterFeatureListAdapter.DataViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DataViewHolder {
@@ -41,9 +44,12 @@ class AdvanceFilterFeatureListAdapter(
         RecyclerView.ViewHolder(mBinding.root) {
         fun setDataToView(model: AdvanceFilterModel.Result.Data) {
 
-            if (model.idManufacturer.toString() == "0") {
-                mBinding.check1.text = model.name
-                if (disData.contains(model.name)) {
+
+            Log.e("model","model is ----> $model")
+
+            if (model.idManufacturer == null || model.idManufacturer.toString() == "0") {
+                mBinding.check1.text = model.categoryName
+                if (categoryData.contains(model.categoryId)) {
                     mBinding.check1.isChecked = true
                 }
             } else {
@@ -56,15 +62,14 @@ class AdvanceFilterFeatureListAdapter(
 
             mBinding.check1.setOnCheckedChangeListener { _, b ->
                 if (b) {
-                    if (model.idManufacturer.toString() == "0") {
-                        if (disData.isEmpty()) {
-                            disData.add(model.name.toString())
+                    if (model.idManufacturer == null || model.idManufacturer.toString() == "0") {
+                        if (categoryData.isEmpty()) {
+                            categoryData.add(model.categoryId)
                         } else {
-                            if (disData.contains(model.name)) {
-                                disData.remove(model.name)
+                            if (categoryData.contains(model.categoryId)) {
+                                categoryData.remove(model.categoryId)
                             } else {
-                                disData.add(model.name.toString())
-
+                                categoryData.add(model.categoryId)
                             }
                         }
                     } else {
@@ -79,28 +84,32 @@ class AdvanceFilterFeatureListAdapter(
                         }
                     }
                 } else {
-                    if (model.idManufacturer.toString() == "0") {
-                        if (disData.isNotEmpty()) {
-                            if (disData.contains(model.name)) {
-                                disData.remove(model.name)
+                    if (model.idManufacturer == null || model.idManufacturer.toString() == "0") {
+                        if (categoryData.isNotEmpty()) {
+                            if (categoryData.contains(model.categoryId)) {
+                                categoryData.remove(model.categoryId)
                             }
                         }
                     } else {
                         if (featureData.isNotEmpty()) {
                             if (featureData.contains(model.idManufacturer!!.toInt())) {
                                 featureData.remove(model.idManufacturer!!.toInt())
-
                             }
                         }
                     }
                 }
 
+                Log.e("TAG","DATA IS ----> CATE---> $categoryData")
+                Log.e("TAG","DATA IS ----> featureData---> $featureData")
+                listener.onClickOnProduct(1, categoryData.joinToString (","), featureData.joinToString (","))
             }
 
-            mBinding.clBook.setOnClickListener {
-
-            }
         }
     }
+
+    interface OnProductClick {
+        fun onClickOnProduct(isCat: Int, adapterPosition: String, featureData : String)
+    }
 }
+
 

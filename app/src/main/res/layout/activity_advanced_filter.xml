@@ -38,9 +38,30 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="20dp"
-            app:layout_constraintBottom_toTopOf="@+id/rangeSeekBar"
-            app:layout_constraintTop_toBottomOf="@+id/imgFilter" />
+            android:layout_marginBottom="@dimen/_10sdp"
+            app:layout_constraintBottom_toTopOf="@+id/rangeSeekbar"
+            app:layout_constraintTop_toBottomOf="@+id/imgFilter"
+            app:layout_constraintTop_toTopOf="parent" />
 
+        <com.mohammedalaa.seekbar.DoubleValueSeekBarView
+            android:id="@+id/rangeSeekbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@+id/btnApply"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rvProduct"
+            app:r2barHeight="15dp"
+            app:r2baseColor="@color/navy"
+            app:r2circleFillColor="@color/white"
+            app:r2circleRadius="15dp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            app:r2circleTextColor="@color/black"
+            app:r2circleTextSize="@dimen/value_bar_circleTextSize"
+            app:r2fillColor="@color/blue"
+            android:visibility="gone"
+           />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvEmptyText"
@@ -56,13 +77,13 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/_35sdp"
             android:layout_below="@+id/rvProduct"
+            android:layout_marginTop="@dimen/_5sdp"
             android:background="@color/teal_200"
             android:text="@string/apply_il_filtyro"
             android:textAllCaps="false"
             android:textColor="@color/white"
-            android:layout_marginTop="@dimen/_5sdp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/rvProduct" />
+            app:layout_constraintTop_toBottomOf="@+id/rangeSeekbar" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
