@@ -419,6 +419,17 @@ interface MyApi {
     suspend fun deleteOrder(@PartMap map: Map<String, @JvmSuppressWildcards RequestBody>)
             : Response<Delete>*/
 
+
+
+    @GET("index.php")
+    suspend fun deleteAcc(
+        @Query("controller") controller: String = "mobileapi",
+        @Query("op") op: String = "deleteaccount",
+        @Query("id_customer") id_customer: String
+    ): Response<CommonResponse>
+
+
+
     @Multipart
     @POST("upload")
     fun uploadMultipleFilesDynamic(

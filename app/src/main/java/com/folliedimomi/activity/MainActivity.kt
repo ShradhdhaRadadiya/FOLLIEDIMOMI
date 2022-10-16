@@ -85,6 +85,7 @@ class MainActivity : AppCompatActivity(),
         //forceRtlIfSupported() //Right to Left transaction
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        mActivity = this
         lifecycle.addObserver(MyObserver()) //LifeCycle Observer from JetPack
 
 
@@ -445,6 +446,8 @@ class MainActivity : AppCompatActivity(),
     companion object {
         var cartCount: Int = 0
         var icon: LayerDrawable? = null
+       var mActivity: MainActivity?= null
+
     }
 
     override fun onShoppingCartUpdate() {

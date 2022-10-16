@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
 import com.folliedimomi.R
 import com.folliedimomi._app.Constant
+import com.folliedimomi.activity.MainActivity
 import com.folliedimomi.adapter.BannerAdapter
 import com.folliedimomi.databinding.DialogeVideoPlayBinding
 import com.folliedimomi.model.Gallery
@@ -199,6 +200,11 @@ class ProductDetailsFragment(private var p_id: Int) : Fragment(), KodeinAware,
                 drawerData.result.let {
                     if (drawerData.status == 1) {
                         requireActivity().toast(drawerData.message)
+                        drawerData.result.products.let {
+                            val product = drawerData.result.products
+                            product.let { MainActivity.cartCount = product.size }
+                            MainActivity.mActivity?.updateCount(requireContext(), MainActivity.cartCount)
+                        }
                     }
                     //hide
                     Globals.hideProgress()

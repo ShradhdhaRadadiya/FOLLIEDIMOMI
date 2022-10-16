@@ -93,6 +93,9 @@ class OrderReviewFragment(
         btnPayNow.setOnClickListener {
             when {
                 cbxPayPal.isChecked -> {
+                    requireActivity().toast("Prossimamente...")
+
+/*
 
                     if (grandTotal.isNotEmpty()) {
                         paymentAmount = grandTotal
@@ -105,9 +108,16 @@ class OrderReviewFragment(
                     dropInRequest.collectDeviceData(true)
                     startActivityForResult(dropInRequest.getIntent(requireActivity()), 100)
 
+*/
 
                     //onInitPayPal()
                     //requireActivity().loadFragment(PayPalFragment(cartId, secretKey, grandTotal, idAddress, idCarrier, idAddressInvoice))
+                }
+                cbxBonifico.isChecked -> {
+                    onPlaceOrder("Bonifico bancario", "ps_wirepayment")
+                }
+                cbxPay.isChecked -> {
+                    onPlaceOrder("Pagamento tramite PostePay", " ps_tanzopostepay")
                 }
 
                 else -> requireActivity().coordinatorLayout.snackBar("Seleziona il tipo di pagamento"/*""Please choose any payment option first"*/)
@@ -121,10 +131,12 @@ class OrderReviewFragment(
         cbxBonifico.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) cbxPayPal.isChecked = false
             if (isChecked) cbxPay.isChecked = false
+
         }
         cbxPay.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) cbxPayPal.isChecked = false
             if (isChecked) cbxBonifico.isChecked = false
+
         }
 
 
@@ -198,76 +210,50 @@ class OrderReviewFragment(
 
     }
 
-    private fun onInitStripe(
-        amount: String,
-        userId: String = "0",
-        currency: String = _currency,
-        cardHolder: String = ""
-    ) {
-        onAuthorizeStripe(amount, userId, currency, cardHolder)
-    }
 
-    private fun onAuthorizeStripe(
-        amount: String,
-        userId: String = "0",
-        currency: String = _currency,
-        cardHolder: String = ""
-    ) {
-        requireActivity().progress_bars_layout.show()
-        Coroutines.main {
-            try {
-                val auth: StripeAuthentication = repository.onStripeAuth(
-                    amount = amount,
-                    userId = userId,
-                    cardHolder = cardHolder,
-                    currency = currency
-                )
-                auth?.let {
-                    //requireActivity().progress_bars_layout.hide()
-                    publishableKey = auth.publishableKey
-                    paymentIntentClientSecret = auth.clientSecret
-                    stripe = Stripe(requireActivity().applicationContext, publishableKey)
 
-                    /*val params = cardInputWidgetMultiple.paymentMethodCreateParams
-                    if (params != null) {
-                        val confirmParams = ConfirmPaymentIntentParams.createWithPaymentMethodCreateParams(params, paymentIntentClientSecret)
-                        stripe = Stripe(requireActivity().applicationContext, PaymentConfiguration.getInstance(requireContext().applicationContext).publishableKey)
-                        stripe.confirmPayment(this, confirmParams)
-                    }*/
 
-                    val cardNumber = etCardNumber.text.toString()
-                    val exMonth = etExpMonth.text.toString()
-                    val exYear = etExpYear.text.toString()
-                    val cvv = etCVV.text.toString()
 
-                    /*val testCard = Card(expMonth = exMonth.toInt(),
-                        expYear = exYear.toInt(),
-                        name =  cardNumber,addressLine1=null,addressLine1Check=null,addressLine2=null,addressCity=null,
-                        addressState=null,
-                        addressZip=null,addressZipCheck=null,addressCountry=null ,last4=null,brand = CardBrand.Unknown,
-                        funding = CardFunding.Unknown,fingerprint=null,country=null,currency=null,customerId=null,cvcCheck = cvv,id=null,tokenizationMethod=null)*/
-                    val testCard = Card.create(cardNumber, exMonth.toInt(), exYear.toInt(), cvv)
-//                    val testCard = Card.create("4242424242424242", 12, 20, "123")
-                    val params = testCard.toPaymentMethodsParams()
-                    if (params != null) {
-                        val confirmParams =
-                            ConfirmPaymentIntentParams.createWithPaymentMethodCreateParams(
-                                params,
-                                paymentIntentClientSecret,
-                                "",
-                                false
-                            )
-                        stripe.confirmPayment(this, confirmParams)
-                    }
-                    return@main
-                }
-            } catch (e: Exception) {
-                requireActivity().onException(e)
-            }
-        }
-    }
+    /*
+     id_cart
+        id_customer
+     id_address_delivery
+     id_address_invoice
+     id_carrier
+     order_payment
+     order_module
+     secure_key
+     customersessionid
+     is_guest
+     guest_email
+     is_same_invoice_address
+     shipping_id_country
+     shipping_id_state
+     shipping_firstname
+     shipping_lastname
+      shipping_company
+    shipping_vat_number
+    shipping_address1
+    shipping_address2
+    shipping_postcode
+    shipping_city
+    shipping_phone_mobile
+    payment_id_country
+    payment_id_state
+payment_firstname
+payment_lastname
+payment_company
+payment_vat_number
+payment_address1
+payment_address2
+payment_postcode
+payment_city
+payment_phone_mobile
 
-    private fun onPlaceOrder(cardHolderName: String, paymentMethod: String) {
+
+     */
+
+    private fun onPlaceOrder(orderPayment: String, paymentMethod: String) {
         Coroutines.main {
             requireActivity().progress_bars_layout.show()
             val mMap = HashMap<String, RequestBody>()
@@ -276,10 +262,9 @@ class OrderReviewFragment(
             mMap["id_cart"] = cartId.convertBody()
             mMap["lang_id"] = Constant.LANG.convertBody()
 
-            mMap["order_payment"] = /*cardHolderName*/paymentMethod.toString().convertBody()
+            mMap["order_payment"] = /*cardHolderName*/orderPayment.toString().convertBody()
             mMap["order_module"] = paymentMethod.toString().convertBody()
-            //mMap["order_payment"] = "Bonifico bancario".toString().convertBody()
-            //mMap["order_module"] = "ps_wirepayment".toString().convertBody()
+
             mMap["secure_key"] = secretKey.convertBody()
             mMap["customersessionid"] = session.getAppSession().toString().convertBody()
 
@@ -493,40 +478,6 @@ class OrderReviewFragment(
 
                 }
             }
-        } else {
-            val weakActivity = WeakReference<Activity>(requireActivity())
-            stripe.onPaymentResult(
-                requestCode,
-                data,
-                object : ApiResultCallback<PaymentIntentResult> {
-                    override fun onSuccess(result: PaymentIntentResult) {
-                        val paymentIntent = result.intent
-                        val status = paymentIntent.status
-                        if (status == StripeIntent.Status.Succeeded) {
-                            val gson = GsonBuilder().setPrettyPrinting().create()
-                            val id = paymentIntent.id
-                            //displayAlert(weakActivity.get(), "Completa Pagamento"/*"Payment succeeded"*/, gson.toJson(paymentIntent))
-                            onPlaceOrder(id!!.toString(), "Stripe")
-                        } else {
-                            requireActivity().progress_bars_layout.hide()
-                            displayAlert(
-                                weakActivity.get(),
-                                "Pagamento fallito"/*"Payment failed"*/,
-                                paymentIntent.lastPaymentError?.message
-                                    ?: ""
-                            )
-                        }
-                    }
-
-                    override fun onError(e: Exception) {
-                        requireActivity().progress_bars_layout.hide()
-                        displayAlert(
-                            weakActivity.get(),
-                            "Pagamento fallito"/*"Payment failed"*/,
-                            e.toString()
-                        )
-                    }
-                })
         }
     }
 
@@ -552,44 +503,6 @@ class OrderReviewFragment(
 
     }
 
-
-    private fun displayAlert(
-        activity: Activity?,
-        title: String,
-        message: String,
-        restartDemo: Boolean = false
-    ) {
-        if (activity == null) {
-            return
-        }
-        Coroutines.main {
-            val builder = AlertDialog.Builder(requireActivity())
-            builder.setTitle(title)
-            builder.setMessage(message)
-            if (restartDemo) {
-                builder.setPositiveButton("Restart demo") { _, _ ->
-                    //val cardInputWidget = findViewById<CardInputWidget>(R.id.cardInputWidget)
-                    //cardInputWidgetMultiple.clear()
-                    //startCheckout()
-                    if (validate()) {
-                        val cardHolder = etCardHolder.text.toString()
-                        var amounts = grandTotal.toDouble().roundToInt() * 100
-                        onInitStripe(
-                            amounts.toString(),
-                            session.getUserId().toString(),
-                            _currency,
-                            cardHolder = cardHolder
-                        )
-                    }
-                    //onAuthorizeStripe("1200"/*grandTotal.toDouble().toInt().toString()*/, session.getUserId().toString())
-                }
-            } else {
-                builder.setPositiveButton("Ok", null)
-            }
-            val dialog = builder.create()
-            dialog.show()
-        }
-    }
 
     var cartId: String = ""
     var isGuest: Boolean = false

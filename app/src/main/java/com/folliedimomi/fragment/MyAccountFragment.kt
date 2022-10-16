@@ -28,11 +28,17 @@ class MyAccountFragment : Fragment(), KodeinAware {
                 OrderListFragment()
             )
         }
+
+
+        if(session.isServerLoggedIn()){
+            tvDeleteAcc.visibility= View.VISIBLE
+        }
         tvOrderTracking.setOnClickListener { requireActivity().loadFragment(WebPageFragment("${Constant.URL}it/dove-si-trova-il-mio-pacco")) }
 //        tvOrderTracking.setOnClickListener { requireActivity().loadFragment(WebPageFragment("${Constant.URL}it/index.php?controller=mypage")) }
         tvMyAddresses.setOnClickListener { requireActivity().loadFragment(AddressFragment()) }
         tvPersonalInformation.setOnClickListener { requireActivity().loadFragment(ProfileFragment()) }
         tvMyVoucher.setOnClickListener { requireActivity().loadFragment(CouponFragment()) }
+        tvDeleteAcc.setOnClickListener { requireActivity().loadFragment(CouponFragment()) }
     }
 
     override fun onCreateView(

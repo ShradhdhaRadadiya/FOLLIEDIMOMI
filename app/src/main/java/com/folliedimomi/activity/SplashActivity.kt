@@ -24,6 +24,9 @@ class SplashActivity : AppCompatActivity(), SplashFragment.OnFragmentInteraction
 
     }
 
+    //carlolvr@gmail.com
+//    rTUg1Y8y
+
     override fun onSplashComplete() {
         if (Session(this).isServerLoggedIn()) {
             showDashboard()

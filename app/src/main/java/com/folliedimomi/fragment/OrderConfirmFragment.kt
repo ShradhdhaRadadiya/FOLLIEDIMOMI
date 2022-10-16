@@ -39,7 +39,10 @@ class OrderConfirmFragment(val orderId: String, val cartId: String, val userId: 
                 FragmentManager.POP_BACK_STACK_INCLUSIVE
             )
         }
-        onConfirmOrder()
+
+        llSuccess.show()
+        MainActivity.cartCount = 0
+//        onConfirmOrder()
         /* if (session.getAppSession()!!.isEmpty()) */session.setAppSession(
             String().getRandomString(
                 14

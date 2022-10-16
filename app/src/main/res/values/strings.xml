@@ -10,7 +10,11 @@
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
 
-
+    <string name="cancella">cancella i miei dati</string>
+    <string name="indieizzo">INDIRIZZO FATTURAZIONE</string>
+    <string name="elimina">ELIMINA IL MIO ACCOUNT</string>
+    <string name="in_conformia">In conformità con il Regolamento generale sulla protezione dei dati (GDPR) dell\'UE, l\'utente ha il diritto di richiedere l\'anonimizzazione dei dati personali contenuti nel sito Web. Si prega di notare che questo processo è irreversibile e non può essere annullato.
+Se sei sicuro di voler procedere con questo processo, puoi iniziare cliccando qui sotto.</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Android Dev</string>

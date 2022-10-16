@@ -16,6 +16,8 @@ import com.bumptech.glide.Glide
 import com.folliedimomi.R
 import com.folliedimomi._app.Constant
 import com.folliedimomi.activity.AdvancedFilterActivity
+import com.folliedimomi.activity.MainActivity
+import com.folliedimomi.activity.MainActivity.Companion.mActivity
 import com.folliedimomi.adapter.ProductListAdapter
 import com.folliedimomi.databinding.DialogeVideoPlayBinding
 import com.folliedimomi.model.ProductListModel
@@ -324,6 +326,11 @@ class DashboardFragment(private var drawerCatText: String = "") :
                 drawerData.result.let {
                     if (drawerData.status == 1) {
                         requireActivity().toast(drawerData.message)
+                        drawerData.result.products.let {
+                            val product = drawerData.result.products
+                            product?.let { MainActivity.cartCount = product.size }
+                            mActivity?.updateCount(requireContext(), MainActivity.cartCount)
+                        }
                     }
                     //hide
                     Globals.hideProgress()

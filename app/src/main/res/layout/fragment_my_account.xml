@@ -86,6 +86,12 @@
             android:id="@+id/tvPersonalInformation"
             style="@style/TextViewProfile"
             android:text="@string/my_personal_information" />
+
+        <TextView
+            android:id="@+id/tvDeleteAcc"
+            style="@style/TextViewProfile"
+            android:text="@string/cancella" />
+
         <!--My Voucher-->
         <TextView
             android:id="@+id/tvMyVoucher"
