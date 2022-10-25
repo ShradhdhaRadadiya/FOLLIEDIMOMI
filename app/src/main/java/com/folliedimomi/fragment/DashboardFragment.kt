@@ -325,7 +325,7 @@ class DashboardFragment(private var drawerCatText: String = "") :
 
                 drawerData.result.let {
                     if (drawerData.status == 1) {
-                        requireActivity().toast(drawerData.message)
+                        requireActivity().toast("Prodotto aggiunto con successo al carrello.")
                         drawerData.result.products.let {
                             val product = drawerData.result.products
                             product?.let { MainActivity.cartCount = product.size }
@@ -365,7 +365,7 @@ class DashboardFragment(private var drawerCatText: String = "") :
         if (videoUrl.isNotEmpty()) {
             openDialogeForVideo(videoUrl)
         } else {
-            requireContext().toast("Video not found!")
+            requireContext().toast("ERROR LOADING ALL VIDEO")
         }
     }
 }

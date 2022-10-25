@@ -33,7 +33,7 @@ class MyAccountFragment : Fragment(), KodeinAware {
         if(session.isServerLoggedIn()){
             tvDeleteAcc.visibility= View.VISIBLE
         }
-        tvOrderTracking.setOnClickListener { requireActivity().loadFragment(WebPageFragment("${Constant.URL}it/dove-si-trova-il-mio-pacco")) }
+        tvOrderTracking.setOnClickListener { requireActivity().loadFragment(WebPageFragment("https://folliedimomi.it/tracking-ospite" ))}
 //        tvOrderTracking.setOnClickListener { requireActivity().loadFragment(WebPageFragment("${Constant.URL}it/index.php?controller=mypage")) }
         tvMyAddresses.setOnClickListener { requireActivity().loadFragment(AddressFragment()) }
         tvPersonalInformation.setOnClickListener { requireActivity().loadFragment(ProfileFragment()) }

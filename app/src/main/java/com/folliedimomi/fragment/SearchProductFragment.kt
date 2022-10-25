@@ -247,7 +247,7 @@ class SearchProductFragment(private val searchText: String) : Fragment(), Kodein
 
                 drawerData.result.let {
                     if (drawerData.status == 1) {
-                        requireActivity().toast(drawerData.message)
+                        requireActivity().toast("Prodotto aggiunto con successo al carrello.")
                     }
                     //hide
                     Globals.hideProgress()

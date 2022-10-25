@@ -22,9 +22,8 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="130dp"
-                android:src="@drawable/ic_launcher_background"
-                android:text="@string/app_name"
-                app:tint="@color/black" />
+                android:src="@drawable/app_icon"
+                android:text="@string/app_name" />
 
             <TextView
                 android:layout_width="match_parent"

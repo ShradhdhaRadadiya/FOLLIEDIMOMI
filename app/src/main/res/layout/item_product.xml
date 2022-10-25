@@ -121,7 +121,7 @@
                 android:paddingTop="@dimen/_3sdp"
                 android:paddingEnd="@dimen/_10sdp"
                 android:paddingBottom="@dimen/_3sdp"
-                android:text="AGGIUINI AL CARReLLO"
+                android:text="AGGIUNGI AL CARRELLO"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_9ssp"

@@ -76,8 +76,6 @@ class MainActivity : AppCompatActivity(),
     private lateinit var imgUserProfile: ImageView
     private var drawerListData = arrayListOf<DrawerMenuModel.Result>()
 
-
-
     var drawerCatText = "Home"
 
 

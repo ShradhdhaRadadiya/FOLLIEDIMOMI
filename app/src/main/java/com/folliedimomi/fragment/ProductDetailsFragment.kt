@@ -57,7 +57,7 @@ class ProductDetailsFragment(private var p_id: Int) : Fragment(), KodeinAware,
         super.onViewCreated(view, savedInstanceState)
         getProductDetails()
 
-        onAddToCartProduct(proId)
+//        onAddToCartProduct(proId)
 
         tvplus.setOnClickListener {
             var data = (tvDigit.text.toString()).toInt()
@@ -84,7 +84,7 @@ class ProductDetailsFragment(private var p_id: Int) : Fragment(), KodeinAware,
                 openDialogeForVideo(videoUrl)
 
             } else {
-                requireContext().toast("Video not found!")
+                requireContext().toast("ERROR LOADING ALL VIDEO")
             }
         }
 
@@ -118,7 +118,7 @@ class ProductDetailsFragment(private var p_id: Int) : Fragment(), KodeinAware,
 
                 drawerData.result.let {
                     if (drawerData.status == 1) {
-                        requireActivity().toast(drawerData.message)
+                        requireActivity().toast("Prodotto aggiunto con successo al carrello.")
                     }
                     //hide
                     Globals.hideProgress()
@@ -320,7 +320,7 @@ class ProductDetailsFragment(private var p_id: Int) : Fragment(), KodeinAware,
                             tvVideoDec.text = Html.fromHtml( dataDis.description)
 
 
-                        } else requireActivity().coordinatorLayout.snackBar(createOrderResponse.message)
+                        } else requireActivity().coordinatorLayout.snackBar("ERROR LOADING ALL VIDEO")
                         return@main
                     }
                 }
