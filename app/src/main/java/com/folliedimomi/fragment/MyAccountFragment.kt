@@ -23,6 +23,7 @@ class MyAccountFragment : Fragment(), KodeinAware {
         super.onViewCreated(view, savedInstanceState)
 
 
+
         tvOrderHistoryAndDetail.setOnClickListener {
             requireActivity().loadFragment(
                 OrderListFragment()

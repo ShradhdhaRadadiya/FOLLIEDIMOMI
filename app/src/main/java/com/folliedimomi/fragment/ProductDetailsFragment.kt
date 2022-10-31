@@ -118,7 +118,9 @@ class ProductDetailsFragment(private var p_id: Int) : Fragment(), KodeinAware,
 
                 drawerData.result.let {
                     if (drawerData.status == 1) {
-                        requireActivity().toast("Prodotto aggiunto con successo al carrello.")
+//                        requireActivity().toast("Prodotto aggiunto con successo al carrello.")
+                       loadFragmentMain(ShoppingCartFragment(), getString(R.string.shopping_cart))
+
                     }
                     //hide
                     Globals.hideProgress()
@@ -149,6 +151,12 @@ class ProductDetailsFragment(private var p_id: Int) : Fragment(), KodeinAware,
         }
     }
 
+    fun loadFragmentMain(fragment: Fragment, title: String = "") {
+        val fragmentTransaction = requireActivity().supportFragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.container, fragment)
+            .addToBackStack(fragment::class.java.simpleName).commit()
+        if (title.isNotEmpty()) requireActivity().title = title
+    }
     private fun openDialogeForVideo(videoUrl: String) {
         val binding: DialogeVideoPlayBinding = DialogeVideoPlayBinding.inflate(
             LayoutInflater.from(context)
@@ -166,8 +174,8 @@ class ProductDetailsFragment(private var p_id: Int) : Fragment(), KodeinAware,
         binding.videoView.setVideoPath(videoUrl)
         binding.videoView.setOnPreparedListener {
             it.isLooping = true
-            binding.videoView.setMediaController(MediaController(requireContext()));
-            binding.videoView.requestFocus();
+            binding.videoView.setMediaController(MediaController(requireContext()))
+            binding.videoView.requestFocus()
             binding.videoView.start()
         }
         dialog.show()
@@ -330,10 +338,6 @@ class ProductDetailsFragment(private var p_id: Int) : Fragment(), KodeinAware,
         }
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_product_detail, container, false)
     }
@@ -348,8 +352,7 @@ class ProductDetailsFragment(private var p_id: Int) : Fragment(), KodeinAware,
         listener = null
     }
 
-    interface OnFragmentInteractionListener {
-    }
+    interface OnFragmentInteractionListener
 
     override fun leftClick(pos: Int) {
         viewPager.arrowScroll(ViewPager.FOCUS_LEFT)

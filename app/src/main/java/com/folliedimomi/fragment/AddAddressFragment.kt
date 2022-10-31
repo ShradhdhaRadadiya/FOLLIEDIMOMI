@@ -10,6 +10,7 @@ import com.folliedimomi.dialog.CountryDialog
 import com.folliedimomi.dialog.StateDialog
 import com.folliedimomi.model.AddAddressResponse
 import com.folliedimomi.model.CountryRespnse
+import com.folliedimomi.model.CountryState
 import com.folliedimomi.model.StateRespnse
 import com.folliedimomi.network.NetworkRepository
 import com.folliedimomi.sharedPrefrense.Session
@@ -104,7 +105,11 @@ class AddAddressFragment(onAddressAddedListener: OnAddressAddedListner) : Fragme
             true
         }
 
-        getCountry()
+//        getCountry()
+        Constant.countryList = emptyList()
+        val coun: ArrayList<CountryState> = arrayListOf()
+        CountryState("Italy",10)
+        Constant.countryList = coun as List<CountryState>
         //getState(countryId)
     }
 

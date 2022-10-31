@@ -10,9 +10,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import com.braintreepayments.api.dropin.DropInActivity
-import com.braintreepayments.api.dropin.DropInRequest
-import com.braintreepayments.api.dropin.DropInResult
+
 import com.folliedimomi.R
 import com.folliedimomi._app.Constant
 import com.folliedimomi._app.loadFragment
