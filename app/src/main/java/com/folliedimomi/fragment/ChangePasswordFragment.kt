@@ -106,5 +106,8 @@ class ChangePasswordFragment : Fragment(), KodeinAware {
         return inflater.inflate(R.layout.fragment_change_password, container, false)
     }
 
-
+    override fun onDestroy() {
+        super.onDestroy()
+        System.gc()
+    }
 }

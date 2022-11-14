@@ -83,7 +83,6 @@ class ProductListAdapter(
         }
         holder.tvVideo.setOnClickListener {
             listnern.onOpenVideo(item.video[0].video_url)
-
         }
     }
 

@@ -301,5 +301,8 @@ class CheckOutRegisterFragment(mCartId: String, mSecretKey: String, mGrandTotal:
         menu.findItem(R.id.action_cart).isVisible = false
         menu.findItem(R.id.action_search).isVisible = false
     }
-
+    override fun onDestroy() {
+        super.onDestroy()
+        System.gc()
+    }
 }

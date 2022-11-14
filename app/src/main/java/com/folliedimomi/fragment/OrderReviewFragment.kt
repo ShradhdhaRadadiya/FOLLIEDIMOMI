@@ -10,6 +10,9 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import com.braintreepayments.api.dropin.DropInActivity
+import com.braintreepayments.api.dropin.DropInRequest
+import com.braintreepayments.api.dropin.DropInResult
 
 import com.folliedimomi.R
 import com.folliedimomi._app.Constant
@@ -64,18 +67,11 @@ class OrderReviewFragment(
 
     val _currency: String = "eur"
 
-    /**Stripe*/
-    private lateinit var publishableKey: String
-    private lateinit var paymentIntentClientSecret: String
-    private lateinit var stripe: Stripe
 
     /**Paypal*/
     private var paymentAmount: String = "0"
     val PAYPAL_REQUEST_CODE = 123
-    var config: PayPalConfiguration =
-        PayPalConfiguration().environment(PayPalConfiguration.ENVIRONMENT_PRODUCTION).clientId(
-            PayPalConfig.PAYPAL_CLIENT_ID
-        )
+
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -91,9 +87,8 @@ class OrderReviewFragment(
         btnPayNow.setOnClickListener {
             when {
                 cbxPayPal.isChecked -> {
-                    requireActivity().toast("Prossimamente...")
+//                    requireActivity().toast("Prossimamente...")
 
-/*
 
                     if (grandTotal.isNotEmpty()) {
                         paymentAmount = grandTotal
@@ -101,12 +96,14 @@ class OrderReviewFragment(
                     //sandbox_d5b6zwpj_3g283r5trmgxb8qc - SANDBOX
                     //production_w3jssw64_89xhm7rnq77hczy2 - live
 
+                    //sandbox_d5b6zwpj_3g283r5trmgxb8qc
+                    //sandbox_5r47y8bm_vx92z4tv69dyxhx3
+
                     val dropInRequest =
-                        DropInRequest().tokenizationKey("production_w3jssw64_89xhm7rnq77hczy2")
+                        DropInRequest().tokenizationKey("sandbox_d5b6zwpj_3g283r5trmgxb8qc")
                     dropInRequest.collectDeviceData(true)
                     startActivityForResult(dropInRequest.getIntent(requireActivity()), 100)
 
-*/
 
                     //onInitPayPal()
                     //requireActivity().loadFragment(PayPalFragment(cartId, secretKey, grandTotal, idAddress, idCarrier, idAddressInvoice))
@@ -208,48 +205,6 @@ class OrderReviewFragment(
 
     }
 
-
-
-
-
-    /*
-     id_cart
-        id_customer
-     id_address_delivery
-     id_address_invoice
-     id_carrier
-     order_payment
-     order_module
-     secure_key
-     customersessionid
-     is_guest
-     guest_email
-     is_same_invoice_address
-     shipping_id_country
-     shipping_id_state
-     shipping_firstname
-     shipping_lastname
-      shipping_company
-    shipping_vat_number
-    shipping_address1
-    shipping_address2
-    shipping_postcode
-    shipping_city
-    shipping_phone_mobile
-    payment_id_country
-    payment_id_state
-payment_firstname
-payment_lastname
-payment_company
-payment_vat_number
-payment_address1
-payment_address2
-payment_postcode
-payment_city
-payment_phone_mobile
-
-
-     */
 
     private fun onPlaceOrder(orderPayment: String, paymentMethod: String) {
         Coroutines.main {
@@ -435,7 +390,7 @@ payment_phone_mobile
                                 val jsonResponse = jsonDetails.getJSONObject("response")
                                 val paymentStatus = jsonResponse.getString("state")
                                 val paymentId = jsonResponse.getString("id")
-                                onPlaceOrder(paymentId, "Paypal")
+                                onPlaceOrder(paymentId, "paypalwithfee")
                                 //displayAlert(requireActivity(), "Completa Pagamento"/*"Payment succeeded"*/, "Status : $paymentStatus and Payment Id : $paymentId")
                                 //showDetail(jsonDetails.getJSONObject("response"), grandTotal)
                             } catch (e: JSONException) {
@@ -457,7 +412,8 @@ payment_phone_mobile
         } else if (requestCode == 100) {
             when (resultCode) {
                 AppCompatActivity.RESULT_OK -> {
-                    val result: DropInResult =
+                    val result:
+                            DropInResult =
                         data?.getParcelableExtra<DropInResult>(DropInResult.EXTRA_DROP_IN_RESULT) as DropInResult
                     val paymentMethodNonce = result.paymentMethodNonce
                     val devicedATA = result.deviceData
@@ -490,7 +446,7 @@ payment_phone_mobile
             auth.let {
                 Log.e("TAG", "rESPONSE IS -----> $it")
                 if (auth.success) {
-                    onPlaceOrder(auth.transaction.id.toString(), "Paypal")
+                    onPlaceOrder(auth.transaction.id.toString(), "paypalwithfee")
 //                    requireActivity().loadFragment(HomeFragment())
 //                    requireActivity().supportFragmentManager.popBackStackImmediate()
                 }
@@ -562,5 +518,8 @@ payment_phone_mobile
                     }
                 })
     }*/
-
+    override fun onDestroy() {
+        super.onDestroy()
+        System.gc()
+    }
 }

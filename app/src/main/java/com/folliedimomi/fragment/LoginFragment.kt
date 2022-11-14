@@ -155,5 +155,8 @@ class LoginFragment : Fragment(), View.OnClickListener, KodeinAware {
         fun onLoadForgotPassword()
     }
 
-
+    override fun onDestroy() {
+        super.onDestroy()
+        System.gc()
+    }
 }

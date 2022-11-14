@@ -37,7 +37,7 @@ interface MyApi {
     //https://cipri-couture.com/braintree/src/create-payment.php
 
     @FormUrlEncoded
-    @POST("braintree/src/create-payment.php")
+    @POST("ps17/braintree/src/create-payment.php")
     suspend fun onPaypalAuth(
         @Field("payment_method_nonce") nonce: String,
         @Field("amount") amount: String = "",

@@ -51,7 +51,7 @@ data class ProductListModel(
 
             )
 
-        data class Product(
+      /*  data class Product(
             @SerializedName("active")
             var active: String,
             @SerializedName("additional_delivery_times")
@@ -184,8 +184,7 @@ data class ProductListModel(
             var outOfStock: Int,
             @SerializedName("pack_stock_type")
             var packStockType: String,
-            @SerializedName("price")
-            var price: String,
+
             @SerializedName("product_image")
             var productImage: String,
             @SerializedName("quantity")
@@ -238,6 +237,42 @@ data class ProductListModel(
             var wholesalePrice: String,
             @SerializedName("width")
             var width: String
+        )*/
+        data class Product(
+
+          /*Name,
+Price
+Salesnumber,
+barWidth
+productImage
+new
+video
+idProduct
+video[0]
+*/
+
+
+
+          @SerializedName("name")
+          var name: String,
+          @SerializedName("new")
+          var new: Int,
+          @SerializedName("sales_number")
+          var salesNumber: String,
+          @SerializedName("bar_width")
+          var barWidth: Int,
+          @SerializedName("product_image")
+          var productImage: String,
+          @SerializedName("video")
+          var video: List<Video>,
+          @SerializedName("id_product")
+          var idProduct: Int,
+          @SerializedName("price")
+          var price: String,
+          @SerializedName("bar_class")
+          var barClass: String,
+
+
         )
     }
 

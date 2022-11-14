@@ -161,6 +161,9 @@ class WebPageFragment(private val url: String) : Fragment(), IOnBackPressed {
 
     }
 
-
+    override fun onDestroy() {
+        super.onDestroy()
+        System.gc()
+    }
 }
 

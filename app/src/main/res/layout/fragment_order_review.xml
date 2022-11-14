@@ -71,7 +71,7 @@
 
                     <ImageView
                         android:layout_width="wrap_content"
-                        android:layout_height="60dp"
+                        android:layout_height="wrap_content"
                         android:scaleType="centerCrop"
                         android:src="@drawable/ps_wirepayment"
                         android:visibility="visible" />
@@ -108,7 +108,7 @@
 
                     <ImageView
                         android:layout_width="wrap_content"
-                        android:layout_height="60dp"
+                        android:layout_height="@dimen/_60sdp"
                         android:scaleType="centerCrop"
                         android:src="@drawable/ic_paypal"
                         android:visibility="visible" />
@@ -124,6 +124,16 @@
                     stripe:tint="@color/colorCommonText" />
 
             </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="7dp"
+                android:background="@color/white"
+                android:paddingBottom="10dp"
+                android:text="@string/spedizione_immediata"
+                android:textColor="@color/colorPrimary"
+                android:textSize="14sp" />
+
 
 
             <!--Paypal-->
@@ -145,7 +155,7 @@
 
                     <ImageView
                         android:layout_width="wrap_content"
-                        android:layout_height="60dp"
+                        android:layout_height="wrap_content"
                         android:scaleType="centerCrop"
                         android:src="@drawable/ps_tanzopostepay"
                         android:visibility="visible" />
@@ -162,16 +172,7 @@
 
             </LinearLayout>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="7dp"
-                android:background="@color/white"
-                android:paddingBottom="10dp"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:text="@string/spedizione_immediata"
-                android:textColor="@color/colorPrimary"
-                android:textSize="14sp" />
+
 
         </LinearLayout>
 

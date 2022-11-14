@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
 import com.folliedimomi.R
 import com.folliedimomi._app.Constant
+import com.folliedimomi._app.loadFragment
 import com.folliedimomi.activity.MainActivity
 import com.folliedimomi.adapter.BannerAdapter
 import com.folliedimomi.databinding.DialogeVideoPlayBinding
@@ -29,6 +30,7 @@ import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
+import java.io.File
 import java.io.IOException
 
 
@@ -81,7 +83,9 @@ class ProductDetailsFragment(private var p_id: Int) : Fragment(), KodeinAware,
 
         tvVideoDes.setOnClickListener {
             if (videoUrl.isNotEmpty()) {
-                openDialogeForVideo(videoUrl)
+                deleteCache(mContext)
+                requireActivity().loadFragment(WebPageFragment(videoUrl ))
+//                openDialogeForVideo(videoUrl)
 
             } else {
                 requireContext().toast("ERROR LOADING ALL VIDEO")
@@ -90,6 +94,32 @@ class ProductDetailsFragment(private var p_id: Int) : Fragment(), KodeinAware,
 
         tvVideo.setOnClickListener {
             doRequestForAddCart()
+        }
+    }
+
+    fun deleteCache(context: Context) {
+        try {
+            val dir: File = context.cacheDir
+            deleteDir(dir)
+        } catch (e: java.lang.Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    fun deleteDir(dir: File?): Boolean {
+        return if (dir != null && dir.isDirectory()) {
+            val children: Array<String> = dir.list()
+            for (i in children.indices) {
+                val success = deleteDir(File(dir, children[i]))
+                if (!success) {
+                    return false
+                }
+            }
+            dir.delete()
+        } else if (dir != null && dir.isFile()) {
+            dir.delete()
+        } else {
+            false
         }
     }
 
@@ -171,13 +201,25 @@ class ProductDetailsFragment(private var p_id: Int) : Fragment(), KodeinAware,
         val height = WindowManager.LayoutParams.WRAP_CONTENT
         window.setLayout(width, height)
         window.setBackgroundDrawableResource(android.R.color.transparent)
-        binding.videoView.setVideoPath(videoUrl)
+        try {
+            binding.webView.getSettings().setJavaScriptEnabled(true)
+            binding.webView.setInitialScale(50)
+            binding.webView.getSettings().setUseWideViewPort(true)
+            binding.webView.setVerticalScrollBarEnabled(false)
+            binding.webView.setHorizontalScrollBarEnabled(false)
+            binding.webView.loadUrl(videoUrl)
+            binding.webView.setWebViewClient(CustomWebViewClient())
+        } catch (e: Exception) {
+            mContext.toast("handle exception")
+        }
+        dialog.show()
+      /*  binding.videoView.setVideoPath(videoUrl)
         binding.videoView.setOnPreparedListener {
             it.isLooping = true
             binding.videoView.setMediaController(MediaController(requireContext()))
             binding.videoView.requestFocus()
             binding.videoView.start()
-        }
+        }*/
         dialog.show()
     }
 
@@ -360,5 +402,10 @@ class ProductDetailsFragment(private var p_id: Int) : Fragment(), KodeinAware,
 
     override fun rightClick(pos: Int) {
         viewPager.arrowScroll(ViewPager.FOCUS_RIGHT)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        System.gc()
     }
 }

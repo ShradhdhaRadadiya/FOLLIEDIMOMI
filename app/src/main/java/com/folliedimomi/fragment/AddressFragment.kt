@@ -134,5 +134,8 @@ class AddressFragment : Fragment(), AddressAdapter.GetSelectedAddress, KodeinAwa
     override fun onAddressAdded() {
         getAddress(session.getUserId().toString())
     }
-
+    override fun onDestroy() {
+        super.onDestroy()
+        System.gc()
+    }
 }

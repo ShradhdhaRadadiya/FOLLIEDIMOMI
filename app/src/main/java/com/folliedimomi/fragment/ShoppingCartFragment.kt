@@ -350,5 +350,8 @@ class ShoppingCartFragment : Fragment(), KodeinAware, ShoppingCartAdapter.OnCart
         super.onPause()
         objects.clear()
     }
-
+    override fun onDestroy() {
+        super.onDestroy()
+        System.gc()
+    }
 }

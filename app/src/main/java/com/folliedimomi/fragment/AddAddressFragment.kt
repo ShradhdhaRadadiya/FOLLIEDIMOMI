@@ -304,4 +304,9 @@ class AddAddressFragment(onAddressAddedListener: OnAddressAddedListner) : Fragme
     interface OnAddressAddedListner {
         fun onAddressAdded()
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        System.gc()
+    }
 }

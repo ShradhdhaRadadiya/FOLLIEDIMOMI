@@ -212,4 +212,6 @@ class AdvancedFilterActivity : AppCompatActivity(), KodeinAware {
         })
         mBinding.rvProduct.adapter = adapter
     }
+
+
 }

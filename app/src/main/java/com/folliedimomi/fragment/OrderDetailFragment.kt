@@ -147,5 +147,8 @@ class OrderDetailFragment(private val orderId: String) : Fragment(), KodeinAware
     ): View? {
         return inflater.inflate(R.layout.fragment_order_detail, container, false)
     }
-
+    override fun onDestroy() {
+        super.onDestroy()
+        System.gc()
+    }
 }

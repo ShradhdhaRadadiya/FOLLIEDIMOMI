@@ -458,4 +458,9 @@ class MainActivity : AppCompatActivity(),
             fragment.onActivityResult(requestCode, resultCode, data)
         }
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        System.gc()
+    }
 }

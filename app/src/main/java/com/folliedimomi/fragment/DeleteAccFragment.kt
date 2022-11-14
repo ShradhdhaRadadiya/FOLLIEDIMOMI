@@ -130,5 +130,8 @@ class DeleteAccFragment : Fragment(R.layout.fragment_coupon), KodeinAware {
         item.isVisible = false
         search.isVisible = false
     }
-
+    override fun onDestroy() {
+        super.onDestroy()
+        System.gc()
+    }
 }

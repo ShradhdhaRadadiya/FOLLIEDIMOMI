@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.folliedimomi.R
 import com.folliedimomi._app.Constant
+import com.folliedimomi._app.loadFragment
 import com.folliedimomi._app.myOnTextChangedListener
 import com.folliedimomi.activity.MainActivity
 import com.folliedimomi.adapter.ProductListAdapter
@@ -32,6 +33,7 @@ import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
+import java.io.File
 import java.io.IOException
 
 
@@ -53,21 +55,27 @@ class SearchProductFragment(private val searchText: String) : Fragment(), Kodein
         etSearch.requestFocus()
         showKeyboard(requireActivity())
 
-        etSearch.myOnTextChangedListener {
+       /* etSearch.myOnTextChangedListener {
             if (it.length > 3) getProductFromServer(
                 etSearch.text.toString(),
                 Session(requireContext()).getUserId().toString()
             )
         }
-
+*/
         etSearch.setOnEditorActionListener { v, actionId, event ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                 //performSearch(etSearch.text.toString())
                 hideKeyboard()
-                getProductFromServer(
+                if ( etSearch.text.toString().length > 3)
+                    getProductFromServer(
                     etSearch.text.toString(),
                     Session(requireContext()).getUserId().toString()
                 )
+              /*
+                getProductFromServer(
+                    etSearch.text.toString(),
+                    Session(requireContext()).getUserId().toString()
+                )*/
                 return@setOnEditorActionListener true
             }
             return@setOnEditorActionListener false
@@ -103,23 +111,27 @@ class SearchProductFragment(private val searchText: String) : Fragment(), Kodein
 
             try {
                 val createOrderResponse: SearchProductModel = repository.searchProduct(mMap)
-                if (isAdded && isVisible) {
 
-                    createOrderResponse.let {
-                        if (createOrderResponse.status == 1) {
-                            var data = createOrderResponse.result
-                            rvProduct.layoutManager = GridLayoutManager(requireContext(), 2)
-                            rvProduct.adapter = ProductListAdapter(
-                                requireActivity(),
-                                data, this
-                            )
-                        } else requireActivity().coordinatorLayout.snackBar(createOrderResponse.message)
+
+                    try{
+                        createOrderResponse.let {
+                            if (createOrderResponse.status == 1) {
+                                var data = createOrderResponse.result
+                                rvCatProduct.layoutManager = GridLayoutManager(requireContext(), 2)
+                                rvCatProduct.adapter = ProductListAdapter(
+                                    mContext as Activity,
+                                    data, this
+                                )
+                            } else requireActivity().coordinatorLayout.snackBar(createOrderResponse.message)
+                        }
+                    }catch (e : Exception){
+
                     }
 
                     Globals.hideProgress()
                     return@main
 
-                }
+
             } catch (e: ApiException) {
                 Log.i("OkHttp", "Response : ${e.message}")
                 //hide
@@ -216,10 +228,7 @@ class SearchProductFragment(private val searchText: String) : Fragment(), Kodein
         hideKeyboard()
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        hideKeyboard()
-    }
+
 
     override fun onAddToCartProduct(addressId: Int) {
         //show
@@ -280,11 +289,42 @@ class SearchProductFragment(private val searchText: String) : Fragment(), Kodein
 
     override fun onOpenVideo(videoUrl: String) {
         if (videoUrl.isNotEmpty()) {
-            openDialogeForVideo(videoUrl)
+            deleteCache(mContext)
+            requireActivity().loadFragment(WebPageFragment(videoUrl ))
+
+//            openDialogeForVideo(videoUrl)
         } else {
             requireContext().toast("Video not found!")
         }
     }
+
+
+    fun deleteCache(context: Context) {
+        try {
+            val dir: File = context.cacheDir
+            deleteDir(dir)
+        } catch (e: java.lang.Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    fun deleteDir(dir: File?): Boolean {
+        return if (dir != null && dir.isDirectory()) {
+            val children: Array<String> = dir.list()
+            for (i in children.indices) {
+                val success = deleteDir(File(dir, children[i]))
+                if (!success) {
+                    return false
+                }
+            }
+            dir.delete()
+        } else if (dir != null && dir.isFile()) {
+            dir.delete()
+        } else {
+            false
+        }
+    }
+
     private fun openDialogeForVideo(videoUrl: String) {
         val binding: DialogeVideoPlayBinding = DialogeVideoPlayBinding.inflate(
             LayoutInflater.from(context)
@@ -299,14 +339,29 @@ class SearchProductFragment(private val searchText: String) : Fragment(), Kodein
         val height = WindowManager.LayoutParams.WRAP_CONTENT
         window.setLayout(width, height)
         window.setBackgroundDrawableResource(android.R.color.transparent)
-        binding.videoView.setVideoPath(videoUrl)
+        try {
+            binding.webView.getSettings().setJavaScriptEnabled(true)
+            binding.webView.setInitialScale(50)
+            binding.webView.getSettings().setUseWideViewPort(true)
+            binding.webView.setVerticalScrollBarEnabled(false)
+            binding.webView.setHorizontalScrollBarEnabled(false)
+            binding.webView.loadUrl(videoUrl)
+            binding.webView.setWebViewClient(CustomWebViewClient())
+        } catch (e: Exception) {
+            mContext.toast("handle exception")
+        }
+        dialog.show()
+      /*  binding.videoView.setVideoPath(videoUrl)
         binding.videoView.setOnPreparedListener {
             it.isLooping = true
             binding.videoView.setMediaController(MediaController(requireContext()));
             binding.videoView.requestFocus();
             binding.videoView.start()
-        }
+        }*/
         dialog.show()
     }
-
+    override fun onDestroy() {
+        super.onDestroy()
+        System.gc()
+    }
 }

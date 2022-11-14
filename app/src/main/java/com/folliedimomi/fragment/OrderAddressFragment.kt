@@ -210,5 +210,8 @@ class OrderAddressFragment(mCartId: String, mSecretKey: String, mGrandTotal: Str
     override fun onAddressAdded() {
         getAddress(session.getUserId().toString())
     }
-
+    override fun onDestroy() {
+        super.onDestroy()
+        System.gc()
+    }
 }

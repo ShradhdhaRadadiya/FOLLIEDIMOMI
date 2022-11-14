@@ -94,5 +94,8 @@ class ForgotPasswordAsGuestFragment : Fragment(R.layout.fragment_forgot_password
         }
         return isValid
     }
-
+    override fun onDestroy() {
+        super.onDestroy()
+        System.gc()
+    }
 }

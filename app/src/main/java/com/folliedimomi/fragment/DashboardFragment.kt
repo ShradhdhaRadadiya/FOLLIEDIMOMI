@@ -8,13 +8,13 @@ import android.content.IntentFilter
 import android.os.Bundle
 import android.util.Log
 import android.view.*
-import android.widget.MediaController
 import androidx.fragment.app.Fragment
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.recyclerview.widget.GridLayoutManager
 import com.bumptech.glide.Glide
 import com.folliedimomi.R
 import com.folliedimomi._app.Constant
+import com.folliedimomi._app.loadFragment
 import com.folliedimomi.activity.AdvancedFilterActivity
 import com.folliedimomi.activity.MainActivity
 import com.folliedimomi.activity.MainActivity.Companion.mActivity
@@ -27,12 +27,16 @@ import com.folliedimomi.utils.*
 import com.folliedimomi.utils.Globals.drawerCatId
 import com.google.gson.JsonSyntaxException
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.dialoge_video_play.*
 import kotlinx.android.synthetic.main.fragment_dashboard.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import okhttp3.RequestBody
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
+import java.io.File
 import java.io.IOException
 
 
@@ -63,6 +67,12 @@ class DashboardFragment(private var drawerCatText: String = "") :
 
         tvFilterText.text = drawerCatText
 
+        if(drawerCatText == "Home"){
+            iv1.visibility = View.VISIBLE
+        }else{
+            iv1.visibility = View.GONE
+        }
+
         tvFilter.setOnClickListener {
             val intent = Intent(mContext, AdvancedFilterActivity::class.java)
             startActivity(intent)
@@ -70,7 +80,9 @@ class DashboardFragment(private var drawerCatText: String = "") :
 
         iv1.setOnClickListener {
             if (videoUrl.isNotEmpty()) {
-                openDialogeForVideo(videoUrl)
+                deleteCache(mContext)
+                requireActivity().loadFragment(WebPageFragment(videoUrl ))
+//                openDialogeForVideo(videoUrl)
             } else {
                 requireContext().toast("Video not found!")
             }
@@ -95,7 +107,8 @@ class DashboardFragment(private var drawerCatText: String = "") :
                             "ProductList -----sorting: $drawerCatId--->$categoryId--->$manufac "
                         )
 
-                        getProductList()
+                        GlobalScope.launch {   getProductList() }
+
                     }
                 })
         }
@@ -115,14 +128,52 @@ class DashboardFragment(private var drawerCatText: String = "") :
         val height = WindowManager.LayoutParams.WRAP_CONTENT
         window.setLayout(width, height)
         window.setBackgroundDrawableResource(android.R.color.transparent)
-        binding.videoView.setVideoPath(videoUrl)
+       /* binding.videoView.setVideoPath(videoUrl)
         binding.videoView.setOnPreparedListener {
             it.isLooping = true
             binding.videoView.setMediaController(MediaController(requireContext()));
             binding.videoView.requestFocus();
             binding.videoView.start()
         }
+*/
+
+        try {
+            binding.webView.getSettings().setJavaScriptEnabled(true)
+            binding.webView.setInitialScale(50)
+            binding.webView.getSettings().setUseWideViewPort(true)
+            binding.webView.setVerticalScrollBarEnabled(false)
+            binding.webView.setHorizontalScrollBarEnabled(false)
+            binding.webView.loadUrl(videoUrl)
+            binding.webView.setWebViewClient(CustomWebViewClient())
+        } catch (e: Exception) {
+            mContext.toast("handle exception")
+        }
         dialog.show()
+    }
+    fun deleteCache(context: Context) {
+        try {
+            val dir: File = context.cacheDir
+            deleteDir(dir)
+        } catch (e: java.lang.Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    fun deleteDir(dir: File?): Boolean {
+        return if (dir != null && dir.isDirectory()) {
+            val children: Array<String> = dir.list()
+            for (i in children.indices) {
+                val success = deleteDir(File(dir, children[i]))
+                if (!success) {
+                    return false
+                }
+            }
+            dir.delete()
+        } else if (dir != null && dir.isFile()) {
+            dir.delete()
+        } else {
+            false
+        }
     }
 
     private fun callDisplyTitleVideoApiCall() {
@@ -137,7 +188,9 @@ class DashboardFragment(private var drawerCatText: String = "") :
 
                         tvBanner.text = drawerData.result.topBar
                         //imgImage.setImageURI(images[position]);
-                        Glide.with(requireContext()).load(drawerData.result.homeImage).into(iv1)
+
+
+//                        Glide.with(requireContext()).load(R.drawable.header).into(iv1)
                         videoUrl = drawerData.result.homeVideo
                     }
                     //hide
@@ -146,8 +199,9 @@ class DashboardFragment(private var drawerCatText: String = "") :
                         "ProductList",
                         "ProductList -----on video screen: $drawerCatId--->$categoryId--->$manufac "
                     )
+                    GlobalScope.launch {   getProductList() }
 
-                    getProductList()
+//                    getProductList()
                     return@main
                 }
 
@@ -175,7 +229,7 @@ class DashboardFragment(private var drawerCatText: String = "") :
         }
     }
 
-    private fun getProductList() {
+   suspend  fun getProductList() {
         if (drawerCatId == 12) {
             categoryId = ""
             manufac = ""
@@ -255,7 +309,10 @@ class DashboardFragment(private var drawerCatText: String = "") :
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        callDisplyTitleVideoApiCall()
+        if(drawerCatText == "Home"){
+            callDisplyTitleVideoApiCall()
+        }
+
     }
 
     override fun onCreateView(
@@ -271,7 +328,9 @@ class DashboardFragment(private var drawerCatText: String = "") :
                 manufac = intent.extras!!.getString("featureData").toString()
                 end_price = intent.extras!!.getString("end_price").toString()
                 start_price = intent.extras!!.getString("start_price").toString()
-                getProductList()
+//                getProductList()
+                GlobalScope.launch {   getProductList() }
+
             }
         }
         LocalBroadcastManager.getInstance(mContext)
@@ -363,12 +422,21 @@ class DashboardFragment(private var drawerCatText: String = "") :
 
     override fun onOpenVideo(videoUrl: String) {
         if (videoUrl.isNotEmpty()) {
-            openDialogeForVideo(videoUrl)
+            deleteCache(mContext)
+            requireActivity().loadFragment(WebPageFragment(videoUrl ))
+
+//            openDialogeForVideo(videoUrl)
         } else {
             requireContext().toast("ERROR LOADING ALL VIDEO")
         }
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        System.gc()
+    }
 }
+
 /*op:advance_filter
 id_parent:12
 id_category:17,16

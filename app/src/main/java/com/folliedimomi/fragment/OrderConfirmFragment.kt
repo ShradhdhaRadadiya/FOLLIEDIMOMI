@@ -98,4 +98,8 @@ class OrderConfirmFragment(val orderId: String, val cartId: String, val userId: 
             FragmentManager.POP_BACK_STACK_INCLUSIVE
         )
     }
+    override fun onDestroy() {
+        super.onDestroy()
+        System.gc()
+    }
 }
