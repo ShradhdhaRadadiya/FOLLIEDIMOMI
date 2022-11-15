@@ -6,7 +6,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.*
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -19,21 +18,13 @@ import com.folliedimomi._app.Constant
 import com.folliedimomi._app.loadFragment
 import com.folliedimomi.model.CreateOrderResponse
 import com.folliedimomi.model.PaypalPaymentModel
-import com.folliedimomi.model.StripeAuthentication
+import com.folliedimomi.model.PaypalPaymentModelTest
 import com.folliedimomi.network.NetworkRepository
 import com.folliedimomi.sharedPrefrense.Session
 import com.folliedimomi.utils.*
 import com.google.android.material.textfield.TextInputLayout
-import com.google.gson.GsonBuilder
-import com.paypal.android.sdk.payments.PayPalConfiguration
 import com.paypal.android.sdk.payments.PaymentActivity
 import com.paypal.android.sdk.payments.PaymentConfirmation
-import com.stripe.android.ApiResultCallback
-import com.stripe.android.PaymentIntentResult
-import com.stripe.android.Stripe
-import com.stripe.android.model.Card
-import com.stripe.android.model.ConfirmPaymentIntentParams
-import com.stripe.android.model.StripeIntent
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_order_review.*
 import kotlinx.android.synthetic.main.stripe_card_layout.*
@@ -44,8 +35,6 @@ import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
-import java.lang.ref.WeakReference
-import kotlin.math.roundToInt
 
 /**
  * This example collects card payments, implementing the guide here: https://stripe.com/docs/payments/accept-a-payment#android
@@ -444,12 +433,12 @@ class OrderReviewFragment(
                     devicedATA.toString()
                 )
             auth.let {
-                Log.e("TAG", "rESPONSE IS -----> $it")
-                if (auth.success) {
-                    onPlaceOrder(auth.transaction.id.toString(), "paypalwithfee")
+
+
+                    onPlaceOrder(auth.params.transaction.correlationId.toString(), "paypalwithfee")
 //                    requireActivity().loadFragment(HomeFragment())
 //                    requireActivity().supportFragmentManager.popBackStackImmediate()
-                }
+
                 return@main
             }
         }

@@ -207,7 +207,7 @@ class AdvancedFilterActivity : AppCompatActivity(), KodeinAware {
                 catId =  catId1
                 featured = featureData
 
-                callAdvanceFilterApiCall()
+//                callAdvanceFilterApiCall()
             }
         })
         mBinding.rvProduct.adapter = adapter

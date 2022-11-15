@@ -6,8 +6,6 @@ import com.folliedimomi.utils.convertBody
 import com.google.gson.JsonObject
 import com.pcs.ciprianicouture.model.OrderDetailResponse
 import okhttp3.RequestBody
-import okhttp3.Response
-import okhttp3.ResponseBody
 
 class NetworkRepository(private val api: MyApi/*, private val session: AppSession*/) :
     SafeApiRequest() {
