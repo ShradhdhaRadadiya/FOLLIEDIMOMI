@@ -98,10 +98,10 @@ class OrderReviewFragment(
                     //requireActivity().loadFragment(PayPalFragment(cartId, secretKey, grandTotal, idAddress, idCarrier, idAddressInvoice))
                 }
                 cbxBonifico.isChecked -> {
-                    onPlaceOrder("Bonifico bancario", "ps_wirepayment")
+                    onPlaceOrder("Paga con bonifico bancario", "ps_wirepayment")
                 }
                 cbxPay.isChecked -> {
-                    onPlaceOrder("Pagamento tramite PostePay", " ps_tanzopostepay")
+                    onPlaceOrder("Paga tramite PostePay", " ps_tanzopostepay")
                 }
 
                 else -> requireActivity().coordinatorLayout.snackBar("Seleziona il tipo di pagamento"/*""Please choose any payment option first"*/)
@@ -199,9 +199,13 @@ class OrderReviewFragment(
         Coroutines.main {
             requireActivity().progress_bars_layout.show()
             val mMap = HashMap<String, RequestBody>()
-            mMap["controller"] = "mobileapi".convertBody()
+
+
             mMap["op"] = "place_order".convertBody()
             mMap["id_cart"] = cartId.convertBody()
+
+
+            mMap["controller"] = "mobileapi".convertBody()
             mMap["lang_id"] = Constant.LANG.convertBody()
 
             mMap["order_payment"] = /*cardHolderName*/orderPayment.toString().convertBody()
@@ -379,7 +383,7 @@ class OrderReviewFragment(
                                 val jsonResponse = jsonDetails.getJSONObject("response")
                                 val paymentStatus = jsonResponse.getString("state")
                                 val paymentId = jsonResponse.getString("id")
-                                onPlaceOrder(paymentId, "paypalwithfee")
+                                onPlaceOrder("Pagamento con Paypal", "paypalwithfee")
                                 //displayAlert(requireActivity(), "Completa Pagamento"/*"Payment succeeded"*/, "Status : $paymentStatus and Payment Id : $paymentId")
                                 //showDetail(jsonDetails.getJSONObject("response"), grandTotal)
                             } catch (e: JSONException) {
@@ -435,7 +439,7 @@ class OrderReviewFragment(
             auth.let {
 
 
-                    onPlaceOrder(auth.params.transaction.correlationId.toString(), "paypalwithfee")
+                    onPlaceOrder("Pagamento con Paypal", "paypalwithfee")
 //                    requireActivity().loadFragment(HomeFragment())
 //                    requireActivity().supportFragmentManager.popBackStackImmediate()
 

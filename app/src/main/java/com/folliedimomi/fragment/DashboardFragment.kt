@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.os.Bundle
+import android.text.Html
 import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
@@ -186,7 +187,7 @@ class DashboardFragment(private var drawerCatText: String = "") :
                 drawerData.result.let {
                     if (drawerData.status == 1) {
 
-                        tvBanner.text = drawerData.result.topBar
+                        tvBanner.text = Html.fromHtml(drawerData.result.topBar)
                         //imgImage.setImageURI(images[position]);
 
 
