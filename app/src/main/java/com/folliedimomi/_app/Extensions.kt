@@ -23,6 +23,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.folliedimomi.R
 import java.io.ByteArrayOutputStream
@@ -43,6 +44,8 @@ fun Context.isNetworkAvailable(): Boolean {
 fun Context.loadImageInGlide(img: ImageView, url: String) {
     Glide.with(this)
         .asBitmap()
+        .diskCacheStrategy(DiskCacheStrategy.NONE)
+        .skipMemoryCache(true)
         .load(url)
         .apply(RequestOptions().placeholder(R.drawable.ic_launcher_background))
         .into(img)

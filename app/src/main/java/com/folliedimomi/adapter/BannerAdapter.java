@@ -10,6 +10,7 @@ import android.widget.RelativeLayout;
 import androidx.viewpager.widget.PagerAdapter;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.folliedimomi.R;
 import com.folliedimomi.model.Gallery;
 
@@ -46,7 +47,8 @@ public class BannerAdapter extends PagerAdapter {
 
         imgImage = (ImageView) itemView.findViewById(R.id.imageView);
         //imgImage.setImageURI(images[position]);
-        Glide.with(context).load(gallery.getImages().get(position)).into(imgImage);
+        Glide.with(context).load(gallery.getImages().get(position)).diskCacheStrategy(DiskCacheStrategy.NONE)
+                .skipMemoryCache(true).into(imgImage);
         container.addView(itemView);
         return itemView;
     }

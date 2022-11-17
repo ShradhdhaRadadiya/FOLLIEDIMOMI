@@ -12,13 +12,10 @@ import androidx.fragment.app.FragmentManager
 import com.braintreepayments.api.dropin.DropInActivity
 import com.braintreepayments.api.dropin.DropInRequest
 import com.braintreepayments.api.dropin.DropInResult
-
 import com.folliedimomi.R
-import com.folliedimomi._app.Constant
 import com.folliedimomi._app.loadFragment
 import com.folliedimomi.model.CreateOrderResponse
 import com.folliedimomi.model.PaypalPaymentModel
-import com.folliedimomi.model.PaypalPaymentModelTest
 import com.folliedimomi.network.NetworkRepository
 import com.folliedimomi.sharedPrefrense.Session
 import com.folliedimomi.utils.*
@@ -60,7 +57,6 @@ class OrderReviewFragment(
     /**Paypal*/
     private var paymentAmount: String = "0"
     val PAYPAL_REQUEST_CODE = 123
-
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -202,14 +198,13 @@ class OrderReviewFragment(
 
 
             mMap["op"] = "place_order".convertBody()
-            mMap["id_cart"] = cartId.convertBody()
-
+            mMap["id_cart"] = cartId.toString().convertBody()
 
             mMap["controller"] = "mobileapi".convertBody()
-            mMap["lang_id"] = Constant.LANG.convertBody()
+//            mMap["lang_id"] = Constant.LANG.convertBody()
 
-            mMap["order_payment"] = /*cardHolderName*/orderPayment.toString().convertBody()
-            mMap["order_module"] = paymentMethod.toString().convertBody()
+            mMap["order_payment"] = orderPayment.trim().toString().convertBody()
+            mMap["order_module"] = paymentMethod.trim().toString().convertBody()
 
             mMap["secure_key"] = secretKey.convertBody()
             mMap["customersessionid"] = session.getAppSession().toString().convertBody()
@@ -226,7 +221,7 @@ class OrderReviewFragment(
                 mMap["shipping_address2"] =
                     bundle.getString("address_two", "")!!.toString().convertBody()
                 mMap["shipping_city"] = bundle.getString("city", "")!!.toString().convertBody()
-                mMap["shipping_id_country"] = bundle.getString("country", "")!!.convertBody()
+
                 mMap["shipping_id_state"] = bundle.getString("state", "")!!.convertBody()
                 mMap["shipping_postcode"] = bundle.getString("pin", "")!!.toString().convertBody()
                 mMap["shipping_phone_mobile"] =
@@ -235,7 +230,10 @@ class OrderReviewFragment(
                     bundle.getString("company", "")!!.toString().convertBody()
                 mMap["shipping_vat_number"] =
                     bundle.getString("id_number", "")!!.toString().convertBody()
+
+                mMap["shipping_id_country"] = bundle.getString("country", "")!!.convertBody()
                 val isDifferentBilling: Boolean = bundle.getBoolean("is_different_billing", false)
+
                 if (isDifferentBilling) {
                     mMap["is_same_invoice_address"] = "no".convertBody()
                     mMap["payment_firstname"] =
@@ -259,7 +257,6 @@ class OrderReviewFragment(
                         bundle.getString("bill_company", "")!!.toString().convertBody()
                     mMap["payment_vat_number"] =
                         bundle.getString("bill_id_number", "")!!.toString().convertBody()
-
                     mMap["payment_vat_number_two"] =
                         bundle.getString("bill_vat_number", "")!!.toString().convertBody()
                     mMap["payment_home_phone"] =
@@ -273,8 +270,8 @@ class OrderReviewFragment(
                 }
             } else {
                 mMap["id_customer"] = session.getUserId().toString().convertBody()
-                mMap["id_address_delivery"] = idAddress.convertBody()
-                mMap["id_address_invoice"] = idAddressInvoice.convertBody()
+                mMap["id_address_delivery"] = idAddress.toString().convertBody()
+                mMap["id_address_invoice"] = idAddressInvoice.toString().convertBody()
                 mMap["id_carrier"] = "22".convertBody() //idCarrier.convertBody()
                 mMap["is_guest"] = "no".convertBody()
             }
@@ -439,7 +436,7 @@ class OrderReviewFragment(
             auth.let {
 
 
-                    onPlaceOrder("Pagamento con Paypal", "paypalwithfee")
+                onPlaceOrder("Pagamento con Paypal", "paypalwithfee")
 //                    requireActivity().loadFragment(HomeFragment())
 //                    requireActivity().supportFragmentManager.popBackStackImmediate()
 

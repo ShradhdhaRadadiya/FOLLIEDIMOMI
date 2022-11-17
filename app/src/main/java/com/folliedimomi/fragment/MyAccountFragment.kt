@@ -39,7 +39,7 @@ class MyAccountFragment : Fragment(), KodeinAware {
         tvMyAddresses.setOnClickListener { requireActivity().loadFragment(AddressFragment()) }
         tvPersonalInformation.setOnClickListener { requireActivity().loadFragment(ProfileFragment()) }
         tvMyVoucher.setOnClickListener { requireActivity().loadFragment(CouponFragment()) }
-        tvDeleteAcc.setOnClickListener { requireActivity().loadFragment(CouponFragment()) }
+        tvDeleteAcc.setOnClickListener { requireActivity().loadFragment(DeleteAccFragment()) }
     }
 
     override fun onCreateView(

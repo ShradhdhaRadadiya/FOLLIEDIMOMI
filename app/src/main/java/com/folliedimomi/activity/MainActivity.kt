@@ -27,6 +27,7 @@ import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.folliedimomi.R
 import com.folliedimomi._app.BadgeDrawable
 import com.folliedimomi._app.getRandomString
@@ -150,6 +151,8 @@ class MainActivity : AppCompatActivity(),
         //imgClockGif
         Glide.with(applicationContext)
             .asGif()
+            .diskCacheStrategy(DiskCacheStrategy.NONE)
+            .skipMemoryCache(true)
             .load(R.drawable.ic_launcher_background)
             .into(imgClockGif)
 

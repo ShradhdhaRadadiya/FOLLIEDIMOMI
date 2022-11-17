@@ -11,6 +11,7 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.folliedimomi.R
 import com.folliedimomi._app.Constant
@@ -195,6 +196,8 @@ class ShoppingCartAdapter(
     private fun setImageInGlide(img: ImageView, url: String) {
         Glide.with(activity)
             .asBitmap()
+            .diskCacheStrategy(DiskCacheStrategy.NONE)
+            .skipMemoryCache(true)
             .load(url)
             .apply(RequestOptions().placeholder(R.drawable.ic_launcher_background))
             .into(img)

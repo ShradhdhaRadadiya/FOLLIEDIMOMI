@@ -11,6 +11,7 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.folliedimomi.R
 import com.folliedimomi._app.listen
 import com.folliedimomi._app.loadFragmentStack
@@ -54,7 +55,8 @@ class ProductListAdapter(
         }
 
         if (item.productImage.isNotEmpty())
-            Glide.with(activity).load(item.productImage).into(holder.imgProduct)
+            Glide.with(activity).load(item.productImage).diskCacheStrategy(DiskCacheStrategy.NONE)
+                .skipMemoryCache(true).into(holder.imgProduct)
 
         if (item.new == 1)
             holder.tvNuovo.visibility = View.VISIBLE
