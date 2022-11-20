@@ -187,7 +187,9 @@ class DashboardFragment(private var drawerCatText: String = "") :
                 drawerData.result.let {
                     if (drawerData.status == 1) {
 
-                        tvBanner.text = Html.fromHtml(drawerData.result.topBar)
+                        val data =  Html.fromHtml(drawerData.result.topBar)
+                        val data1 = data.split(",")
+                        tvBanner.text = data1[0]+"\n"+data1[1]
                         //imgImage.setImageURI(images[position]);
 
 

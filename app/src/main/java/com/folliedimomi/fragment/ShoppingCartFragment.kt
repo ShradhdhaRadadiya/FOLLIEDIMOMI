@@ -35,6 +35,7 @@ class ShoppingCartFragment : Fragment(), KodeinAware, ShoppingCartAdapter.OnCart
     private var grandTotal = ""
     private var secretKey = ""
     val objects = ArrayList<String>()
+    var totalCost = 0.0
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -71,12 +72,19 @@ class ShoppingCartFragment : Fragment(), KodeinAware, ShoppingCartAdapter.OnCart
             )
         }
         btnApply.setOnClickListener {
-            if (etPromotionCode.text.toString().isNullOrEmpty()) {
-                requireActivity().coordinatorLayout.snackBar("Add coupon first")
-                return@setOnClickListener
-            }
-            onApplyCoupon(etPromotionCode.text.toString(), cartId, session.getUserId().toString())
-            //requireActivity().coordinatorLayout.snackBar("Apply Coupon")
+
+          if(totalCost > 300.0){
+              if (etPromotionCode.text.toString().isNullOrEmpty()) {
+                  requireActivity().coordinatorLayout.snackBar("Add coupon first")
+                  return@setOnClickListener
+              }
+              onApplyCoupon(etPromotionCode.text.toString(), cartId, session.getUserId().toString())
+          }else{
+              requireActivity().coordinatorLayout.snackBar(" Non hai raggiunto l'ammontare minimo richiesto per utilizzare questo buono")
+
+          }
+            //
+
         }
 
         btnRemove.setOnClickListener {
@@ -100,12 +108,16 @@ class ShoppingCartFragment : Fragment(), KodeinAware, ShoppingCartAdapter.OnCart
                 if (isAdded && isVisible) {
                     applyCouponRespone.let {
                         if (applyCouponRespone.status == 1) {
+                            requireActivity().coordinatorLayout.snackBar("Coupon aggiunto con successo")
+
                             getShoppingCart(
                                 session.getUserId().toString(),
                                 session.getAppSession().toString()
                             )
                         } else {
-                            requireActivity().coordinatorLayout.snackBar(applyCouponRespone.message)
+                            requireActivity().coordinatorLayout.snackBar("Coupon non valido")
+
+//                            requireActivity().coordinatorLayout.snackBar(applyCouponRespone.message)
                         }
                     }
                 }
@@ -187,6 +199,14 @@ class ShoppingCartFragment : Fragment(), KodeinAware, ShoppingCartAdapter.OnCart
                                         this@ShoppingCartFragment,
                                         session
                                     )
+                                    totalCost = 0.0
+                                    val df = DecimalFormat("#.00")
+                                    for(item in products){
+                                        val d = df.format(item.totalWt).toDouble()
+                                       totalCost =  totalCost.plus(d)
+                                    }
+
+
                                     //requireActivity().coordinatorLayout.snackBar(addToCartResponse.message)
                                     val summary: CartSummary = shoppingCart.cartSummary
                                     cartId = shoppingCart.idCart.toString()
