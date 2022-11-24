@@ -67,7 +67,6 @@
                 android:layout_height="50dp"
                 android:background="@color/colorSecondaryTextDark"
                 android:gravity="center"
-                android:text="Page in piccole rate con KLANA"
                 android:textColor="@color/white"
                 android:textSize="15sp"
                 app:texts="@array/text_temp"
@@ -124,8 +123,8 @@
                         android:layout_gravity="center"
                         android:gravity="center"
                         android:src="@drawable/sort"
-                        tools:ignore="RtlSymmetry"
-                        app:tint="@color/white" />
+                        app:tint="@color/white"
+                        tools:ignore="RtlSymmetry" />
 
 
                 </LinearLayout>
@@ -151,9 +150,10 @@
                         <ImageView
                             android:layout_width="@dimen/_25sdp"
                             android:layout_height="@dimen/_25sdp"
+                            android:padding="@dimen/_5sdp"
                             android:src="@drawable/normal_filter"
-                            app:tint="@color/white"
-                            android:padding="@dimen/_5sdp"/>
+                            app:tint="@color/white" />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"

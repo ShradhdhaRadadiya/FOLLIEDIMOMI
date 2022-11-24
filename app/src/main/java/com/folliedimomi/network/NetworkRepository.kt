@@ -146,10 +146,15 @@ class NetworkRepository(private val api: MyApi/*, private val session: AppSessio
         }
     }
 
-    suspend fun onRemoveCoupon(id_cart_rule: String, id_cart: String,        id_customer: String = ""
+    suspend fun onRemoveCoupon(
+        id_cart_rule: String, id_cart: String, id_customer: String = ""
     ): ApplyCouponRespone {
         return apiRequest {
-            api.onRemoveCoupon(id_cart_rule = id_cart_rule, id_cart = id_cart, id_customer = id_customer)
+            api.onRemoveCoupon(
+                id_cart_rule = id_cart_rule,
+                id_cart = id_cart,
+                id_customer = id_customer
+            )
         }
     }
 
@@ -176,8 +181,10 @@ class NetworkRepository(private val api: MyApi/*, private val session: AppSessio
         }
     }
 
-    suspend fun addToCart(mMap: HashMap<String, RequestBody>/*customerId: String,
-    productId: String, qty: String, shopId: String*/): AddToCartResponse {
+    suspend fun addToCart(
+        mMap: HashMap<String, RequestBody>/*customerId: String,
+    productId: String, qty: String, shopId: String*/
+    ): AddToCartResponse {
         return apiRequest {
             api.addToCart(map = mMap)
         }
@@ -381,6 +388,7 @@ class NetworkRepository(private val api: MyApi/*, private val session: AppSessio
         }
         return response
     }
+
     suspend fun deleteAcc(customerId: String): CommonResponse {
         return apiRequest {
             api.deleteAcc(id_customer = customerId)

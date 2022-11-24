@@ -12,7 +12,6 @@ import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.recyclerview.widget.GridLayoutManager
-import com.bumptech.glide.Glide
 import com.folliedimomi.R
 import com.folliedimomi._app.Constant
 import com.folliedimomi._app.loadFragment
@@ -62,15 +61,18 @@ class DashboardFragment(private var drawerCatText: String = "") :
     private val session: Session by instance()
 
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        if (drawerCatText == "Home") {
+            iv1.visibility = View.VISIBLE
+        } else {
+            iv1.visibility = View.GONE
+        }
         tvFilterText.text = drawerCatText
 
-        if(drawerCatText == "Home"){
+        if (drawerCatText == "Home") {
             iv1.visibility = View.VISIBLE
-        }else{
+        } else {
             iv1.visibility = View.GONE
         }
 
@@ -82,7 +84,7 @@ class DashboardFragment(private var drawerCatText: String = "") :
         iv1.setOnClickListener {
             if (videoUrl.isNotEmpty()) {
                 deleteCache(mContext)
-                requireActivity().loadFragment(WebPageFragment(videoUrl ))
+                requireActivity().loadFragment(WebPageFragment(videoUrl))
 //                openDialogeForVideo(videoUrl)
             } else {
                 requireContext().toast("Video not found!")
@@ -108,7 +110,7 @@ class DashboardFragment(private var drawerCatText: String = "") :
                             "ProductList -----sorting: $drawerCatId--->$categoryId--->$manufac "
                         )
 
-                        GlobalScope.launch {   getProductList() }
+                        GlobalScope.launch { getProductList() }
 
                     }
                 })
@@ -129,14 +131,14 @@ class DashboardFragment(private var drawerCatText: String = "") :
         val height = WindowManager.LayoutParams.WRAP_CONTENT
         window.setLayout(width, height)
         window.setBackgroundDrawableResource(android.R.color.transparent)
-       /* binding.videoView.setVideoPath(videoUrl)
-        binding.videoView.setOnPreparedListener {
-            it.isLooping = true
-            binding.videoView.setMediaController(MediaController(requireContext()));
-            binding.videoView.requestFocus();
-            binding.videoView.start()
-        }
-*/
+        /* binding.videoView.setVideoPath(videoUrl)
+         binding.videoView.setOnPreparedListener {
+             it.isLooping = true
+             binding.videoView.setMediaController(MediaController(requireContext()));
+             binding.videoView.requestFocus();
+             binding.videoView.start()
+         }
+ */
 
         try {
             binding.webView.getSettings().setJavaScriptEnabled(true)
@@ -151,6 +153,7 @@ class DashboardFragment(private var drawerCatText: String = "") :
         }
         dialog.show()
     }
+
     fun deleteCache(context: Context) {
         try {
             val dir: File = context.cacheDir
@@ -187,9 +190,9 @@ class DashboardFragment(private var drawerCatText: String = "") :
                 drawerData.result.let {
                     if (drawerData.status == 1) {
 
-                        val data =  Html.fromHtml(drawerData.result.topBar)
+                        val data = Html.fromHtml(drawerData.result.topBar)
                         val data1 = data.split(",")
-                        tvBanner.text = data1[0]+"\n"+data1[1]
+                        tvBanner.text = data1[0] + "\n" + data1[1]
                         //imgImage.setImageURI(images[position]);
 
 
@@ -202,7 +205,7 @@ class DashboardFragment(private var drawerCatText: String = "") :
                         "ProductList",
                         "ProductList -----on video screen: $drawerCatId--->$categoryId--->$manufac "
                     )
-                    GlobalScope.launch {   getProductList() }
+                    GlobalScope.launch { getProductList() }
 
 //                    getProductList()
                     return@main
@@ -232,7 +235,7 @@ class DashboardFragment(private var drawerCatText: String = "") :
         }
     }
 
-   suspend  fun getProductList() {
+    suspend fun getProductList() {
         if (drawerCatId == 12) {
             categoryId = ""
             manufac = ""
@@ -312,9 +315,8 @@ class DashboardFragment(private var drawerCatText: String = "") :
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if(drawerCatText == "Home"){
-            callDisplyTitleVideoApiCall()
-        }
+
+        callDisplyTitleVideoApiCall()
 
     }
 
@@ -332,7 +334,7 @@ class DashboardFragment(private var drawerCatText: String = "") :
                 end_price = intent.extras!!.getString("end_price").toString()
                 start_price = intent.extras!!.getString("start_price").toString()
 //                getProductList()
-                GlobalScope.launch {   getProductList() }
+                GlobalScope.launch { getProductList() }
 
             }
         }
@@ -426,7 +428,7 @@ class DashboardFragment(private var drawerCatText: String = "") :
     override fun onOpenVideo(videoUrl: String) {
         if (videoUrl.isNotEmpty()) {
             deleteCache(mContext)
-            requireActivity().loadFragment(WebPageFragment(videoUrl ))
+            requireActivity().loadFragment(WebPageFragment(videoUrl))
 
 //            openDialogeForVideo(videoUrl)
         } else {

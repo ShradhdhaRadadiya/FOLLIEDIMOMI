@@ -5,10 +5,8 @@ import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import com.folliedimomi.R
-import com.folliedimomi._app.Constant
 import com.folliedimomi._app.loadFragment
 import com.folliedimomi.sharedPrefrense.Session
-
 import kotlinx.android.synthetic.main.fragment_my_account.*
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
@@ -31,10 +29,10 @@ class MyAccountFragment : Fragment(), KodeinAware {
         }
 
 
-        if(session.isServerLoggedIn()){
-            tvDeleteAcc.visibility= View.VISIBLE
+        if (session.isServerLoggedIn()) {
+            tvDeleteAcc.visibility = View.VISIBLE
         }
-        tvOrderTracking.setOnClickListener { requireActivity().loadFragment(WebPageFragment("https://folliedimomi.it/tracking-ospite" ))}
+        tvOrderTracking.setOnClickListener { requireActivity().loadFragment(WebPageFragment("https://folliedimomi.it/tracking-ospite")) }
 //        tvOrderTracking.setOnClickListener { requireActivity().loadFragment(WebPageFragment("${Constant.URL}it/index.php?controller=mypage")) }
         tvMyAddresses.setOnClickListener { requireActivity().loadFragment(AddressFragment()) }
         tvPersonalInformation.setOnClickListener { requireActivity().loadFragment(ProfileFragment()) }
@@ -60,6 +58,7 @@ class MyAccountFragment : Fragment(), KodeinAware {
         menu.findItem(R.id.action_cart).isVisible = false
         menu.findItem(R.id.action_search).isVisible = false
     }
+
     override fun onDestroy() {
         super.onDestroy()
         System.gc()

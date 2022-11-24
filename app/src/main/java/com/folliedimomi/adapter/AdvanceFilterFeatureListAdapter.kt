@@ -45,7 +45,7 @@ class AdvanceFilterFeatureListAdapter(
         fun setDataToView(model: AdvanceFilterModel.Result.Data) {
 
 
-            Log.e("model","model is ----> $model")
+            Log.e("model", "model is ----> $model")
 
             if (model.idManufacturer == null || model.idManufacturer.toString() == "0") {
                 mBinding.check1.text = model.categoryName
@@ -99,16 +99,20 @@ class AdvanceFilterFeatureListAdapter(
                     }
                 }
 
-                Log.e("TAG","DATA IS ----> CATE---> $categoryData")
-                Log.e("TAG","DATA IS ----> featureData---> $featureData")
-                listener.onClickOnProduct(1, categoryData.joinToString (","), featureData.joinToString (","))
+                Log.e("TAG", "DATA IS ----> CATE---> $categoryData")
+                Log.e("TAG", "DATA IS ----> featureData---> $featureData")
+                listener.onClickOnProduct(
+                    1,
+                    categoryData.joinToString(","),
+                    featureData.joinToString(",")
+                )
             }
 
         }
     }
 
     interface OnProductClick {
-        fun onClickOnProduct(isCat: Int, adapterPosition: String, featureData : String)
+        fun onClickOnProduct(isCat: Int, adapterPosition: String, featureData: String)
     }
 }
 

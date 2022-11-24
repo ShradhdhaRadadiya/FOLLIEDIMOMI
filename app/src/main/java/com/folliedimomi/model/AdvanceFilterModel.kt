@@ -39,9 +39,9 @@ data class AdvanceFilterModel(
             @SerializedName("selected")
             var selected: String,
             @SerializedName("id_manufacturer")
-            var idManufacturer: String="0",
+            var idManufacturer: String = "0",
             @SerializedName("name")
             var name: String
-            )
+        )
     }
 }

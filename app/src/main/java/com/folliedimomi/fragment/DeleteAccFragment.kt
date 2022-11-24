@@ -8,18 +8,13 @@ import android.os.Bundle
 import android.view.*
 import androidx.core.app.ActivityCompat.finishAffinity
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.folliedimomi.R
 import com.folliedimomi._app.loadFragment
-import com.folliedimomi.adapter.CouponAdapter
 import com.folliedimomi.model.CommonResponse
-import com.folliedimomi.model.CouponCode
-import com.folliedimomi.model.CouponCodeResponse
 import com.folliedimomi.network.NetworkRepository
 import com.folliedimomi.sharedPrefrense.Session
 import com.folliedimomi.utils.*
 import com.google.gson.JsonSyntaxException
-import kotlinx.android.synthetic.main.fragment_coupon.*
 import kotlinx.android.synthetic.main.fragment_delete_acc.*
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
@@ -75,7 +70,7 @@ class DeleteAccFragment : Fragment(R.layout.fragment_coupon), KodeinAware {
         Coroutines.main {
             try {
                 val addressResponse: CommonResponse =
-                    repository.deleteAcc(customerId  = session.getUserId().toString())
+                    repository.deleteAcc(customerId = session.getUserId().toString())
 
                 addressResponse.let {
 
@@ -130,6 +125,7 @@ class DeleteAccFragment : Fragment(R.layout.fragment_coupon), KodeinAware {
         item.isVisible = false
         search.isVisible = false
     }
+
     override fun onDestroy() {
         super.onDestroy()
         System.gc()

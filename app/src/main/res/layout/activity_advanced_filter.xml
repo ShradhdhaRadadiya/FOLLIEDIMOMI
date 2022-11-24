@@ -47,6 +47,9 @@
             android:id="@+id/rangeSeekbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:visibility="gone"
             app:layout_constraintBottom_toTopOf="@+id/btnApply"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -55,13 +58,9 @@
             app:r2baseColor="@color/navy"
             app:r2circleFillColor="@color/white"
             app:r2circleRadius="15dp"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:layout_marginEnd="@dimen/_10sdp"
             app:r2circleTextColor="@color/black"
             app:r2circleTextSize="@dimen/value_bar_circleTextSize"
-            app:r2fillColor="@color/blue"
-            android:visibility="gone"
-           />
+            app:r2fillColor="@color/blue" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvEmptyText"

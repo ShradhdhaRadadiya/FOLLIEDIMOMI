@@ -302,8 +302,8 @@ fun Context.showConfirmationDialog(
 ) =
     AlertDialog.Builder(this).setMessage(msg)
         .setPositiveButton(positiveText) { _, _ -> onResponse(true) }.setNegativeButton(
-        negetiveText
-    ) { _, _ -> onResponse(false) }.setCancelable(cancelable).show()
+            negetiveText
+        ) { _, _ -> onResponse(false) }.setCancelable(cancelable).show()
 
 
 /**

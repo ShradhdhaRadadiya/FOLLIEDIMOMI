@@ -8,7 +8,6 @@ import android.os.Bundle
 import android.text.Html
 import android.util.Log
 import android.view.*
-import android.widget.MediaController
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
 import com.folliedimomi.R
@@ -84,7 +83,7 @@ class ProductDetailsFragment(private var p_id: Int) : Fragment(), KodeinAware,
         tvVideoDes.setOnClickListener {
             if (videoUrl.isNotEmpty()) {
                 deleteCache(mContext)
-                requireActivity().loadFragment(WebPageFragment(videoUrl ))
+                requireActivity().loadFragment(WebPageFragment(videoUrl))
 //                openDialogeForVideo(videoUrl)
 
             } else {
@@ -149,7 +148,7 @@ class ProductDetailsFragment(private var p_id: Int) : Fragment(), KodeinAware,
                 drawerData.result.let {
                     if (drawerData.status == 1) {
 //                        requireActivity().toast("Prodotto aggiunto con successo al carrello.")
-                       loadFragmentMain(ShoppingCartFragment(), getString(R.string.shopping_cart))
+                        loadFragmentMain(ShoppingCartFragment(), getString(R.string.shopping_cart))
 
                     }
                     //hide
@@ -187,6 +186,7 @@ class ProductDetailsFragment(private var p_id: Int) : Fragment(), KodeinAware,
             .addToBackStack(fragment::class.java.simpleName).commit()
         if (title.isNotEmpty()) requireActivity().title = title
     }
+
     private fun openDialogeForVideo(videoUrl: String) {
         val binding: DialogeVideoPlayBinding = DialogeVideoPlayBinding.inflate(
             LayoutInflater.from(context)
@@ -213,13 +213,13 @@ class ProductDetailsFragment(private var p_id: Int) : Fragment(), KodeinAware,
             mContext.toast("handle exception")
         }
         dialog.show()
-      /*  binding.videoView.setVideoPath(videoUrl)
-        binding.videoView.setOnPreparedListener {
-            it.isLooping = true
-            binding.videoView.setMediaController(MediaController(requireContext()))
-            binding.videoView.requestFocus()
-            binding.videoView.start()
-        }*/
+        /*  binding.videoView.setVideoPath(videoUrl)
+          binding.videoView.setOnPreparedListener {
+              it.isLooping = true
+              binding.videoView.setMediaController(MediaController(requireContext()))
+              binding.videoView.requestFocus()
+              binding.videoView.start()
+          }*/
         dialog.show()
     }
 
@@ -253,7 +253,10 @@ class ProductDetailsFragment(private var p_id: Int) : Fragment(), KodeinAware,
                         drawerData.result.products.let {
                             val product = drawerData.result.products
                             product.let { MainActivity.cartCount = product.size }
-                            MainActivity.mActivity?.updateCount(requireContext(), MainActivity.cartCount)
+                            MainActivity.mActivity?.updateCount(
+                                requireContext(),
+                                MainActivity.cartCount
+                            )
                         }
                     }
                     //hide
@@ -367,7 +370,7 @@ class ProductDetailsFragment(private var p_id: Int) : Fragment(), KodeinAware,
                                 tvVideoDes.visibility = View.VISIBLE
                             }
 
-                            tvVideoDec.text = Html.fromHtml( dataDis.description)
+                            tvVideoDec.text = Html.fromHtml(dataDis.description)
 
 
                         } else requireActivity().coordinatorLayout.snackBar("ERROR LOADING ALL VIDEO")
@@ -380,7 +383,11 @@ class ProductDetailsFragment(private var p_id: Int) : Fragment(), KodeinAware,
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.fragment_product_detail, container, false)
     }
 

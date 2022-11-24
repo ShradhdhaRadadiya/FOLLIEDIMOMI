@@ -93,7 +93,8 @@
             <LinearLayout
                 style="@style/LinearLayoutHori"
                 android:layout_width="match_parent"
-                android:gravity="center_vertical">
+                android:gravity="center_vertical"
+                android:visibility="gone">
 
                 <CheckBox
                     android:id="@+id/cbxPayPal"
@@ -124,6 +125,7 @@
                     stripe:tint="@color/colorCommonText" />
 
             </LinearLayout>
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -132,8 +134,8 @@
                 android:paddingBottom="10dp"
                 android:text="@string/spedizione_immediata"
                 android:textColor="@color/colorPrimary"
-                android:textSize="14sp" />
-
+                android:textSize="14sp"
+                android:visibility="gone" />
 
 
             <!--Paypal-->
@@ -171,7 +173,6 @@
                     stripe:tint="@color/colorCommonText" />
 
             </LinearLayout>
-
 
 
         </LinearLayout>

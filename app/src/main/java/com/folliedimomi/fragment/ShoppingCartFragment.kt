@@ -73,16 +73,20 @@ class ShoppingCartFragment : Fragment(), KodeinAware, ShoppingCartAdapter.OnCart
         }
         btnApply.setOnClickListener {
 
-          if(totalCost > 300.0){
-              if (etPromotionCode.text.toString().isNullOrEmpty()) {
-                  requireActivity().coordinatorLayout.snackBar("Add coupon first")
-                  return@setOnClickListener
-              }
-              onApplyCoupon(etPromotionCode.text.toString(), cartId, session.getUserId().toString())
-          }else{
-              requireActivity().coordinatorLayout.snackBar(" Non hai raggiunto l'ammontare minimo richiesto per utilizzare questo buono")
+            if (totalCost > 300.0) {
+                if (etPromotionCode.text.toString().isNullOrEmpty()) {
+                    requireActivity().coordinatorLayout.snackBar("Add coupon first")
+                    return@setOnClickListener
+                }
+                onApplyCoupon(
+                    etPromotionCode.text.toString(),
+                    cartId,
+                    session.getUserId().toString()
+                )
+            } else {
+                requireActivity().coordinatorLayout.snackBar(" Non hai raggiunto l'ammontare minimo richiesto per utilizzare questo buono")
 
-          }
+            }
             //
 
         }
@@ -131,7 +135,11 @@ class ShoppingCartFragment : Fragment(), KodeinAware, ShoppingCartAdapter.OnCart
         Coroutines.main {
             try {
                 val applyCouponRespone: ApplyCouponRespone =
-                    repository.onRemoveCoupon(id_cart_rule = couponCode, id_cart = cartId,session.getUserId().toString())
+                    repository.onRemoveCoupon(
+                        id_cart_rule = couponCode,
+                        id_cart = cartId,
+                        session.getUserId().toString()
+                    )
                 if (isAdded && isVisible) {
                     applyCouponRespone.let {
                         if (applyCouponRespone.status == 1) {
@@ -201,9 +209,9 @@ class ShoppingCartFragment : Fragment(), KodeinAware, ShoppingCartAdapter.OnCart
                                     )
                                     totalCost = 0.0
                                     val df = DecimalFormat("#.00")
-                                    for(item in products){
+                                    for (item in products) {
                                         val d = df.format(item.totalWt).toDouble()
-                                       totalCost =  totalCost.plus(d)
+                                        totalCost = totalCost.plus(d)
                                     }
 
 
@@ -211,7 +219,10 @@ class ShoppingCartFragment : Fragment(), KodeinAware, ShoppingCartAdapter.OnCart
                                     val summary: CartSummary = shoppingCart.cartSummary
                                     cartId = shoppingCart.idCart.toString()
                                     secretKey = shoppingCart.secureKey.toString()
-                                tvTotalDiscount.text = if(summary.totalDiscounts == 0.0)  "0,00 €" else df.format(summary.totalDiscounts).replace(".", ",") +" €"
+                                    tvTotalDiscount.text =
+                                        if (summary.totalDiscounts == 0.0) "0,00 €" else df.format(
+                                            summary.totalDiscounts
+                                        ).replace(".", ",") + " €"
 
 //                                    tvTotalDiscount.text = String.format("%.2f", summary.totalDiscounts).toDouble().toString() + " €"
                                     //tvSubTotal.text = String.format("%.2f", summary.totalProducts).toDouble().toString() + " €"
@@ -370,6 +381,7 @@ class ShoppingCartFragment : Fragment(), KodeinAware, ShoppingCartAdapter.OnCart
         super.onPause()
         objects.clear()
     }
+
     override fun onDestroy() {
         super.onDestroy()
         System.gc()

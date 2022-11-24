@@ -376,7 +376,7 @@ class MainActivity : AppCompatActivity(),
             }
         }
 
-        if(drawerCatId == 1){
+        if (drawerCatId == 1) {
             drawerCatId = 12
         }
 
@@ -447,7 +447,7 @@ class MainActivity : AppCompatActivity(),
     companion object {
         var cartCount: Int = 0
         var icon: LayerDrawable? = null
-       var mActivity: MainActivity?= null
+        var mActivity: MainActivity? = null
 
     }
 

@@ -42,8 +42,8 @@ class AdvancedFilterActivity : AppCompatActivity(), KodeinAware {
     private var featured = "0"
     private var catId = "0"
     private var parent_id = "0"
-    private  var start_price = 0
-    private  var end_price = 0
+    private var start_price = 0
+    private var end_price = 0
 
     companion object {
         var disData = arrayListOf<String>()
@@ -95,21 +95,21 @@ class AdvancedFilterActivity : AppCompatActivity(), KodeinAware {
 
         mBinding.btnApply.setOnClickListener {
 
-          /*  if(rangeSeekbar.visibility == View.VISIBLE){
-                start_price = rangeSeekbar.currentMinValue
-                end_price = rangeSeekbar.currentMaxValue
-            }else {
-                rangeSeekbar.visibility = View.GONE
-                start_price = 0
-                end_price = 0
-            }*/
+            /*  if(rangeSeekbar.visibility == View.VISIBLE){
+                  start_price = rangeSeekbar.currentMinValue
+                  end_price = rangeSeekbar.currentMaxValue
+              }else {
+                  rangeSeekbar.visibility = View.GONE
+                  start_price = 0
+                  end_price = 0
+              }*/
 
             val intent = Intent()
             intent.action = "DataAction"
             intent.flags = Intent.FLAG_INCLUDE_STOPPED_PACKAGES
-            intent.putExtra("disData", categoryData.joinToString (",") )
-            intent.putExtra("featureData",  featureData.joinToString(","))
-            intent.putExtra("start_price",  start_price)
+            intent.putExtra("disData", categoryData.joinToString(","))
+            intent.putExtra("featureData", featureData.joinToString(","))
+            intent.putExtra("start_price", start_price)
             intent.putExtra("end_price", end_price)
             LocalBroadcastManager.getInstance(this).sendBroadcast(intent)
             finish()
@@ -124,35 +124,53 @@ class AdvancedFilterActivity : AppCompatActivity(), KodeinAware {
         Coroutines.main {
             try {
 //              var  products = repository.getAdvanceFilter("12", "17,16", "2", "10", "120")
-                Log.e("TAG","ADVANCE FILTER IS parent_id--> $parent_id")
-                Log.e("TAG","ADVANCE FILTER IS catId--> $catId")
-                Log.e("TAG","ADVANCE FILTER IS featured--> $featured")
-                Log.e("TAG","ADVANCE FILTER IS start_price--> $start_price")
-                Log.e("TAG","ADVANCE FILTER IS end_price--> $end_price")
-            var products = repository.getAdvanceFilter(parent_id, catId, featured, start_price.toString(), end_price.toString())
+                Log.e("TAG", "ADVANCE FILTER IS parent_id--> $parent_id")
+                Log.e("TAG", "ADVANCE FILTER IS catId--> $catId")
+                Log.e("TAG", "ADVANCE FILTER IS featured--> $featured")
+                Log.e("TAG", "ADVANCE FILTER IS start_price--> $start_price")
+                Log.e("TAG", "ADVANCE FILTER IS end_price--> $end_price")
+                var products = repository.getAdvanceFilter(
+                    parent_id,
+                    catId,
+                    featured,
+                    start_price.toString(),
+                    end_price.toString()
+                )
 
 
-                if(products.get("status").toString() == "1"){
+                if (products.get("status").toString() == "1") {
                     var advancdRes = products.getAsJsonArray("result")
-                    Log.e("TAG","ADVANCE FILTER IS --> ${advancdRes}")
+                    Log.e("TAG", "ADVANCE FILTER IS --> ${advancdRes}")
 
                     filterData.clear()
 
-                    for (i in 0 until advancdRes.size()){
-                        Log.e("TAG","ADVANCE ITEM IS --> ${advancdRes[i].asJsonObject}")
-                        if(advancdRes[i].asJsonObject.get("title").toString().contains("Categories") || advancdRes[i].asJsonObject.get("title").toString().contains("Marca")){
-                            val `object`: AdvanceFilterModel.Result = Gson().fromJson(advancdRes[i].asJsonObject, AdvanceFilterModel.Result::class.java)
+                    for (i in 0 until advancdRes.size()) {
+                        Log.e("TAG", "ADVANCE ITEM IS --> ${advancdRes[i].asJsonObject}")
+                        if (advancdRes[i].asJsonObject.get("title").toString()
+                                .contains("Categories") || advancdRes[i].asJsonObject.get("title")
+                                .toString().contains("Marca")
+                        ) {
+                            val `object`: AdvanceFilterModel.Result = Gson().fromJson(
+                                advancdRes[i].asJsonObject,
+                                AdvanceFilterModel.Result::class.java
+                            )
                             filterData.add(`object`)
-                        }else if(advancdRes[i].asJsonObject.get("title").toString().contains("Prezzo") ){
-                            start_price = (advancdRes[i].asJsonObject.get("data").asJsonObject.get("start_price").toString()).toInt()
-                            end_price = (advancdRes[i].asJsonObject.get("data").asJsonObject.get("end_price").toString()).toInt()
+                        } else if (advancdRes[i].asJsonObject.get("title").toString()
+                                .contains("Prezzo")
+                        ) {
+                            start_price =
+                                (advancdRes[i].asJsonObject.get("data").asJsonObject.get("start_price")
+                                    .toString()).toInt()
+                            end_price =
+                                (advancdRes[i].asJsonObject.get("data").asJsonObject.get("end_price")
+                                    .toString()).toInt()
                         }
                     }
 
-                    if(start_price == 0){
+                    if (start_price == 0) {
                         rangeSeekbar.visibility = View.GONE
-                    }else {
-                        rangeSeekbar.visibility =  View.VISIBLE
+                    } else {
+                        rangeSeekbar.visibility = View.VISIBLE
                         rangeSeekbar.minValue = start_price
                         rangeSeekbar.maxValue = end_price
                     }
@@ -160,14 +178,14 @@ class AdvancedFilterActivity : AppCompatActivity(), KodeinAware {
                     mBinding.rvProduct.show()
                     mBinding.tvEmptyText.hide()
                     setAdapter(filterData)
-                }else{
+                } else {
                     mBinding.rvProduct.hide()
                     mBinding.tvEmptyText.show()
                     toast(products.get("message").toString())
                 }
-                    //hide
-                    this.progress_bars_layout.hide()
-                    return@main
+                //hide
+                this.progress_bars_layout.hide()
+                return@main
 
 
             } catch (e: ApiException) {
@@ -204,7 +222,7 @@ class AdvancedFilterActivity : AppCompatActivity(), KodeinAware {
         adapter = CategoryAdapter(liProducts, currentContext, object :
             CategoryAdapter.OnProductClick {
             override fun onClickCatOnProduct(isCat: Int, catId1: String, featureData: String) {
-                catId =  catId1
+                catId = catId1
                 featured = featureData
 
 //                callAdvanceFilterApiCall()

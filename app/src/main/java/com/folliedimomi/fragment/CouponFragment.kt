@@ -58,6 +58,7 @@ class CouponFragment : Fragment(R.layout.fragment_coupon), KodeinAware {
             }
         }
     }
+
     override fun onDestroy() {
         super.onDestroy()
         System.gc()

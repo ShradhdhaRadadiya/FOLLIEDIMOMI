@@ -257,7 +257,8 @@ interface MyApi {
     @POST("index.php")//
     suspend fun productList(@PartMap map: Map<String, @JvmSuppressWildcards RequestBody>):
             Response<ProductListModel>
-   /** Product List */
+
+    /** Product List */
     @Multipart
     @POST("index.php")//
     suspend fun searchProduct(@PartMap map: Map<String, @JvmSuppressWildcards RequestBody>):
@@ -312,8 +313,10 @@ interface MyApi {
 
     @Multipart
     @POST("index.php")
-    suspend fun createOrder(@PartMap map: Map<String,
-            @JvmSuppressWildcards RequestBody>): Response<CreateOrderResponse>
+    suspend fun createOrder(
+        @PartMap map: Map<String,
+                @JvmSuppressWildcards RequestBody>
+    ): Response<CreateOrderResponse>
 
     /** Confirm Order */
     @FormUrlEncoded
@@ -429,7 +432,6 @@ interface MyApi {
         @Query("op") op: String = "deleteaccount",
         @Query("id_customer") id_customer: String
     ): Response<CommonResponse>
-
 
 
     @Multipart

@@ -141,6 +141,7 @@ class HomeFragment : Fragment(), KodeinAware {
         menu.findItem(R.id.action_cart).isVisible = true
         menu.findItem(R.id.action_search).isVisible = false
     }
+
     override fun onDestroy() {
         super.onDestroy()
         System.gc()

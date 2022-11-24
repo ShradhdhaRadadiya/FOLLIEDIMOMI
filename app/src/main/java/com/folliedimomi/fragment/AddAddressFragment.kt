@@ -108,7 +108,7 @@ class AddAddressFragment(onAddressAddedListener: OnAddressAddedListner) : Fragme
 //        getCountry()
         Constant.countryList = emptyList()
         val coun: ArrayList<CountryState> = arrayListOf()
-        CountryState("Italy",10)
+        CountryState("Italy", 10)
         Constant.countryList = coun as List<CountryState>
         //getState(countryId)
     }

@@ -9,17 +9,14 @@ import android.util.Log
 import android.view.*
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
-import android.widget.MediaController
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.folliedimomi.R
 import com.folliedimomi._app.Constant
 import com.folliedimomi._app.loadFragment
-import com.folliedimomi._app.myOnTextChangedListener
 import com.folliedimomi.activity.MainActivity
 import com.folliedimomi.adapter.ProductListAdapter
 import com.folliedimomi.databinding.DialogeVideoPlayBinding
-import com.folliedimomi.model.ProductListModel
 import com.folliedimomi.model.SearchProductModel
 import com.folliedimomi.network.NetworkRepository
 import com.folliedimomi.sharedPrefrense.Session
@@ -55,27 +52,27 @@ class SearchProductFragment(private val searchText: String) : Fragment(), Kodein
         etSearch.requestFocus()
         showKeyboard(requireActivity())
 
-       /* etSearch.myOnTextChangedListener {
-            if (it.length > 3) getProductFromServer(
-                etSearch.text.toString(),
-                Session(requireContext()).getUserId().toString()
-            )
-        }
-*/
+        /* etSearch.myOnTextChangedListener {
+             if (it.length > 3) getProductFromServer(
+                 etSearch.text.toString(),
+                 Session(requireContext()).getUserId().toString()
+             )
+         }
+ */
         etSearch.setOnEditorActionListener { v, actionId, event ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                 //performSearch(etSearch.text.toString())
                 hideKeyboard()
-                if ( etSearch.text.toString().length > 3)
+                if (etSearch.text.toString().length > 3)
                     getProductFromServer(
-                    etSearch.text.toString(),
-                    Session(requireContext()).getUserId().toString()
-                )
-              /*
-                getProductFromServer(
-                    etSearch.text.toString(),
-                    Session(requireContext()).getUserId().toString()
-                )*/
+                        etSearch.text.toString(),
+                        Session(requireContext()).getUserId().toString()
+                    )
+                /*
+                  getProductFromServer(
+                      etSearch.text.toString(),
+                      Session(requireContext()).getUserId().toString()
+                  )*/
                 return@setOnEditorActionListener true
             }
             return@setOnEditorActionListener false
@@ -113,23 +110,23 @@ class SearchProductFragment(private val searchText: String) : Fragment(), Kodein
                 val createOrderResponse: SearchProductModel = repository.searchProduct(mMap)
 
 
-                    try{
-                        createOrderResponse.let {
-                            if (createOrderResponse.status == 1) {
-                                var data = createOrderResponse.result
-                                rvCatProduct.layoutManager = GridLayoutManager(requireContext(), 2)
-                                rvCatProduct.adapter = ProductListAdapter(
-                                    mContext as Activity,
-                                    data, this
-                                )
-                            } else requireActivity().coordinatorLayout.snackBar(createOrderResponse.message)
-                        }
-                    }catch (e : Exception){
-
+                try {
+                    createOrderResponse.let {
+                        if (createOrderResponse.status == 1) {
+                            var data = createOrderResponse.result
+                            rvCatProduct.layoutManager = GridLayoutManager(requireContext(), 2)
+                            rvCatProduct.adapter = ProductListAdapter(
+                                mContext as Activity,
+                                data, this
+                            )
+                        } else requireActivity().coordinatorLayout.snackBar(createOrderResponse.message)
                     }
+                } catch (e: Exception) {
 
-                    Globals.hideProgress()
-                    return@main
+                }
+
+                Globals.hideProgress()
+                return@main
 
 
             } catch (e: ApiException) {
@@ -229,7 +226,6 @@ class SearchProductFragment(private val searchText: String) : Fragment(), Kodein
     }
 
 
-
     override fun onAddToCartProduct(addressId: Int) {
         //show
         Globals.showProgress(mContext)
@@ -290,7 +286,7 @@ class SearchProductFragment(private val searchText: String) : Fragment(), Kodein
     override fun onOpenVideo(videoUrl: String) {
         if (videoUrl.isNotEmpty()) {
             deleteCache(mContext)
-            requireActivity().loadFragment(WebPageFragment(videoUrl ))
+            requireActivity().loadFragment(WebPageFragment(videoUrl))
 
 //            openDialogeForVideo(videoUrl)
         } else {
@@ -351,15 +347,16 @@ class SearchProductFragment(private val searchText: String) : Fragment(), Kodein
             mContext.toast("handle exception")
         }
         dialog.show()
-      /*  binding.videoView.setVideoPath(videoUrl)
-        binding.videoView.setOnPreparedListener {
-            it.isLooping = true
-            binding.videoView.setMediaController(MediaController(requireContext()));
-            binding.videoView.requestFocus();
-            binding.videoView.start()
-        }*/
+        /*  binding.videoView.setVideoPath(videoUrl)
+          binding.videoView.setOnPreparedListener {
+              it.isLooping = true
+              binding.videoView.setMediaController(MediaController(requireContext()));
+              binding.videoView.requestFocus();
+              binding.videoView.start()
+          }*/
         dialog.show()
     }
+
     override fun onDestroy() {
         super.onDestroy()
         System.gc()

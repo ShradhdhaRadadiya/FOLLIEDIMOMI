@@ -90,12 +90,12 @@
                 android:layout_marginTop="5dp"
                 android:layout_weight="1"
                 android:gravity="center|end"
+                android:paddingStart="@dimen/_10sdp"
                 android:text="€ 89.00"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:textColor="@color/red"
                 android:textSize="@dimen/_13ssp"
                 android:textStyle="bold"
-                android:paddingStart="@dimen/_10sdp"
                 tools:ignore="RtlSymmetry,UnusedAttribute" />
 
             <TextView
@@ -106,11 +106,11 @@
                 android:layout_marginTop="5dp"
                 android:layout_weight="1"
                 android:gravity="center|start"
+                android:paddingEnd="@dimen/_10sdp"
                 android:text="MARYFLO - 200 COLPI"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_13ssp"
-                android:paddingEnd="@dimen/_10sdp"
                 android:textStyle="bold"
                 tools:ignore="RtlSymmetry,UnusedAttribute" />
         </LinearLayout>
@@ -318,11 +318,11 @@
             android:paddingBottom="1dp"
             android:singleLine="true"
             android:text="CAT F2"
-            android:visibility="gone"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textColor="@color/black"
             android:textSize="@dimen/_13ssp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:visibility="gone" />
 
 
         <LinearLayout

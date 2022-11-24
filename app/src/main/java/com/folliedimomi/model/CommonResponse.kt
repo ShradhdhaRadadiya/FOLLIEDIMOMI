@@ -2,7 +2,7 @@ package com.folliedimomi.model
 
 import com.google.gson.annotations.SerializedName
 
-data class CommonResponse (
+data class CommonResponse(
     @SerializedName("message")
     var message: String,
     @SerializedName("result")

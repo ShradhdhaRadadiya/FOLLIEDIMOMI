@@ -12,11 +12,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-     <!--   <VideoView
-            android:id="@+id/videoView"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_300sdp"
-            app:layout_constraintTop_toTopOf="parent" />-->
+        <!--   <VideoView
+               android:id="@+id/videoView"
+               android:layout_width="match_parent"
+               android:layout_height="@dimen/_300sdp"
+               app:layout_constraintTop_toTopOf="parent" />-->
 
         <WebView
             android:id="@+id/webView"

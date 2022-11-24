@@ -284,6 +284,7 @@ class RegisterFragment : Fragment(), KodeinAware, CountryDialog.ProductInterface
     ): View? {
         return inflater.inflate(R.layout.fragment_register, container, false)
     }
+
     override fun onDestroy() {
         super.onDestroy()
         System.gc()

@@ -80,6 +80,7 @@ class OrderListFragment : Fragment(), KodeinAware {
     ): View? {
         return inflater.inflate(R.layout.fragment_order_list, container, false)
     }
+
     override fun onDestroy() {
         super.onDestroy()
         System.gc()

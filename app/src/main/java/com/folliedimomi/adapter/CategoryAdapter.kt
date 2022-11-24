@@ -66,22 +66,22 @@ class CategoryAdapter(
         private val binding: ItemCategoryRadioIlterBinding = itemView
 
         fun bind(cell: AdvanceFilterModel.Result) {
-         /*   binding.apply {
-                rbCat1.text = cell.title
-                rvCat.layoutManager =
-                    LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-                val adapter = AdvanceFilterCatListAdapter(cell.data, context, object :
-                    AdvanceFilterCatListAdapter.OnProductClick {
-                    override fun onClickOnProduct(
-                        isCat: Int,
-                        adapterPosition: String,
-                        joinToString: String
-                    ) {
-                        listener.onClickCatOnProduct(isCat, adapterPosition, featureData)
-                    }
-                })
-                rvCat.adapter = adapter
-            }*/
+            /*   binding.apply {
+                   rbCat1.text = cell.title
+                   rvCat.layoutManager =
+                       LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+                   val adapter = AdvanceFilterCatListAdapter(cell.data, context, object :
+                       AdvanceFilterCatListAdapter.OnProductClick {
+                       override fun onClickOnProduct(
+                           isCat: Int,
+                           adapterPosition: String,
+                           joinToString: String
+                       ) {
+                           listener.onClickCatOnProduct(isCat, adapterPosition, featureData)
+                       }
+                   })
+                   rvCat.adapter = adapter
+               }*/
         }
 
     }
@@ -96,7 +96,7 @@ class CategoryAdapter(
 
                 rvCat.layoutManager =
                     LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-                if(cell.data!=null) {
+                if (cell.data != null) {
                     val adapter = AdvanceFilterFeatureListAdapter(cell.data, context, object :
                         AdvanceFilterFeatureListAdapter.OnProductClick {
                         override fun onClickOnProduct(
@@ -122,7 +122,7 @@ class CategoryAdapter(
     override fun getItemViewType(position: Int): Int {
 
         return if (dataList[position].type == "radio") {
-          2
+            2
         } else {
             2
         }
