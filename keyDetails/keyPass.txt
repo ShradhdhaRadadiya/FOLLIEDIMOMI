@@ -1,0 +1,6 @@
+keystore  -  folliedimomi.jks
+pass - folliedimomi
+alias - folliedimomi
+
+
+
